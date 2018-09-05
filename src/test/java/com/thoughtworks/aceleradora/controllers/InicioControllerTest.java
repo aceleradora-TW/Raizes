@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class InicioControllerTest {
 
     @Test
-    public void renderiza_pagina_inicio() {
+    public void renderizaPaginaInicio() {
         InicioController inicioController = new InicioController();
 
         assertEquals("inicio", inicioController.renderizaPaginaInicial());
