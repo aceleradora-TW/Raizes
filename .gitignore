@@ -24,3 +24,6 @@ bin/
 
 # MacOS
 .DS_Store
+
+# Vim
+*.swp
