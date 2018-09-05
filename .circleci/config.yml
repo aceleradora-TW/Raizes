@@ -27,5 +27,23 @@ jobs:
 
       - run: gradle test
 
-
-
+  integration-deploy:
+      docker:
+        - image: buildpack-deps:trusty
+      steps:
+        - checkout
+        - run:
+            name: Deploy para o ambiente de integracao
+            command: |
+              git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_INTEGRATION_APP_NAME.git master
+workflows:
+  version: 2
+  deploy-to-integration:
+    jobs:
+      - build
+      - integration-deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
