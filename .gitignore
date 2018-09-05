@@ -14,3 +14,13 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 .idea
 out/
+*.iml
+
+# Eclipse
+bin/
+.settings
+.project
+.classpath
+
+# MacOS
+.DS_Store
