@@ -1,2 +1,9 @@
 version 'unspecified'
 
+task runLocal(type: Exec) {
+    commandLine 'npm', 'run', 'test:local'
+}
+
+task debug(type: Exec) {
+    commandLine 'npm', 'run', 'test:debug'
+}
