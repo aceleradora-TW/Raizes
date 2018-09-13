@@ -1,5 +1,7 @@
 .gradle
 /build/
+app/build
+testes-funcionais/build
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -27,4 +29,7 @@ bin/
 
 # Vim
 *.swp
+
+# Node
 node_modules
+package-lock.json

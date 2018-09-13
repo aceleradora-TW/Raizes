@@ -1,9 +1,30 @@
-version 'unspecified'
-
-task runLocal(type: Exec) {
-    commandLine 'npm', 'run', 'test:local'
+ext {
+    groupName = " >>> TESTES FUNCIONAIS"
 }
 
-task debug(type: Exec) {
-    commandLine 'npm', 'run', 'test:debug'
+task npmInstall(type: Exec) {
+    group = groupName
+    description = "Instala dependencias dos testes funcionais (se ja nao estiverem instaladas)."
+
+    def nodeModules = new File('node_modules')
+
+    if (nodeModules.exists()) {
+        commandLine 'printf', "\n >>> Cypress ja esta instalado, prosseguindo.\n"
+    } else {
+        commandLine 'npm', 'install', '--verbose'
+    }
+}
+
+task cypressRunLocal(type: Exec, dependsOn: ['npmInstall', ':app:assemble']) {
+    group = groupName
+    description = "Executa os testes funcionais no ambiente local"
+
+    commandLine 'npx', 'cypress', 'run'
+}
+
+task cypressOpen(type: Exec, dependsOn: ['npmInstall', ':app:assemble']) {
+    group = groupName
+    description = "Abre a interface grafica do Cypress"
+
+    commandLine 'npx', 'cypress', 'open'
 }

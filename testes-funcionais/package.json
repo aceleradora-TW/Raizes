@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test:debug": "npx cypress open",
-    "fail": "echo 'I failed' && exit 1"
-  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
