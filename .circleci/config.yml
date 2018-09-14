@@ -38,17 +38,17 @@ jobs:
 
       - run: docker push aceleradoratw/esqueleto-ci-runner
 
-  functional-test:
+  functional-tests:
     docker:
       - image: cypress/base:8
-      - image: aceleradora-tw/esqueleto-ci-runner
+      - image: aceleradoratw/esqueleto-ci-runner
 
     working_directory: ~/repo
 
     steps:
       - checkout
 
-      - run: cypress run testes-funcionais/cypress
+      - run: cypress run testes-funcionais/cypress/integration
 
   integration-deploy:
       docker:
@@ -62,9 +62,12 @@ jobs:
 
 workflows:
   version: 2
-  deploy-to-integration:
+  standard-build:
     jobs:
       - build
+      - functional-tests:
+          requires:
+            - build
       - integration-deploy:
           requires:
             - build
