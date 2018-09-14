@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - checkout
-      
+
       - setup_remote_docker
 
       - restore_cache:
@@ -32,11 +32,11 @@ jobs:
 
       - run: gradle assemble
 
-      - run: sudo docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD https://hub.docker.com
+      - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD https://hub.docker.com
 
-      - run: sudo docker build -f ci-runner.docker -t aceleradora-tw/esqueleto-ci-runner .
+      - run: docker build -f ci-runner.docker -t aceleradora-tw/esqueleto-ci-runner .
 
-      - run: sudo docker push aceleradora-tw/esqueleto-ci-runner
+      - run: docker push aceleradora-tw/esqueleto-ci-runner
 
   functional-test:
     docker:
