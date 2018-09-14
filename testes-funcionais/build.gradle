@@ -2,8 +2,7 @@ ext {
     groupName = " >>> TESTES FUNCIONAIS"
 }
 
-task npmInstall(type: Exec) {
-    group = groupName
+task npmInstall(type: Exec, group: groupName) {
     description = "Instala dependencias dos testes funcionais (se ja nao estiverem instaladas)."
 
     def nodeModules = new File("$rootDir/testes-funcionais/node_modules")

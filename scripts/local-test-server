@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 
-readonly MAX_STARTUP_CHECK_ATTEMPTS="11"
+readonly MAX_STARTUP_CHECK_ATTEMPTS="60"
 
 readonly command=${1:?}
 readonly jar_path=${2:?}
@@ -12,6 +12,11 @@ readonly pid_path="$build_dir/test-server.pid"
 
 get_server_pid() {
     cat ${pid_path}
+}
+
+start_server() {
+    ${startup_command} > ${log_path} 2>&1 &
+    echo $! > ${pid_path}
 }
 
 wait_for_startup() {
@@ -27,28 +32,34 @@ wait_for_startup() {
         attempts=$((attempts+1))
 
         if [ "$attempts" -eq "$MAX_STARTUP_CHECK_ATTEMPTS" ]; then
+            echo ""
             echo " >>> O servidor nao foi inicializado corretamente. Verifique os logs em $log_path"
             exit 1
         fi
 
+        echo " >>> Servidor ainda nao iniciado. Esperando 1s para verificar novamente (verificacao $attempts de $MAX_STARTUP_CHECK_ATTEMPTS)"
         sleep 1
     done
 
+    echo ""
     echo " >>> Servidor iniciado com pid $(get_server_pid)"
 
 }
 
+stop_server() {
+    echo " >>> Parando servidor com pid $(get_server_pid)"
+    kill -9 $(get_server_pid)
+    rm ${pid_path} ${log_path}
+    echo " >>> Sevidor parado com sucesso"
+}
+
 case ${command} in
     start)
-        ${startup_command} > ${log_path} 2>&1 &
-        echo $! > ${pid_path}
+        start_server
         wait_for_startup
         ;;
     stop)
-        echo " >>> Parando servidor com pid $(get_server_pid)"
-        kill -9 $(get_server_pid)
-        rm ${pid_path} ${log_path}
-        echo " >>> Sevidor parado com sucesso"
+        stop_server
         ;;
     *)
         echo " >>> Opcao indisponivel. Tente uma das seguintes: start | stop"
