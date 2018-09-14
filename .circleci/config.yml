@@ -48,6 +48,11 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          keys:
+          - npm-dependencies-{{ checksum "testes-funcionais/package.json" }}
+          - npm-dependencies-
+
       - run: npm --prefix testes-funcionais install --verbose
 
       - run: npm --prefix testes-funcionais run ci:run
