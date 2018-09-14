@@ -32,7 +32,7 @@ jobs:
 
       - run: gradle assemble
 
-      - run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD https://hub.docker.com
+      - run: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
 
       - run: docker build -f ci-runner.docker -t aceleradora-tw/esqueleto-ci-runner .
 
