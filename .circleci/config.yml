@@ -50,7 +50,7 @@ jobs:
 
       - run: npm --prefix testes-funcionais install --verbose
 
-      - run: npx cypress run cypress/integration
+      - run: npm --prefix testes-funcionais run ci:run
 
   integration-deploy:
       docker:
