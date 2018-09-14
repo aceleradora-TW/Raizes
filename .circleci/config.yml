@@ -43,12 +43,14 @@ jobs:
       - image: cypress/base:8
       - image: aceleradoratw/esqueleto-ci-runner
 
-    working_directory: ~/repo
+    working_directory: ~/repo/testes-funcionais
 
     steps:
       - checkout
 
-      - run: cypress run testes-funcionais/cypress/integration
+      - run: npm install --verbose
+
+      - run: npx cypress run cypress/integration
 
   integration-deploy:
       docker:
