@@ -46,7 +46,7 @@ jobs:
     steps:
       - checkout
 
-      run: cypress run testes-funcionais/cypress
+      - run: cypress run testes-funcionais/cypress
 
   integration-deploy:
       docker:
