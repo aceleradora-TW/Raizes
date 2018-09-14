@@ -49,7 +49,6 @@ wait_for_startup() {
 stop_server() {
     echo " >>> Parando servidor com pid $(get_server_pid)"
     kill -9 $(get_server_pid)
-    rm ${pid_path} ${log_path}
     echo " >>> Sevidor parado com sucesso"
 }
 
