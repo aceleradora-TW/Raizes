@@ -23,3 +23,15 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+task startFromJar(type: Exec, dependsOn: assemble) {
+    description = "Inicia aplicacao em plano de fundo, utilizando o jar gerado pela task :app:assemble"
+
+    commandLine "${rootDir}/scripts/local-test-server", "start", "$buildDir/libs/app.jar", "$buildDir"
+}
+
+task stopRunningJar(type: Exec) {
+    description = "Para aplicacao que foi iniciada por :app:startFromJar"
+
+    commandLine "${rootDir}/scripts/local-test-server", "stop", "$buildDir/libs/app.jar", "$buildDir"
+}

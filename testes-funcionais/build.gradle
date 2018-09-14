@@ -6,7 +6,7 @@ task npmInstall(type: Exec) {
     group = groupName
     description = "Instala dependencias dos testes funcionais (se ja nao estiverem instaladas)."
 
-    def nodeModules = new File('node_modules')
+    def nodeModules = new File("$rootDir/testes-funcionais/node_modules")
 
     if (nodeModules.exists()) {
         commandLine 'printf', "\n >>> Cypress ja esta instalado, prosseguindo.\n"
@@ -15,15 +15,17 @@ task npmInstall(type: Exec) {
     }
 }
 
-task cypressRunLocal(type: Exec, dependsOn: ['npmInstall', ':app:assemble']) {
-    group = groupName
+task cypressRunLocal(type: Exec, dependsOn: ['npmInstall', ':app:startFromJar'], group: groupName) {
     description = "Executa os testes funcionais no ambiente local"
+
+    environment 'CYPRESS_baseUrl', 'http://localhost:8080'
 
     commandLine 'npx', 'cypress', 'run'
 }
 
-task cypressOpen(type: Exec, dependsOn: ['npmInstall', ':app:assemble']) {
-    group = groupName
+cypressRunLocal.finalizedBy = [':app:stopRunningJar']
+
+task cypressOpen(type: Exec, dependsOn: ['npmInstall', ':app:assemble'], group: groupName) {
     description = "Abre a interface grafica do Cypress"
 
     commandLine 'npx', 'cypress', 'open'
