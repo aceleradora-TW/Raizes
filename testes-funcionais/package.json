@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "ci:run": "CYPRESS_baseUrl='http://localhost:8080' $(npm bin)/cypress run"
+    "ci:run": "$(npm bin)/cypress run"
   },
 
   "devDependencies": {

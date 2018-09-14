@@ -55,7 +55,34 @@ jobs:
 
       - run: npm --prefix testes-funcionais install --verbose
 
-      - run: npm --prefix testes-funcionais run ci:run
+      - run:
+          name: Executa testes funcionais com o jar gerado pelo CI
+          command: npm --prefix testes-funcionais run ci:run
+          environment:
+            CYPRESS_baseUrl: http://localhost:8080
+
+  integration-functional-tests:
+    docker:
+      - image: cypress/base:8
+      - image: aceleradoratw/esqueleto-ci-runner
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - npm-dependencies-{{ checksum "testes-funcionais/package.json" }}
+          - npm-dependencies-
+
+      - run: npm --prefix testes-funcionais install --verbose
+
+      - run:
+          name: Executa testes funcionais contra o servidor de integracao logo apos um novo deploy.
+          command: npm --prefix testes-funcionais run ci:run
+          environment:
+            CYPRESS_baseUrl: https://esqueleto-integracao.herokuapp.com
 
   integration-deploy:
       docker:
@@ -78,6 +105,12 @@ workflows:
       - integration-deploy:
           requires:
             - build
+          filters:
+            branches:
+              only: master
+      - integration-functional-tests:
+          requires:
+            - integration-deploy
           filters:
             branches:
               only: master
