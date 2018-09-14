@@ -34,9 +34,9 @@ jobs:
 
       - run: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
 
-      - run: docker build -f ci-runner.docker -t aceleradora-tw/esqueleto-ci-runner .
+      - run: docker build -f ci-runner.docker -t aceleradoratw/esqueleto-ci-runner .
 
-      - run: docker push aceleradora-tw/esqueleto-ci-runner
+      - run: docker push aceleradoratw/esqueleto-ci-runner
 
   functional-test:
     docker:
