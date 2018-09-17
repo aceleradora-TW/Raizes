@@ -1,6 +1,5 @@
 version: 2
 jobs:
-
   build:
     docker:
       - image: circleci/openjdk:8-jdk
@@ -38,7 +37,7 @@ jobs:
 
       - run: docker push aceleradoratw/esqueleto-ci-runner
 
-  functional-tests:
+  testes-funcionais:
     docker:
       - image: cypress/base:8
       - image: aceleradoratw/esqueleto-ci-runner
@@ -61,7 +60,7 @@ jobs:
           environment:
             CYPRESS_baseUrl: http://localhost:8080
 
-  integration-functional-tests:
+  testes-funcionais-pos-deploy:
     docker:
       - image: cypress/base:8
 
@@ -83,7 +82,7 @@ jobs:
           environment:
             CYPRESS_baseUrl: https://esqueleto-integracao.herokuapp.com
 
-  integration-deploy:
+  deploy-integracao:
       docker:
         - image: buildpack-deps:trusty
       steps:
@@ -98,18 +97,15 @@ workflows:
   standard-build:
     jobs:
       - build
-      - functional-tests:
+      - testes-funcionais:
           requires:
             - build
-      - integration-deploy:
+      - deploy-integracao:
           requires:
-            - functional-tests
+            - testes-funcionais
           filters:
             branches:
               only: master
-      - integration-functional-tests:
+      - testes-funcionais-pos-deploy:
           requires:
-            - integration-deploy
-          filters:
-            branches:
-              only: master
+            - deploy-integracao
