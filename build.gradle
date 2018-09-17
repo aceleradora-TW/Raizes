@@ -5,3 +5,21 @@ idea {
         downloadSources = true
     }
 }
+
+task copyToLib(type: Copy) {
+    group = ' >>> HEROKU'
+    description = """
+    Move o jar da aplicacao (gerado pela task build) para a pasta raiz do projeto, que eh utilizada pelo Heroku
+    para executar a aplicacao.
+    """
+    from "${project(':app').buildDir}/libs/"
+    into "$rootDir/build/libs/"
+}
+
+task stage {
+    group = ' >>> HEROKU'
+    description = 'Task utilizada pelo Heroku para construi o jar da aplicacao antes de executa-lo.'
+    dependsOn = [':app:clean', ':app:build', 'copyToLib']
+}
+
+copyToLib.mustRunAfter(':app:build')
