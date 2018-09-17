@@ -1,0 +1,9 @@
+FROM circleci/openjdk:8-jdk
+
+WORKDIR /app
+
+COPY app/build/libs/app.jar ./esqueleto.jar
+
+EXPOSE 8080
+
+CMD java -jar esqueleto.jar
