@@ -35,3 +35,5 @@ task stopRunningJar(type: Exec) {
 
     commandLine "${rootDir}/scripts/local-test-server", "stop", "$buildDir/libs/app.jar", "$buildDir"
 }
+
+build.mustRunAfter('clean')
