@@ -1,5 +1,6 @@
-package com.thoughtworks.aceleradora.controllers;
+package com.thoughtworks.aceleradora.pessoa.controllers;
 
+import com.thoughtworks.aceleradora.home.controllers.InicioController;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

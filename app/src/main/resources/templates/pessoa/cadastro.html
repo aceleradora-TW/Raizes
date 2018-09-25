@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Pessoas</title>
+    <link href="/css/estilo.css" rel="stylesheet">
+    <style>
+        .container {
+            padding: 10%;
+        }
+        input {
+            width: 100%;
+            height: 40px;
+            border: solid 1px;
+        }
+
+        button {
+            width: 80px;
+            height: 35px;
+            margin-top: 40px;
+        }
+
+        .titulo {
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="cabecalho">
+    <h1>Esqueleto Ambulante</h1>
+</header>
+
+<nav class="navegacao">
+    <ul>
+        <a href="/">
+            <li>Início</li>
+        </a>
+        <a href="/pessoa/lista">
+            <li>Pessoas</li>
+        </a>
+        <a href="/pessoa/cadastro">
+            <li>Cadastrar Pessoa</li>
+        </a>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1 class="titulo">FORMULÁRIO DE CADASTRO DE PESSOA</h1>
+
+    <form action="/pessoa/cadastro" method="post">
+
+        <label for="nome">Nome:</label>
+        <br>
+        <input type="text" name="nome" id="nome"/>
+
+        <br/>
+        <br/>
+
+        <label for="sobrenome">Sobrenome:</label>
+        <br>
+        <input type="text" name="sobrenome" id="sobrenome"/>
+
+        <br/>
+
+        <button type="submit">Cadastrar</button>
+
+    </form>
+</div>
+
+
+</body>
+</html>

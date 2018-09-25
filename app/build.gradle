@@ -6,8 +6,13 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "org.postgresql:postgresql:42.2.5"
     }
+}
+
+plugins {
+    id "org.flywaydb.flyway" version "5.1.4"
 }
 
 apply plugin: 'java'
@@ -17,7 +22,13 @@ apply plugin: 'io.spring.dependency-management'
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+    compile "com.h2database:h2"
+    compile "org.postgresql:postgresql:42.2.5"
+
     testCompile 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:2.21.0"
+
 }
 
 repositories {
@@ -34,6 +45,12 @@ task stopRunningJar(type: Exec) {
     description = "Para aplicacao que foi iniciada por :app:startFromJar"
 
     commandLine "${rootDir}/scripts/local-test-server", "stop", "$buildDir/libs/app.jar", "$buildDir"
+}
+
+flyway {
+    url = "jdbc:postgresql://localhost:5432/esqueleto"
+    user = "postgres"
+    password = "esqueleto"
 }
 
 build.mustRunAfter('clean')
