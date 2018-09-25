@@ -4,6 +4,20 @@ Uma aplicação mínima em Spring Boot.
 
 [![CircleCI](https://circleci.com/gh/aceleradora-TW/esqueleto-ambulante/tree/master.svg?style=svg)](https://circleci.com/gh/aceleradora-TW/esqueleto-ambulante/tree/master)
 
+## Dependências
+
+- Java 8
+- Postgres
+- Node/npm
+
+## Configuração inicial
+
+Após instalar todas as dependências, execute as migrações do banco de dados:
+
+```bash
+./gradlew flywayMigrate -i
+```
+
 ## Comandos
 
 Para executar a aplicação:

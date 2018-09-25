@@ -27,5 +27,7 @@ cypressRunLocal.finalizedBy = [':app:stopRunningJar']
 task cypressOpen(type: Exec, dependsOn: ['npmInstall', ':app:assemble'], group: groupName) {
     description = "Abre a interface grafica do Cypress"
 
+    environment 'CYPRESS_baseUrl', 'http://localhost:8080'
+
     commandLine 'npx', 'cypress', 'open'
 }

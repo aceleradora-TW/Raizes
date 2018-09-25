@@ -1,0 +1,18 @@
+case $1 in
+  run)
+    docker run --rm --name esqueleto-db -p 5432:5432 -e POSTGRES_PASSWORD=esqueleto -d postgres
+  ;;
+
+  create)
+    docker exec -it esqueleto-db psql -U postgres -c 'CREATE DATABASE esqueleto'
+  ;;
+
+  console)
+    docker exec -it esqueleto-db psql -U postgres -d esqueleto
+  ;;
+
+  *)
+    echo "nope"
+  ;;
+esac
+
