@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/esqueleto
-    username: postgres
-    password: esqueleto
+    url: jdbc:postgresql://${ESQUELETO_DB_HOST:localhost}:${ESQUELETO_DB_PORT:5432}/${ESQUELETO_DB_NAME:esqueleto}
+    username: ${ESQUELETO_DB_USER:postgres}
+    password: ${ESQUELETO_DB_PASSWORD:esqueleto}
 
   jpa:
     show-sql: true
