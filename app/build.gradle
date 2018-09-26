@@ -47,9 +47,14 @@ task stopRunningJar(type: Exec) {
 }
 
 flyway {
-    url = "jdbc:postgresql://localhost:5432/esqueleto"
-    user = "postgres"
-    password = "esqueleto"
+
+    def host = System.getenv("ESQUELETO_DB_HOST") ?: 'localhost'
+    def port = System.getenv("ESQUELETO_DB_PORT") ?: 5432
+    def name = System.getenv("ESQUELETO_DB_NAME") ?: 'esqueleto'
+
+    url = "jdbc:postgresql://$host:$port/$name"
+    user = System.getenv("ESQUELETO_DB_USER") ?: 'postgres'
+    password = System.getenv("ESQUELETO_DB_PASSWORD") ?: 'esqueleto'
 }
 
 build.mustRunAfter('clean')
