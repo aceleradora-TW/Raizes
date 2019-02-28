@@ -7,12 +7,7 @@ buildscript {
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-        classpath "org.postgresql:postgresql:42.2.5"
     }
-}
-
-plugins {
-    id "org.flywaydb.flyway" version "5.1.4"
 }
 
 apply plugin: 'java'
@@ -24,6 +19,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
+    compile "org.flywaydb:flyway-core"
     compile "com.h2database:h2"
     compile "org.postgresql:postgresql:42.2.5"
 
@@ -45,17 +41,6 @@ task stopRunningJar(type: Exec) {
     description = "Para aplicacao que foi iniciada por :app:startFromJar"
 
     commandLine "${rootDir}/scripts/local-test-server", "stop", "$buildDir/libs/app.jar", "$buildDir"
-}
-
-flyway {
-
-    def host = System.getenv("ESQUELETO_DB_HOST") ?: 'localhost'
-    def port = System.getenv("ESQUELETO_DB_PORT") ?: 5432
-    def name = System.getenv("ESQUELETO_DB_NAME") ?: 'esqueleto'
-
-    url = "jdbc:postgresql://$host:$port/$name"
-    user = System.getenv("ESQUELETO_DB_USER") ?: 'postgres'
-    password = System.getenv("ESQUELETO_DB_PASSWORD") ?: 'esqueleto'
 }
 
 bootRun {
