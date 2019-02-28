@@ -58,4 +58,12 @@ flyway {
     password = System.getenv("ESQUELETO_DB_PASSWORD") ?: 'esqueleto'
 }
 
+bootRun {
+  def activeProfiles = 'dev'
+
+  jvmArgs = [
+    "-Dspring.profiles.active=$activeProfiles"
+  ]
+}
+
 build.mustRunAfter('clean')
