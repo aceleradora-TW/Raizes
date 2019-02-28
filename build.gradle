@@ -9,5 +9,3 @@ idea {
 task stage {
     dependsOn = [':app:clean', ':app:build']
 }
-
-copyToLib.mustRunAfter(':app:build')
