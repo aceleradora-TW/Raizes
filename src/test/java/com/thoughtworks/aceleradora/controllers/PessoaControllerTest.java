@@ -1,7 +1,7 @@
-package com.thoughtworks.aceleradora.pessoa.controllers;
+package com.thoughtworks.aceleradora.controllers;
 
-import com.thoughtworks.aceleradora.pessoa.dominio.Pessoa;
-import com.thoughtworks.aceleradora.pessoa.dominio.PessoaRepository;
+import com.thoughtworks.aceleradora.dominio.Pessoa;
+import com.thoughtworks.aceleradora.dominio.PessoaRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,10 +13,8 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PessoaControllerTest {

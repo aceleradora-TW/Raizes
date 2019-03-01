@@ -1,8 +1,7 @@
-package com.thoughtworks.aceleradora.pessoa.controllers;
+package com.thoughtworks.aceleradora.controllers;
 
-import com.thoughtworks.aceleradora.pessoa.dominio.Pessoa;
-import com.thoughtworks.aceleradora.pessoa.dominio.PessoaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.thoughtworks.aceleradora.dominio.Pessoa;
+import com.thoughtworks.aceleradora.dominio.PessoaRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,6 @@ public class PessoaController {
 
     private PessoaRepository repositorio;
 
-    @Autowired
     public PessoaController(PessoaRepository repositorio) {
         this.repositorio = repositorio;
     }
@@ -35,8 +33,6 @@ public class PessoaController {
 
     @GetMapping("/lista")
     public String lista(Model model) {
-
-        System.out.println(repositorio.findAll());
         model.addAttribute("pessoas", repositorio.findAll());
 
         return "pessoa/lista";

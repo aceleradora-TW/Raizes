@@ -1,5 +1,4 @@
-package com.thoughtworks.aceleradora.pessoa.dominio;
-
+package com.thoughtworks.aceleradora.dominio;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +37,7 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        return String.format("[%s]", Stream.of(nome, sobrenome).collect(joining(" ")));
+        return String.format("[%s]", String.join(" ", nome, sobrenome));
     }
 
     @Override
