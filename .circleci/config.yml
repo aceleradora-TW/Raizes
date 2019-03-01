@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:11.0.2-jdk-node-browsers-legacy
 
     working_directory: ~/repo
 
@@ -12,8 +12,6 @@ jobs:
 
     steps:
       - checkout
-
-      - setup_remote_docker
 
       - restore_cache:
           keys:
@@ -28,59 +26,6 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
       - run: gradle test
-
-      - run: gradle assemble
-
-      - run: echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
-
-      - run: docker build -f ci-runner.docker -t aceleradoratw/esqueleto-ci-runner .
-
-      - run: docker push aceleradoratw/esqueleto-ci-runner
-
-  testes-funcionais:
-    docker:
-      - image: cypress/base:8
-      - image: aceleradoratw/esqueleto-ci-runner
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      - restore_cache:
-          keys:
-          - npm-dependencies-{{ checksum "testes-funcionais/package.json" }}
-          - npm-dependencies-
-
-      - run: npm --prefix testes-funcionais install --verbose
-
-      - run:
-          name: Executa testes funcionais com o jar gerado pelo CI
-          command: npm --prefix testes-funcionais run ci:run
-          environment:
-            CYPRESS_baseUrl: http://localhost:8080
-
-  testes-funcionais-pos-deploy:
-    docker:
-      - image: cypress/base:8
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      - restore_cache:
-          keys:
-          - npm-dependencies-{{ checksum "testes-funcionais/package.json" }}
-          - npm-dependencies-
-
-      - run: npm --prefix testes-funcionais install --verbose
-
-      - run:
-          name: Executa testes funcionais contra o servidor de integracao logo apos um novo deploy.
-          command: npm --prefix testes-funcionais run ci:run
-          environment:
-            CYPRESS_baseUrl: https://esqueleto-integracao.herokuapp.com
 
   deploy-integracao:
       docker:
@@ -97,15 +42,9 @@ workflows:
   standard-build:
     jobs:
       - build
-      - testes-funcionais:
-          requires:
-            - build
       - deploy-integracao:
           requires:
-            - testes-funcionais
+            - build
           filters:
             branches:
               only: master
-      - testes-funcionais-pos-deploy:
-          requires:
-            - deploy-integracao

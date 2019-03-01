@@ -1,4 +1,4 @@
-FROM circleci/openjdk:8-jdk
+FROM circleci/openjdk:11.0.2-jdk-node-browsers-legacy
 
 WORKDIR /app
 
