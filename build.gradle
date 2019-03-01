@@ -47,9 +47,3 @@ bootRun {
     "-Dspring.profiles.active=$activeProfiles"
   ]
 }
-
-task stage {
-    dependsOn = [':app:clean', ':app:build']
-}
-
-build.mustRunAfter('clean')
