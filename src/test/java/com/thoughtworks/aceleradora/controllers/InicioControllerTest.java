@@ -1,9 +1,8 @@
-package com.thoughtworks.aceleradora.pessoa.controllers;
+package com.thoughtworks.aceleradora.controllers;
 
-import com.thoughtworks.aceleradora.home.controllers.InicioController;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class InicioControllerTest {
 
