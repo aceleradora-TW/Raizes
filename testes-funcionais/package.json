@@ -1,9 +1,0 @@
-{
-  "scripts": {
-    "ci:run": "$(npm bin)/cypress run"
-  },
-
-  "devDependencies": {
-    "cypress": "^3.1.0"
-  }
-}
