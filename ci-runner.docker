@@ -1,9 +1,0 @@
-FROM circleci/openjdk:11.0.2-jdk-node-browsers-legacy
-
-WORKDIR /app
-
-COPY app/build/libs/app.jar ./esqueleto.jar
-
-EXPOSE 8080
-
-CMD java -jar esqueleto.jar
