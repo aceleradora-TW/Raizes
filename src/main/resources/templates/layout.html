@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br" th:fragment="layout(title, content)" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title th:replace="${title}"></title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">
+    <link href="/css/estilo.css" rel="stylesheet">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body>
+<header>
+    <nav class="navbar is-mobile " role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <img src="/images/capoeira.gif" width="40" height="60">
+                <span class="titulo-nav">Esqueleto Ambulante</span>
+            </a>
+            <a class="navbar-item" href="/pessoa/lista">
+                <p class="titulo-nav">Pessoas</p>
+            </a>
+            <a class="navbar-item" href="/pessoa/cadastro">
+                <p class="titulo-nav">Cadastrar Pessoa</p>
+            </a>
+        </div>
+    </nav>
+</header>
+<main th:replace="${content}"></main>
+</body>
+
+</html>

@@ -1,28 +1,39 @@
 <!DOCTYPE HTML>
-<html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Aceleradora Ágil - Esqueleto Ambulante</title>
-    <link href="/css/estilo.css" rel="stylesheet">
 </head>
 <body>
-    <div class="agrupadora">
-        <header class="cabecalho">
-            <h1>Esqueleto Ambulante</h1>
-        </header>
+<section class="hero is-primary is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                Esqueleto Ambulante
+            </h1>
+            <h2 class="subtitle">
+                Um projeto mínimo com exemplos.
+            </h2>
 
-        <nav class="navegacao">
-            <ul>
-                <a href="/"><li>Início</li></a>
-                <a href="/pessoa/lista"><li>Pessoas</li></a>
-                <a href="/pessoa/cadastro"><li>Cadastrar Pessoa</li></a>
-            </ul>
-        </nav>
+            <section class="columns is-multiline">
+                <div class="column is-4">
+                    <figure class="image is-128x128">
+                        <img src="/images/capoeira.gif">
+                    </figure>
+                </div>
+                <div class="column is-4">
+                    <figure class="image is-128x128">
+                        <img src="/images/waiting.gif">
+                    </figure>
+                </div>
+                <div class="column is-4">
+                    <figure class="image is-128x128">
+                        <img src="/images/dancing.gif">
+                    </figure>
+                </div>
+            </section>
 
-        <div class="conteudo">
-            <img src="https://media3.giphy.com/media/l4JyOCNEfXvVYEqB2/giphy.gif">
         </div>
     </div>
+</section>
 </body>
 </html>

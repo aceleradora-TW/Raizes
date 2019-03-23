@@ -1,69 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Lista de Pessoas</title>
-    <link href="/css/estilo.css" rel="stylesheet">
 </head>
-<style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-
-.container {
-    padding: 15%;
-}
-
-</style>
 
 <body>
 
-<header class="cabecalho">
-    <h1>Esqueleto Ambulante</h1>
-</header>
+<div class="section">
+    <div class="container">
+        <h1 class="title">Pessoas</h1>
 
-<nav class="navegacao">
-    <ul>
-        <a href="/">
-            <li>Início</li>
-        </a>
-        <a href="/pessoa/lista">
-            <li>Pessoas</li>
-        </a>
-        <a href="/pessoa/cadastro">
-            <li>Cadastrar Pessoa</li>
-        </a>
-    </ul>
-</nav>
+        <div class="columns is-multiline">
+            <div class="column is-4" th:each="pessoa: ${pessoas}">
+                <div class="box">
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                    <strong th:text="${pessoa.nome}"></strong>
+                                    <small>@johnsmith</small>
+                                    <small>31m</small>
+                                    <br>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet
+                                    massa
+                                    fringilla egestas. Nullam condimentum luctus turpis.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
 
-<div class="container">
-    <h1>Lista de Pessoas:</h1>
-    <br>
-    <table>
-        <tr>
-            <td>Nome</td>
-            <td>Sobrenome</td>
-        </tr>
-        <tr th:each="pessoa : ${pessoas}">
-            <td th:text="${pessoa.nome}"></td>
-            <td th:text="${pessoa.sobrenome}"></td>
-        </tr>
-    </table>
-
+    </div>
 </div>
-
 
 </body>
 </html>
