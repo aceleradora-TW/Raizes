@@ -4,7 +4,7 @@ Uma aplicação mínima em Spring Boot.
 
 [![CircleCI](https://circleci.com/gh/aceleradora-TW/esqueleto-ambulante/tree/master.svg?style=svg)](https://circleci.com/gh/aceleradora-TW/esqueleto-ambulante/tree/master)
 
-![Caveira](./src/main/resources/static/images/capoeira.gif)
+![Caveira](./src/main/resources/static/images/sneaky.gif)
 
 
 ## Dependências
