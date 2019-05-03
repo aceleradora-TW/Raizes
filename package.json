@@ -17,6 +17,9 @@
     "style-loader": "^0.23.1",
     "webpack": "^4.29.5"
   },
+  "engines": {
+    "node": "11.9"
+  },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
     "autoprefixer": "^9.5.1",
@@ -39,7 +42,8 @@
   "scripts": {
     "watch": "NODE_ENV=development webpack --mode development --watch",
     "build": "NODE_ENV=production webpack --colors --mode production",
-    "dev": "npm run build -- --mode development --inline --hot"
+    "dev": "npm run build -- --mode development --inline --hot",
+    "postinstall": "npm run build "
   },
   "repository": {
     "type": "git",
