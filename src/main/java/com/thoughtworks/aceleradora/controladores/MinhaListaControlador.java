@@ -17,10 +17,12 @@ public class MinhaListaControlador {
     private ProdutoServico produtoServico;
     private MinhaListaServico minhaListaServico;
 
+    @Autowired
     public MinhaListaControlador(ProdutoServico produtoServico, MinhaListaServico minhaListaServico) {
         this.produtoServico = produtoServico;
         this.minhaListaServico = minhaListaServico;
     }
+
 
     @GetMapping("/cadastro")
     public String criarLista(Model model) {
@@ -29,13 +31,12 @@ public class MinhaListaControlador {
         return "minhaLista/cadastro";
     }
 
+
     @PostMapping("/cadastro")
-    public String salvarLista(MinhaLista lista, Model model) {
+    public String salvarLista(MinhaLista lista) {
 
-        MinhaLista novaLista = minhaListaServico.salvar(lista);
-
-        model.addAttribute("listaCriada", lista);
-        return "minhaLista/previa";
+        MinhaLista novalista = minhaListaServico.salvar(lista);
+        return "minhaLista/cadastro";
     }
 
 }
