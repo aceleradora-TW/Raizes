@@ -43,7 +43,7 @@
     "watch": "NODE_ENV=development webpack --mode development --watch",
     "build": "NODE_ENV=production webpack --colors --mode production",
     "dev": "npm run build -- --mode development --inline --hot",
-    "postinstall": "npm run build "
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
