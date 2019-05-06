@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/minhalista")
 public class MinhaListaControlador {
@@ -31,12 +33,26 @@ public class MinhaListaControlador {
         return "minhaLista/cadastro";
     }
 
+    @PostMapping("/previa")
+    public String previaLista(MinhaLista lista, Model model) {
+        model.addAttribute("minhaLista", lista);
+        return "minhaLista/previa";
+    }
+
 
     @PostMapping("/cadastro")
     public String salvarLista(MinhaLista lista) {
-
         MinhaLista novalista = minhaListaServico.salvar(lista);
-        return "minhaLista/cadastro";
+
+        return "minhaLista/previa";
+    }
+
+
+    public String salvarMinhaListaNaSessao(MinhaLista minhaLista, HttpSession session) {
+        session.setAttribute("minhaLista", minhaLista);
+
+        MinhaLista minhaListaNaSession = (MinhaLista) session.getAttribute("minhaLista");
+        return null;
     }
 
 }
