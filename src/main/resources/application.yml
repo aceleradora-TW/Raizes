@@ -10,3 +10,17 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+  thymeleaf:
+    cache: false
+  devtools:
+    remote:
+      secret: somesecret
+    livereload:
+      enabled: true
+  resources: 
+    chain:
+      cache: false
+      strategy:
+        fixed: 
+          enabled: true
+          version: test_version
