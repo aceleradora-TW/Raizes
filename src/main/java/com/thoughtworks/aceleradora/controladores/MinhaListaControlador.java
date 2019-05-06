@@ -27,7 +27,7 @@ public class MinhaListaControlador {
     @GetMapping("/cadastro")
     public String criarLista(Model model) {
 
-        model.addAttribute("produtos", produtoServico.getAll());
+        model.addAttribute("produtos", produtoServico.pegarTodos());
         return "minhaLista/cadastro";
     }
 

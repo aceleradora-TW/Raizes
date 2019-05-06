@@ -8,7 +8,7 @@ import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Entity(name="listas")
+@Entity(name = "listas")
 public class MinhaLista {
 
     @Id
@@ -17,41 +17,39 @@ public class MinhaLista {
 
     private String nome;
 
-//    @ManyToMany(mappedBy = "produtos", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "lista_produtos",
-            joinColumns = { @JoinColumn(name = "id_lista") },
-            inverseJoinColumns = { @JoinColumn(name = "id_produto") }
+            joinColumns = {@JoinColumn(name = "id_lista")},
+            inverseJoinColumns = {@JoinColumn(name = "id_produto")}
     )
-    @JsonIgnoreProperties("listas")
 
+    @JsonIgnoreProperties("listas")
     private List<Produto> produtos = new ArrayList<>();
 
-    public MinhaLista(){
+    public MinhaLista() {
 
     }
 
-    public MinhaLista(String nome){
+    public MinhaLista(String nome) {
         this.nome = nome;
 
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
 
     }
 
-    public void setNome(String nome){
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public String getNome(){
+    public String getNome() {
         return nome;
     }
 
