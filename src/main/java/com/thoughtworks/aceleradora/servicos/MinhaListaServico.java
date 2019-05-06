@@ -12,7 +12,7 @@ public class MinhaListaServico {
     public MinhaListaServico(MinhaListaRepositorio repositorio) {
         this.repositorio = repositorio;
     }
-    public MinhaLista  salvar(MinhaLista lista) {
+    public MinhaLista salvar(MinhaLista lista) {
         return repositorio.save(lista);
     }
 

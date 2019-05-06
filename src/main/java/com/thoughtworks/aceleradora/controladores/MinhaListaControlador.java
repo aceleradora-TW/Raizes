@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/minhalista")
+@RequestMapping("/minha-lista")
 public class MinhaListaControlador {
 
     private ProdutoServico produtoServico;
@@ -35,7 +35,7 @@ public class MinhaListaControlador {
     @PostMapping("/cadastro")
     public String salvarLista(MinhaLista lista) {
 
-        MinhaLista novalista = minhaListaServico.salvar(lista);
+        minhaListaServico.salvar(lista);
         return "minhaLista/cadastro";
     }
 
