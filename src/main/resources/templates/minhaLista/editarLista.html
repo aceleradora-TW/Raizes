@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Aceleradora Ágil - Esqueleto Ambulante</title>
+</head>
+<body>
+
+<section class="section">
+
+    <section class="container">
+
+        <h1 class="title">Editar Lista</h1>
+
+        <div class="columns">
+            <div class="column is-6">
+                <div class="box">
+                    <form action="/teste" method="post">
+                        <div class="field">
+                            <label class="label">Nome da Lista vem aqui</label>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Selecione produtos:</label>
+                            <div class="control">
+                                <ul class="lista-produtos">
+                                    <li th:each="produto: ${produtos}">
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="produtos" th:value="${produto.id}">
+                                            <span th:text="${produto.nome}">
+                                                </span>
+                                        </label>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <button class="button is-primary" type="submit">Salvar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</section>
+
+
+</body>
+</html>
