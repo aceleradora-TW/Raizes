@@ -5,20 +5,17 @@
 </head>
 <body>
 <section class="section">
-
     <section class="container">
-
         <h1 class="title">Prévia da Lista</h1>
-
         <div class="columns">
             <div class="column is-6">
                 <div class="box">
-                    <h1 th:text="${minhaLista.nome}"></h1>
-
+                    <form th:action="'/minha-lista/previa'" method="post">
+                    <h1 th:name="'nome'" th:text="${minhaLista.nome}" ></h1>
                     <ul>
-                        <li th:each="produto: ${minhaLista.produtos}">
+                        <li th:each="produto: ${minhaLista.produtos}" th:name="'produtos'" th:value="${produto.id}">
                             <label class="checkbox">
-                                <span th:text="${produto.nome}">
+                                <span th:text="${produto.nome}" >
                                 </span>
                             </label>
                         </li>
@@ -28,15 +25,11 @@
                             <button class="button is-primary" type="submit">Salvar</button>
                         </div>
                     </div>
-
-
+                    </form>
                 </div>
             </div>
         </div>
-
     </section>
-
 </section>
-
 </body>
 </html>

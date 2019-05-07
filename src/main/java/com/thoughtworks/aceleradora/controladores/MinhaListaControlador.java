@@ -37,13 +37,15 @@ public class MinhaListaControlador {
     public String previaLista(MinhaLista lista, Model modelo,  HttpSession sessao) {
         modelo.addAttribute("minhaLista", lista);
         sessao.setAttribute("minhaLista", lista);
+
+        MinhaLista novalista = minhaListaServico.salvar(lista);
+
         return "minhaLista/previa";
     }
 
 
     @PostMapping("/cadastro")
     public String salvarLista(MinhaLista lista) {
-        MinhaLista novalista = minhaListaServico.salvar(lista);
 
         return "minhaLista/previa";
     }
