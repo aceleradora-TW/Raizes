@@ -7,7 +7,16 @@
 <section class="section">
 
     <section class="container">
-
+        <div class="container">
+            <div class="section">
+                <nav class="breadcrumb" aria-label="breadcrumbs">
+                    <ul>
+                        <li><a th:href="@{'/'}" class="has-text-black" aria-current="page">Inicio</a></li>
+                        <li><a th:href="@{'/minha-lista/cadastro'}" class="has-text-black" aria-current="page">Crie a sua Lista</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
         <h1 class="title">Crie a sua Lista</h1>
 
         <div class="columns">
@@ -24,16 +33,16 @@
                         <div class="field">
                             <label class="label">Selecione produtos:</label>
                             <div class="control">
-                                    <ul class="lista-produtos">
-                                        <li th:each="produto: ${produtos}">
-                                            <label class="checkbox">
-                                                <input type="checkbox" name="produtos" th:value="${produto.id}">
-                                                <span th:text="${produto.nome}">
+                                <ul class="lista-produtos">
+                                    <li th:each="produto: ${produtos}">
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="produtos" th:value="${produto.id}">
+                                            <span th:text="${produto.nome}">
                                                 </span>
-                                            </label>
-                                        </li>
+                                        </label>
+                                    </li>
 
-                                    </ul>
+                                </ul>
                             </div>
                         </div>
 
