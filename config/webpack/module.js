@@ -39,7 +39,7 @@ module.exports = {
         options: {
           name: '[name].[ext]',
           outputPath: '/fonts',
-          publicPath: path.join(appRoot, '/src/main/resources/static/assets/')
+          publicPath: path.join(appRoot, '/src/main/resources/static/')
         }
       }]
     }

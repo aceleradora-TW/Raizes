@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title th:replace="${title}"></title>
-    <link th:href="@{/assets/css/app.css}" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
 </head>
 
 <body class="has-background-light">
@@ -15,7 +15,7 @@
         <div class="navbar-brand">
             <a class="ml-2 navbar-item icon-only" href="/">
                 <svg class="navbar-item nav-icon" >
-                    <use xlink:href="/assets/svg/spritmap.svg#sprite-skull"></use>
+                    <use xlink:href="/svg/spritmap.svg#sprite-skull"></use>
                 </svg>
             </a>
             <a class="navbar-item" href="/minha-lista/cadastro">
@@ -30,6 +30,6 @@
     <button class="delete"></button>
     <div class="body"></div>
 </div>
-<script th:src="@{/assets/js/app.js}"></script>
+<script src="/js/app.js"></script>
 </body>
 </html>
