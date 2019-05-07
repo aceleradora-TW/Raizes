@@ -17,12 +17,13 @@ public class WebConfig implements WebMvcConfigurer {
         versionResolver.addFixedVersionStrategy("test_version", "/**");
 
         VersionResourceResolver versionResourceResolver = new VersionResourceResolver()
-            .addVersionStrategy(new ContentVersionStrategy(),"/**");
+                .addVersionStrategy(new ContentVersionStrategy(),"/**");
 
         registry.addResourceHandler("/**")
-            .setCachePeriod(60*60*24*365)
-            .resourceChain(true)
-            .addResolver(versionResourceResolver);
+                .addResourceLocations("classpath:/static/assets/", "classpath:/static/")
+                .setCachePeriod(60*60*24*365)
+                .resourceChain(true)
+                .addResolver(versionResourceResolver);
     }
 
 }

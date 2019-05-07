@@ -6,9 +6,8 @@ module.exports = {
       extractComments: false,
       sourceMap: devMode,
       uglifyOptions: {
-        warnings: false,
         parse: {},
-        compress: { warnings: false, drop_console:  !devMode},
+        compress: { drop_console:  !devMode},
         mangle: true,
         output: { comments: false },
         toplevel: false,
