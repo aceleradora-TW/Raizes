@@ -24,11 +24,19 @@ idea {
     }
 }
 
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
+    developmentOnly "org.springframework.boot:spring-boot-devtools"
     compile "org.flywaydb:flyway-core"
     compile "org.postgresql:postgresql:42.2.5"
 
@@ -42,8 +50,10 @@ repositories {
 
 bootRun {
   def activeProfiles = 'dev'
+  classpath = sourceSets.main.runtimeClasspath + configurations.developmentOnly
 
-  jvmArgs = [
-    "-Dspring.profiles.active=$activeProfiles"
+    jvmArgs = [
+    "-Dspring.profiles.active=$activeProfiles",
+    "-agentlib:jdwp=transport=dt_socket,server=y,address=8000,suspend=n"
   ]
 }

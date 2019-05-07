@@ -1,0 +1,12 @@
+.notification {
+    position: fixed;
+    top: 42px;
+    left: 100%;
+    width: 500px;
+    z-index: 30;
+    transition: transform .3s cubic-bezier(0.6, 1.43, 0, 1.2), -webkit-transform .3s ease;
+
+    &.active{
+        transform: translateX(-100%);
+    }
+}

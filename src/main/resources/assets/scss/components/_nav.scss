@@ -1,0 +1,12 @@
+.tw-navigation {
+    .nav-icon {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+    }
+    .navbar-item {
+        &.icon-only {
+            padding: 0;
+        }
+    }
+}

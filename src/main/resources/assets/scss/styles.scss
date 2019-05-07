@@ -1,0 +1,17 @@
+// import bulma
+@import "~bulma/bulma";
+
+// font-awesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+
+// Config
+@import 'config/variables';
+@import 'config/custom-helpers';
+
+// helpers
+@import 'helpers/spacing';
+@import 'helpers/flex';
+
+// Components
+@import 'components/nav';
+@import 'components/notification';
