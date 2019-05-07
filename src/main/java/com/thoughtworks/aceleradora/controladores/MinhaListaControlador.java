@@ -27,15 +27,16 @@ public class MinhaListaControlador {
 
 
     @GetMapping("/cadastro")
-    public String criarLista(Model model) {
+    public String criarLista(Model modelo) {
 
-        model.addAttribute("produtos", produtoServico.getAll());
+        modelo.addAttribute("produtos", produtoServico.getAll());
         return "minhaLista/cadastro";
     }
 
     @PostMapping("/previa")
-    public String previaLista(MinhaLista lista, Model model) {
-        model.addAttribute("minhaLista", lista);
+    public String previaLista(MinhaLista lista, Model modelo,  HttpSession sessao) {
+        modelo.addAttribute("minhaLista", lista);
+        sessao.setAttribute("minhaLista", lista);
         return "minhaLista/previa";
     }
 
