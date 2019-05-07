@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/minhalista")
+@RequestMapping("/minha-lista")
 public class MinhaListaControlador {
 
     private ProdutoServico produtoServico;
@@ -29,7 +29,7 @@ public class MinhaListaControlador {
     @GetMapping("/cadastro")
     public String criarLista(Model modelo) {
 
-        modelo.addAttribute("produtos", produtoServico.getAll());
+        modelo.addAttribute("produtos", produtoServico.pegarTodos());
         return "minhaLista/cadastro";
     }
 

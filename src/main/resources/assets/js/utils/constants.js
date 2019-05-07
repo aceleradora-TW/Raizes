@@ -1,5 +1,4 @@
 export default {
-    // Notification types
     NOTIFICATIONS_TYPE: {
         PRIMARY: 'primary',
         DAGER: 'danger',
@@ -8,8 +7,7 @@ export default {
         SUCCESS: 'success',
         WARNING: 'warning'
     },
-
-    // Constants
+    
     MESSAGES: {
         'USER_ALREADY_SELECTED' : 'Este dev já está na lista :)',
         'USER__REMOVED' : 'DEV Removido :)' 
