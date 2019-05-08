@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" th:fragment="layout(title, content)" xmlns:th="http://www.thymeleaf.org" class="has-background-light">
+<html lang="pt-br" th:fragment="layout(title, content, breadcrumb)" xmlns:th="http://www.thymeleaf.org" class="has-background-light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,7 @@
 </head>
 
 <body class="has-background-light">
+
 <header>
     <nav class="navbar is-mobile tw-navigation" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
@@ -25,13 +26,7 @@
     </nav>
 </header>
 
-<nav class="breadcrumb" aria-label="breadcrumbs">
-    <ul>
-        <li><a href="/">Página Inicial</a></li>
-        <li><a href="/minha-lista/cadastro">Criar Lista de Produtos</a></li>
-        <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
-    </ul>
-</nav>
+<nav th:replace="${breadcrumb}"/>
 
 <main th:replace="${content}"></main>
 <div class="notification is-info">
