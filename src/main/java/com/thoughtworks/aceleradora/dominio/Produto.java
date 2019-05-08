@@ -2,6 +2,11 @@ package com.thoughtworks.aceleradora.dominio;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "produtos")
@@ -13,8 +18,18 @@ public class Produto {
     private Long id;
     private String nome;
 
-    public Produto() {
-    }
+//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @JoinTable(
+//            name = "lista_produtos",
+//            joinColumns = {@JoinColumn(name = "id_lista")},
+//            inverseJoinColumns = {@JoinColumn(name = "id_produto")}
+//    )
+
+
+    @ManyToMany(mappedBy = "produtos")
+    private List<MinhaLista> listas = new ArrayList<>();
+
+    public Produto() { }
 
     public Produto(String nome) {
         this.nome = nome;
@@ -38,6 +53,14 @@ public class Produto {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public List<MinhaLista> getListas() {
+        return listas;
+    }
+
+    public void setListas(List<MinhaLista> listas) {
+        this.listas = listas;
     }
 }
 

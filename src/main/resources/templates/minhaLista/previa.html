@@ -10,12 +10,12 @@
         <div class="columns">
             <div class="column is-6">
                 <div class="box">
-                    <form th:action="'/minha-lista/previa'" method="post">
-                    <h1 th:name="'nome'" th:text="${minhaLista.nome}" ></h1>
+                    <form th:action="'/minha-lista/cadastro'" method="post">
+                    <h2 th:text="${minhaLista.nome}"></h2>
                     <ul>
-                        <li th:each="produto: ${minhaLista.produtos}" th:name="'produtos'" th:value="${produto.id}">
+                        <li th:each="produto: ${minhaLista.produtos}">
                             <label class="checkbox">
-                                <span th:text="${produto.nome}" >
+                                <span th:text="${produto.nome}">
                                 </span>
                             </label>
                         </li>

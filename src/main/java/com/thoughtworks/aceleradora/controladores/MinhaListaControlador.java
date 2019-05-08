@@ -33,30 +33,19 @@ public class MinhaListaControlador {
         return "minhaLista/cadastro";
     }
 
-    @PostMapping("/previa")
-    public String previaLista(MinhaLista lista, Model modelo,  HttpSession sessao) {
+    @PostMapping("/cadastro")
+    public String previaLista(HttpSession sessao) {
+        MinhaLista lista = (MinhaLista) sessao.getAttribute("minhaLista");
+        MinhaLista novaLista = minhaListaServico.salvar(lista);
+
+        return "minhaLista/cadastro";
+    }
+
+    @PostMapping("/cadastro/previa")
+    public String salvarLista(MinhaLista lista, Model modelo, HttpSession sessao) {
         modelo.addAttribute("minhaLista", lista);
         sessao.setAttribute("minhaLista", lista);
-
-        MinhaLista novalista = minhaListaServico.salvar(lista);
-
         return "minhaLista/previa";
     }
-
-
-    @PostMapping("/cadastro")
-    public String salvarLista(MinhaLista lista) {
-
-        return "minhaLista/previa";
-    }
-
-
-    public String salvarMinhaListaNaSessao(MinhaLista minhaLista, HttpSession session) {
-        session.setAttribute("minhaLista", minhaLista);
-
-        MinhaLista minhaListaNaSession = (MinhaLista) session.getAttribute("minhaLista");
-        return null;
-    }
-
 }
 
