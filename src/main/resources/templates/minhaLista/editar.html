@@ -15,19 +15,19 @@
         <div class="columns">
             <div class="column is-6">
                 <div class="box">
-                    <form action="/teste" method="post">
+                    <form action="/minha-lista/editar-lista" method="post">
                         <div class="field">
-                            <label class="label">Nome da Lista vem aqui</label>
+                            <label class="label" th:text="${lista.nome}"></label>
                         </div>
 
                         <div class="field">
                             <label class="label">Selecione produtos:</label>
                             <div class="control">
                                 <ul class="lista-produtos">
-                                    <li th:each="produto: ${produtos}">
+                                    <li th:each="produto: ${lista.produtos}">
                                         <label class="checkbox">
-                                            <input type="checkbox" name="produtos" th:value="${produto.id}">
-                                            <span th:text="${produto.nome}">
+                                            <input type="checkbox" name="produtos" th:value="${produto.id}" checked>
+                                            <span th:text="${produto}">
                                                 </span>
                                         </label>
                                     </li>

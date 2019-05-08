@@ -6,9 +6,9 @@ import com.thoughtworks.aceleradora.servicos.ProdutoServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/minha-lista")
@@ -38,6 +38,17 @@ public class MinhaListaControlador {
         minhaListaServico.salvar(lista);
         return "minhaLista/cadastro";
     }
+
+    @GetMapping("/editar-lista/{id}")
+    public String editarLista(Model modelo, @PathVariable("id") Long id) {
+        Optional<MinhaLista> lista = minhaListaServico.encontraUm(id);
+
+        modelo.addAttribute("lista", lista.get());
+
+        return "minhaLista/editar";
+
+    }
+
 
 }
 
