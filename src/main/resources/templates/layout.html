@@ -25,6 +25,14 @@
     </nav>
 </header>
 
+<nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+        <li><a href="/">Página Inicial</a></li>
+        <li><a href="/minha-lista/cadastro">Criar Lista de Produtos</a></li>
+        <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
+    </ul>
+</nav>
+
 <main th:replace="${content}"></main>
 <div class="notification is-info">
     <button class="delete"></button>
