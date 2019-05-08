@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
+import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +41,30 @@ public class MinhaListaControlador {
     }
 
     @GetMapping("/editar-lista/{id}")
-    public String editarLista(Model modelo, @PathVariable("id") Long id) {
+    public String pegaLista(Model modelo, @PathVariable("id") Long id) {
         Optional<MinhaLista> lista = minhaListaServico.encontraUm(id);
 
         modelo.addAttribute("lista", lista.get());
 
         return "minhaLista/editar";
-
     }
+
+    @PostMapping("/editar-lista/{id}")
+    public String salvarEdicao(MinhaLista minhaLista, @PathVariable("id") Long id) {
+        MinhaLista minhaListaBD = minhaListaServico.encontraUm(id).get();
+
+        for (Produto produto:minhaLista.getProdutos()) {
+
+            if(!(minhaListaBD.getProdutos().contains(produto))) {
+                minhaListaServico.deletar(id);
+            }
+
+        }
+
+
+        return "minhaLista/editar";
+    }
+
 
 
 }

@@ -19,6 +19,9 @@ public class MinhaListaServico {
     }
     public Optional<MinhaLista> encontraUm(Long id) {
         return repositorio.findById(id);
-  }
+    }
+    public void deletar(Long id){
+         repositorio.deleteById(id);
+    }
 
 }
