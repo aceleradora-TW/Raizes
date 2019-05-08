@@ -37,13 +37,6 @@ public class MinhaListaControlador {
         return "minhaLista/cadastro";
     }
 
-//    @GetMapping("/cadastro")
-//    public String mostrarCategorias(Model model) {
-//
-//        return "minhaLista/cadastro";
-//    }
-
-
     @PostMapping("/cadastro")
     public String salvarLista(MinhaLista lista) {
 
