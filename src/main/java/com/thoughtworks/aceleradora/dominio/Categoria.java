@@ -17,6 +17,7 @@ public class Categoria {
     private String nome;
 
     @OneToMany(mappedBy = "categoria")
+    @OrderBy(value="nome")
     private List<Produto> produtos;
 
     public Categoria() {
