@@ -3,6 +3,8 @@ package com.thoughtworks.aceleradora.dominio;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "categorias")
@@ -11,7 +13,11 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
     private String nome;
+
+    @OneToMany(mappedBy = "categoria")
+    private List<Produto> produtos;
 
     public Categoria() {
     }
@@ -30,6 +36,14 @@ public class Categoria {
 
     public String getNome() {
         return nome;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     public void setNome(String nome) {

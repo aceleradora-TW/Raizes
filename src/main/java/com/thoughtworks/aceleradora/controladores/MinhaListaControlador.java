@@ -1,5 +1,6 @@
 package com.thoughtworks.aceleradora.controladores;
 
+import com.thoughtworks.aceleradora.dominio.Categoria;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.repositorios.CategoriaRepositorio;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
@@ -11,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/minha-lista")
@@ -31,8 +34,14 @@ public class MinhaListaControlador {
     @GetMapping("/cadastro")
     public String criarLista(Model model) {
 
+        List<Categoria> categorias = categoriaServico.pegarCategorias();
+
+        System.out.println(categorias.get(0).getProdutos());
+
         model.addAttribute("produtos", produtoServico.pegarTodos());
-        model.addAttribute("categorias", categoriaServico.pegarCategorias());
+
+
+        model.addAttribute("categorias", categorias);
 
         return "minhaLista/cadastro";
     }

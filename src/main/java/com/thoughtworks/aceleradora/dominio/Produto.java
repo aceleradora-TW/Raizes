@@ -11,9 +11,22 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
     private String nome;
 
+    @ManyToOne
+    @JoinColumn(name = "id_categorias")
+    private Categoria categoria;
+
     public Produto() {
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public Produto(String nome) {
@@ -22,14 +35,6 @@ public class Produto {
 
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getId() {
