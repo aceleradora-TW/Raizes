@@ -36,11 +36,6 @@ public class MinhaListaControlador {
 
         List<Categoria> categorias = categoriaServico.pegarCategorias();
 
-        System.out.println(categorias.get(0).getProdutos());
-
-        model.addAttribute("produtos", produtoServico.pegarTodos());
-
-
         model.addAttribute("categorias", categorias);
 
         return "minhaLista/cadastro";

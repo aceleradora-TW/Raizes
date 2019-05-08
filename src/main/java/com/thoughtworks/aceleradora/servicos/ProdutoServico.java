@@ -11,13 +11,8 @@ public class ProdutoServico {
 
     private ProdutoRepositorio repositorio;
 
-
-
     public ProdutoServico(ProdutoRepositorio repositorio) {
         this.repositorio = repositorio;
     }
 
-    public List<Produto> pegarTodos() {
-        return repositorio.findAll();
-    }
 }

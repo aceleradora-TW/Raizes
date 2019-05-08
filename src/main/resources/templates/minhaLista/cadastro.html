@@ -41,13 +41,14 @@
                                                 </span>
                                             </span>
                                         </label>
-                                    </li>
-                                    <li th:each="produto: ${produtos}">
-                                        <label class="checkbox">
-                                            <input type="checkbox" name="produtos" th:value="${produto.id}">
-                                            <span th:text="${produto.nome}">
-                                                </span>
-                                        </label>
+
+                                        <div th:each="produto: ${categoria.produtos}">
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="produtos" th:value="${produto.id}">
+                                                <span th:text="${produto.nome}">
+                                                    </span>
+                                            </label>
+                                        </div>
                                     </li>
 
                                 </ul>
