@@ -39,5 +39,12 @@ public class MinhaListaControlador {
         return "minhaLista/cadastro";
     }
 
+    @GetMapping("/listas-criadas")
+    public String listasCriadas() {
+
+        //modelo.addAttribute();
+        return "minhaLista/listas-criadas";
+    }
+
 }
 
