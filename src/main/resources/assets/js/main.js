@@ -3,3 +3,8 @@ import '@fortawesome/fontawesome-free/js/all'
 import 'animate.css'
 import '../scss/styles.scss'
 
+import minhasLista from './pages/minha-lista'
+
+
+window.minhasLista = minhasLista;
+

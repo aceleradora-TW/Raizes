@@ -13,19 +13,22 @@
         <h1 class="title">Minhas listas</h1>
 
         <div class="columns">
-            <div class="column is-6">
+            <div class="column is-10">
                 <div class="box">
                     <form th:action="'/minha-lista/listas-criadas'" method="post">
                         <div class="field">
-                            <label class="label">Nome da sua Lista</label>
                             <div class="control">
                                 <ul class="lista-produtos">
                                     <li th:each="tituloLista: ${tituloLista}">
-                                        <label class="checkbox">
-                                            <input type="checkbox" name="tituloLista" th:value="${tituloLista.id}">
-                                            <span th:text="${tituloLista.nome}">
-                                                </span>
-                                        </label>
+                                        <span th:text="${tituloLista.nome}">
+                                        </span>
+                                        <div class="buttons has-addons">
+                                            <span class="button">Visualizar</span>
+                                            <span class="button">Editar</span>
+                                            <span class="button">Comprar</span>
+                                            <span class="button" th:onclick="'window.minhasLista.excluirLista('+ tituloLista.nome +')'">Excluir</span>
+                                        </div>
+                                        <hr>
                                     </li>
 
                                 </ul>
