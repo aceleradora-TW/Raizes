@@ -18,13 +18,8 @@ public class Produto {
     private Long id;
     private String nome;
 
-//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    @JoinTable(
-//            name = "lista_produtos",
-//            joinColumns = {@JoinColumn(name = "id_lista")},
-//            inverseJoinColumns = {@JoinColumn(name = "id_produto")}
-//    )
-
+    @Transient
+    private boolean checado;
 
     @ManyToMany(mappedBy = "produtos")
     private List<MinhaLista> listas = new ArrayList<>();
@@ -61,6 +56,14 @@ public class Produto {
 
     public void setListas(List<MinhaLista> listas) {
         this.listas = listas;
+    }
+
+    public boolean isChecado() {
+        return checado;
+    }
+
+    public void setChecado(boolean checado) {
+        this.checado = checado;
     }
 }
 
