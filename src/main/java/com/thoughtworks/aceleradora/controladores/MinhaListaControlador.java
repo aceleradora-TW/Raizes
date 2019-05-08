@@ -40,9 +40,9 @@ public class MinhaListaControlador {
     }
 
     @GetMapping("/listas-criadas")
-    public String listasCriadas() {
+    public String listasCriadas(Model modelo) {
 
-        //modelo.addAttribute();
+        modelo.addAttribute("tituloLista", minhaListaServico.pegarListasCriadas());
         return "minhaLista/listas-criadas";
     }
 
