@@ -34,6 +34,14 @@
                             <label class="label">Selecione produtos:</label>
                             <div class="control">
                                 <ul class="lista-produtos">
+                                    <li th:each="categoria: ${categorias}">
+                                        <label>
+                                            <span name="categorias" th:value="${categoria.id}">
+                                            <span th:text="${categoria.nome}">
+                                                </span>
+                                        </label>
+                                    </li>
+
                                     <li th:each="produto: ${produtos}">
                                         <label class="checkbox">
                                             <input type="checkbox" name="produtos" th:value="${produto.id}">

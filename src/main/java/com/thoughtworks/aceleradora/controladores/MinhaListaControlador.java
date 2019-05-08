@@ -1,6 +1,8 @@
 package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
+import com.thoughtworks.aceleradora.repositorios.CategoriaRepositorio;
+import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,13 @@ public class MinhaListaControlador {
 
     private ProdutoServico produtoServico;
     private MinhaListaServico minhaListaServico;
+    private CategoriaServico categoriaServico;
 
     @Autowired
-    public MinhaListaControlador(ProdutoServico produtoServico, MinhaListaServico minhaListaServico) {
+    public MinhaListaControlador(ProdutoServico produtoServico, MinhaListaServico minhaListaServico, CategoriaServico categoriaServico) {
         this.produtoServico = produtoServico;
         this.minhaListaServico = minhaListaServico;
+        this.categoriaServico = categoriaServico;
     }
 
 
@@ -28,8 +32,16 @@ public class MinhaListaControlador {
     public String criarLista(Model model) {
 
         model.addAttribute("produtos", produtoServico.pegarTodos());
+        model.addAttribute("categorias", categoriaServico.pegarCategorias());
+
         return "minhaLista/cadastro";
     }
+
+//    @GetMapping("/cadastro")
+//    public String mostrarCategorias(Model model) {
+//
+//        return "minhaLista/cadastro";
+//    }
 
 
     @PostMapping("/cadastro")

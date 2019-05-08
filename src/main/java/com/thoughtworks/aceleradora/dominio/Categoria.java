@@ -1,23 +1,31 @@
 package com.thoughtworks.aceleradora.dominio;
 
+
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Entity(name = "produtos")
+@Entity(name = "categorias")
 @Access(AccessType.FIELD)
-public class Produto {
-
+public class Categoria {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String nome;
 
-    public Produto() {
+    public Categoria() {
     }
 
-    public Produto(String nome) {
+    public Categoria(String nome) {
         this.nome = nome;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -27,18 +35,4 @@ public class Produto {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String toString() {
-        return nome;
-    }
-
 }
-
