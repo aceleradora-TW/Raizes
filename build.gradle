@@ -38,8 +38,10 @@ dependencies {
     compile "org.springframework:spring-jdbc"
     compile "org.flywaydb:flyway-core"
     compile "org.postgresql:postgresql:42.2.5"
+    compile "com.h2database:h2"
 
-    testCompile 'junit:junit:4.12'
+    testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    testCompile "junit:junit:4.12"
     testCompile "org.mockito:mockito-core:2.21.0"
 
     developmentOnly "org.springframework.boot:spring-boot-devtools"

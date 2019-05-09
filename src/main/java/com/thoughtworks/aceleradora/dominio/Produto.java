@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.dominio;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -17,6 +18,11 @@ public class Produto {
     }
 
     public Produto(String nome) {
+        this.nome = nome;
+    }
+
+    public Produto(Long id, String nome) {
+        this.id = id;
         this.nome = nome;
     }
 
@@ -38,6 +44,20 @@ public class Produto {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Produto produto = (Produto) o;
+        return Objects.equals(id, produto.id) &&
+                Objects.equals(nome, produto.nome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome);
     }
 }
 
