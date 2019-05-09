@@ -1,5 +1,6 @@
 package com.thoughtworks.aceleradora.servicos;
 
+import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.repositorios.ProdutoRepositorio;
 import org.springframework.stereotype.Service;
@@ -14,5 +15,7 @@ public class ProdutoServico {
     public ProdutoServico(ProdutoRepositorio repositorio) {
         this.repositorio = repositorio;
     }
+
+    public void salvar() {}
 
 }

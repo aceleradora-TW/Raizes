@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -35,7 +36,6 @@ public class MinhaListaControlador {
     public String criarLista(Model model) {
 
         List<Categoria> categorias = categoriaServico.pegarCategorias();
-
         model.addAttribute("categorias", categorias);
 
         return "minhaLista/cadastro";
@@ -46,6 +46,14 @@ public class MinhaListaControlador {
 
         minhaListaServico.salvar(lista);
         return "minhaLista/cadastro";
+    }
+
+
+
+    @ResponseBody
+    @GetMapping("/pegarCategorias")
+    public List<Categoria> salvarLista() {
+        return categoriaServico.pegarCategorias();
     }
 
 }
