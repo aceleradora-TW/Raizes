@@ -5,7 +5,18 @@
   <title>Aceleradora Ágil - Esqueleto Ambulante</title>
 </head>
 <body>
-  <nav th:replace="@{./fragmentos/breadcrumb}"/>
+<!--  <nav th:replace="@{./fragmentos/breadcrumb}"/>-->
+<nav class="breadcrumb" aria-label="breadcrumbs" xmlns:th="http://www.thymeleaf.org">
+  <ul>
+    <li th:each="rota: ${rotas}">
+      <a th:text="@{${nome}}"></a>
+    </li>
+
+    <li><a href="#">Documentation</a></li>
+    <li><a href="#">Components</a></li>
+    <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
+  </ul>
+</nav>
 
 
   <section class="hero is-primary is-fullheight-with-navbar">
