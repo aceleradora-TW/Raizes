@@ -1,4 +1,7 @@
 fileignoreconfig:
-- filename: src/test/resources/test-produtos-data.sql
+- filename: src/test/resources/inserir-produtos-de-teste.sql
   checksum: 5c4cb12bd4a980bd50a9a73cf42777c812d12bef2c8e75b863349f9901d3c83c
+  ignore_detectors: []
+- filename: src/test/resources/limpar-dados-de-teste.sql
+  checksum: 299055d551074d23f95167fc17563b5c501948edaa45320e1b2f8ef5bc6b4be0
   ignore_detectors: []
