@@ -1,10 +1,17 @@
 <!DOCTYPE HTML>
-<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{layout :: layout(~{::title}, ~{::body}, ~{::article})}" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <title>Aceleradora Ágil - Esqueleto Ambulante</title>
 </head>
 
+<article th:if="${breadcrumb}">
+  <ul>
+    <li th:each="item : ${breadcrumb}">
+      <span th:text="${item}"></span>
+    </li>
+  </ul>
+</article>
 <body>
   <section class="hero is-primary is-fullheight-with-navbar">
     <div class="hero-body">
