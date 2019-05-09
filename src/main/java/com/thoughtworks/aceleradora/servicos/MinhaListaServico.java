@@ -5,6 +5,7 @@ import com.thoughtworks.aceleradora.repositorios.MinhaListaRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MinhaListaServico {
@@ -17,9 +18,16 @@ public class MinhaListaServico {
     public MinhaLista salvar(MinhaLista lista) {
         return repositorio.save(lista);
     }
-
     public List<MinhaLista> pegarListasCriadas() {
         return (List<MinhaLista>) repositorio.findAll();
+    }
+
+    public void removerListaCriada(Long idLista) {
+        repositorio.deleteById(idLista);
+    }
+
+    public Optional<MinhaLista> buscaListaPorId(Long id) {
+        return repositorio.findById(id);
     }
 
 
