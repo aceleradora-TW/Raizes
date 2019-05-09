@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -25,36 +24,26 @@ public class MinhaListaControlador {
         this.minhaListaServico = minhaListaServico;
     }
 
-
     @GetMapping("/cadastro")
-    public String criarLista(Model modelo) {
-
+    public String renderizaProdutos(Model modelo, HttpSession sessao) {
         modelo.addAttribute("produtos", produtoServico.pegarTodos());
+        MinhaLista lista = (MinhaLista) sessao.getAttribute("minhaLista");
+        modelo.addAttribute("lista",lista);
         return "minhaLista/cadastro";
     }
 
-    @PostMapping("/previa")
-    public String previaLista(MinhaLista lista, Model modelo,  HttpSession sessao) {
+    @PostMapping("/cadastro/previa")
+    public String previaLista(MinhaLista lista, Model modelo, HttpSession sessao) {
         modelo.addAttribute("minhaLista", lista);
         sessao.setAttribute("minhaLista", lista);
         return "minhaLista/previa";
     }
 
-
     @PostMapping("/cadastro")
-    public String salvarLista(MinhaLista lista) {
-        MinhaLista novalista = minhaListaServico.salvar(lista);
-
-        return "minhaLista/previa";
+    public String salvarLista(HttpSession sessao) {
+        MinhaLista lista = (MinhaLista) sessao.getAttribute("minhaLista");
+        MinhaLista novaLista = minhaListaServico.salvar(lista);
+        return "minhaLista/cadastro";
     }
-
-
-    public String salvarMinhaListaNaSessao(MinhaLista minhaLista, HttpSession session) {
-        session.setAttribute("minhaLista", minhaLista);
-
-        MinhaLista minhaListaNaSession = (MinhaLista) session.getAttribute("minhaLista");
-        return null;
-    }
-
 }
 

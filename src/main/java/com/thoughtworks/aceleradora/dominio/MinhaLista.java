@@ -17,13 +17,12 @@ public class MinhaLista {
 
     private String nome;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(
             name = "lista_produtos",
             joinColumns = {@JoinColumn(name = "id_lista")},
             inverseJoinColumns = {@JoinColumn(name = "id_produto")}
     )
-
     @JsonIgnoreProperties("listas")
     private List<Produto> produtos = new ArrayList<>();
 
@@ -33,12 +32,10 @@ public class MinhaLista {
 
     public MinhaLista(String nome) {
         this.nome = nome;
-
     }
 
     public void setId(Long id) {
         this.id = id;
-
     }
 
     public void setNome(String nome) {
@@ -52,7 +49,6 @@ public class MinhaLista {
     public String getNome() {
         return nome;
     }
-
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;

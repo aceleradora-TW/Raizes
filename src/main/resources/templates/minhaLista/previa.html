@@ -5,16 +5,13 @@
 </head>
 <body>
 <section class="section">
-
     <section class="container">
-
         <h1 class="title">Prévia da Lista</h1>
-
         <div class="columns">
             <div class="column is-6">
                 <div class="box">
-                    <h1 th:text="${minhaLista.nome}"></h1>
-
+                    <form th:action="'/minha-lista/cadastro'" method="post">
+                    <h2 th:text="${minhaLista.nome}"></h2>
                     <ul>
                         <li th:each="produto: ${minhaLista.produtos}">
                             <label class="checkbox">
@@ -28,15 +25,16 @@
                             <button class="button is-primary" type="submit">Salvar</button>
                         </div>
                     </div>
-
-
+                        <div class="field">
+                            <div class="control">
+                                <a class="button is-primary" th:href="'/minha-lista/cadastro'">Voltar</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
     </section>
-
 </section>
-
 </body>
 </html>
