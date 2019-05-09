@@ -13,8 +13,4 @@ public class Breadcrumb {
         this.listaDePaginas = listaDePaginas;
     }
 
-    public String getNomeDaPagina() {
-
-        return null;
-    }
 }
