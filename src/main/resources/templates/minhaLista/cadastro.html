@@ -50,9 +50,9 @@
                                             </label>
 
                                         </div>
-                                        <a class="flex center" href="#" onclick="aparece('perguntaum');" >ver mais</a>
-                                        <span id="perguntaum" style="display: none; ">
-                                        É A CASSIA E O DANINHO
+                                        <a class="flex center" href="#" onclick="aparece('ver-mais');" >ver mais</a>
+                                        <span id="ver-mais" style="display: none; ">
+                                        Outros produtos
                                         </span>
                                     </li>
                                 </ul>
@@ -73,16 +73,14 @@
 
 </section>
 <script>
-    function aparece(ahhhh){
-        if(document.getElementById(ahhhh).style.display== "none"){
-            document.getElementById(ahhhh).style.display = "block";
+    function aparece(texto){
+        if(document.getElementById(texto).style.display== "none"){
+            document.getElementById(texto).style.display = "block";
         }
         else {
-            document.getElementById(ahhhh).style.display = "none"
+            document.getElementById(texto).style.display = "none"
         }
     }
 </script>
-
-
 </body>
 </html>
