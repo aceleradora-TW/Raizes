@@ -15,7 +15,7 @@
         <div class="columns">
             <div class="column is-10">
                 <div class="box">
-                    <form th:action="'/minha-lista/listas-criadas'" method="post">
+                    <form name="formularioMinhasListas" th:action="'/minha-lista/listas-criadas'" method="post">
                         <div class="field">
                             <div class="control">
                                 <ul class="lista-produtos">
@@ -26,7 +26,7 @@
                                             <span class="button">Visualizar</span>
                                             <span class="button">Editar</span>
                                             <span class="button">Comprar</span>
-                                            <span class="button" th:onclick="'window.minhasLista.excluirLista('+ tituloLista.nome +')'">Excluir</span>
+                                            <span class="button" th:onclick= "minhasLista.excluirLista(formularioMinhasListas)" >Excluir</span>
                                         </div>
                                         <hr>
                                     </li>
