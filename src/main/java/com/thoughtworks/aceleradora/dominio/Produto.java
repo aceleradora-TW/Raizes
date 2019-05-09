@@ -1,11 +1,8 @@
 package com.thoughtworks.aceleradora.dominio;
 
 import javax.persistence.*;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -17,9 +14,6 @@ public class Produto {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String nome;
-
-    @Transient
-    private boolean checado;
 
     @ManyToMany(mappedBy = "produtos")
     private List<MinhaLista> listas = new ArrayList<>();
@@ -58,12 +52,5 @@ public class Produto {
         this.listas = listas;
     }
 
-    public boolean isChecado() {
-        return checado;
-    }
-
-    public void setChecado(boolean checado) {
-        this.checado = checado;
-    }
 }
 
