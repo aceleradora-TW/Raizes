@@ -50,23 +50,18 @@ public class MinhaListaControlador {
     }
 
     @PostMapping("/editar-lista/{id}")
-    public String salvarEdicao(MinhaLista minhaLista, @PathVariable("id") String id) {
-        Long idLong = Long.parseLong(id);
-        MinhaLista minhaListaBD = minhaListaServico.encontraUm(idLong).get();
+    public String salvarEdicao(MinhaLista minhaLista, @PathVariable("id") Long id) {
+        MinhaLista minhaListaBD = minhaListaServico.encontraUm(id).get();
 
-        for (Produto produto:minhaLista.getProdutos()) {
+        for (Produto produto:minhaListaBD.getProdutos()) {
 
-            if(!(minhaListaBD.getProdutos().contains(produto))) {
-                minhaListaServico.deletar(idLong);
+            if(!(minhaLista.getProdutos().contains(produto))) {
+                minhaListaServico.deletar(minhaListaBD.getId());
             }
 
         }
-
-
-        return "minhaLista/editar";
+        return "minhaLista/cadastro";
     }
-
-
 
 }
 
