@@ -50,7 +50,7 @@ public class MinhaListaControlador {
     @PostMapping("/listas-criadas/excluir/{id}")
     public String removerListaCriada(MinhaLista lista, @PathVariable ("id") Long id) {
         minhaListaServico.removerListaCriada(id);
-        return "minhaLista/cadastro";
+        return "minhaLista/listas-criadas";
     }
 }
 
