@@ -13,19 +13,18 @@ import java.util.List;
 @Controller
 public class InicioControlador {
 
+    private Breadcrumb breadcrumb;
+
+    public InicioControlador() {
+        this.breadcrumb = new Breadcrumb();
+    }
+
     @GetMapping("/")
-    public String renderizaPaginaInicial(Model modelo, Breadcrumb breadcrumb) {
-        List<Pagina> nomes = new ArrayList<>();
-        Pagina paginaInicial = new Pagina("Página Inicial");
-        Pagina criarLista = new Pagina("Criar Lista");
-
-        nomes.add(paginaInicial);
-        nomes.add(criarLista);
-
-        breadcrumb.setListaDePaginas(nomes);
-
-        modelo.addAttribute("rotas", breadcrumb);
+    public String renderizaPaginaInicial(Model modelo) {
+        List<Pagina> listaDePaginas = breadcrumb.criaBreadcrumb("Página Inicial", "/", modelo);
+        modelo.addAttribute("listaDePaginas", listaDePaginas);
 
         return "inicio";
     }
+
 }

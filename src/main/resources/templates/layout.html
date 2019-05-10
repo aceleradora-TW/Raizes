@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-br" th:fragment="layout(title, content, breadcrumb)" xmlns:th="http://www.thymeleaf.org" class="has-background-light">
+<html lang="pt-br" th:fragment="layout(title, content, breadcrumb)"
+      xmlns:th="http://www.thymeleaf.org" class="has-background-light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,9 +25,15 @@
             </a>
         </div>
     </nav>
+
+    <nav th:replace="${breadcrumb}"/>
+
 </header>
 
 <main th:replace="${content}"></main>
+
+
+
 <div class="notification is-info">
     <button class="delete"></button>
     <div class="body"></div>
