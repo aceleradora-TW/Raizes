@@ -15,29 +15,33 @@
         <div class="columns">
             <div class="column is-10">
                 <div class="box">
-                    <form name="formularioMinhasListas" th:action="'/minha-lista/listas-criadas'" method="post">
-                        <div class="field">
-                            <div class="control">
-                                <ul class="lista-produtos">
-                                    <li th:each="tituloLista: ${tituloLista}">
-                                        <span th:text="${tituloLista.nome}">
-                                        </span>
-                                        <div class="mb-0 flex end buttons has-addons">
-                                            <span class="button rz-botao">Visualizar</span>
-                                            <span class="button rz-botao">Editar</span>
-                                            <span class="button rz-botao">Comprar</span>
-                                            <span class="button rz-botao" th:onclick= "minhasLista.excluirLista(formularioMinhasListas)" >Excluir</span>
-                                        </div>
-                                        <hr>
-                                    </li>
+                    <div class="field">
+                        <div class="control">
+                            <ul class="lista-produtos">
+                                <li th:each="lista: ${listasCriadas}">
+                                    <span th:text="${lista.nome}">
+                                    </span>
+                                    <div class="mb-0 flex end buttons has-addons">
+                                        <span class="button rz-botao">Visualizar</span>
+                                        <span class="button rz-botao">Editar</span>
+                                        <span class="button rz-botao">Comprar</span>
 
-                                </ul>
-                            </div>
-                        </div>
+                                        <form th:action="@{'/minha-lista/listas-criadas/excluir/' + ${lista.id}}" method="post">
+                                            <button class="button rz-botao" type="submit">Excluir</button>
+                                        </form>
 
-                        <div class="field">
+                                    </div>
+                                    <hr>
+                                </li>
+                            </ul>
+                            <form th:action="'/minha-lista/cadastro'" method="get">
+                                <button class="button is-primary" type="submit">Nova Lista</button>
+                            </form>
                         </div>
-                    </form>
+                    </div>
+
+                    <div class="field">
+                    </div>
                 </div>
             </div>
         </div>

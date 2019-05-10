@@ -15,9 +15,11 @@ public class MinhaListaServico {
     public MinhaListaServico(MinhaListaRepositorio repositorio) {
         this.repositorio = repositorio;
     }
+
     public MinhaLista salvar(MinhaLista lista) {
         return repositorio.save(lista);
     }
+
     public List<MinhaLista> pegarListasCriadas() {
         return (List<MinhaLista>) repositorio.findAll();
     }
@@ -25,10 +27,5 @@ public class MinhaListaServico {
     public void removerListaCriada(Long idLista) {
         repositorio.deleteById(idLista);
     }
-
-    public Optional<MinhaLista> buscaListaPorId(Long id) {
-        return repositorio.findById(id);
-    }
-
 
 }
