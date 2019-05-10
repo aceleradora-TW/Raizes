@@ -33,7 +33,7 @@
                         <div class="field">
                             <label class="label">Selecione produtos:</label>
                             <div class="control">
-                                <ul class="lista-produtos">
+                                <ul class="categorias">
                                     <li th:each="categoria: ${categorias}">
                                         <label>
                                             <span name="categorias" th:value="${categoria.id}">
@@ -41,17 +41,17 @@
                                                 </span>
                                             </span>
                                         </label>
-
-                                        <div th:each="produto: ${categoria.produtos}">
-                                            <label class="checkbox">
-                                                <input type="checkbox" name="produtos" th:value="${produto.id}">
-                                                <span th:text="${produto.nome}">
+                                        <ul class="lista-produtos">
+                                            <li th:each="produto: ${categoria.produtos}">
+                                                <label class="checkbox">
+                                                    <input type="checkbox" name="produtos" th:value="${produto.id}">
+                                                    <span th:text="${produto.nome}">
                                                     </span>
-                                            </label>
-
-                                        </div>
-                                        <a class="flex center" href="#" onclick="aparece('ver-mais');" >ver mais</a>
-                                        <span id="ver-mais" style="display: none; ">
+                                                </label>
+                                            </li>
+                                        </ul>
+                                        <a class="flex center" href="#" th:onclick="'cadastroLista.aparece(' + 'event, ' + ${categoria.id} + ');'" >ver mais</a>
+                                        <span class="ver-mais" style="display: none; ">
                                         Outros produtos
                                         </span>
                                     </li>
@@ -72,15 +72,5 @@
     </section>
 
 </section>
-<script>
-    function aparece(texto){
-        if(document.getElementById(texto).style.display== "none"){
-            document.getElementById(texto).style.display = "block";
-        }
-        else {
-            document.getElementById(texto).style.display = "none"
-        }
-    }
-</script>
 </body>
 </html>

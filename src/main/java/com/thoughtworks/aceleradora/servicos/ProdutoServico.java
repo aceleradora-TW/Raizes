@@ -1,10 +1,10 @@
 package com.thoughtworks.aceleradora.servicos;
 
-import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.repositorios.ProdutoRepositorio;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 
 @Service
@@ -16,6 +16,9 @@ public class ProdutoServico {
         this.repositorio = repositorio;
     }
 
-    public void salvar() {}
+    public List<Produto> pegarTodos(){
+        return repositorio.findAll();
+    }
+
 
 }
