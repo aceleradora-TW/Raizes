@@ -60,5 +60,4 @@ public class MinhaLista {
     public List<Produto> getProdutos() {
         return produtos;
     }
-
 }

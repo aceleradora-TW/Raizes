@@ -14,14 +14,23 @@ public class MinhaListaServico {
     public MinhaListaServico(MinhaListaRepositorio repositorio) {
         this.repositorio = repositorio;
     }
+
     public MinhaLista salvar(MinhaLista lista) {
         return repositorio.save(lista);
     }
+
     public Optional<MinhaLista> encontraUm(Long id) {
         return repositorio.findById(id);
     }
+
     public void deletar(Long id){
          repositorio.deleteById(id);
     }
 
+    public void atualizar(Long id, Long idProduto) {
+        Optional<MinhaLista> lista = repositorio.findById(id);
+        lista.get().getProdutos().remove(idProduto);
+
+        repositorio.save(lista.get());
+    }
 }

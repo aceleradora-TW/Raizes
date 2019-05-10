@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Id;
 import java.util.Optional;
 
 @Controller
@@ -50,16 +51,8 @@ public class MinhaListaControlador {
     }
 
     @PostMapping("/editar-lista/{id}")
-    public String salvarEdicao(MinhaLista minhaLista, @PathVariable("id") Long id) {
-        MinhaLista minhaListaBD = minhaListaServico.encontraUm(id).get();
-
-        for (Produto produto:minhaListaBD.getProdutos()) {
-
-            if(!(minhaLista.getProdutos().contains(produto))) {
-                minhaListaServico.deletar(minhaListaBD.getId());
-            }
-
-        }
+    public String salvarEdicao(MinhaLista minhaLista, @PathVariable("id") Long id, @PathVariable("produto.id") Long idProduto) {
+        minhaListaServico.atualizar(id, idProduto);
         return "minhaLista/cadastro";
     }
 
