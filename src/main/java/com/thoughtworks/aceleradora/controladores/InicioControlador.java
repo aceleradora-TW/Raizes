@@ -14,7 +14,6 @@ public class InicioControlador  extends MainController{
 
     @GetMapping("/")
     public String renderizaPaginaInicial(Model model) {
-        return "inicio";
-        return this.go("inicio", "Inicio", model);
+        return this.go("" + "inicio", "Inicio", model);
     }
 }
