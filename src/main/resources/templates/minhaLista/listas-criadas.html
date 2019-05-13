@@ -26,8 +26,8 @@
                                         <span class="button rz-botao">Editar</span>
                                         <span class="button rz-botao" th:onclick= "minhasLista.excluirLista()">Comprar</span>
 
-                                        <form th:action="@{'/minha-lista/listas-criadas/excluir/' + ${lista.id}}" method="post">
-                                            <button class="button rz-botao" th:onclick="minhasLista.excluirLista()">Excluir</button>
+                                        <form th:action="@{'/minha-lista/listas-criadas/excluir/' + ${lista.id}}" method="post"  name="meuform">
+                                            <button class="button rz-botao" type="button" th:onclick="return minhasLista.excluirLista(meuform)">Excluir</button>
                                         </form>
 
                                     </div>
