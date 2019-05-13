@@ -51,8 +51,11 @@ public class MinhaListaControlador {
     }
 
     @PostMapping("/editar-lista/{id}")
-    public String salvarEdicao(MinhaLista minhaLista, @PathVariable("id") Long id, @PathVariable("produto.id") Long idProduto) {
-        minhaListaServico.atualizar(id, idProduto);
+    public String salvarEdicao(MinhaLista minhaLista, @PathVariable("id") Long id) {
+        for(int i = 0; i < minhaLista.getProdutos().size(); i++) {
+            minhaListaServico.atualizar(id, minhaLista.getProdutos().get(i).getId());
+        }
+
         return "minhaLista/cadastro";
     }
 
