@@ -4,6 +4,14 @@
     <title>Aceleradora Ágil - Esqueleto Ambulante</title>
 </head>
 
+<breadcrumb class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+        <li th:each="pagina: ${listaDePaginas}">
+            <a th:text="${pagina.nome}" th:href="${pagina.url}"></a>
+        </li>
+        <li class="is-active"><a href="#" aria-current="page">Página Atual</a></li>
+    </ul>
+</breadcrumb>
 
 <body>
 

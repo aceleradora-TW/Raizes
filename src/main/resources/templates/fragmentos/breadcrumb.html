@@ -1,14 +1,16 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<nav class="breadcrumb" aria-label="breadcrumbs" >
-    <ul>
-        <li th:each="rota: ${rotas.listaDePaginas}">
-            <a th:text="${rota.nome}"></a>
-        </li>
 
-        <li><a href="#">Documentation</a></li>
-        <li><a href="#">Components</a></li>
-        <li class="is-active"><a href="#" aria-current="page">Breadcrumb</a></li>
-    </ul>
-</nav>
-</html>
+<!--<div th:replace="~{layout :: layout(~{::title}, ~{::body}, ~{::breadcrumb})}" xmlns:th="http://www.thymeleaf.org">-->
+<!--    <nav class="breadcrumb" aria-label="breadcrumbs" th:fragment="breadcrumb(listaDePaginas)" >-->
+<!--        <ul>-->
+<!--            <li th:each="pagina: ${listaDePaginas}">-->
+<!--                <a th:text="${pagina.nome}" th:href="${pagina.url}"></a>-->
+<!--            </li>-->
+<!--            <li class="is-active"><a href="#" aria-current="page">Página Atual</a></li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+
+<!--</div>-->
+
+
+
+<!--th:replace="inicio :: breadcrumb(listaDePaginas)"-->
