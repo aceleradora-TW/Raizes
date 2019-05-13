@@ -1,7 +1,5 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import org.springframework.ui.Model;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +19,13 @@ public class Breadcrumb {
         this.listaDoBreadcrumb = listaDoBreadcrumb;
     }
 
-    public List<Pagina> criaBreadcrumb (String nomeDaPagina, String urlDaPagina, Model modelo) {
-        Pagina pagina = new Pagina(nomeDaPagina, urlDaPagina);
-        listaDoBreadcrumb.add(pagina);
+    public void adicionaPagina(String nomeDaPagina, String urlDaPagina) {
+        for (Pagina pagina : listaDoBreadcrumb) {
+            if (!pagina.getNome().equalsIgnoreCase(nomeDaPagina)) {
+                Pagina novaPagina = new Pagina(nomeDaPagina, urlDaPagina);
+                listaDoBreadcrumb.add(pagina);
+            }
+        }
 
-        return listaDoBreadcrumb;
     }
 }

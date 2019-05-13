@@ -5,8 +5,8 @@ public class Pagina {
     private String url;
 
     public Pagina(String nome, String url) {
-        this.url = url;
         this.nome = nome;
+        this.url = url;
     }
 
     public String getNome() {
@@ -16,6 +16,4 @@ public class Pagina {
     public String getUrl() {
         return url;
     }
-
-
 }

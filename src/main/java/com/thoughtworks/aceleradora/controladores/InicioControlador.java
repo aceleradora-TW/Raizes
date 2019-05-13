@@ -1,30 +1,23 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.Pagina;
+import com.thoughtworks.aceleradora.servicos.BreadcrumbServico;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class InicioControlador {
 
-    private Breadcrumb breadcrumb;
+    private BreadcrumbServico breadcrumbServico;
 
-    public InicioControlador() {
-        this.breadcrumb = new Breadcrumb();
+    public InicioControlador(BreadcrumbServico breadcrumbServico) {
+        this.breadcrumbServico = breadcrumbServico;
     }
 
     @GetMapping("/")
     public String renderizaPaginaInicial(Model modelo) {
-        List<Pagina> listaDePaginas = breadcrumb.criaBreadcrumb("Página Inicial", "/", modelo);
-        modelo.addAttribute("listaDePaginas", listaDePaginas);
 
-        return "inicio";
+        return this.breadcrumbServico.renderizaBreadcrumb("Página Inicial","inicio", "/", modelo);
     }
 
 }

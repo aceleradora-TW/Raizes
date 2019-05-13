@@ -1,8 +1,7 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
-import com.thoughtworks.aceleradora.dominio.Pagina;
+import com.thoughtworks.aceleradora.servicos.BreadcrumbServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,34 +12,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequestMapping("/minha-lista")
 public class MinhaListaControlador {
 
-    private Breadcrumb breadcrumb;
+    private BreadcrumbServico breadcrumbServico;
     private ProdutoServico produtoServico;
     private MinhaListaServico minhaListaServico;
 
+
     @Autowired
-    public MinhaListaControlador(ProdutoServico produtoServico, MinhaListaServico minhaListaServico) {
+    public MinhaListaControlador(ProdutoServico produtoServico, MinhaListaServico minhaListaServico, BreadcrumbServico breadcrumbServico) {
         this.produtoServico = produtoServico;
         this.minhaListaServico = minhaListaServico;
+        this.breadcrumbServico = breadcrumbServico;
     }
 
 
     @GetMapping("/cadastro")
     public String criarLista(Model modelo) {
-        List<Pagina> listaDePaginas = breadcrumb
-                .criaBreadcrumb("Criar Lista de Produtos",
-                        "/minha-lista/cadastro",
-                        modelo);
 
-        modelo.addAttribute("listaDePaginas", listaDePaginas);
         modelo.addAttribute("produtos", produtoServico.pegarTodos());
 
-        return "minhaLista/cadastro";
+        return this.breadcrumbServico.renderizaBreadcrumb("Criar Lista de Produtos",
+                "minhaLista/cadastro",
+                "/minha-lista/cadastro",
+                modelo);
     }
 
     @PostMapping("/previa")
