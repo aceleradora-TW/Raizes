@@ -3,7 +3,7 @@ import '@fortawesome/fontawesome-free/js/all'
 import 'animate.css'
 import '../scss/styles.scss'
 import '@fengyuanchen/validator';
+import Validator from './utils/validator'
 
-import cadastroLista from './pages/cadastro-lista'
-window.cadastroLista = cadastroLista
+
 
