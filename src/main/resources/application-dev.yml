@@ -2,4 +2,4 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/raizes
     username: postgres
-    password: raizes
+    password: esqueleto
