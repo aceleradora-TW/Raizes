@@ -1,31 +1,40 @@
 package com.thoughtworks.aceleradora.dominio;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class Breadcrumb {
-    private List<Pagina> listaDoBreadcrumb;
+    private Set<Pagina> listaDoBreadcrumb;
 
     public Breadcrumb() {
-        this.listaDoBreadcrumb = new ArrayList<>();
+        this.listaDoBreadcrumb = new HashSet<>();
     }
 
-    public List<Pagina> getListaDoBreadcrumb() {
+    public Set<Pagina> getListaDoBreadcrumb() {
         return listaDoBreadcrumb;
     }
 
-    public void setListaDoBreadcrumb(List<Pagina> listaDoBreadcrumb) {
+    public void setListaDoBreadcrumb(Set<Pagina> listaDoBreadcrumb) {
         this.listaDoBreadcrumb = listaDoBreadcrumb;
     }
 
     public void adicionaPagina(String nomeDaPagina, String urlDaPagina) {
-        for (Pagina pagina : listaDoBreadcrumb) {
-            if (!pagina.getNome().equalsIgnoreCase(nomeDaPagina)) {
-                Pagina novaPagina = new Pagina(nomeDaPagina, urlDaPagina);
-                listaDoBreadcrumb.add(pagina);
-            }
-        }
+//        for (Pagina pagina : listaDoBreadcrumb) {
+//            String nome = pagina.getNome();
+//
+//            if (!nome.equals(nomeDaPagina)) {
+//                Pagina novaPagina = new Pagina(nomeDaPagina, urlDaPagina);
+//                listaDoBreadcrumb.add(novaPagina);
+//            }
+//        }
+        Pagina novaPagina = new Pagina(nomeDaPagina, urlDaPagina);
+               listaDoBreadcrumb.add(novaPagina);
 
     }
+
+
+
 }

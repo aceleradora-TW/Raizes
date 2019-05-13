@@ -6,13 +6,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class BreadcrumbServico {
      private Breadcrumb breadcrumb = new Breadcrumb();
 
     public String renderizaBreadcrumb(String nomeDaPagina, String nomeHtml, String urlDaPagina, Model modelo) {
-        List<Pagina> listaDoBreadcrumb = breadcrumb.getListaDoBreadcrumb();
+        Set<Pagina> listaDoBreadcrumb = breadcrumb.getListaDoBreadcrumb();
         breadcrumb.adicionaPagina(nomeDaPagina, urlDaPagina);
 
         modelo.addAttribute("listaDePaginas", listaDoBreadcrumb);
