@@ -1,6 +1,6 @@
 CREATE TABLE listas (
 
   id serial primary key,
-  nome varchar(255)
+  nome varchar(255) not null
 
 );

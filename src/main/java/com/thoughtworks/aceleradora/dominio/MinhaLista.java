@@ -19,7 +19,7 @@ public class MinhaLista {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
-            name = "lista_produtos",
+            name = "listas_produtos",
             joinColumns = {@JoinColumn(name = "id_lista")},
             inverseJoinColumns = {@JoinColumn(name = "id_produto")}
     )
