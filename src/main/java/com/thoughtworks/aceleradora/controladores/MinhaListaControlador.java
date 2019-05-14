@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Id;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -56,6 +57,12 @@ public class MinhaListaControlador {
             minhaListaServico.atualizar(id, minhaLista.getProdutos().get(i).getId());
         }
 
+        return "minhaLista/cadastro";
+    }
+
+    @PostMapping("/editar-lista/{id}/remover-item")
+    public String removerItem(MinhaLista minhaLista, @PathVariable("id") Long id) {
+        //minhaListaServico.removerItem();
         return "minhaLista/cadastro";
     }
 

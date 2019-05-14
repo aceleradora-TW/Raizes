@@ -1,9 +1,11 @@
 package com.thoughtworks.aceleradora.servicos;
 
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
+import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.repositorios.MinhaListaRepositorio;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,4 +35,20 @@ public class MinhaListaServico {
 
         repositorio.save(lista.get());
     }
+
+    public void removerItem(Long idLista, Long idProduto) {
+        Optional<MinhaLista> lista = repositorio.findById(idLista);
+        Produto produtoAtual;
+
+        for (int i=0; i<=lista.get().getProdutos().size(); i++) {
+            produtoAtual = lista.get().getProdutos().get(i);
+
+            if (produtoAtual.getId() == idProduto){
+                lista.get().getProdutos().remove(i);
+            }
+
+        }
+
+    }
+
 }
