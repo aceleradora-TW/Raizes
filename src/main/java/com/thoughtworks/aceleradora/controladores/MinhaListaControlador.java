@@ -29,10 +29,8 @@ public class MinhaListaControlador {
         this.breadcrumbServico = breadcrumbServico;
     }
 
-
     @GetMapping("/cadastro")
     public String criarLista(Model modelo) {
-
         modelo.addAttribute("produtos", produtoServico.pegarTodos());
 
         return this.breadcrumbServico.renderizaBreadcrumb("Criar Lista de Produtos",

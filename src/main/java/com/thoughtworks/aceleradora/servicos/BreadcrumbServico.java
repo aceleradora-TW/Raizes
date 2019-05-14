@@ -20,22 +20,6 @@ public class BreadcrumbServico {
 
         return nomeHtml;
 
+
     }
-
-//     public String criaBreadcrumb (String nomeDaPagina, String nomeHtml, String urlDaPagina, Model modelo) {
-//         List<Pagina> listaDoBreadcrumb = breadcrumb.getListaDoBreadcrumb();
-//
-//         if(!listaDoBreadcrumb.contains(nomeDaPagina)){
-//             Pagina pagina = new Pagina(nomeDaPagina, urlDaPagina);
-//             listaDoBreadcrumb.add(pagina);
-//
-//         }
-//         modelo.addAttribute("listaDePaginas", this.listaDoBreadcrumb);
-//
-//         return nomeHtml;
-//     }
-
-
-
-
 }

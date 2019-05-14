@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Pagina {
     private String nome;
     private String url;
+    private int ordem;
 
     public Pagina(String nome, String url) {
         this.nome = nome;
