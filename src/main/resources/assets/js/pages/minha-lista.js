@@ -1,6 +1,6 @@
 export default {
     excluirLista: () => {
-        const message = `Teste \n Você deseja realmente excluir a lista selecionada?`
+        const message = `Realmente deseja excluir a lista selecionada?`
         
         return confirm(message);
     },
