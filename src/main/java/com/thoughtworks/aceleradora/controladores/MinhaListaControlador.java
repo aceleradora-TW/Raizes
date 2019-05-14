@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Id;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -60,11 +59,20 @@ public class MinhaListaControlador {
         return "minhaLista/cadastro";
     }
 
+    //Dar continuidade ao metodo para compara o que está no banco com o que está no selecionado no checkbox
+    // o que está no parametro é o que retorna do html
+    //O que está instanciado(lista) é o que está no banco.
     @PostMapping("/editar-lista/{id}/remover-item")
     public String removerItem(MinhaLista minhaLista, @PathVariable("id") Long id) {
-        //minhaListaServico.removerItem();
+        Optional<MinhaLista> lista = minhaListaServico.encontraUm(id);
+        for(int i = 0; i < lista.get().getProdutos().size(); i++) {
+            if (minhaLista.getId() != lista.get().getId())
+            minhaListaServico.removerItem(id,lista.get().getId());
+        }
         return "minhaLista/cadastro";
     }
+
+
 
 }
 
