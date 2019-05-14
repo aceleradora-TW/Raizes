@@ -37,21 +37,21 @@ public class MinhaListaControlador {
     public String salvarLista(MinhaLista lista) {
 
         minhaListaServico.salvar(lista);
-        return "minhaLista/cadastro";
+        return "redirect:/minha-lista/listas-criadas";
     }
+
 
     @GetMapping("/listas-criadas")
     public String listasCriadas(Model modelo) {
 
-        modelo.addAttribute("tituloLista", minhaListaServico.pegarListasCriadas());
+        modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
         return "minhaLista/listas-criadas";
     }
 
-    @PostMapping("/listas-criadas/")
-    public String removerListaCriada(MinhaLista lista) {
-        Long id = lista.getId();
+    @PostMapping("/listas-criadas/excluir/{id}")
+    public String removerListaCriada(MinhaLista lista, @PathVariable ("id") Long id) {
         minhaListaServico.removerListaCriada(id);
-        return "minhaLista/listas-criadas";
+        return "redirect:/minha-lista/listas-criadas";
     }
 }
 
