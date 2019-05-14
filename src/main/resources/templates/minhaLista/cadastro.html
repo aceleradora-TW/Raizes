@@ -22,12 +22,13 @@
         <div class="columns">
             <div class="column is-6">
                 <div class="box">
-                    <form th:action="'/minha-lista/cadastro'" method="post">
+                    <form id="formCriaLista"th:action="'/minha-lista/cadastro'" method="post">
                         <div class="field">
                             <label class="label">Nome da sua Lista</label>
                             <div class="control">
-                                <input class="input" type="text" name="nome" placeholder="Ex.: Minha Lista Compras 1" required>
+                                <input class="input" type="text" name="nome" placeholder="Ex.: Minha Lista Compras 1">
                             </div>
+                            <div class="help-block"></div>
                         </div>
 
                         <div class="field">
@@ -52,9 +53,8 @@
                                         </ul>
                                 </ul>
                             </div>
-                            <div class="helpbox"></div> //chama erro
+                          <div class="help-block"></div>
                         </div>
-
                         <div class="field">
                             <div class="control flex end">
                                 <button class="button is-primary " type="submit">Avançar</button>
