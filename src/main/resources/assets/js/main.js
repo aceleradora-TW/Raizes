@@ -4,3 +4,6 @@ import 'animate.css'
 import '../scss/styles.scss'
 import '@fengyuanchen/validator';
 
+import mensagem  from './pages/editar'
+
+window.exibirMensagem = mensagem;
