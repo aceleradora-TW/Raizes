@@ -1,5 +1,5 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/esqueleto
+    url: jdbc:postgresql://localhost:5432/raizes
     username: postgres
-    password: esqueleto
+    password: raizes
