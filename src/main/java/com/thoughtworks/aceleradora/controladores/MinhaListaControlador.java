@@ -48,8 +48,6 @@ public class MinhaListaControlador {
         return "minhaLista/cadastro";
     }
 
-
-
     @ResponseBody
     @GetMapping("/pegarCategorias")
     public List<Categoria> salvarLista() {
@@ -57,5 +55,3 @@ public class MinhaListaControlador {
     }
 
 }
-
-
