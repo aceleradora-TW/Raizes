@@ -2,10 +2,11 @@ package com.thoughtworks.aceleradora.dominio;
 
 import java.util.Objects;
 
-public class Pagina {
+public class Pagina{
     private String nome;
     private String url;
-    private int ordem;
+    private int id;
+
 
     public Pagina(String nome, String url) {
         this.nome = nome;
@@ -20,17 +21,27 @@ public class Pagina {
         return url;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pagina pagina = (Pagina) o;
-        return Objects.equals(nome, pagina.nome) &&
-                Objects.equals(url, pagina.url);
+        return id == pagina.id &&
+                nome.equals(pagina.nome) &&
+                url.equals(pagina.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, url);
+        return Objects.hash(nome, url, id);
     }
+
 }
