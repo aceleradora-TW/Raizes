@@ -4,6 +4,8 @@ import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.repositorios.MinhaListaRepositorio;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MinhaListaServico {
 
@@ -18,4 +20,7 @@ public class MinhaListaServico {
         return repositorio.save(lista);
     }
 
+    public Optional<MinhaLista> findByNome(String nome) {
+        return repositorio.findByNome(nome);
+    }
 }
