@@ -1,16 +1,23 @@
 package com.thoughtworks.aceleradora.controladores;
 
+import com.thoughtworks.aceleradora.classeDTO.ListaProdutoDTO;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.Produto;
+import com.thoughtworks.aceleradora.repositorios.ListaProdutoDTORepositorio;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
+import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/minha-lista")
@@ -59,17 +66,17 @@ public class MinhaListaControlador {
         return "minhaLista/cadastro";
     }
 
-    //Dar continuidade ao metodo para compara o que está no banco com o que está no selecionado no checkbox
-    // o que está no parametro é o que retorna do html
-    //O que está instanciado(lista) é o que está no banco.
     @PostMapping("/editar-lista/{id}/remover-item")
-    public String removerItem(MinhaLista minhaLista, @PathVariable("id") Long id) {
-        Optional<MinhaLista> lista = minhaListaServico.encontraUm(id);
-        for(int i = 0; i < lista.get().getProdutos().size(); i++) {
-            if (minhaLista.getId() != lista.get().getId())
-            minhaListaServico.removerItem(id,lista.get().getId());
-        }
-        return "minhaLista/cadastro";
+    public String removerItem(MinhaLista ListaDoFronte, @PathVariable("id") Long id) {
+        Optional<MinhaLista> listaDoBanco = minhaListaServico.encontraUm(id);
+        List<Produto> devoDeletar = new ArrayList<>();
+                listaDoBanco.get().getProdutos().stream()
+                .forEach(produto -> {
+                    if(!ListaDoFronte.getProdutos().stream().anyMatch(k-> k.getId() == produto.getId())){
+                        devoDeletar.add(produto);
+                    }
+                });
+        return "/editar-listaDoBanco/{id}";
     }
 
 
