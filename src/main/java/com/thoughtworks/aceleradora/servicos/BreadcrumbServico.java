@@ -17,6 +17,7 @@ public class BreadcrumbServico {
         breadcrumb.adicionaPagina(nomeDaPagina, urlDaPagina);
 
         modelo.addAttribute("listaDePaginas", listaDoBreadcrumb);
+        modelo.addAttribute("listaDePaginas2", breadcrumb.pegaPaginaAtual(nomeDaPagina));
 
         return nomeHtml;
     }
