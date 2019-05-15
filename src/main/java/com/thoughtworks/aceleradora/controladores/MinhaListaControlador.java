@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.Categoria;
+import com.thoughtworks.aceleradora.dominio.Erro;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.repositorios.CategoriaRepositorio;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
@@ -48,15 +49,19 @@ public class MinhaListaControlador {
 
         modelo.addAttribute("lista", lista);
 
+
         if (listaComMesmoNome.isPresent()) {
+            Erro erro= new Erro("nao pode salvar com mesmo nome", true);
 
             List<Categoria> categorias = categoriaServico.pegarCategorias();
             modelo.addAttribute("categorias", categorias);
+            modelo.addAttribute("resposta", erro);
 
             return "minhaLista/cadastro";
 
         } else {
             minhaListaServico.salvar(lista);
+            /*modelo.addAttribute();*/
             return "minhaLista/cadastro";
         }
     }

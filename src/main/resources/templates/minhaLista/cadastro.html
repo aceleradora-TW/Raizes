@@ -21,13 +21,16 @@
 
         <div class="columns">
             <div class="column is-6">
+                <div th:if="${Erro.estado} == true">
+                   <span th:text="${Erro.mensagem}"></span>
+                </div>
                 <div class="box">
                     <form id="formCriaLista"th:action="'/minha-lista/cadastro'" method="post">
                         <div class="field">
                             <label class="label">Nome da sua Lista</label>
                             <div class="control">
                                 <input class="input"  type="text" th:field="*{lista.nome}" placeholder="Ex.: Minha Lista Compras 1"/>
-                                <div th:if="${#fields.hasErrors('lista')}" th:errors="*{lista.nome}">Name Error></div>
+<!--                                <div th:if="${#fields.hasErrors('lista')}" th:errors="*{lista.nome}">Name Error></div>-->
                             </div>
                             <div class="help-block"></div>
                         </div>
