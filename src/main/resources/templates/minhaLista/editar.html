@@ -1,64 +1,65 @@
 <!DOCTYPE HTML>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Aceleradora Ágil - Esqueleto Ambulante</title>
+  <meta charset="UTF-8">
+  <title>Aceleradora Ágil - Esqueleto Ambulante</title>
 </head>
+
 <body>
 
-<section class="section">
+  <section class="section">
 
     <section class="container">
 
-        <h1 class="title">Editar Lista</h1>
+      <h1 class="title">Editar Lista</h1>
 
-        <div class="columns">
-            <div class="column is-6">
-                <div class="box">
+      <div class="columns">
+        <div class="column is-6">
+          <div class="box">
+            <form id="formEditar" th:action="'/minha-lista/editar-lista/' + ${lista.id}" method="post">
+              <div class="field">
+                <input class="input" type="text" name="nome" th:value="${lista.nome}"
+                  placeholder="Ex.: Minha Lista Compras 1">
+                <div class="help-block"></div>
+              </div>
+              <div class="field">
+                <label class="label">Selecione produtos:</label>
+                <div class="control">
+                  <ul class="lista-produtos">
+                    <li th:each="produto: ${lista.produtos}">
+                      <label class="checkbox">
+                        <input type="checkbox" name="produtosEditar" th:value="${produto.id}" checked>
+                        <span th:text="${produto}">
+                        </span>
+                      </label>
+                    </li>
 
-                    <form th:action="'/minha-lista/editar-lista/' + ${lista.id}" method="post">
-                        <div class="field">
-                            <input class="input" type="text" name="nome" th:value="${lista.nome}" placeholder="Ex.: Minha Lista Compras 1">
-                        </div>
-                        <div class="field">
-                            <div class="control center">
-                                <button class="button is-primary " type="submit"> + Adicionar Produtos</button>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="label">Selecione produtos:</label>
-                            <div class="control">
-                                <ul class="lista-produtos">
-                                    <li th:each="produto: ${lista.produtos}">
-                                        <label class="checkbox">
-                                            <input type="checkbox" name="produtos" th:value="${produto.id}" checked>
-                                            <span th:text="${produto}">
-                                                </span>
-                                        </label>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="field flex-row flex space-between">
-                                <div class="control">
-                                    <button class="button is-primary " type="submit" onclick="return exibirMensagem()">Cancelar</button>
-                                </div>
-                            <div class="control">
-                                <button class="button is-primary" type="submit">Salvar</button>
-                            </div>
-                        </div>
-
-                    </form>
+                  </ul>
                 </div>
-            </div>
+                <div class="help-block">
+                </div>
+              </div>
+
+              <div class="field flex-row flex space-between">
+                <div class="control">
+                  <button class="button is-primary " type="submit" onclick="return exibirMensagem()">Cancelar</button>
+                </div>
+                <div class="control">
+                  <button class="button is-primary" type="submit">Salvar</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
         </div>
+      </div>
 
     </section>
 
-</section>
+  </section>
 
 
 </body>
+
 </html>

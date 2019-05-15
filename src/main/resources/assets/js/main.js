@@ -4,6 +4,15 @@ import 'animate.css'
 import '../scss/styles.scss'
 import '@fengyuanchen/validator';
 
-import mensagem  from './pages/editar'
+import mensagemCancelar  from './pages/mensagem'
 
-window.exibirMensagem = mensagem;
+import validaEditar from './pages/validaAdicionarProdutos'
+
+
+ $(function () {
+    validaEditar.validacaoEditar();   
+
+
+});
+
+window.exibirMensagem = mensagemCancelar;
