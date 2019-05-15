@@ -10,7 +10,6 @@
     <li th:each="pagina: ${listaDePaginas}">
       <a th:text="${pagina.nome}" th:href="${pagina.url}"></a>
     </li>
-    <li class="is-active"><a href="#" aria-current="page">Página Atual</a></li>
   </ul>
 </breadcrumb>
 
@@ -23,7 +22,6 @@
         </h1>
         <h2 class="subtitle">
           Um projeto mínimo com exemplos.
-          <i class="fa fa-search"></i>
         </h2>
 
         <section class="columns is-multiline">

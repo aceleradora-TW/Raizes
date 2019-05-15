@@ -1,15 +1,14 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 
 public class Breadcrumb {
     private Set<Pagina> listaDoBreadcrumb;
 
     public Breadcrumb() {
-        this.listaDoBreadcrumb = new HashSet<>();
+        this.listaDoBreadcrumb = new LinkedHashSet<>();
     }
 
     public Set<Pagina> getListaDoBreadcrumb() {
@@ -31,6 +30,15 @@ public class Breadcrumb {
         }
 
     }
+     public String pegaPaginaAtual(){
+        String ultimaPagina = null;
+
+         for (Pagina pagina: listaDoBreadcrumb) {
+             ultimaPagina = pagina.getNome();
+         }
+
+        return ultimaPagina;
+     }
 
     public void removePagina(String nomeDaPagina, String urlDaPagina){
         Pagina paginaAntiga = new Pagina(nomeDaPagina, urlDaPagina);

@@ -9,7 +9,7 @@
         <li th:each="pagina: ${listaDePaginas}">
             <a th:text="${pagina.nome}" th:href="${pagina.url}"></a>
         </li>
-        <li class="is-active"><a href="#" aria-current="page">Página Atual</a></li>
+        <!--        <li class="is-active" href="#" aria-current="page" th:text="${listaDePaginas.pegaPaginaAtual}"></li>-->
     </ul>
 </breadcrumb>
 
@@ -33,35 +33,21 @@
                                 <input class="input" type="text" name="nome" placeholder="Ex.: Minha Lista Compras 1">
                             </div>
                         </div>
-
-                        <div class="field has-addons">
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Buscar produtos">
-                            </div>
-                            <div class="control">
-                                <a class="button is-info">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div>
-                        </div>
-
-
                         <div class="field">
                             <label class="label">Selecione produtos:</label>
                             <div class="control">
-                                    <ul class="lista-produtos">
-                                        <li th:each="produto: ${produtos}">
-                                            <label class="checkbox">
-                                                <input type="checkbox" name="produtos" th:value="${produto.id}">
-                                                <span th:text="${produto.nome}">
+                                <ul class="lista-produtos">
+                                    <li th:each="produto: ${produtos}">
+                                        <label class="checkbox">
+                                            <input type="checkbox" name="produtos" th:value="${produto.id}">
+                                            <span th:text="${produto.nome}">
                                                 </span>
-                                            </label>
-                                        </li>
+                                        </label>
+                                    </li>
 
-                                    </ul>
+                                </ul>
                             </div>
                         </div>
-
                         <div class="field">
                             <div class="control">
                                 <button class="button is-primary" type="submit">Avançar</button>

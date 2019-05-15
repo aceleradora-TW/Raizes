@@ -19,7 +19,5 @@ public class BreadcrumbServico {
         modelo.addAttribute("listaDePaginas", listaDoBreadcrumb);
 
         return nomeHtml;
-
-
     }
 }
