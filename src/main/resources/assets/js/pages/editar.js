@@ -1,8 +1,6 @@
 export default function(){
-	if(confirm("Deseja ser redirecionado?")){
+	if(confirm("Suas alterações não serão salvas!")){
 		return true;
-        return "redirect:/";
-
 	} else {
 	    return false;
     }
