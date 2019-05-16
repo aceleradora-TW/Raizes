@@ -21,7 +21,7 @@ public class MinhaListaServico {
     }
 
     public List<MinhaLista> pegarListasCriadas() {
-        return (List<MinhaLista>) repositorio.findAll();
+        return repositorio.findAll();
     }
 
     public void removerListaCriada(Long idLista) {
