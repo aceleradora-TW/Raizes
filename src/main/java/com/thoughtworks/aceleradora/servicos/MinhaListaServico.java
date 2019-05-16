@@ -4,7 +4,7 @@ import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.repositorios.MinhaListaRepositorio;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class MinhaListaServico {
@@ -15,12 +15,19 @@ public class MinhaListaServico {
         this.repositorio = repositorio;
     }
 
-
     public MinhaLista salvar(MinhaLista lista) {
-        return repositorio.save(lista);
+        try {
+            return repositorio.save(lista);
+        } catch(Exception e) {
+            return null;
+        }
     }
 
-    public Optional<MinhaLista> findByNome(String nome) {
-        return repositorio.findByNome(nome);
+    public List<MinhaLista> pegarListasCriadas() {
+        return repositorio.findAll();
+    }
+
+    public void removerListaCriada(Long idLista) {
+        repositorio.deleteById(idLista);
     }
 }

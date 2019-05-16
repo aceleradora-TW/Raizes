@@ -15,3 +15,8 @@ $(function () {
 
 
 
+import minhasListas from './pages/minha-lista'
+
+
+window.minhasListas = minhasListas;
+
