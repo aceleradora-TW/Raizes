@@ -1,7 +1,14 @@
-.rz-body{
-  font-family: 'Raleway', sans-serif;
-  color: #394d17;
-  background: red;
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Raleway');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: $primary-color;
+  background-color: white;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Raleway');
+h1{
+  font-family: 'Raleway', sans-serif; 
+  color: $primary-color;
+  text-align: center;
+}
+

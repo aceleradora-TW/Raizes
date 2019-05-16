@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+.rz-botao {
+  font-family: 'Montserrat', sans-serif;
+
+  &:hover {
+      border: 1px solid $hover-botao;
+      background: $hover-botao;
+      color: $white;
+  } 
+
+  
+}
