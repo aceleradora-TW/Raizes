@@ -19,6 +19,13 @@ public class MinhaListaServico {
     public MinhaLista salvar(MinhaLista lista) {
         return repositorio.save(lista);
     }
+    public Optional<MinhaLista> encontraUm(Long id) {
+        return repositorio.findById(id);
+    }
+
+    public void deletar(Long id){
+         repositorio.deleteById(id);
+    }
 
     public List<MinhaLista> pegarListasCriadas() {
         return repositorio.findAll();
@@ -26,14 +33,6 @@ public class MinhaListaServico {
 
     public void removerListaCriada(Long idLista) {
         repositorio.deleteById(idLista);
-    }
-
-    public Optional<MinhaLista> encontraUm(Long id) {
-        return repositorio.findById(id);
-    }
-
-    public void deletar(Long id){
-         repositorio.deleteById(id);
     }
 
     public void atualizar(Long id, Long idProduto) {

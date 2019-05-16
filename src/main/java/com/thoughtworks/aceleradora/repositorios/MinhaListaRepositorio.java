@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface MinhaListaRepositorio extends CrudRepository<MinhaLista, Long> {
     List<MinhaLista> findAll();
     Optional<MinhaLista> findById(Long id);
+
+    void deleteById(Long id);
 }
