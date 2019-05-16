@@ -26,6 +26,15 @@ public class Breadcrumb {
         return this;
     }
 
+    public Breadcrumb aproveitar(Consumer<Breadcrumb> construtorPreguicoso) {
+        construtorPreguicoso.accept(this);
+        return this;
+    }
+
+    public boolean ehPaginaAtiva(Pagina pagina) {
+        return paginas.indexOf(pagina) == paginas.size() - 1;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,12 +52,4 @@ public class Breadcrumb {
         return paginas.stream().map(Pagina::toString).collect(joining(" > "));
     }
 
-    public Breadcrumb aproveitar(Consumer<Breadcrumb> construtorPreguicoso) {
-        construtorPreguicoso.accept(this);
-        return this;
-    }
-
-    public boolean ehPaginaAtiva(Pagina pagina) {
-        return paginas.indexOf(pagina) == paginas.size() - 1;
-    }
 }
