@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.Categoria;
+import com.thoughtworks.aceleradora.dominio.Erro;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.repositorios.CategoriaRepositorio;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
@@ -9,12 +10,10 @@ import com.thoughtworks.aceleradora.servicos.ProdutoServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/minha-lista")
@@ -33,22 +32,39 @@ public class MinhaListaControlador {
 
 
     @GetMapping("/cadastro")
-    public String criarLista(Model model) {
+    public String criarLista(Model modelo) {
+
+        modelo.addAttribute("lista", new MinhaLista());
 
         List<Categoria> categorias = categoriaServico.pegarCategorias();
-        model.addAttribute("categorias", categorias);
+        modelo.addAttribute("categorias", categorias);
 
         return "minhaLista/cadastro";
     }
 
     @PostMapping("/cadastro")
-    public String salvarLista(MinhaLista lista) {
+    public String salvarLista(MinhaLista lista, Model modelo) {
 
-        minhaListaServico.salvar(lista);
-        return "minhaLista/cadastro";
+        Optional<MinhaLista> listaComMesmoNome = minhaListaServico.findByNome(lista.getNome());
+
+        modelo.addAttribute("lista", lista);
+
+
+        if (listaComMesmoNome.isPresent()) {
+            Erro erro= new Erro("nao pode salvar com mesmo nome", true);
+
+            List<Categoria> categorias = categoriaServico.pegarCategorias();
+            modelo.addAttribute("categorias", categorias);
+            modelo.addAttribute("resposta", erro);
+
+            return "minhaLista/cadastro";
+
+        } else {
+            minhaListaServico.salvar(lista);
+            /*modelo.addAttribute();*/
+            return "minhaLista/cadastro";
+        }
     }
-
-
 
     @ResponseBody
     @GetMapping("/pegarCategorias")
@@ -57,4 +73,3 @@ public class MinhaListaControlador {
     }
 
 }
-

@@ -21,13 +21,18 @@
 
         <div class="columns">
             <div class="column is-6">
+                <div th:if="${Erro.estado} == true">
+                   <span th:text="${Erro.mensagem}"></span>
+                </div>
                 <div class="box">
-                    <form th:action="'/minha-lista/cadastro'" method="post">
+                    <form id="formCriaLista"th:action="'/minha-lista/cadastro'" method="post">
                         <div class="field">
                             <label class="label">Nome da sua Lista</label>
                             <div class="control">
-                                <input class="input" type="text" name="nome" placeholder="Ex.: Minha Lista Compras 1" required>
+                                <input class="input"  type="text" th:field="*{lista.nome}" placeholder="Ex.: Minha Lista Compras 1"/>
+<!--                                <div th:if="${#fields.hasErrors('lista')}" th:errors="*{lista.nome}">Name Error></div>-->
                             </div>
+                            <div class="help-block"></div>
                         </div>
 
                         <div class="field">
@@ -37,7 +42,7 @@
                                     <li th:each="categoria: ${categorias}">
                                         <label>
                                             <span name="categorias" th:value="${categoria.id}">
-                                            <span th:text="${categoria.nome}">
+                                            <span th:text="${categoria.nome}"></span>
                                                 </span>
                                             </span>
                                         </label>
@@ -50,18 +55,14 @@
                                                 </label>
                                             </li>
                                         </ul>
-                                        <a class="flex center" href="#" th:onclick="'cadastroLista.aparece(' + 'event, ' + ${categoria.id} + ');'" >ver mais</a>
-                                        <span class="ver-mais" style="display: none; ">
-                                        Outros produtos
-                                        </span>
                                     </li>
                                 </ul>
                             </div>
+                          <div class="help-block"></div>
                         </div>
-
                         <div class="field">
                             <div class="control flex end">
-                                <button class="button is-primary " type="submit">Avançar</button>
+                                <button class="button is-primary " type="submit">Salvar</button>
                             </div>
                         </div>
                     </form>
