@@ -1,7 +1,7 @@
 .rz-botao {
   &:hover {
-      border: 1px solid #44BAEA;
-      background: #44BAEA;
+      border: 1px solid $hover-botao;
+      background: $hover-botao;
       color: $white;
   } 
 }
