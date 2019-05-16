@@ -55,7 +55,7 @@ public class MinhaListaControlador {
 
             List<Categoria> categorias = categoriaServico.pegarCategorias();
             modelo.addAttribute("categorias", categorias);
-            modelo.addAttribute("resposta", erro);
+            modelo.addAttribute("erro", erro);
 
             return "minhaLista/cadastro";
 
