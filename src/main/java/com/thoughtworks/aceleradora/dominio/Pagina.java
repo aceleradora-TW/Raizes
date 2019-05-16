@@ -12,6 +12,14 @@ public class Pagina {
         this.url = url;
     }
 
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

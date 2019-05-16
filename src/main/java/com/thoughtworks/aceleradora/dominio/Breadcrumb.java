@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import static java.util.stream.Collectors.joining;
 import static org.springframework.web.context.WebApplicationContext.SCOPE_REQUEST;
@@ -40,5 +41,14 @@ public class Breadcrumb {
 
     public String toString() {
         return paginas.stream().map(Pagina::toString).collect(joining(" > "));
+    }
+
+    public Breadcrumb aproveitar(Consumer<Breadcrumb> construtorPreguicoso) {
+        construtorPreguicoso.accept(this);
+        return this;
+    }
+
+    public boolean ehPaginaAtiva(Pagina pagina) {
+        return paginas.indexOf(pagina) == paginas.size() - 1;
     }
 }
