@@ -7,9 +7,11 @@
 
 <breadcrumb th:if="${listaDePaginas}" class="breadcrumb" aria-label="breadcrumbs">
   <ul>
-    <li th:each="pagina: ${listaDePaginas}">
-      <a th:text="${pagina.nome}" th:href="${pagina.url}"></a>
+    <li th:each="pagina : ${listaDePaginas}">
+      <a th:unless="${pagina.nome} == ${listaDePaginas2}"
+              th:text="${pagina.nome}" th:href="${pagina.url}"></a>
     </li>
+    <li class="is-active" href="#" aria-current="page" th:text="${listaDePaginas2}"></li>
   </ul>
 </breadcrumb>
 
