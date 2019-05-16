@@ -33,7 +33,7 @@
 
                                             <form th:action="@{'/minha-lista/listas-criadas/excluir/' + ${lista.id}}"
                                                 method="post" name="meuform"
-                                                th:onsubmit="return minhasLista.excluirLista()">
+                                                th:onsubmit="return minhasListas.excluirLista()">
                                                 <button type="submit" class="button rz-botao">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>

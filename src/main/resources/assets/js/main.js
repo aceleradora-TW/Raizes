@@ -4,8 +4,8 @@ import 'animate.css'
 import '../scss/styles.scss'
 import '@fengyuanchen/validator';
 
-import minhasLista from './pages/minha-lista'
+import minhasListas from './pages/minha-lista'
 
 
-window.minhasLista = minhasLista;
+window.minhasListas = minhasListas;
 
