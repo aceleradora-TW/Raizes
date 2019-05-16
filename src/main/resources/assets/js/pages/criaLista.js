@@ -11,8 +11,6 @@ export default {
       rules: {
         required: true
       }
-
-
     }); 
   }
 }

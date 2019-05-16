@@ -61,7 +61,6 @@ public class MinhaListaControlador {
 
         } else {
             minhaListaServico.salvar(lista);
-            /*modelo.addAttribute();*/
             return "minhaLista/cadastro";
         }
     }
