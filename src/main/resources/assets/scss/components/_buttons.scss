@@ -2,11 +2,13 @@
 
 .rz-botao {
   font-family: 'Montserrat', sans-serif;
+  background-color: $btn-color;
+  color: black;
 
   &:hover {
-      border: 1px solid $hover-botao;
-      background: $hover-botao;
-      color: $white;
+      border: 1px solid $btn-hover;
+      background: $btn-hover;
+      color: white;
   } 
 
   
