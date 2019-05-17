@@ -26,6 +26,13 @@
             </a>
         </div>
     </nav>
+    <nav class="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
+        <ul>
+            <li th:each="pagina : ${@breadcrumb.paginas}" th:classappend="${@breadcrumb.ehPaginaAtiva(pagina)} ? 'is-active' : ''">
+                <a th:href="${pagina.url}" th:text="${pagina.titulo}"></a>
+            </li>
+        </ul>
+    </nav>
 </header>
 
 <main th:replace="${content}"></main>
