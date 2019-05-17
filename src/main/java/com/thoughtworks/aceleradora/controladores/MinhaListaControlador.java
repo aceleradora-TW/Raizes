@@ -3,7 +3,6 @@ package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.Categoria;
 import com.thoughtworks.aceleradora.dominio.Erro;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
-import com.thoughtworks.aceleradora.repositorios.CategoriaRepositorio;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
@@ -61,8 +60,7 @@ public class MinhaListaControlador {
 
         } else {
             minhaListaServico.salvar(lista);
-            /*modelo.addAttribute();*/
-            return "minhaLista/cadastro";
+            return "redirect:/minha-lista/listas-criadas";
         }
     }
 
@@ -71,5 +69,19 @@ public class MinhaListaControlador {
     public List<Categoria> salvarLista() {
         return categoriaServico.pegarCategorias();
     }
+
+    @GetMapping("/listas-criadas")
+    public String listasCriadas(Model modelo) {
+
+        modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
+        return "minhaLista/listas-criadas";
+    }
+
+    @PostMapping("/listas-criadas/excluir/{id}")
+    public String removerListaCriada(MinhaLista lista, @PathVariable ("id") Long id) {
+        minhaListaServico.removerListaCriada(id);
+        return "redirect:/minha-lista/listas-criadas";
+    }
+}
 
 }
