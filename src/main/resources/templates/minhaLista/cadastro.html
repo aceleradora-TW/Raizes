@@ -37,11 +37,7 @@
                 <div class="control">
                   <ul class="categorias">
                     <li th:each="categoria: ${categorias}">
-                      <label>
-                        <span name="categorias" th:value="${categoria.id}">
-                          <h3 th:align="center" th:text="${categoria.nome}"></h3>
-                        </span>
-                      </label>
+                      <h3 class="centraliza-texto" th:text="${categoria.nome}"></h3>
                       <ul class="lista-produtos">
                         <li th:each="produto: ${categoria.produtos}">
                           <label class="checkbox">
