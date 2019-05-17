@@ -1,7 +1,9 @@
 package com.thoughtworks.aceleradora.controladores;
 
+import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.Categoria;
 import com.thoughtworks.aceleradora.dominio.Erro;
+import com.thoughtworks.aceleradora.dominio.Categoria;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
@@ -16,6 +18,8 @@ import java.util.List;
 
 import java.util.Optional;
 
+import java.util.function.Consumer;
+
 @Controller
 @RequestMapping("/minha-lista")
 public class MinhaListaControlador {
@@ -23,6 +27,10 @@ public class MinhaListaControlador {
     private ProdutoServico produtoServico;
     private MinhaListaServico minhaListaServico;
     private CategoriaServico categoriaServico;
+
+    private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
+            .pagina("Início", "/");
+
 
     @Autowired
     public MinhaListaControlador(ProdutoServico produtoServico, MinhaListaServico minhaListaServico, CategoriaServico categoriaServico) {
@@ -33,10 +41,12 @@ public class MinhaListaControlador {
 
 
     @GetMapping("/cadastro")
-    public String criarLista(Model modelo) {
+    public String criarLista(Model modelo, Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Cadastro", "/minha-lista/cadastro");
 
         modelo.addAttribute("lista", new MinhaLista());
-
         List<Categoria> categorias = categoriaServico.pegarCategorias();
         modelo.addAttribute("categorias", categorias);
 
@@ -44,14 +54,16 @@ public class MinhaListaControlador {
     }
 
     @PostMapping("/cadastro")
-    public String salvarLista(MinhaLista lista, RedirectAttributes atributosRedirecionamento) {
+    public String salvarLista(MinhaLista lista, Breadcrumb breadcrumb, RedirectAttributes atributosRedirecionamento) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Cadastro", "/minha-lista/cadastro");
         if(minhaListaServico.salvar(lista) == null) {
             Erro erro = new Erro("Falhou na criação da lista");
             atributosRedirecionamento.addFlashAttribute("Erro", erro);
 
             return "redirect:/minha-lista/cadastro";
         }
-
         return "redirect:/";
     }
 
@@ -65,7 +77,7 @@ public class MinhaListaControlador {
     public String listasCriadas(Model modelo) {
 
         modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
-        return "minhaLista/listas-criadas";
+        return "redirect:/minha-lista/listas-criadas";
     }
 
     @PostMapping("/listas-criadas/excluir/{id}")
