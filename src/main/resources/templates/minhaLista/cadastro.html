@@ -25,13 +25,10 @@
               </div>
 
               <div class="column columns is-multiline is-10 is-offset-1">
-                  <div class="column is-2" th:each="produto: ${produtos}">
-                    <label class="checkbox">
-                      <input type="checkbox" name="produtos" th:value="${produto.id}">
-                      <span th:text="${produto.nome}">
-                      </span>
-                    </label>
-                  </div>
+                <div class="column is-2" th:each="produto: ${produtos}">
+                  <input class="column is-1" type="checkbox" name="produtos" th:value="${produto.id}">
+                  <span class="column" th:text="${produto.nome}"></span>
+                </div>
               </div>
 
               <div class="field">

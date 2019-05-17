@@ -55,7 +55,7 @@ public class MinhaListaControlador {
     public String listasCriadas(Model modelo) {
 
         modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
-        return "redirect:/minha-lista/listas-criadas";
+        return "minhaLista/listas-criadas";
     }
 
     @PostMapping("/listas-criadas/excluir/{id}")
