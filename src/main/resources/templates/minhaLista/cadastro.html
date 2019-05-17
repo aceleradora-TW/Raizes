@@ -39,8 +39,7 @@
                     <li th:each="categoria: ${categorias}">
                       <label>
                         <span name="categorias" th:value="${categoria.id}">
-                          <span th:text="${categoria.nome}"></span>
-                        </span>
+                          <h3 th:align="center" th:text="${categoria.nome}"></h3>
                         </span>
                       </label>
                       <ul class="lista-produtos">
