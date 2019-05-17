@@ -1,5 +1,6 @@
 package com.thoughtworks.aceleradora.controladores;
 
+import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.ErroEditarLista;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.Produto;
@@ -12,12 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 @Controller
 @RequestMapping("/minha-lista")
@@ -25,6 +26,9 @@ public class MinhaListaControlador {
 
     private ProdutoServico produtoServico;
     private MinhaListaServico minhaListaServico;
+    private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
+            .pagina("Início", "/");
+
 
     @Autowired
     public MinhaListaControlador(ProdutoServico produtoServico, MinhaListaServico minhaListaServico) {
@@ -34,7 +38,10 @@ public class MinhaListaControlador {
 
 
     @GetMapping("/cadastro")
-    public String criarLista(Model model) {
+    public String criarLista(Model model, Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Cadastro", "/minha-lista/cadastro");
 
         model.addAttribute("produtos", produtoServico.pegarTodos());
         return "minhaLista/cadastro";
@@ -42,7 +49,10 @@ public class MinhaListaControlador {
 
 
     @PostMapping("/cadastro")
-    public String salvarLista(MinhaLista lista) {
+    public String salvarLista(MinhaLista lista, Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Cadastro", "/minha-lista/cadastro");
 
         minhaListaServico.salvar(lista);
         return "redirect:/minha-lista/listas-criadas";
