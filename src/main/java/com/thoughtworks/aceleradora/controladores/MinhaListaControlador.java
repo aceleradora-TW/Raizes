@@ -1,5 +1,6 @@
 package com.thoughtworks.aceleradora.controladores;
 
+import com.thoughtworks.aceleradora.dominio.ErroEditarLista;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,11 +70,23 @@ public class MinhaListaControlador {
         return "minhaLista/editar";
     }
 
-    @PostMapping("/editar-lista/{id}/remover-item")
-    public String removerItem(MinhaLista ListaDoFronte, @PathVariable("id") Long id) {
+    @PostMapping("/editar-lista/{id}")
+    public String erroAoSalvar(MinhaLista lista, RedirectAttributes redirecionamentoDeAtributos) {
+        if(minhaListaServico.salvar(lista) == null) {
+            ErroEditarLista erro = new ErroEditarLista("Erro ao salvar a lista!");
+            redirecionamentoDeAtributos.addFlashAttribute("ErroEditar", erro);
+
+            return "redirect:/minha-lista/editar";
+        }
+
+        return "redirect:/minha-lista/listas-criadas";
+    }
+
+    @PostMapping("/editar-lista/{id}/salvar")
+    public String removerItem(MinhaLista ListaDoFronte, @PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
         Optional<MinhaLista> ListaDoBanco = minhaListaServico.encontraUm(id);
         List<Produto> produtosParaSeremRemovidos = new ArrayList<>();
-
+        MinhaLista lista = ListaDoBanco.get();
         if (ListaDoBanco.isPresent()) {
             List<Produto> ProdutosDoBanco = ListaDoBanco.get().getProdutos();
             List<Produto> produtosFront = ListaDoFronte.getProdutos();
@@ -83,10 +97,18 @@ public class MinhaListaControlador {
                 }
             }
 
-            ListaDoBanco.get().getProdutos().removeAll(produtosParaSeremRemovidos);
+            lista.getProdutos().removeAll(produtosParaSeremRemovidos);
+            lista.setNome(ListaDoFronte.getNome());
 
-            minhaListaServico.salvar(ListaDoBanco.get());
+
+            if(minhaListaServico.salvar(ListaDoBanco.get()) == null) {
+                ErroEditarLista erro = new ErroEditarLista("Erro ao salvar a lista!");
+                redirecionamentoDeAtributos.addFlashAttribute("ErroEditar", erro);
+
+                return "redirect:/minha-lista/editar";
+            }
         }
+
         return "minhaLista/cadastro";
     }
 }

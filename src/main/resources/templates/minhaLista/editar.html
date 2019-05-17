@@ -14,9 +14,12 @@
 
         <div class="columns">
             <div class="column is-6">
+                <div th:if="${ErroEditar} != null">
+                    <span th:text="${ErroEditar.mensagemAoSalvar}"></span>
+                </div>
                 <div class="box">
 
-                    <form th:action="'/minha-lista/editar-lista/' + ${lista.id} + '/remover-item'" method="post">
+                    <form th:action="'/minha-lista/editar-lista/' + ${lista.id} + '/salvar'" method="post">
                         <div class="field">
                             <input class="input" type="text" name="nome" th:value="${lista.nome}" placeholder="Ex.: Minha Lista Compras 1">
                         </div>

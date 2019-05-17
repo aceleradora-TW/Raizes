@@ -17,7 +17,11 @@ public class MinhaListaServico {
     }
 
     public MinhaLista salvar(MinhaLista lista) {
-        return repositorio.save(lista);
+        try {
+            return repositorio.save(lista);
+        } catch(Exception e) {
+            return null;
+        }
     }
     public Optional<MinhaLista> encontraUm(Long id) {
         return repositorio.findById(id);
