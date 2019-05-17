@@ -4,12 +4,11 @@
 <head>
   <title>Aceleradora Ágil - Esqueleto Ambulante</title>
 </head>
-
 <breadcrumb th:if="${listaDePaginas}" class="breadcrumb" aria-label="breadcrumbs">
   <ul>
     <li th:each="pagina : ${listaDePaginas}">
       <a th:unless="${pagina.nome} == ${listaDePaginas2}"
-              th:text="${pagina.nome}" th:href="${pagina.url}"></a>
+         th:text="${pagina.nome}" th:href="${pagina.url}"></a>
     </li>
     <li class="is-active" href="#" aria-current="page" th:text="${listaDePaginas2}"></li>
   </ul>
@@ -19,7 +18,7 @@
   <section class="hero is-primary is-fullheight-with-navbar">
     <div class="hero-body">
       <div class="container">
-        <h1 class="title">
+        <h1 class="title">,
           Esqueleto Ambulante
         </h1>
         <h2 class="subtitle">

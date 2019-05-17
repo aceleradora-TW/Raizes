@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -38,9 +39,26 @@ public class MinhaListaControlador {
 
     @PostMapping("/cadastro")
     public String salvarLista(MinhaLista lista) {
-        MinhaLista novalista = minhaListaServico.salvar(lista);
 
-        return "minhaLista/previa";
+        minhaListaServico.salvar(lista);
+        return "redirect:/minha-lista/listas-criadas";
+    }
+
+
+    @GetMapping("/listas-criadas")
+    public String listasCriadas(Model modelo) {
+        modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
+
+        return this.breadcrumbServico.renderizaBreadcrumb("Minhas listas",
+                "minhaLista/listas-criadas",
+                "/minha-lista/listas-criadas",
+                modelo);
+    }
+
+    @PostMapping("/listas-criadas/excluir/{id}")
+    public String removerListaCriada(MinhaLista lista, @PathVariable ("id") Long id) {
+        minhaListaServico.removerListaCriada(id);
+        return "redirect:/minha-lista/listas-criadas";
     }
 }
 
