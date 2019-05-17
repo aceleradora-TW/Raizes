@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+
 import java.util.Optional;
 
 @Controller
@@ -42,26 +44,15 @@ public class MinhaListaControlador {
     }
 
     @PostMapping("/cadastro")
-    public String salvarLista(MinhaLista lista, Model modelo) {
+    public String salvarLista(MinhaLista lista, RedirectAttributes atributosRedirecionamento) {
+        if(minhaListaServico.salvar(lista) == null) {
+            Erro erro = new Erro("Falhou na criação da lista");
+            atributosRedirecionamento.addFlashAttribute("Erro", erro);
 
-        Optional<MinhaLista> listaComMesmoNome = minhaListaServico.findByNome(lista.getNome());
-
-        modelo.addAttribute("lista", lista);
-
-
-        if (listaComMesmoNome.isPresent()) {
-            Erro erro= new Erro("nao pode salvar com mesmo nome", true);
-
-            List<Categoria> categorias = categoriaServico.pegarCategorias();
-            modelo.addAttribute("categorias", categorias);
-            modelo.addAttribute("resposta", erro);
-
-            return "minhaLista/cadastro";
-
-        } else {
-            minhaListaServico.salvar(lista);
-            return "redirect:/minha-lista/listas-criadas";
+            return "redirect:/minha-lista/cadastro";
         }
+
+        return "redirect:/";
     }
 
     @ResponseBody
@@ -84,4 +75,4 @@ public class MinhaListaControlador {
     }
 }
 
-}
+

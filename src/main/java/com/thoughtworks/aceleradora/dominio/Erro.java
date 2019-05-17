@@ -2,10 +2,18 @@ package com.thoughtworks.aceleradora.dominio;
 
 public class Erro {
     private String mensagem;
-    private boolean estado;
 
-    public Erro(String mensagem, boolean estado) {
+    public Erro(){}
+
+    public Erro(String mensagem) {
         this.mensagem = mensagem;
-        this.estado = estado;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
     }
 }
