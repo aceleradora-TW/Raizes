@@ -8,21 +8,21 @@
 
     <section class="container">
 
-        <h1 class="title">Crie a sua Lista</h1>
+        <h1 class="title">Criar Lista</h1>
+        <h3 class="subtitle">*Campos obrigatórios.</h3>
 
         <div class="columns">
-            <div class="column is-6">
+            <div class="column is-12">
                 <div class="box">
                     <form th:action="'/minha-lista/cadastro'" method="post">
-                        <div class="field">
-                            <label class="label">Nome da sua Lista</label>
+                        <div class="field column is-6 is-offset-3">
+                            <label class="label">Nome*</label>
                             <div class="control">
                                 <input class="input" type="text" name="nome" placeholder="Ex.: Minha Lista Compras 1">
                             </div>
                         </div>
 
                         <div class="field">
-                            <label class="label">Selecione produtos:</label>
                             <div class="control">
                                     <ul class="lista-produtos">
                                         <li th:each="produto: ${produtos}">
