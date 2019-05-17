@@ -1,7 +1,7 @@
 //Cores
-$primary-color:#394d17 !important;
-$secondary-color: #cfe4a9 !important;
-$success-color: #ffffff !important;
-$error-color: #ffffff !important;
-$btn-color: #cfe4a9 !important;
-$btn-hover: #83a942 !important;
+$primary-color: #cfe4a9;
+$secondary-color:#394d17;
+$success-color: blue;
+$error-color: red;
+$btn-color: $primary-color;
+$btn-hover: darken($primary-color, 20%);
