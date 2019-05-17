@@ -5,7 +5,8 @@ import '../scss/styles.scss'
 import '@fengyuanchen/validator';
 
 import minhasListas from './pages/minha-lista'
+import mensagemSalvoComSucesso  from './pages/mensagemSalvar'
 
-
+window.mensagemSalva=mensagemSalvoComSucesso;
 window.minhasListas = minhasListas;
 
