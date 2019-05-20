@@ -23,12 +23,9 @@ public class MinhaListaServico {
             return null;
         }
     }
+
     public Optional<MinhaLista> encontraUm(Long id) {
         return repositorio.findById(id);
-    }
-
-    public void deletar(Long id){
-         repositorio.deleteById(id);
     }
 
     public List<MinhaLista> pegarListasCriadas() {
@@ -37,13 +34,6 @@ public class MinhaListaServico {
 
     public void removerListaCriada(Long idLista) {
         repositorio.deleteById(idLista);
-    }
-
-    public void atualizar(Long id, Long idProduto) {
-        Optional<MinhaLista> lista = repositorio.findById(id);
-        lista.get().getProdutos().remove(idProduto);
-
-        repositorio.save(lista.get());
     }
 
 }

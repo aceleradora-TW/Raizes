@@ -24,9 +24,12 @@
                                         <span th:text="${lista.nome}">
                                         </span>
                                         <div class="mb-0 flex end buttons has-addons">
-                                            <span class="button rz-botao">
+                                        <form  th:action="@{'/minha-lista/editar-lista/' + ${lista.id}}">
+                                            <button type="submit" class="button rz-botao">
                                                 <i class="fas fa-edit"></i>
-                                            </span>
+                                            </button>
+                                        </form>
+
                                             <span class="button rz-botao">
                                                 <i class="fas fa-shopping-basket"></i>
                                             </span>

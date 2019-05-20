@@ -15,6 +15,7 @@ public class MinhaLista {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String nome;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -53,6 +54,7 @@ public class MinhaLista {
         return nome;
     }
 
+
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
@@ -60,4 +62,6 @@ public class MinhaLista {
     public List<Produto> getProdutos() {
         return produtos;
     }
+
+
 }
