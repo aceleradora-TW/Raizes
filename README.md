@@ -24,7 +24,7 @@ sudo -u postgres psql -c 'CREATE DATABASE raizes'
 
 Para inicar o servidor:
 
-1.Para instalar node.js package manager:
+1.Para instalar as dependências do projeto:
 
 ```sh
 npm install
@@ -80,7 +80,7 @@ Endereço: http://raizes-homologacao.herokuapp.com/
 
 Este ambiente é atualizado toda vez que uma alteração é introduzida no projeto e as verificações automatizados do Circle CI executam exitosamente. Ou seja é o ambiente mais instável e que recebe as alterações mais recentes.
 
-Produção
+__Produção__
 
 Endereço: http://raizes-producao.herokuapp.com/
 
