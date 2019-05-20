@@ -30,10 +30,18 @@ Para inicar o servidor:
 npm install
 ```
 
-2.Para atualizar os arquivos do node.js:
+2.Este comando utiliza o webpack para gerar arquivos css e js de deselvolvimento, localizados em
+  `/src/main/resources/static/`.
 
 ```sh
 npm run watch
+```
+
+2.1Assim como o watch este comando utiliza o webpack para gerar arquivos css e js localizados em
+`/src/main/resources/static/`,porém agora os arquivos estarão otimizados para ambiente de produção.
+
+```sh
+npm run build
 ```
 
 3.Para executar a aplicação e migrações do bando de dados:
