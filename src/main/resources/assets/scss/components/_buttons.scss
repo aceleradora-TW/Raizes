@@ -1,9 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-.rz-botao {
+.rz-button {
   font-family: 'Montserrat', sans-serif;
   background-color: $btn-color;
   color: black;
+  margin: 0;
+  // border-radius: 0px;
+
+
+  // &:first-child {
+  //   border-bottom-left-radius: 10px;
+  //   border-top-left-radius: 10px;
+  // }
+
+  // &:last-child{
+  //   border-bottom-right-radius: 10px;
+  //   border-top-right-radius: 10px;
+  // }
 
   &:hover {
       border: 1px solid $btn-hover;
