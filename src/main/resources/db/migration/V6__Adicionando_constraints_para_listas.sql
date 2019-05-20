@@ -1,0 +1,2 @@
+ALTER TABLE listas ADD CONSTRAINT nome_unico UNIQUE(nome);
+ALTER TABLE listas ALTER COLUMN nome SET NOT NULL;

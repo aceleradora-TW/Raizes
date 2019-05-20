@@ -1,50 +1,61 @@
 <!DOCTYPE HTML>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
-
 <head>
   <title>Aceleradora Ágil - Esqueleto Ambulante</title>
 </head>
-
 <body class="rz-body">
-  <section class="section">
+    <section class="section">
 
-    <section class="container">
+        <section class="container">
 
-      <h1 class="title">Criar Lista</h1>
-      <h3 class="subtitle">*Campos obrigatórios.</h3>
+            <h1 class="title">Criar Lista</h1>
+            <h3 class="subtitle">*Campos obrigatórios.</h3>
 
-      <div class="columns">
-        <div class="column is-12">
-          <div class="box">
-            <form th:action="'/minha-lista/cadastro'" method="post">
-              <div class="field column is-6 is-offset-3">
-                <label class="label">Nome*</label>
-                <div class="control">
-                  <input class="input" type="text" name="nome" placeholder="Ex.: Minha Lista Compras 1">
+
+            <div class="columns">
+                <div class="column is-12">
+                    <div th:if="${Erro} != null">
+                        <span th:text="${Erro.mensagem}"></span>
+                    </div>
+                <div class="box">
+                    <form id="formCriaLista" th:action="'/minha-lista/cadastro'" method="post">
+                        <div class="field column is-6 is-offset-3">
+                            <label class="label">Nome*</label>
+                            <div class="control">
+                                <input class="input" type="text" name="nome" placeholder="Ex.: Minha Lista Compras 1">
+                            </div>
+                            <div class="help-block"></div>
+                        </div>
+
+                        <div class="column columns is-multiline is-10 is-offset-1">
+
+
+                            <ul class="categorias">
+                                <li th:each="categoria: ${categorias}">
+                                    <h3 class="centraliza-texto" th:text="${categoria.nome}"></h3>
+                                    <div class="column is-4" th:each="produto: ${categoria.produtos}">
+                                        <input class="checkbox" type="checkbox" name="produtos" th:value="${produto.id}">
+                                        <label class="checkbox" th:text="${produto.nome}"></label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="help-block"></div>
+
+                        <div class="field">
+                            <div class="control flex end">
+                                <button class="button rz-botao" type="submit">Salvar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-              </div>
-
-              <div class="column columns is-multiline is-10 is-offset-1">
-                <div class="column is-4" th:each="produto: ${produtos}">
-                  <input class="checkbox" type="checkbox" name="produtos" th:value="${produto.id}">
-                  <label class="checkbox" th:text="${produto.nome}"></label>
-                </div>
-              </div>
-
-              <div class="field">
-                <div class="control">
-                  <button class="button rz-botao" type="submit">Salvar</button>
-                </div>
-              </div>
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
 
     </section>
 
-  </section>
+</section>
 
 </body>
-
 </html>

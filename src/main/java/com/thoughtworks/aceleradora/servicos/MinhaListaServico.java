@@ -17,7 +17,11 @@ public class MinhaListaServico {
     }
 
     public MinhaLista salvar(MinhaLista lista) {
-        return repositorio.save(lista);
+        try {
+            return repositorio.save(lista);
+        } catch(Exception e) {
+            return null;
+        }
     }
 
     public List<MinhaLista> pegarListasCriadas() {
@@ -28,4 +32,7 @@ public class MinhaListaServico {
         repositorio.deleteById(idLista);
     }
 
+    public Optional<MinhaLista> findByNome(String nome) {
+        return repositorio.findByNome(nome);
+    }
 }
