@@ -72,8 +72,11 @@ public class MinhaListaControlador {
         return "redirect:/minha-lista/listas-criadas";
     }
     @GetMapping("/editar-lista/{id}")
-    public String pegaLista(Model modelo, @PathVariable("id") Long id) {
+    public String pegaLista(Model modelo, @PathVariable("id") Long id, Breadcrumb breadcrumb) {
         Optional<MinhaLista> lista = minhaListaServico.encontraUm(id);
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("editar lista", "/minha-lista/editar-lista/{id}");
 
         modelo.addAttribute("lista", lista.get());
 
