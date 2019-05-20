@@ -4,11 +4,13 @@
   font-family: 'Montserrat', sans-serif;
   background-color: $btn-color;
   color: black;
-  margin: 0;
+  margin-bottom: 0 !important;
 
-  &:last-child{
-    border-bottom-left-radius: 0px;
-    border-top-left-radius: 0px;
+  &.list-style {
+    &:last-child {
+      border-bottom-left-radius: 0px;
+      border-top-left-radius: 0px;
+    }
   }
 
   &:hover {

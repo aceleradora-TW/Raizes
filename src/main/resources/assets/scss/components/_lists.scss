@@ -1,4 +1,7 @@
 .rz-list {
+    align-items: center;
+    margin-bottom: 0;
+
     &.striped{
         li {
             &:nth-child(even) {background: #CCC}

@@ -20,20 +20,20 @@
             <div class="field">
               <div class="control">
                 <ul class="rz-list striped">
-                  <li class="flex space-between" th:each="lista: ${listasCriadas}">
+                  <li class="flex flex-row vertical-center space-between" th:each="lista: ${listasCriadas}">
                     <span th:text="${lista.nome}">
                     </span>
                     <div class="mb-0 ml-auto flex end buttons has-addons">
-                      <span class="button rz-button">
+                      <span class="button rz-button list-style">
                         <i class="fas fa-edit"></i>
                       </span>
-                      <span class="button rz-button">
+                      <span class="button rz-button list-style">
                         <i class="fas fa-shopping-basket"></i>
                       </span>
 
                       <form th:action="@{'/minha-lista/listas-criadas/excluir/' + ${lista.id}}" method="post"
                         name="meuform" th:onsubmit="return minhasListas.exibeConfirmacaDeExclusaoDaLista()">
-                        <button type="submit" class="button rz-button">
+                        <button type="submit" class="button rz-button list-style">
                           <i class="fas fa-trash-alt"></i>
                         </button>
                       </form>
