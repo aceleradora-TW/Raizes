@@ -2,13 +2,17 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
-  color: $primary-color;
+  color: black;
   background-color: white;
+}
+
+.title {
+  color: $secondary-color;
 }
 
 h1, h3 {
   font-family: 'Raleway', sans-serif; 
-  color: $primary-color;
+  color: $secondary-color;
   text-align: center;
 }
 

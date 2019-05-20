@@ -3,66 +3,62 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+  <meta charset="UTF-8">
+  <title></title>
 </head>
 
 <body>
-    <section class="section">
+  <section class="section">
 
-        <section class="container">
+    <section class="container">
 
-            <h1 class="title">Minhas listas</h1>
+      <h1 class="title">Minhas listas</h1>
 
-            <div class="columns">
-                <div class="column is-12">
-                    <div class="box">
-                        <div class="field">
-                            <div class="control">
-                                <ul class="lista-produtos">
-                                    <li th:each="lista: ${listasCriadas}">
-                                        <span th:text="${lista.nome}">
-                                        </span>
-                                        <div class="mb-0 flex end buttons has-addons">
-                                            <span class="button rz-botao">
-                                                <i class="fas fa-edit"></i>
-                                            </span>
-                                            <span class="button rz-botao">
-                                                <i class="fas fa-shopping-basket"></i>
-                                            </span>
+      <div class="columns">
+        <div class="column is-12">
 
-                                            <form th:action="@{'/minha-lista/listas-criadas/excluir/' + ${lista.id}}"
-                                                method="post" name="meuform"
-                                                th:onsubmit="return minhasListas.exibeConfirmacaDeExclusaoDaLista()">
-                                                <button type="submit" class="button rz-botao">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            </form>
+          <div class="field">
+            <div class="control">
+              <table class="lista-produtos table is-striped">
+                <tr th:each="lista: ${listasCriadas}">
+                  <span th:text="${lista.nome}">
+                  </span>
+                  <div class="mb-0 flex end buttons has-addons">
+                    <span class="button rz-botao">
+                      <i class="fas fa-edit"></i>
+                    </span>
+                    <span class="button rz-botao">
+                      <i class="fas fa-shopping-basket"></i>
+                    </span>
 
-                                        </div>
-                                        <hr>
-                                    </li>
-                                </ul>
+                    <form th:action="@{'/minha-lista/listas-criadas/excluir/' + ${lista.id}}" method="post"
+                      name="meuform" th:onsubmit="return minhasListas.exibeConfirmacaDeExclusaoDaLista()">
+                      <button type="submit" class="button rz-botao">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </form>
+                  </div>
+                </tr>
+              </table>
+              <div class="flex space-between">
+                <form th:action="'/'" method="get">
+                  <button class="button rz-botao is-rounded" type="submit">Voltar</button>
+                </form>
 
-                                <div class="flex space-between">
-                                    <form th:action="'/'" method="get">
-                                        <button class="button rz-botao is-rounded" type="submit">Voltar</button>
-                                    </form>
+                <form th:action="'/minha-lista/cadastro'" method="get">
+                  <button class="button rz-botao is-rounded" type="submit">Nova Lista</button>
+                </form>
+              </div>
 
-                                    <form th:action="'/minha-lista/cadastro'" method="get">
-                                        <button class="button rz-botao is-rounded" type="submit">Nova Lista</button>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
+          </div>
 
-        </section>
+        </div>
+      </div>
 
     </section>
+
+  </section>
 </body>
 
 </html>
