@@ -25,15 +25,15 @@
               </div>
 
               <div class="column columns is-multiline is-10 is-offset-1">
-                <div class="column is-2" th:each="produto: ${produtos}">
-                  <input class="column is-1" type="checkbox" name="produtos" th:value="${produto.id}">
-                  <span class="column" th:text="${produto.nome}"></span>
+                <div class="column is-4" th:each="produto: ${produtos}">
+                  <input class="checkbox" type="checkbox" name="produtos" th:value="${produto.id}">
+                  <label class="checkbox" th:text="${produto.nome}"></label>
                 </div>
               </div>
 
               <div class="field">
                 <div class="control">
-                  <button class="button is-primary" type="submit">Salvar</button>
+                  <button class="button rz-botao" type="submit">Salvar</button>
                 </div>
               </div>
             </form>
