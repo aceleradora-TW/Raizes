@@ -1,5 +1,7 @@
 package com.thoughtworks.aceleradora.dominio;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -11,9 +13,23 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
     private String nome;
 
+    @ManyToOne
+    @JoinColumn(name = "id_categorias")
+    @JsonIgnoreProperties("produtos")
+    private Categoria categoria;
+
     public Produto() {
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public Produto(String nome) {
@@ -24,20 +40,13 @@ public class Produto {
         return nome;
     }
 
-    public String toString() {
-        return nome;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getId() {
         return id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String toString() {
+        return nome;
     }
+
 }
 
