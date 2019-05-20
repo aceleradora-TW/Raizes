@@ -60,7 +60,10 @@ public class MinhaListaControlador {
 
 
     @GetMapping("/listas-criadas")
-    public String listasCriadas(Model modelo) {
+    public String listasCriadas(Model modelo, Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Minhas Listas", "/minha-lista/listas-criadas");
 
         modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
         return "minhaLista/listas-criadas";
