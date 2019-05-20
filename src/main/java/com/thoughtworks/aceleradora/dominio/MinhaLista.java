@@ -15,6 +15,7 @@ public class MinhaLista {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String nome;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

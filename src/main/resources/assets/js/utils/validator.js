@@ -83,7 +83,7 @@ export default class Validator {
 	 * Adiciona regra de validação customizada,
 	 * É obtrigatório que o seletor seja o atributo name dos campos'.
 	 * Utilizado para campos do tipo checkbox(grupo de checkboxes de mesmo tipo) ou radio
-   * Espera Seletor do campo,  nome do validador, mensagem de erro e a função validadorar
+   * Espera Seletor do campo,  nome do validador, mensagem de erro e a função validadora
    * 
 	 * @param String selector Ex: 'input[type="checkbox"]'
 	 * @param String name Ex: 'ValidadorCheckbox'
@@ -113,7 +113,7 @@ export default class Validator {
       return $(s + ':checked').length >= 1;
     })
   }
-
+  
   /**
 	 * Adiciona regras de validação para um campo específico,
 	 * Espera o seletor para o elemento como por exemplo: '.input-nome'.
