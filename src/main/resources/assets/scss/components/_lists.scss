@@ -5,7 +5,7 @@
 
     &.striped{
         li {
-            &:nth-child(even) {background: #CCC}
+            &:nth-child(even) {background: $striped-row}
             &:nth-child(odd) {background: #FFF}
         }
     }
