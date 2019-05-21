@@ -75,9 +75,14 @@ Demais comandos disponíveis:
 ./gradlew tasks
 ```
 
+```sh
+npm run cypress:open
+```
+
 ## Ferramentas
 
 - [Circle CI](https://circleci.com/gh/aceleradora-TW/Raizes)
+- [Cypress](https://www.cypress.io/)
 
 
 ## Ambientes
@@ -110,3 +115,4 @@ A nomenclatura segue um padrão similar, com o número da história e uma breve 
 ```
 
 O repositório não permite fazer push direto para a `master`. Todas mudanças devem ser feitas através de Pull Requests, passando por uma revisão de código por parte do time. Sugerimos adicionar uma descrição ao pull request, descrevendo quais mudanças foram feitas.
+
