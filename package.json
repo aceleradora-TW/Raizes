@@ -48,7 +48,7 @@
     "build": "NODE_ENV=production webpack --colors --mode production",
     "dev": "npm run build -- --mode development --inline --hot",
     "heroku-postbuild": "npm run build",
-    "npx cypress open": "cypress open"
+    "cypress:open": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -58,5 +58,9 @@
     "JS"
   ],
   "author": "Jean Sarlôn <jean.sarlon@icloud.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeansarlon/js-tdd-course/issues"
+  },
+  "homepage": "https://github.com/jeansarlon/js-tdd-course#readme"
 }
