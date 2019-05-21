@@ -1,7 +1,7 @@
 {
   "name": "js-skeleton",
   "version": "1.0.0",
-  "description": "",
+  "description": "Uma aplicação mínima em Spring Boot.",
   "main": "index.js",
   "dependencies": {
     "@babel/plugin-proposal-private-methods": "^7.4.4",
@@ -30,6 +30,7 @@
     "babel-loader": "^8.0.6",
     "babel-preset-es2015": "^6.24.1",
     "bulma": "^0.7.4",
+    "cypress": "^3.3.0",
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
@@ -46,7 +47,8 @@
     "watch": "NODE_ENV=development webpack --mode development --watch",
     "build": "NODE_ENV=production webpack --colors --mode production",
     "dev": "npm run build -- --mode development --inline --hot",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "cypress:open": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -56,5 +58,9 @@
     "JS"
   ],
   "author": "Jean Sarlôn <jean.sarlon@icloud.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeansarlon/js-tdd-course/issues"
+  },
+  "homepage": "https://github.com/jeansarlon/js-tdd-course#readme"
 }
