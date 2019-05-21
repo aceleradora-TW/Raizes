@@ -108,3 +108,5 @@ A nomenclatura segue um padrão similar, com o número da história e uma breve 
 ```sh
 03/configura-layout
 ```
+
+O repositório não permite fazer push direto para a `master`. Todas mudanças devem ser feitas através de Pull Requests, passando por uma revisão de código por parte do time. Sugerimos adicionar uma descrição ao pull request, descrevendo quais mudanças foram feitas.
