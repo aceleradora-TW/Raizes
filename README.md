@@ -20,7 +20,7 @@ Você precisará criar um banco de dados vazio antes de iniciar a aplicação. O
 sudo -u postgres psql -c 'CREATE DATABASE raizes'
 ```
 
-## Executando a aplicação
+### Executando a aplicação
 
 Para inicar o servidor:
 
@@ -63,17 +63,17 @@ Para saber quais alterações serão executadas no banco, veja os arquivos de mi
 
 O comando compila o códico automaticamente a cada atualização. 
 
-####Executando os testes:
+### Executando os testes:
 
 ```sh
 ./gradlew test
 ```
 
-Demais comandos disponíveis:
-
 ```sh
 ./gradlew tasks
 ```
+
+Executando o Cypress:
 
 ```sh
 npm run cypress:open
@@ -100,7 +100,7 @@ Endereço: http://raizes-producao.herokuapp.com/
 Este ambiente é o onde será entregue versão final da aplicação.
 
 
-###Regras para Commit, Branch e Pull Request
+### Regras para Commit, Branch e Pull Request
 
 Nosso padrão de commit consiste no número da história no github e quem desenvolveu:
 
