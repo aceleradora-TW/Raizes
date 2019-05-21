@@ -93,3 +93,18 @@ __Produção__
 Endereço: http://raizes-producao.herokuapp.com/
 
 Este ambiente é o onde será entregue versão final da aplicação.
+
+
+###Regras para Commit, Branch e Pull Request
+
+Nosso padrão de commit consiste no número da história no github e quem desenvolveu:
+
+```sh
+03/@fulana,@ciclana: Adiciona header
+```
+
+A nomenclatura segue um padrão similar, com o número da história e uma breve descrição:
+
+```sh
+03/configura-layout
+```
