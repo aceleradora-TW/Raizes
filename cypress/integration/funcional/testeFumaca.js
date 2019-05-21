@@ -10,4 +10,3 @@ describe('Testa titulo', function() {
         cy.title().should('eq', 'Aceleradora Ágil - Esqueleto Ambulante')
     })
 })
-
