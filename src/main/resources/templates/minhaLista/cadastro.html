@@ -14,20 +14,18 @@
 
       <div class="columns">
         <div class="column is-12">
-
           <div th:if="${Erro} != null">
             <span th:text="${Erro.mensagem}"></span>
           </div>
 
           <div class="box">
+
             <form id="formCriaLista" th:action="'/minha-lista/cadastro'" method="post">
               <div class="field column is-6 is-offset-3">
-
                 <label class="label">Nome*</label>
                 <div class="control">
                   <input class="input" type="text" name="nome" placeholder="Ex.: Minha Lista Compras 1">
                 </div>
-
                 <div class="help-block"></div>
               </div>
 
@@ -35,24 +33,23 @@
               <div class="categorias rz-list">
 
                 <div class="column columns is-multiline is-10 is-offset-1" th:each="categoria: ${categorias}">
-                  <h3 class="column is-12" th:text="${categoria.nome}"></h3>
+                  <h2 class="column is-12" th:text="${categoria.nome}"></h2>
                   <div class="column is-4" th:each="produto: ${categoria.produtos}">
                     <input class="checkbox" type="checkbox" name="produtos" th:value="${produto.id}">
                     <label class="checkbox" th:text="${produto.nome}"></label>
                   </div>
                 </div>
 
+                <div class="field">
+                  <div class="control flex end">
+                    <button class="button rz-button is-rounded" type="submit">Salvar</button>
+                  </div>
+                </div>
 
                 <div class="help-block"></div>
-              </div>
 
-              <div class="field">
-                <div class="control flex end">
-                  <button class="button rz-botao" type="submit">Salvar</button>
-                </div>
               </div>
             </form>
-
           </div>
         </div>
       </div>

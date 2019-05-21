@@ -10,13 +10,28 @@ body {
   color: $secondary-color;
 }
 
-h1, h3 {
+h1 {
   font-family: 'Raleway', sans-serif; 
   color: $secondary-color;
   text-align: center;
+  }
+
+.box {
+  $box-padding: 0;
 }
 
-.box{
-  $box-padding: 0;
+h2 {
+  font-family: 'Raleway', sans-serif; 
+  color: $secondary-color;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+h3 {
+  font-family: 'Raleway', sans-serif;
+  color: $secondary-color;
+  text-align: center;
+  font-size: 1.0em;
 }
 
