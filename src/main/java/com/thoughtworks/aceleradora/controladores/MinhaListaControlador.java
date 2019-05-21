@@ -95,18 +95,6 @@ public class MinhaListaControlador {
         return "minhaLista/editar";
     }
 
-    @PostMapping("/editar-lista/{id}")
-    public String erroAoSalvar(MinhaLista lista, RedirectAttributes redirecionamentoDeAtributos) {
-        if(minhaListaServico.salvar(lista) == null) {
-            ErroEditarLista erro = new ErroEditarLista("Erro ao salvar a lista!");
-            redirecionamentoDeAtributos.addFlashAttribute("ErroEditar", erro);
-
-            return "redirect:/minha-lista/editar";
-        }
-
-        return "redirect:/minha-lista/listas-criadas";
-    }
-
     @PostMapping("/editar-lista/{id}/salvar")
     public String removerItem(MinhaLista ListaDoFronte, @PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
         Optional<MinhaLista> ListaDoBanco = minhaListaServico.encontraUm(id);
