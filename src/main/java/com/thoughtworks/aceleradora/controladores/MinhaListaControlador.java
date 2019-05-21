@@ -3,7 +3,6 @@ package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.Categoria;
 import com.thoughtworks.aceleradora.dominio.Erro;
-import com.thoughtworks.aceleradora.dominio.Categoria;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
@@ -15,13 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-
-import java.util.Optional;
-
 import java.util.function.Consumer;
 
 @Controller
-
+@RequestMapping("/minhas-listas")
 public class MinhaListaControlador {
 
     private ProdutoServico produtoServico;
@@ -31,7 +27,6 @@ public class MinhaListaControlador {
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Início", "/");
 
-
     @Autowired
     public MinhaListaControlador(ProdutoServico produtoServico, MinhaListaServico minhaListaServico, CategoriaServico categoriaServico) {
         this.produtoServico = produtoServico;
@@ -39,7 +34,7 @@ public class MinhaListaControlador {
         this.categoriaServico = categoriaServico;
     }
 
-    @RequestMapping("/minhas-listas")
+    @GetMapping
     public String listasCriadas(Model modelo, Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
