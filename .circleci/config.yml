@@ -1,8 +1,11 @@
 version: 2
 jobs:
+  orbs:
+    cypress: cypress-io/cypress@1
   build:
     docker:
       - image: circleci/openjdk:11.0.2-jdk-node-browsers-legacy
+      - image: cypress/base:8
 
     working_directory: ~/repo
 
@@ -27,6 +30,7 @@ jobs:
 
       - run: gradle test
 
+
   deploy-integracao:
       docker:
         - image: buildpack-deps:trusty
@@ -41,10 +45,12 @@ workflows:
   version: 2
   standard-build:
     jobs:
+      - cypress/run
       - build
       - deploy-integracao:
           requires:
             - build
+            - cypress/run
           filters:
             branches:
               only: master
