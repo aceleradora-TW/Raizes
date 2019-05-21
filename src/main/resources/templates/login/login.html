@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Login</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+      integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">
+<link href="/css/style.css" rel="stylesheet">
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar is-mobile " role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <p class="titulo-nav">Raizes</p>
+            </a>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="container card-content valign center has-text-centered">
+        <form th:action="@{/login}" method="POST" onsubmit="return validaLogin(event)">
+            <h1 class="title is-1">Raizes</h1>
+            <div th:if="${param.error}">
+                <p class="has-text-danger"> Usuário ou senha incorretos!</p>
+            </div>
+            <div class="columns">
+                <div class="column is-half">
+                    <p class="control has-icons-left has-icons-right margin-left-10">
+                        <i class="fas fa-user"></i>
+                        <label for="firstName">Usuário</label>
+                    </p>
+                    <input class="validate input input-fancy borda-arredondada" id="firstName" type="text" name="nome">
+                </div>
+            </div>
+            <div class="columns">
+                <div class = "column is-half">
+                    <p class="control has-icons-left has-icons-right margin-left-10">
+                        <i class="fas fa-lock"></i>
+                        <label for="password">Senha</label>
+                    </p>
+                    <input class="validate input input-fancy borda-arredondada" id="password" type="password" name="senha">
+                </div>
+            </div>
+            <button class="button verde-viavida is-medium borda-arredondada" type="submit" name="action">Entrar</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>
