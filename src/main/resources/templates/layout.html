@@ -13,14 +13,31 @@
 
 <body>
   <header>
-    <div class="navbar-menu" id="navMenu">
-      <a class="navbar-item" href="/minha-lista/cadastro">
-        <p class="titulo-nav">Criar Lista de Produtos</p>
-      </a>
-      <a class="navbar-item" href="/minha-lista/listas-criadas">
-        <p class="titulo-nav">Minhas Listas</p>
-      </a>
-    </div>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <i class="fab fa-pagelines"></i>
+          <span class="m-2">Raízes</span>
+        </a>
+          <a class="navbar-item" href="/minha-lista/cadastro">
+            <p class="titulo-nav">Criar Lista de Produtos</p>
+          </a>
+          <a class="navbar-item" href="/minha-lista/listas-criadas">
+            <p class="titulo-nav">Minhas Listas</p>
+          </a>
+        </div>
+      </div>
+    </nav>
+        
+    <!-- <nav class="navbar is-mobile tw-navigation" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a onclick="Burger()" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+    </nav> -->
     <nav class="m-2 ml-5 breadcrumb has-arrow-separator" aria-label="breadcrumbs">
       <ul>
         <li th:each="pagina : ${@breadcrumb.paginas}"
