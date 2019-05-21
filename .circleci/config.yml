@@ -44,7 +44,7 @@ workflows:
     jobs:
       orbs:
         cypress: cypress-io/cypress@1
-      - deploy-integracao:
+        deploy-integracao:
           requires:
             - build
             - cypress/run
