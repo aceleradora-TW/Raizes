@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-
 import java.util.Optional;
-
 import java.util.function.Consumer;
 
 @Controller
@@ -47,7 +45,6 @@ public class MinhaListaControlador {
         return "minhaLista/cadastro";
     }
 
-
     @PostMapping("/cadastro")
     public String salvarLista(MinhaLista lista, Breadcrumb breadcrumb, RedirectAttributes atributosRedirecionamento) {
         breadcrumb
@@ -78,12 +75,6 @@ public class MinhaListaControlador {
         return "minhaLista/listas-criadas";
     }
 
-    @PostMapping("/listas-criadas/excluir/{id}")
-    public String removerListaCriada(MinhaLista lista, @PathVariable ("id") Long id) {
-        minhaListaServico.removerListaCriada(id);
-        return "redirect:/minha-lista/listas-criadas";
-    }
-
     @GetMapping("/editar-lista/{id}")
     public String pegaLista(Model modelo, @PathVariable("id") Long id) {
         Optional<MinhaLista> lista = minhaListaServico.encontraUm(id);
@@ -106,5 +97,12 @@ public class MinhaListaControlador {
         }
         return "minhaLista/cadastro";
     }
+
+    @PostMapping("/listas-criadas/excluir/{id}")
+    public String removerListaCriada(MinhaLista lista, @PathVariable ("id") Long id) {
+        minhaListaServico.removerListaCriada(id);
+        return "redirect:/minha-lista/listas-criadas";
+    }
 }
+
 

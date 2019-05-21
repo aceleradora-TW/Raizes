@@ -15,4 +15,3 @@ public interface MinhaListaRepositorio extends CrudRepository<MinhaLista, Long> 
 
     void deleteById(Long id);
 }
-
