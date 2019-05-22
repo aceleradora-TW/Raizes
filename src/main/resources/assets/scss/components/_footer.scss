@@ -1,3 +1,16 @@
-.footer{
-    background-color: $primary-color;
+.rz-footer{
+    background-color: $third-color;
+    position:relative;
+    padding: 0;
+    bottom:0;
+    height: 50px;
+    width:100%;
+    
+    
+    &.footer-item {
+        padding: 0;
+    }
+    .texto{
+        background-color: whitesmoke;
+    }
 }

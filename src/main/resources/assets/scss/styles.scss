@@ -7,6 +7,8 @@
 // Config
 @import 'config/variables';
 @import 'config/custom-helpers';
+@import 'config/base';
+@import 'config/headers';
 
 // helpers
 @import 'helpers/spacing';
@@ -18,5 +20,4 @@
 @import 'components/notification';
 @import 'components/validator';
 @import 'components/buttons';
-@import 'components/body';
 @import 'components/footer';

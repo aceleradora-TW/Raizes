@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Raleway');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: black;
+  background-color: white;
+}
+.box {
+    $box-padding: 0;
+}
+.main {
+  min-height: calc(100vh - 150px); //mudar de acordo com o cabecalho+rodape
+}
+ 
+  

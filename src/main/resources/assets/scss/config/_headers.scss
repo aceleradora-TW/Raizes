@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Raleway');
 
-body {
-  font-family: 'Roboto', sans-serif;
-  color: black;
-  background-color: white;
-}
 
 .title {
   color: $secondary-color;
@@ -15,10 +10,6 @@ h1 {
   color: $secondary-color;
   text-align: center;
   }
-
-.box {
-  $box-padding: 0;
-}
 
 h2 {
   font-family: 'Roboto', sans-serif;
