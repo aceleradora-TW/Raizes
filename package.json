@@ -1,7 +1,7 @@
 {
-  "name": "js-skeleton",
+  "name": "js-raizes",
   "version": "1.0.0",
-  "description": "Uma aplicação mínima em Spring Boot.",
+  "description": "Melhorar a comunicação entre pequenos agricultores e consumidores.",
   "main": "index.js",
   "dependencies": {
     "@babel/plugin-proposal-private-methods": "^7.4.4",
