@@ -121,6 +121,9 @@ public class MinhaListaControlador {
                 return "redirect:/minha-lista/editar";
             }
         }
+        String mensagemDeSucesso = "Sua lista foi salva com sucesso!";
+        redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", mensagemDeSucesso);
+
 
         return "redirect:/minha-lista/listas-criadas";
     }

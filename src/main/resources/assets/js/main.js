@@ -4,20 +4,12 @@ import 'animate.css'
 import '../scss/styles.scss'
 import '@fengyuanchen/validator';
 import CriarLista from './pages/criaLista'
-
+import minhasListas from './pages/minha-lista'
 
 $(function () {
     CriarLista.validaFormulario();   
          
 });
 
-
-
-
-
-import minhasListas from './pages/minha-lista'
-import mensagemSalvoComSucesso  from './pages/mensagemSalvar'
-
-window.mensagemSalva=mensagemSalvoComSucesso;
 window.minhasListas = minhasListas;
 

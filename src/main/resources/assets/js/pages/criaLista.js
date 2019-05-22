@@ -1,4 +1,3 @@
-
 import Validator from '../utils/validator'
 
 export default {
