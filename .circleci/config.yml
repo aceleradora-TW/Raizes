@@ -43,11 +43,12 @@ orbs:
 workflows:
   standard-build:
     jobs:
-      - teste-de-fumaca: cypress/run
-      - deploy-integracao:
-        requires:
-          - build
-          - teste-de-fumaca
-        filters:
-          branches:
-            only: master
+      - cypress/run
+
+#      - deploy-integracao:
+#        requires:
+#          - build
+#          - teste-de-fumaca
+#        filters:
+#          branches:
+#            only: master
