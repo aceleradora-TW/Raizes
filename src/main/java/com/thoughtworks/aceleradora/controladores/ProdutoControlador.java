@@ -28,10 +28,12 @@ public class ProdutoControlador {
     }
 
     @GetMapping("/cadastro")
-    public void cadastarProduto(Model modelo, Breadcrumb breadcrumb) {
+    public String cadastarProduto(Model modelo, Breadcrumb breadcrumb) {
             breadcrumb
                     .aproveitar(partesComunsDoBreadCrumb)
                     .pagina("Cadastro", "/produtos/cadastro");
+
+            return "produto/cadastro";
     }
 
 
