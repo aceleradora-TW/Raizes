@@ -6,7 +6,10 @@ testes-funcionais/build
 /src/main/resources/static/css/
 /src/main/resources/static/js/
 /src/main/resources/static/svg/
-
+/cypress/plugins/
+/cypress/support/
+/cypress/videos/
+/cypress/fixtures/
 
 # Ignore Gradle GUI config
 gradle-app.setting
