@@ -43,9 +43,8 @@ orbs:
 workflows:
   standard-build:
     jobs:
-      - cypress/run:
-          requires:
-            - cypress/install
+      - cypress/install
+      - cypress/run
 #      - deploy-integracao:
 #        requires:
 #          - build
