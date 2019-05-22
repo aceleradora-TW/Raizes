@@ -29,8 +29,8 @@
               <div class="field">
                 <label class="label">Categoria</label>
                 <div class="select">
-                    <select th:field="*{categoria}">
-                      <option th:each="categoria: ${categorias}" th:value="${categoria}" th:text="categoria.nome" ></option>
+                    <select form="formCadastraProduto" id="categorias" name="categorias">
+                      <option th:each="categoria: ${categorias}" th:text="${categoria.nome}" ></option>
                       <option>With options</option>
                     </select>
                   </div>

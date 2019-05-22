@@ -43,8 +43,8 @@ public class ProdutoControlador {
                     .pagina("Produtos", "/produtos")
                     .pagina("Cadastro", "/produtos/cadastro");
 
-            modelo.addAttribute("Categorias",categoriaServico.pegarCategorias());
-            //modelo.addAttribute("Cultivo", cultivoServico.pegarCultivos());
+            modelo.addAttribute("categorias",categoriaServico.pegarCategorias());
+            //modelo.addAttribute("cultivo", cultivoServico.pegarCultivos());
 
             return "produto/cadastro";
     }
