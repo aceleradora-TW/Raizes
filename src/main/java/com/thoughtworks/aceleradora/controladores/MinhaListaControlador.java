@@ -41,7 +41,7 @@ public class MinhaListaControlador {
                 .pagina("Minhas Listas", "/minhas-listas");
 
         modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
-        return "minhaLista/listas-criadas";
+        return "minha-lista/listas-criadas";
     }
 
 
@@ -56,7 +56,7 @@ public class MinhaListaControlador {
         List<Categoria> categorias = categoriaServico.pegarCategorias();
         modelo.addAttribute("categorias", categorias);
 
-        return "minhaLista/cadastro";
+        return "minha-lista/cadastro";
     }
 
     @PostMapping("/criar")
