@@ -3,7 +3,6 @@ package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.Categoria;
 import com.thoughtworks.aceleradora.dominio.Erro;
-import com.thoughtworks.aceleradora.dominio.Categoria;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
@@ -15,9 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-
-import java.util.Optional;
-
 import java.util.function.Consumer;
 
 @Controller
@@ -74,11 +70,16 @@ public class MinhaListaControlador {
     }
 
     @GetMapping("/listas-criadas")
-    public String listasCriadas(Model modelo, Breadcrumb breadcrumb) {
+    public String listasCriadas(Model modelo, Breadcrumb breadcrumb, RedirectAttributes atributosRedirecionamento) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Minhas Listas", "/minha-lista/listas-criadas");
 
+        if(minhaListaServico.pegarListasCriadas() == null) {
+            Erro erro = new Erro("Não há nenhuma lista criada.");
+            atributosRedirecionamento.addFlashAttribute("Erro", erro);
+            return "minhaLista/listas-criadas";
+        }
         modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
         return "minhaLista/listas-criadas";
     }

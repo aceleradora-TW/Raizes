@@ -19,6 +19,9 @@
                     <div class="box">
                         <div class="field">
                             <div class="control">
+                                <div th:if="${Erro} != null">
+                                    <span th:text="${Erro.mensagem}"></span>
+                                </div>
                                 <ul class="lista-produtos">
                                     <li th:each="lista: ${listasCriadas}">
                                         <span th:text="${lista.nome}">
