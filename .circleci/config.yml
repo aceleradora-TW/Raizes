@@ -16,8 +16,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
 
       - run: gradle dependencies
 
@@ -29,23 +29,22 @@ jobs:
       - run: gradle test
 
   deploy-integracao:
-      docker:
-        - image: buildpack-deps:trusty
-      steps:
-        - checkout
-        - run:
-            name: Deploy para o ambiente de integracao
-            command: |
-              git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_INTEGRATION_APP_NAME.git master
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+          name: Deploy para o ambiente de integracao
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_INTEGRATION_APP_NAME.git master
 orbs:
   cypress: cypress-io/cypress@1.7.0
 
 workflows:
-  version: 2
   standard-build:
     jobs:
-      teste-de-fumaca: cypress/run
-      deploy-integracao:
+      - teste-de-fumaca: cypress/run
+      - deploy-integracao:
         requires:
           - build
           - teste-de-fumaca
