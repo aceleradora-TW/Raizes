@@ -38,10 +38,10 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/js/**", "/css/**", "/imagem/**", "/registrar/**")
+                .antMatchers("/", "/js/**", "/css/**", "/images/**", "/svg/**")
                 .permitAll()
-                .antMatchers("/admin").hasAuthority(TipoDeUsuario.PRODUTOR.getNome())
-                .antMatchers("/assistente").hasAuthority( TipoDeUsuario.RESTAURANTEIRO.getNome())
+                .antMatchers("/").hasAuthority(TipoDeUsuario.PRODUTOR.getNome())
+                .antMatchers("/").hasAuthority( TipoDeUsuario.RESTAURANTEIRO.getNome())
                 .anyRequest()
                 .authenticated()
                 .and()
