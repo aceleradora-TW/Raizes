@@ -45,7 +45,7 @@ public class MinhaListaControlador {
     }
 
 
-    @GetMapping("/cadastro")
+    @GetMapping("/criar")
     public String criarLista(Model modelo, Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
@@ -59,18 +59,18 @@ public class MinhaListaControlador {
         return "minhaLista/cadastro";
     }
 
-    @PostMapping("/cadastro")
+    @PostMapping("/salvar")
     public String salvarLista(MinhaLista lista, RedirectAttributes atributosRedirecionamento) {
         if(minhaListaServico.salvar(lista) == null) {
             Erro erro = new Erro("Falhou na criação da lista");
             atributosRedirecionamento.addFlashAttribute("Erro", erro);
 
-            return "redirect:/minhas-listas/cadastro";
+            return "redirect:/minhas-listas/criar";
         }
         return "redirect:/minhas-listas";
     }
 
-    @PostMapping("/excluir/{id}")
+    @PostMapping("/{id}/excluir")
     public String removerListaCriada(MinhaLista lista, @PathVariable ("id") Long id) {
         minhaListaServico.removerListaCriada(id);
         return "redirect:/minhas-listas";

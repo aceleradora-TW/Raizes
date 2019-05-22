@@ -31,7 +31,7 @@
                                                 <i class="fas fa-shopping-basket"></i>
                                             </span>
 
-                                            <form th:action="@{'/minhas-listas/excluir/' + ${lista.id}}"
+                                            <form th:action="@{'/minhas-listas/'+${lista.id}+'/excluir/' }"
                                                 method="post" name="meuform"
                                                 th:onsubmit="return minhasListas.exibeConfirmacaDeExclusaoDaLista()">
                                                 <button type="submit" class="button rz-botao">
