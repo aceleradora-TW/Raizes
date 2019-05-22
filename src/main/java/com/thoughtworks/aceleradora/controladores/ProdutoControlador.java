@@ -40,6 +40,7 @@ public class ProdutoControlador {
     public String cadastarProduto(Model modelo, Breadcrumb breadcrumb) {
             breadcrumb
                     .aproveitar(partesComunsDoBreadCrumb)
+                    .pagina("Produtos", "/produtos")
                     .pagina("Cadastro", "/produtos/cadastro");
 
             return "produto/cadastro";
