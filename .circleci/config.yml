@@ -25,7 +25,9 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
-      - run: gradle test
+      - run: gr
+  orbs:
+    cypress: cypress-io/cypress@1.5.0
 
   deploy-integracao:
     docker:
@@ -47,13 +49,11 @@ jobs:
           name: Executa testes de fumaca com Cypress
           command: npx cypress run
 
-orbs:
-  cypress: cypress-io/cypress@1.5.0
-
-workflows:
-  standard-build:
-    jobs:
-      - teste-de-fumaca
+  workflows:
+    standard-build:
+      jobs:
+        - cypress/run:
+            record: true
 #      - deploy-integracao:
 #        requires:
 #          - build
