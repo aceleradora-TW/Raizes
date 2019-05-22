@@ -3,66 +3,63 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+  <meta charset="UTF-8">
+  <title></title>
 </head>
 
 <body>
-    <section class="section">
+  <section class="section">
 
-        <section class="container">
+    <section class="container">
 
-            <h1 class="title centraliza-texto">Minhas listas</h1>
+      <h1 class="title centraliza-texto">Minhas listas</h1>
 
-            <div class="columns">
-                <div class="column is-12">
-                    <div class="box">
-                        <div class="field">
-                            <div class="control">
-                                <ul class="lista-produtos">
-                                    <li th:each="lista: ${listasCriadas}">
-                                        <span th:text="${lista.nome}">
-                                        </span>
-                                        <div class="mb-0 flex end buttons has-addons">
-                                            <span class="button rz-botao">
-                                                <i class="fas fa-edit"></i>
-                                            </span>
-                                            <span class="button rz-botao">
-                                                <i class="fas fa-shopping-basket"></i>
-                                            </span>
+      <div class="columns">
+        <div class="column is-12">
+          <div class="box">
+            <div class="field">
+              <div class="control">
+                <ul class="lista-produtos">
+                  <li th:each="lista: ${listasCriadas}">
+                    <span th:text="${lista.nome}">
+                    </span>
+                    <div class="mb-0 flex end buttons has-addons">
+                      <span class="button rz-botao">
+                        <i class="fas fa-edit"></i>
+                      </span>
+                      <span class="button rz-botao">
+                        <i class="fas fa-shopping-basket"></i>
+                      </span>
 
-                                            <form th:action="@{'/minhas-listas/'+${lista.id}+'/excluir/' }"
-                                                method="post" name="meuform"
-                                                th:onsubmit="return minhasListas.exibeConfirmacaDeExclusaoDaLista()">
-                                                <button type="submit" class="button rz-botao">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            </form>
+                      <form th:action="@{'/minhas-listas/'+${lista.id}+'/excluir/' }" method="post" name="meuform"
+                        th:onsubmit="return minhasListas.exibeConfirmacaDeExclusaoDaLista()">
+                        <button type="submit" class="button rz-botao">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </form>
 
-                                        </div>
-                                        <hr>
-                                    </li>
-                                </ul>
-
-                                <div class="flex space-between">
-                                    <form th:action="'/'" method="get">
-                                        <button class="button is-primary" type="submit">Voltar</button>
-                                    </form>
-
-                                    <form th:action="'/minhas-listas/cadastro'" method="get">
-                                        <button class="button is-primary" type="submit">Nova Lista</button>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
                     </div>
-                </div>
-            </div>
+                    <hr>
+                  </li>
+                </ul>
 
-        </section>
+                <div class="flex space-between">
+
+                  <a class="button is-primary" type="submit" th:href="@{/}">Voltar</a>
+
+                  <a class="button is-primary" type="submit" th:href="@{/minhas-listas/criar}">Nova Lista</a>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </section>
+
+  </section>
 </body>
 
 </html>
