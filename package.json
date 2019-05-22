@@ -48,6 +48,7 @@
     "build": "NODE_ENV=production webpack --colors --mode production",
     "dev": "npm run build -- --mode development --inline --hot",
     "heroku-postbuild": "npm run build",
+    "cypress-run": "npx cypress run",
     "cypress-open": "npx cypress open"
   },
   "repository": {
