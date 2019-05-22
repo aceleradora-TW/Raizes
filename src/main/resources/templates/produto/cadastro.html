@@ -28,9 +28,12 @@
 
               <div class="field">
                 <label class="label">Categoria</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="Ex.: Fruta" />
-                </div>
+                <div class="select">
+                    <select th:field="*{categoria}">
+                      <option th:each="categoria: ${categorias}" th:value="${categoria}" th:text="categoria.nome" ></option>
+                      <option>With options</option>
+                    </select>
+                  </div>
                 <div class="help-block"></div>
               </div>
 
