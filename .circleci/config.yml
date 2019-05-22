@@ -3,7 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:11.0.2-jdk-node-browsers-legacy
-      - image: cypress/base:8
 
     working_directory: ~/repo
 
@@ -37,14 +36,23 @@ jobs:
           name: Deploy para o ambiente de integracao
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_INTEGRATION_APP_NAME.git master
+
+  testes-de-fumaca:
+    docker:
+      - image: cypress/base:8
+    steps:
+      - checkout
+      - run:
+          name: Executa testes de fumaca com Cypress
+          command: npx cypress run
+
 orbs:
   cypress: cypress-io/cypress@1.5.0
 
 workflows:
   standard-build:
     jobs:
-      - cypress/install
-      - cypress/run
+      - teste-de-fumaca
 #      - deploy-integracao:
 #        requires:
 #          - build
