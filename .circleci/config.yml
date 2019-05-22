@@ -44,7 +44,6 @@ workflows:
   standard-build:
     jobs:
       - cypress/run
-
 #      - deploy-integracao:
 #        requires:
 #          - build
