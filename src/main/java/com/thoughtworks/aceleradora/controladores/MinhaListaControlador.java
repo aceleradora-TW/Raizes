@@ -59,7 +59,7 @@ public class MinhaListaControlador {
         return "minhaLista/cadastro";
     }
 
-    @PostMapping("/salvar")
+    @PostMapping("/criar")
     public String salvarLista(MinhaLista lista, RedirectAttributes atributosRedirecionamento) {
         if(minhaListaServico.salvar(lista) == null) {
             Erro erro = new Erro("Falhou na criação da lista");
