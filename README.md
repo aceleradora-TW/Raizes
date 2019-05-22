@@ -44,7 +44,7 @@ npm run watch
 npm run build
 ```
 
-3.Para executar a aplicação e migrações do bando de dados:
+3.Para executar a aplicação e migrações do banco de dados:
 
 ```sh
 ./gradlew bootRun
