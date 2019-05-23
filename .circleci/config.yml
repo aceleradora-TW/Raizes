@@ -47,6 +47,6 @@ workflows:
       - cypress/run:
           requires:
             - cypress/install
-#      - deploy-integracao:
-#        requires:
-#          - build
+      - deploy-integracao:
+        requires:
+          - build
