@@ -1,63 +1,85 @@
 version: 2.1
-jobs:
-  build:
-    docker:
-      - image: circleci/openjdk:11.0.2-jdk-node-browsers-legacy
+orbs:
+  cypress: cypress-io/cypress@1.5.0
+workflows:
+  standard-build:
+      jobs:
+        - cypress/run:
+            record: true
+        - deploy-integracao:
+          requires:
+            - build
+            - teste-de-fumaca
+          filters:
+            branches:
+              only: master
 
-    working_directory: ~/repo
 
-    environment:
-      JVM_OPTS: -Xmx3200m
-      TERM: dumb
 
-    steps:
-      - checkout
 
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "build.gradle" }}
-            - v1-dependencies-
 
-      - run: gradle dependencies
 
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle" }}
 
-      - run: gr
-  orbs:
-    cypress: cypress-io/cypress@1.5.0
-
-  deploy-integracao:
-    docker:
-      - image: buildpack-deps:trusty
-    steps:
-      - checkout
-      - run:
-          name: Deploy para o ambiente de integracao
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_INTEGRATION_APP_NAME.git master
-
-#  teste-de-fumaca:
+#version: 2.1
+#jobs:
+#  build:
 #    docker:
-#      - image: cypress/base:8
+#      - image: circleci/openjdk:11.0.2-jdk-node-browsers-legacy
+#
+#    working_directory: ~/repo
+#
+#    environment:
+#      JVM_OPTS: -Xmx3200m
+#      TERM: dumb
+#
 #    steps:
 #      - checkout
-#      - run: npm install
+#
+#      - restore_cache:
+#          keys:
+#            - v1-dependencies-{{ checksum "build.gradle" }}
+#            - v1-dependencies-
+#
+#      - run: gradle dependencies
+#
+#      - save_cache:
+#          paths:
+#            - ~/.gradle
+#          key: v1-dependencies-{{ checksum "build.gradle" }}
+#
+#      - run: gr
+#  orbs:
+#    cypress: cypress-io/cypress@1.5.0
+#
+#  deploy-integracao:
+#    docker:
+#      - image: buildpack-deps:trusty
+#    steps:
+#      - checkout
 #      - run:
-#          name: Executa testes de fumaca com Cypress
-#          command: npx cypress run
-
-  workflows:
-    standard-build:
-    jobs:
-      - cypress/run:
-          record: true
-#      - deploy-integracao:
-#        requires:
-#          - build
-#          - teste-de-fumaca
-#        filters:
-#          branches:
-#            only: master
+#          name: Deploy para o ambiente de integracao
+#          command: |
+#            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_INTEGRATION_APP_NAME.git master
+#
+##  teste-de-fumaca:
+##    docker:
+##      - image: cypress/base:8
+##    steps:
+##      - checkout
+##      - run: npm install
+##      - run:
+##          name: Executa testes de fumaca com Cypress
+##          command: npx cypress run
+#
+#  workflows:
+#    standard-build:
+#    jobs:
+#      - cypress/run:
+#          record: true
+##      - deploy-integracao:
+##        requires:
+##          - build
+##          - teste-de-fumaca
+##        filters:
+##          branches:
+##            only: master
