@@ -35,19 +35,18 @@ jobs:
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_INTEGRATION_APP_NAME.git master
 
   teste-de-fumaca:
-    steps:
-      - checkout
-      - run: npm install
 
-  workflows:
-    standard-build:
+    command: |
+      git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_INTEGRATION_APP_NAME.git master
+orbs:
+  cypress: cypress-io/cypress@1.5.0
+
+workflows:
+  standard-build:
     jobs:
       - cypress/run:
-          record: true
-      - deploy-integracao:
-        requires:
-          - build
-          - teste-de-fumaca
-        filters:
-          branches:
-            only: master
+          requires:
+            - cypress/install
+#      - deploy-integracao:
+#        requires:
+#          - build
