@@ -31,7 +31,6 @@
                 <div class="select">
                     <select form="formCadastraProduto" id="categorias" name="categorias">
                       <option th:each="categoria: ${categorias}" th:text="${categoria.nome}" ></option>
-                      <option>With options</option>
                     </select>
                   </div>
                 <div class="help-block"></div>
@@ -39,8 +38,10 @@
 
               <div class="field">
                   <label class="label">Tipo de Cultivo</label>
-                  <div class="control">
-                      <input class="input" type="text" placeholder="Ex.: Orgânico" />
+                  <div class="select">
+                    <select form="formCadastraProduto" id="cultivos" name="cultivos">
+                      <option th:each="cultivo: ${cultivos}" th:text="${cultivo.nome}" ></option>
+                    </select>
                   </div>
                   <div class="help-block"></div>
               </div>

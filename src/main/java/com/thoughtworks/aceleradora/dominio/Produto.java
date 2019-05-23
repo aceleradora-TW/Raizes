@@ -21,6 +21,19 @@ public class Produto {
     @JsonIgnoreProperties("produtos")
     private Categoria categoria;
 
+
+    @JoinColumn(name = "id_tipos_de_cultivos")
+    @JsonIgnoreProperties("produtos")
+    private Cultivo cultivo;
+
+    public Cultivo getCultivo() {
+        return cultivo;
+    }
+
+    public void setCultivo(Cultivo cultivo) {
+        this.cultivo = cultivo;
+    }
+
     public Produto() {
     }
 
