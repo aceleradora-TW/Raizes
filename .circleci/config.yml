@@ -27,8 +27,6 @@ jobs:
     cypress: cypress-io/cypress@1.5.0
 
   deploy-integracao:
-    docker:
-      - image: buildpack-deps:trusty
     steps:
       - checkout
       - run:
@@ -37,11 +35,10 @@ jobs:
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_INTEGRATION_APP_NAME.git master
 
   teste-de-fumaca:
-    docker:
-      - image: cypress/base:8
     steps:
       - checkout
       - run: npm install
+          name: Executa testes de fumaca com Cypress
 
   workflows:
     standard-build:
