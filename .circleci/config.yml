@@ -38,7 +38,6 @@ jobs:
     steps:
       - checkout
       - run: npm install
-          name: 'Executa testes de fumaca com Cypress'
 
   workflows:
     standard-build:
