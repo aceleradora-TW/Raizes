@@ -19,7 +19,7 @@
                 </div>
                 <div class="box">
 
-                    <form th:action="'/minha-lista/editar-lista/' + ${lista.id} + '/salvar'" method="post">
+                    <form th:action="'/minhas-listas/editar-lista/' + ${lista.id} + '/salvar'" method="post">
                         <div class="field">
                             <input class="input" type="text" name="nome" th:value="${lista.nome}" placeholder="Ex.: Minha Lista Compras 1">
                         </div>

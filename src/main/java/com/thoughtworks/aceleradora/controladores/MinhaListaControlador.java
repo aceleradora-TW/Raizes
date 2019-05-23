@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 @Controller
-@RequestMapping("/minha-lista")
+@RequestMapping("/minhas-listas")
 public class MinhaListaControlador {
 
     private ProdutoServico produtoServico;
@@ -24,8 +24,7 @@ public class MinhaListaControlador {
     private CategoriaServico categoriaServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
-            .pagina("Início", "/");
-
+            .pagina("Página Inicial", "/");
 
     @Autowired
     public MinhaListaControlador(ProdutoServico produtoServico, MinhaListaServico minhaListaServico, CategoriaServico categoriaServico) {
@@ -34,32 +33,40 @@ public class MinhaListaControlador {
         this.categoriaServico = categoriaServico;
     }
 
+    @GetMapping
+    public String listasCriadas(Model modelo, Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Minhas Listas", "/minhas-listas");
 
-    @GetMapping("/cadastro")
+        modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
+        return "minha-lista/listas-criadas";
+    }
+
+
+    @GetMapping("/criar")
     public String criarLista(Model modelo, Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Cadastro", "/minha-lista/cadastro");
+                .pagina("Minhas Listas", "/minhas-listas")
+                .pagina("Cadastro", "/minhas-listas/cadastro");
 
         modelo.addAttribute("lista", new MinhaLista());
         List<Categoria> categorias = categoriaServico.pegarCategorias();
         modelo.addAttribute("categorias", categorias);
 
-        return "minhaLista/cadastro";
+        return "minha-lista/cadastro";
     }
 
-    @PostMapping("/cadastro")
-    public String salvarLista(MinhaLista lista, Breadcrumb breadcrumb, RedirectAttributes atributosRedirecionamento) {
-        breadcrumb
-                .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Cadastro", "/minha-lista/cadastro");
+    @PostMapping("/criar")
+    public String salvarLista(MinhaLista lista, RedirectAttributes atributosRedirecionamento) {
         if(minhaListaServico.salvar(lista) == null) {
             Erro erro = new Erro("Falhou na criação da lista");
             atributosRedirecionamento.addFlashAttribute("Erro", erro);
 
-            return "redirect:/minha-lista/cadastro";
+            return "redirect:/minhas-listas/criar";
         }
-        return "redirect:/";
+        return "redirect:/minhas-listas";
     }
 
     @ResponseBody
@@ -68,17 +75,7 @@ public class MinhaListaControlador {
         return categoriaServico.pegarCategorias();
     }
 
-    @GetMapping("/listas-criadas")
-    public String listasCriadas(Model modelo, Breadcrumb breadcrumb) {
-        breadcrumb
-                .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Minhas Listas", "/minha-lista/listas-criadas");
-
-        modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
-        return "minhaLista/listas-criadas";
-    }
-
-    @PostMapping("/listas-criadas/excluir/{id}")
+    @PostMapping("/{id}/excluir")
     public String removerListaCriada(MinhaLista lista, @PathVariable ("id") Long id) {
         minhaListaServico.removerListaCriada(id);
         return "redirect:/minha-lista/listas-criadas";
@@ -125,7 +122,8 @@ public class MinhaListaControlador {
         redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", mensagemDeSucesso);
 
 
-        return "redirect:/minha-lista/listas-criadas";
+        return "redirect:/minhas-listas";
     }
 }
+
 
