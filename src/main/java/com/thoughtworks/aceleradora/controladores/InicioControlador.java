@@ -10,7 +10,7 @@ public class InicioControlador {
     @GetMapping("/")
     public String renderizaPaginaInicial(Breadcrumb breadcrumb) {
         breadcrumb
-                .pagina("Início", "/");
+                .pagina("Página Inicial", "/");
 
         return "inicio";
     }
