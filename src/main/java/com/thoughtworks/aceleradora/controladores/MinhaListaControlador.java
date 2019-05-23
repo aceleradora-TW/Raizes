@@ -78,8 +78,9 @@ public class MinhaListaControlador {
     @PostMapping("/{id}/excluir")
     public String removerListaCriada(MinhaLista lista, @PathVariable ("id") Long id) {
         minhaListaServico.removerListaCriada(id);
-        return "redirect:/minha-lista/listas-criadas";
+        return "redirect:/minhas-listas";
     }
+
     @GetMapping("/editar-lista/{id}")
     public String pegaLista(Model modelo, @PathVariable("id") Long id, Breadcrumb breadcrumb) {
         Optional<MinhaLista> lista = minhaListaServico.encontraUm(id);
@@ -89,7 +90,7 @@ public class MinhaListaControlador {
 
         modelo.addAttribute("lista", lista.get());
 
-        return "minhaLista/editar";
+        return "minha-lista/editar";
     }
 
     @PostMapping("/editar-lista/{id}/salvar")
@@ -115,7 +116,7 @@ public class MinhaListaControlador {
                 ErroEditarLista erro = new ErroEditarLista("Erro ao salvar a lista!");
                 redirecionamentoDeAtributos.addFlashAttribute("ErroEditar", erro);
 
-                return "redirect:/minha-lista/editar";
+                return "redirect:/minhas-listas/editar";
             }
         }
         String mensagemDeSucesso = "Sua lista foi salva com sucesso!";
