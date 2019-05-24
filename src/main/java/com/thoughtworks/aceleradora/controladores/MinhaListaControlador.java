@@ -43,10 +43,10 @@ public class MinhaListaControlador {
         if(minhaListaServico.pegarListasCriadas() == null) {
             Erro erro = new Erro("Não há nenhuma lista criada.");
             atributosRedirecionamento.addFlashAttribute("Erro", erro);
-            return "minhaLista/listas-criadas";
+            return "minha-lista/listas-criadas";
         }
         modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
-        return "minhaLista/listas-criadas";
+        return "minha-lista/listas-criadas";
     }
 
 
@@ -61,7 +61,7 @@ public class MinhaListaControlador {
         List<Categoria> categorias = categoriaServico.pegarCategorias();
         modelo.addAttribute("categorias", categorias);
 
-        return "minhaLista/cadastro";
+        return "minha-lista/cadastro";
     }
 
     @PostMapping("/criar")
