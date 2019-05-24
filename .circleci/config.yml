@@ -1,50 +1,61 @@
-  # we need version 2.1. to use job parameters
-  version: 2.1
+#  # we need version 2.1. to use job parameters
+#  version: 2.1
+#
+#  jobs:
+#    run-it:
+#      parameters:
+#        parallelism:
+#          type: integer
+#          default: 1
+#          description: Number of boxes to use to run this job
+#      docker:
+#        - image: cypress/base:10
+#      parallelism: <<parameters.parallelism>>
+#      steps:
+#        - run: echo "runs with parallelism = <<parameters.parallelism>>"
+#
+#    after-tests:
+#      docker:
+#        - image: cypress/base:10
+#      steps:
+#        - run: echo "all good"
+#
+#  workflows:
+#    version: 2.1
+#    main:
+#      # see how to filter jobs in workflow per branch
+#      # https://circleci.com/docs/2.0/configuration-reference/#jobs-1
+#      jobs:
+#        - run-it:
+#            name: parallel build job
+#            # pass parameter to the job
+#            parallelism: 2
+#            filters:
+#              branches:
+#                # for pull requests do not run this job
+#                ignore: /pull.*/
+#
+#        - run-it:
+#            name: single build job
+#            # pass parameter to the job
+#            parallelism: 1
+#            filters:
+#              branches:
+#                # run pull requests with parallelism 1
+#                only: /pull.*/
+#
+#        - after-tests:
+#            requires:
+#              - "parallel build job"
+#              - "single build job"
 
-  jobs:
-    run-it:
-      parameters:
-        parallelism:
-          type: integer
-          default: 1
-          description: Number of boxes to use to run this job
-      docker:
-        - image: cypress/base:10
-      parallelism: <<parameters.parallelism>>
-      steps:
-        - run: echo "runs with parallelism = <<parameters.parallelism>>"
 
-    after-tests:
-      docker:
-        - image: cypress/base:10
-      steps:
-        - run: echo "all good"
+version: 2.1
 
-  workflows:
-    version: 2.1
-    main:
-      # see how to filter jobs in workflow per branch
-      # https://circleci.com/docs/2.0/configuration-reference/#jobs-1
-      jobs:
-        - run-it:
-            name: parallel build job
-            # pass parameter to the job
-            parallelism: 2
-            filters:
-              branches:
-                # for pull requests do not run this job
-                ignore: /pull.*/
-
-        - run-it:
-            name: single build job
-            # pass parameter to the job
-            parallelism: 1
-            filters:
-              branches:
-                # run pull requests with parallelism 1
-                only: /pull.*/
-
-        - after-tests:
-            requires:
-              - "parallel build job"
-              - "single build job"
+orbs:
+  cypress: cypress-io/cypress@1
+workflows:
+  build:
+    jobs:
+      - cypress/run:
+          store_artifacts: true
