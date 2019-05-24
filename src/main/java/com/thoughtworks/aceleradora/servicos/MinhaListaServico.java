@@ -25,7 +25,6 @@ public class MinhaListaServico {
     }
 
     public List<MinhaLista> pegarListasCriadas() {
-            if (repositorio.findAll() == null) return null;
             return repositorio.findAll();
     }
 
