@@ -38,6 +38,6 @@ workflows:
     # - deploy_integracao:
     # -  requires:
     # -    - build
-      - teste_de_fumaca:
+      - teste_de_fumaca
     #     requires:
     #       - deploy_integracao
