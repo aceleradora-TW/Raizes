@@ -8,8 +8,8 @@ ALTER SEQUENCE produtor_id_seq RESTART WITH 1;
 ALTER SEQUENCE produtos_produtor_id_seq RESTART WITH 1;
 
 INSERT
-  INTO produtor (nome)
-  VALUES ('Aldo');
+  INTO produtor (nome, possui_transporte)
+  VALUES ('Aldo', 1);
 
 INSERT
   INTO produtos_produtor (id_produtor, id_produtos, preco, qtd_estoque)
