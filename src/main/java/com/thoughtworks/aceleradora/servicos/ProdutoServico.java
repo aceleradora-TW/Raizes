@@ -20,11 +20,18 @@ public class ProdutoServico {
     public List<Produto> pegarTodos() {
         return repositorio.findAll();
     }
+
     public Optional<Produto> encontraUm(Long id) {
         return repositorio.findById(id);
     }
 
-    public void removerTodos(List<Produto> produtosDoBanco, List<Produto> produtosParaSeremRemovidos) {
-        produtosDoBanco.removeAll(produtosParaSeremRemovidos);
+    public boolean removerTodos(List<Produto> produtosDoBanco, List<Produto> produtosParaSeremRemovidos) {
+        try {
+            if(produtosParaSeremRemovidos.size() == 0) return true;
+            return produtosDoBanco.removeAll(produtosParaSeremRemovidos);
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

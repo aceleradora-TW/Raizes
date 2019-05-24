@@ -7,23 +7,15 @@
 <body>
 
 <section class="section">
-
     <section class="container">
-
         <h1 class="title">Editar Lista</h1>
-
         <div class="columns">
             <div class="column is-6">
-                <div th:if="${ErroEditar} != null">
-                    <span th:text="${ErroEditar.mensagemAoSalvar}"></span>
-                </div>
                 <div class="box">
-
                     <form th:action="'/minhas-listas/editar-lista/' + ${lista.id} + '/salvar'" method="post">
                         <div class="field">
                             <input class="input" type="text" name="nome" th:value="${lista.nome}" placeholder="Ex.: Minha Lista Compras 1">
                         </div>
-
                         <div class="field">
                             <label class="label">Selecione produtos:</label>
                             <div class="control">
@@ -35,11 +27,9 @@
                                                 </span>
                                         </label>
                                     </li>
-
                                 </ul>
                             </div>
                         </div>
-
                         <div class="field">
                             <div class="control">
                                 <button class="button is-primary" type="submit">Salvar</button>
@@ -49,9 +39,7 @@
                 </div>
             </div>
         </div>
-
     </section>
-
 </section>
 
 </body>

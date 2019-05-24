@@ -60,7 +60,7 @@ public class MinhaListaControlador {
 
     @PostMapping("/criar")
     public String salvarLista(MinhaLista lista, RedirectAttributes atributosRedirecionamento) {
-        if(minhaListaServico.salvar(lista) == null) {
+        if (minhaListaServico.salvar(lista) == null) {
             Erro erro = new Erro("Falhou na criação da lista");
             atributosRedirecionamento.addFlashAttribute("Erro", erro);
 
@@ -76,7 +76,7 @@ public class MinhaListaControlador {
     }
 
     @PostMapping("/{id}/excluir")
-    public String removerListaCriada(MinhaLista lista, @PathVariable ("id") Long id) {
+    public String removerListaCriada(MinhaLista lista, @PathVariable("id") Long id) {
         minhaListaServico.removerListaCriada(id);
         return "redirect:/minhas-listas";
     }
@@ -99,32 +99,34 @@ public class MinhaListaControlador {
         List<Produto> produtosParaSeremRemovidos = new ArrayList<>();
         MinhaLista lista = ListaDoBanco.get();
 
+//        boolean erro = false;
+
         if (ListaDoBanco.isPresent()) {
             List<Produto> produtosDoBanco = lista.getProdutos();
             List<Produto> produtosFront = ListaDoFronte.getProdutos();
 
-            for(Produto produto : produtosDoBanco) {
+            for (Produto produto : produtosDoBanco) {
                 if (!produtosFront.contains(produto)) {
                     produtosParaSeremRemovidos.add(produto);
                 }
             }
 
-            produtoServico.removerTodos(produtosDoBanco,produtosParaSeremRemovidos);
-            lista.setNome(ListaDoFronte.getNome());
+            if (produtoServico.removerTodos(produtosDoBanco, produtosParaSeremRemovidos)) {
+                if (!ListaDoFronte.getNome().trim().isEmpty()) {
+                    lista.setNome(ListaDoFronte.getNome());
+                    minhaListaServico.salvar(lista);
+                    String mensagemDeSucesso = "Sua lista foi salva com sucesso!";
+                    redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", mensagemDeSucesso);
+                } else {
+                    Erro erro = new Erro("Erro ao salvar a lista!");
+                    redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
+                }
 
-            minhaListaServico.salvar(lista);
-
-//            if(minhaListaServico.salvar(lista) == null) {
-//                ErroEditarLista erro = new ErroEditarLista("Erro ao salvar a lista!");
-//                redirecionamentoDeAtributos.addFlashAttribute("ErroEditar", erro);
-//
-//                return "redirect:/minhas-listas/editar";
-//            }
+            } else {
+                Erro erro = new Erro("Erro ao salvar a lista!");
+                redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
+             }
         }
-//        String mensagemDeSucesso = "Sua lista foi salva com sucesso!";
-//        redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", mensagemDeSucesso);
-
-
         return "redirect:/minhas-listas";
     }
 }

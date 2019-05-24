@@ -14,6 +14,12 @@
 
       <h1 class="title centraliza-texto">Minhas listas</h1>
 
+      <div th:if="${erro} != null">
+        <span th:text="${erro.mensagem}"></span>
+      </div>
+      <div th:if="${mensagemSalvoComSucesso} != null">
+        <span th:text="${mensagemSalvoComSucesso}"></span>
+      </div>
       <div class="columns">
         <div class="column is-12">
           <div class="box">
