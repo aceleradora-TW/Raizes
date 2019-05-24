@@ -9,6 +9,10 @@
 <section class="section">
     <section class="container">
         <h1 class="title">Editar Lista</h1>
+
+        <div th:if="${erro} != null">
+            <span th:text="${erro.mensagem}"></span>
+        </div>
         <div class="columns">
             <div class="column is-6">
                 <div class="box">
