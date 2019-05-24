@@ -28,8 +28,7 @@ jobs:
       - image: cypress/base:8
     steps:
       - checkout
-      - run: npm install
-      - run: $(npm bin)/cypress run
+      - run: cypress run
 
 workflows:
   version: 2
