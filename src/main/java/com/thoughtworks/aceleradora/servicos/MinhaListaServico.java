@@ -32,8 +32,7 @@ public class MinhaListaServico {
         return repositorio.findAll();
     }
 
-    public void removerListaCriada(Long idLista) {
-        repositorio.deleteById(idLista);
-    }
+    public void removerListaCriada(Long idLista) { repositorio.deleteById(idLista);}
 
+    public Optional<MinhaLista> findByNome(String nome) { return repositorio.findByNome(nome);}
 }
