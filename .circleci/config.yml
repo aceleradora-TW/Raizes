@@ -55,7 +55,21 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@1
 workflows:
-  build:
+  version 2.1
+  build_and_deploy_staging:
     jobs:
+      - build
+      - deploy-staging:
+        requires: build
+      filters:
+        - branches:
+            - only: master
       - cypress/run:
+          record: true
+          parallel: false
+          requires:
+            - deploy-staging
+          filters:
+            branches:
+              only: master
           store_artifacts: true
