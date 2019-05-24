@@ -33,7 +33,11 @@ jobs:
 workflows:
   version: 2
   build_padrao:
+    - build:
+
     jobs:
+      - cypress/run:
+      store_artifacts: true
       - build
       - deploy_integracao:
           requires:
@@ -44,3 +48,7 @@ workflows:
       - teste_de_fumaca:
           requires:
             - deploy_integracao
+
+orbs:
+  cypress: cypress-io/cypress@1
+
