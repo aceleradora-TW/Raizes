@@ -28,7 +28,6 @@ jobs:
       - image: cypress/included:3.3.0
     steps:
       - checkout
-        # - run: npm install
       - run: cypress run
 
 workflows:
@@ -36,9 +35,12 @@ workflows:
   build_padrao:
     jobs:
       - build
-    # - deploy_integracao:
-    # -  requires:
-    # -    - build
-      - teste_de_fumaca
-    #     requires:
-    #       - deploy_integracao
+      - deploy_integracao:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+      - teste_de_fumaca:
+          requires:
+            - deploy_integracao
