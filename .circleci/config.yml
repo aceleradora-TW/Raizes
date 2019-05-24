@@ -34,8 +34,6 @@ workflows:
   version: 2
   build_padrao:
     jobs:
-      - cypress/run:
-      store_artifacts: true
       - build
       - deploy_integracao:
           requires:
@@ -49,4 +47,7 @@ workflows:
 
 orbs:
   cypress: cypress-io/cypress@1
-
+  build:
+    jobs:
+      - cypress/run:
+          store_artifacts: true
