@@ -1,29 +1,29 @@
 package com.thoughtworks.aceleradora.dominio;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "tipos_de_cultivos")
-
+@Access(AccessType.FIELD)
 public class Cultivo {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String nome;
 
-    @OneToMany(mappedBy = "tipos_de_cultivos")
+    @OneToMany(mappedBy = "cultivo")
+
     private List<Produto> produtos;
 
-    public Cultivo(String nome, List<Produto> produtos) {
+    public Cultivo(){
+    }
+
+    public Cultivo(String nome) {
         this.nome = nome;
-        this.produtos = produtos;
     }
 
     public Long getId() {

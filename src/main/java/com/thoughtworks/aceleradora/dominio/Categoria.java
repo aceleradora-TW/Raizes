@@ -13,7 +13,6 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
     private String nome;
 
     @OneToMany(mappedBy = "categoria")
