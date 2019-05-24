@@ -13,15 +13,15 @@
 <header>
     <nav class="navbar is-mobile tw-navigation" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="ml-2 navbar-item icon-only" href="/">
+            <a class="ml-2 navbar-item icon-only" th:href="@{/}">
                 <svg class="navbar-item nav-icon" >
                     <use xlink:href="/svg/spritmap.svg#sprite-skull"></use>
                 </svg>
             </a>
-            <a class="navbar-item" href="/minha-lista/cadastro">
+            <a class="navbar-item" th:href="@{/minhas-listas/criar}">
                 <p class="titulo-nav">Criar Lista de Produtos</p>
             </a>
-            <a class="navbar-item" href="/minha-lista/listas-criadas">
+            <a class="navbar-item" th:href="@{/minhas-listas}">
                 <p class="titulo-nav">Minhas Listas</p>
             </a>
         </div>
