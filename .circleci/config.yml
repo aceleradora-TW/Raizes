@@ -44,10 +44,3 @@ workflows:
       - teste_de_fumaca:
           requires:
             - deploy_integracao
-
-orbs:
-  cypress: cypress-io/cypress@1
-  build:
-    jobs:
-      - cypress/run:
-          store_artifacts: true
