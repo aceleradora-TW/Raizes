@@ -25,14 +25,10 @@ public class MinhaListaServico {
     }
 
     public List<MinhaLista> pegarListasCriadas() {
-        return repositorio.findAll();
+            return repositorio.findAll();
     }
 
-    public void removerListaCriada(Long idLista) {
-        repositorio.deleteById(idLista);
-    }
+    public void removerListaCriada(Long idLista) { repositorio.deleteById(idLista);}
 
-    public Optional<MinhaLista> findByNome(String nome) {
-        return repositorio.findByNome(nome);
-    }
+    public Optional<MinhaLista> findByNome(String nome) { return repositorio.findByNome(nome);}
 }
