@@ -31,7 +31,7 @@ jobs:
 
       - run: gradle test
 
-  deploy-integracao:
+  deploy_integracao:
     docker:
       - image: buildpack-deps:trusty
     steps:
@@ -45,7 +45,7 @@ workflows:
   build:
     jobs:
       - build
-      - deploy-integracao:
+      - deploy_integracao:
         requires:
           - build
       - cypress/run
