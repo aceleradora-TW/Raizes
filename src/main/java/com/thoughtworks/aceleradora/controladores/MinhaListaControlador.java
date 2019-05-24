@@ -35,20 +35,13 @@ public class MinhaListaControlador {
     }
 
     @GetMapping
-    public String listasCriadas(Model modelo, Breadcrumb breadcrumb, RedirectAttributes atributosRedirecionamento) {
+    public String listasCriadas(Model modelo, Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Minhas Listas", "/minha-lista/listas-criadas");
-
-        if(minhaListaServico.pegarListasCriadas() == null) {
-            Erro erro = new Erro("Não há nenhuma lista criada.");
-            atributosRedirecionamento.addFlashAttribute("Erro", erro);
-            return "minha-lista/listas-criadas";
-        }
         modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
         return "minha-lista/listas-criadas";
     }
-
 
     @GetMapping("/criar")
     public String criarLista(Model modelo, Breadcrumb breadcrumb) {
