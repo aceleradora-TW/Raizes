@@ -23,7 +23,11 @@ public class ProdutoServico {
     }
 
     public Produto salvar(Produto produto) {
-        return repositorio.save(produto);
+        try {
+            return repositorio.save(produto);
+        } catch(Exception e) {
+            return null;
+        }
 
     }
 

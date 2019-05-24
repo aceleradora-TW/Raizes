@@ -56,10 +56,26 @@ public class ProdutoControlador {
     }
 
     @PostMapping("/cadastro")
-    public String salvarProduto (Produto produto, Model modelo) {
-        Produto produtoSalvo = produtoServico.salvar(produto);
+    public String salvarProduto (Produto produtoQueVem, Model modelo) {
+//        Produto produtoSalvo = produtoServico.salvar(produto);
+//        modelo.addAttribute("produtoSalvo", produtoSalvo);
 
-        modelo.addAttribute("produtoSalvo", produtoSalvo);
+        Produto produtoQueVai = new Produto();
+
+
+        if (!produtoQueVem.getNome().trim().isEmpty()) {
+            produtoQueVai.setNome(produtoQueVem.getNome());
+            produtoQueVai.setCategoria(produtoQueVem.getCategoria());
+            produtoQueVai.setCultivo(produtoQueVem.getCultivo());
+
+            produtoServico.salvar(produtoQueVai);
+
+            String mensagem = "Sua lista foi salva com sucesso!";
+            modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
+        } else {
+            Erro erro = new Erro("Erro ao salvar a lista!");
+            modelo.addAttribute("erro", erro);
+        }
 
         return "produto/cadastro";
     }

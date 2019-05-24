@@ -12,12 +12,13 @@
       <h1 class="title">Cadastrar Produto</h1>
       <div class="columns">
         <div class="column is-6">
-          <div th:if="${Erro} != null">
-            <span th:text="${Erro.mensagem}"></span>
+
+          <div th:if="${erro} != null">
+            <span th:text="${erro.mensagem}"></span>
           </div>
 
-          <div th:if="${produtoSalvo} != null">
-            <h2>Salvou!</h2>
+          <div th:if="${mensagemSalvoComSucesso} != null">
+            <span th:text="${mensagemSalvoComSucesso}"></span>
           </div>
 
           <div class="box">
