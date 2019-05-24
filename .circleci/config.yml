@@ -1,8 +1,5 @@
 version: 2
 
-# orbs:
-#   cypress: cypress-io/cypress@1
-
 jobs:
   build:
     docker:
@@ -30,16 +27,17 @@ jobs:
     docker:
       - image: cypress/base:8
     steps:
-      - run: npx cypress run
+      - run: npm install
+      - run: $(npm bin)/cypress run
 
 workflows:
   version: 2
   build_padrao:
     jobs:
       - build
-      - deploy_integracao:
-         requires:
-           - build
+    # - deploy_integracao:
+    # -  requires:
+    # -    - build
       - teste_de_fumaca:
-         requires:
-           - deploy_integracao
+    #     requires:
+    #       - deploy_integracao
