@@ -21,7 +21,10 @@ jobs:
       - image: buildpack-deps:trusty
     steps:
       - checkout
-      - run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_INTEGRATION_APP_NAME.git master
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
 
   teste_de_fumaca:
     docker:
