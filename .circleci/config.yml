@@ -27,6 +27,7 @@ jobs:
     docker:
       - image: cypress/base:8
     steps:
+      - checkout
       - run: npm install
       - run: $(npm bin)/cypress run
 
