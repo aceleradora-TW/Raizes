@@ -16,7 +16,7 @@ public class Cultivo {
     private String nome;
 
     @OneToMany(mappedBy = "cultivo")
-
+    @OrderBy(value="nome")
     private List<Produto> produtos;
 
     public Cultivo(){
