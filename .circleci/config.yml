@@ -3,6 +3,12 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@1
 
+commands:
+  gradle_test:
+    steps:
+      - run: gradle dependencies
+      - run: gradle test
+
 jobs:
   build:
     docker:
@@ -16,8 +22,7 @@ jobs:
 
     steps:
       - checkout
-      - run: gradle dependencies
-      - run: gradle test
+      - gradle_test
 
   deploy_integracao:
     docker:
@@ -27,10 +32,10 @@ jobs:
       - run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_INTEGRATION_APP_NAME.git master
 
 workflows:
-  build:
+  build_padrao:
     jobs:
       - build
-      - deploy_integracao:
-        requires:
-          - build
+      - deploy_integracao
+        # requires:
+        #   - build
       - cypress/run
