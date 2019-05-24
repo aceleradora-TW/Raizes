@@ -1,13 +1,16 @@
 .rz-footer{
     background-color: $third-color;
-    &.rodape{
-        padding: 0;
-        width:100%;
-    }
     &.texto{
         align-items: center;
         justify-content: center;
         background-color: whitesmoke;
-        
+        text-align: center;
     }
+    .siga{
+        align-items: center;
+        justify-content: center;
+        background-color: whitesmoke;
+        text-align: center; 
+    }
+    
 }
