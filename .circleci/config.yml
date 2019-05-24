@@ -25,9 +25,10 @@ jobs:
 
   teste_de_fumaca:
     docker:
-      - image: cypress/base:8
+      - image: cypress/included:3.3.0
     steps:
       - checkout
+        # - run: npm install
       - run: cypress run
 
 workflows:
