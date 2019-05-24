@@ -70,10 +70,10 @@ public class ProdutoControlador {
 
             produtoServico.salvar(produtoQueVai);
 
-            String mensagem = "Sua lista foi salva com sucesso!";
+            String mensagem = "Seu produto foi cadastrado com sucesso!";
             modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
         } else {
-            Erro erro = new Erro("Erro ao salvar a lista!");
+            Erro erro = new Erro("Erro ao salvar seu produto!");
             modelo.addAttribute("erro", erro);
         }
 
