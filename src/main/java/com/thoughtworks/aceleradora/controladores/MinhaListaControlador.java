@@ -102,6 +102,12 @@ public class MinhaListaControlador {
         if (listaDoBanco.isPresent()) {
             List<Produto> produtosDoBanco = lista.getProdutos();
             List<Produto> produtosFront = listaDoFront.getProdutos();
+            Erro erro = new Erro("Erro ao salvar a lista!");
+
+            if (listaDoFront.getNome().trim().isEmpty()) {
+                redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
+                return "redirect:/minhas-listas/editar-lista/{id}";
+            }
 
             for (Produto produto : produtosDoBanco) {
                 if (!produtosFront.contains(produto)) {
@@ -109,32 +115,16 @@ public class MinhaListaControlador {
                 }
             }
 
-            if (produtoServico.removerTodos(produtosDoBanco, produtosParaSeremRemovidos)) {
-                if (!listaDoFront.getNome().trim().isEmpty()) {
-                    lista.setNome(listaDoFront.getNome());
-                    if(produtosDoBanco.size() >= 1) {
-                        minhaListaServico.salvar(lista);
-
-                        String mensagemDeSucesso = "Sua lista foi salva com sucesso!";
-                        redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", mensagemDeSucesso);
-                    } else {
-                        Erro erro = new Erro("Erro ao salvar a lista!");
-                        redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
-                        return "redirect:/minhas-listas/editar-lista/{id}";
-                    }
-
-                } else {
-                    Erro erro = new Erro("Erro ao salvar a lista!");
-                    redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
-                    return "redirect:/minhas-listas/editar-lista/{id}";
-                }
-
-            } else {
-                Erro erro = new Erro("Erro ao salvar a lista!");
+            if (produtosDoBanco.size() == produtosParaSeremRemovidos.size() || !(produtoServico.removerTodos(produtosDoBanco, produtosParaSeremRemovidos))) {
                 redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
                 return "redirect:/minhas-listas/editar-lista/{id}";
-
             }
+
+            lista.setNome(listaDoFront.getNome());
+            minhaListaServico.salvar(lista);
+
+            String mensagemDeSucesso = "Sua lista foi salva com sucesso!";
+            redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", mensagemDeSucesso);
         }
         return "redirect:/minhas-listas";
     }
