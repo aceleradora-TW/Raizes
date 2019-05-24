@@ -23,4 +23,8 @@ public class ProdutoServico {
     public Optional<Produto> encontraUm(Long id) {
         return repositorio.findById(id);
     }
+
+    public void removerTodos(List<Produto> produtosDoBanco, List<Produto> produtosParaSeremRemovidos) {
+        produtosDoBanco.removeAll(produtosParaSeremRemovidos);
+    }
 }

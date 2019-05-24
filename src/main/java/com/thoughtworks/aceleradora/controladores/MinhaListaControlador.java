@@ -98,29 +98,31 @@ public class MinhaListaControlador {
         Optional<MinhaLista> ListaDoBanco = minhaListaServico.encontraUm(id);
         List<Produto> produtosParaSeremRemovidos = new ArrayList<>();
         MinhaLista lista = ListaDoBanco.get();
+
         if (ListaDoBanco.isPresent()) {
-            List<Produto> ProdutosDoBanco = ListaDoBanco.get().getProdutos();
+            List<Produto> produtosDoBanco = lista.getProdutos();
             List<Produto> produtosFront = ListaDoFronte.getProdutos();
 
-            for(Produto produtoDoBanco : ProdutosDoBanco) {
-                if (!produtosFront.contains(produtoDoBanco)) {
-                    produtosParaSeremRemovidos.add(produtoDoBanco);
+            for(Produto produto : produtosDoBanco) {
+                if (!produtosFront.contains(produto)) {
+                    produtosParaSeremRemovidos.add(produto);
                 }
             }
 
-            lista.getProdutos().removeAll(produtosParaSeremRemovidos);
+            produtoServico.removerTodos(produtosDoBanco,produtosParaSeremRemovidos);
             lista.setNome(ListaDoFronte.getNome());
 
+            minhaListaServico.salvar(lista);
 
-            if(minhaListaServico.salvar(ListaDoBanco.get()) == null) {
-                ErroEditarLista erro = new ErroEditarLista("Erro ao salvar a lista!");
-                redirecionamentoDeAtributos.addFlashAttribute("ErroEditar", erro);
-
-                return "redirect:/minhas-listas/editar";
-            }
+//            if(minhaListaServico.salvar(lista) == null) {
+//                ErroEditarLista erro = new ErroEditarLista("Erro ao salvar a lista!");
+//                redirecionamentoDeAtributos.addFlashAttribute("ErroEditar", erro);
+//
+//                return "redirect:/minhas-listas/editar";
+//            }
         }
-        String mensagemDeSucesso = "Sua lista foi salva com sucesso!";
-        redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", mensagemDeSucesso);
+//        String mensagemDeSucesso = "Sua lista foi salva com sucesso!";
+//        redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", mensagemDeSucesso);
 
 
         return "redirect:/minhas-listas";
