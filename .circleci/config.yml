@@ -59,6 +59,5 @@ workflows:
     jobs:
       - cypress/run:
           deploy-integracao:
-            requires:
               - build
           store_artifacts: true
