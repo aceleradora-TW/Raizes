@@ -1,64 +1,52 @@
-#  # we need version 2.1. to use job parameters
-#  version: 2.1
-#
-#  jobs:
-#    run-it:
-#      parameters:
-#        parallelism:
-#          type: integer
-#          default: 1
-#          description: Number of boxes to use to run this job
-#      docker:
-#        - image: cypress/base:10
-#      parallelism: <<parameters.parallelism>>
-#      steps:
-#        - run: echo "runs with parallelism = <<parameters.parallelism>>"
-#
-#    after-tests:
-#      docker:
-#        - image: cypress/base:10
-#      steps:
-#        - run: echo "all good"
-#
-#  workflows:
-#    version: 2.1
-#    main:
-#      # see how to filter jobs in workflow per branch
-#      # https://circleci.com/docs/2.0/configuration-reference/#jobs-1
-#      jobs:
-#        - run-it:
-#            name: parallel build job
-#            # pass parameter to the job
-#            parallelism: 2
-#            filters:
-#              branches:
-#                # for pull requests do not run this job
-#                ignore: /pull.*/
-#
-#        - run-it:
-#            name: single build job
-#            # pass parameter to the job
-#            parallelism: 1
-#            filters:
-#              branches:
-#                # run pull requests with parallelism 1
-#                only: /pull.*/
-#
-#        - after-tests:
-#            requires:
-#              - "parallel build job"
-#              - "single build job"
-
-
 version: 2.1
 
 orbs:
   cypress: cypress-io/cypress@1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:11.0.2-jdk-node-browsers-legacy
+
+    working_directory: ~/repo
+
+    environment:
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
+
+    steps:
+      - checkout
+
+      - restore_cache:
+        keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          - v1-dependencies-
+
+      - run: gradle dependencies
+
+      - save_cache:
+        paths:
+          - ~/.gradle
+        key: v1-dependencies-{{ checksum "build.gradle" }}
+
+      - run: gradle test
+
+  deploy-integracao:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+        name: Deploy para o ambiente de integracao
+        command: |
+          git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_INTEGRATION_APP_NAME.git master
+
 workflows:
   build:
     jobs:
-      - cypress/run:
-          deploy-integracao:
-            requires:
-              - build
-          store_artifacts: true
+      - build
+      - deploy-integracao:
+        requires:
+          - build
+        store_artifacts: true
+      - cypress/run
