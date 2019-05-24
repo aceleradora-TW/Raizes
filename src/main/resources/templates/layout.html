@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br" th:fragment="layout(title, content)" xmlns:th="http://www.thymeleaf.org"
   class="has-background-light">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
   <title th:replace="${title}"></title>
   <link href="/css/app.css" rel="stylesheet">
 </head>
-
 <body>
   <header>
     <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -28,7 +25,6 @@
       </div>
       </div>
     </nav>
-
     <!-- <nav class="navbar is-mobile tw-navigation" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a onclick="Burger()" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -47,7 +43,6 @@
       </ul>
     </nav>
   </header>
-
   <div class="main">
     <main th:replace="${content}"></main>
     <div class="notification is-info">
@@ -55,15 +50,11 @@
       <div class="body"></div>
     </div>
   </div>
-
-
   <footer class="rz-footer">
-
     <div class="navbar-brand rz-footer texto">
-      <span class="siga">Siga a gente</span>
-    </div>
-      
-    <div class="flex flex-row navbar-brand rz-footer texto">
+      <span class="navbar-item">Siga a gente</span>
+    </div>      
+    <div class="flex flex-row navbar-brand rz-footer texto ">
       <a class="navbar-item" href="/">
         <i class="fab fa-facebook"></i>
       </a>
@@ -72,23 +63,16 @@
       </a>      
       <a class="navbar-item" href="/">   
         <i class="fab fa-instagram"></i>
-      </a>
-     
+      </a>     
     </div>
-
-    <div class="flex flex-row content has-text-left rz-footer navbar-item">
-      <a class="navbar-item m-2" href="/">
+    <div class="navbar-brand flex flex-row content has-text-left rz-footer navbar-item">
+      <a class="navbar-item" href="/">
         <i class="fab fa-pagelines"></i>
-        Raízes
+        <span class="m-2">Raízes</span>
       </a>
       <span class="m-2"> Copyleft 2019 thoughtworks</span>
     </div>
-
   </footer>
-
   <script src="/js/app.js"></script>
-
-
 </body>
-
 </html>
