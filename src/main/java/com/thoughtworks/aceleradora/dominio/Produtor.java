@@ -16,8 +16,8 @@ public class Produtor {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
     private String nome;
+    private boolean possuiTransporte;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
@@ -32,9 +32,11 @@ public class Produtor {
     public Produtor() {
     }
 
-    public Produtor(String nome, List<Produto> produtos) {
+    public Produtor(String nome, List<Produto> produtos, boolean possuiTransporte) {
         this.nome = nome;
         this.produtos = produtos;
+        this.possuiTransporte = possuiTransporte;
+
     }
 
     public Long getId() {
@@ -61,13 +63,12 @@ public class Produtor {
         this.produtos = produtos;
     }
 
-    @Override
-    public String toString() {
-        return "Produtor{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", produtos=" + produtos +
-                '}';
+    public boolean isPossuiTransporte() {
+        return possuiTransporte;
+    }
+
+    public void setPossuiTransporte(boolean possuiTransporte) {
+        this.possuiTransporte = possuiTransporte;
     }
 }
 

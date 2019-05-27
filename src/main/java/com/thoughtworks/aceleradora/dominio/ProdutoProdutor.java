@@ -3,6 +3,8 @@ package com.thoughtworks.aceleradora.dominio;
 
 import javax.persistence.*;
 
+import java.math.BigDecimal;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "produtos_produtor")
@@ -12,8 +14,8 @@ public class ProdutoProdutor {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private double preco;
-    private double qtdEstoque;
+    private double quantidadeEstoque;
+    private BigDecimal preco;
 
     @ManyToOne
     @JoinColumn(name = "id_produtos")
@@ -26,11 +28,11 @@ public class ProdutoProdutor {
     public ProdutoProdutor() {
     }
 
-    public ProdutoProdutor(double preco, double qtdEstoque, Produto produto, Produtor produtor) {
-        this.preco = preco;
-        this.qtdEstoque = qtdEstoque;
+    public ProdutoProdutor(double quantidadeEstoque, BigDecimal preco, Produto produto, Produtor produtor) {
+        this.quantidadeEstoque = quantidadeEstoque;
         this.produto = produto;
         this.produtor = produtor;
+        this.preco = preco;
     }
 
     public Long getId() {
@@ -41,30 +43,19 @@ public class ProdutoProdutor {
         this.id = id;
     }
 
-    public double getPreco() {
+    public double getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+
+    public void setQuantidadeEstoque(double quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
+
+    public BigDecimal getPreco() {
         return preco;
     }
 
-    public void setPreco(double preco) {
+    public void setPreco(BigDecimal preco) {
         this.preco = preco;
-    }
-
-    public double getQtdEstoque() {
-        return qtdEstoque;
-    }
-
-    public void setQtdEstoque(double qtdEstoque) {
-        this.qtdEstoque = qtdEstoque;
-    }
-
-    @Override
-    public String toString() {
-        return "ProdutoProdutor{" +
-                "id=" + id +
-                ", preco=" + preco +
-                ", qtdEstoque=" + qtdEstoque +
-                ", produto=" + produto +
-                ", produtor=" + produtor +
-                '}';
     }
 }
