@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+
+<body>
+  <section class="section">
+    <section class="container">
+      <h1 class="title centraliza-texto">Pedidos</h1>
+      <div class="columns">
+        <div class="column is-12">
+          <div class="box">
+            <div class="field">
+              <div class="control">
+                <p class="centraliza-texto">Não há pedidos em espera.</p>
+                <div class="flex equal-sizing flex-row">    
+                  <span>Pedidos</span>                    
+                  <span>Status</span>
+                </div>
+
+                <ul class="lista-pedidos">
+                  <li class="space-between flex flex-row">
+                    <span class="flex-column vertical-center">Pedido1</span> 
+                    <span>Recusado</span>
+                    <div class="mb-0 flex end buttons has-addons">
+                        <span class="button rz-botao">
+                          <i class="fas fa-eye"></i>
+                        </span>
+                        <span class="button rz-botao">
+                          <i class="fas fa-edit"></i>
+                        </span>                 
+                        <div type="submit" class="mb-0 flex end buttons has-addons">
+                          <span class="button rz-botao">
+                            <i class="fas fa-times"></i>
+                          </span>
+                        </div>
+                    </div>
+                  </li>
+                </ul>
+
+                <div class="flex space-between">
+                  <a class="button is-primary" type="submit" th:href="@{/}">Voltar</a>
+                  <a class="button is-primary" type="submit" th:href="@{/minhas-listas/criar}">Nova Pedido</a>
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</body>
+
+</html>
+</body>
+</html>
