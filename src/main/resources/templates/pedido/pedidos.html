@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title></title>
-</head>
-
-<body>
+</head><body>
   <section class="section">
     <section class="container">
       <h1 class="title centraliza-texto">Pedidos</h1>
@@ -21,7 +18,6 @@
                   <span>Pedidos</span>                    
                   <span>Status</span>
                 </div>
-
                 <ul class="lista-pedidos">
                   <li class="space-between flex flex-row">
                     <span class="flex-column vertical-center">Pedido1</span> 
@@ -41,7 +37,6 @@
                     </div>
                   </li>
                 </ul>
-
                 <div class="flex space-between">
                   <a class="button is-primary" type="submit" th:href="@{/}">Voltar</a>
                   <a class="button is-primary" type="submit" th:href="@{/minhas-listas/criar}">Nova Pedido</a>
@@ -54,7 +49,6 @@
     </section>
   </section>
 </body>
-
 </html>
 </body>
 </html>
