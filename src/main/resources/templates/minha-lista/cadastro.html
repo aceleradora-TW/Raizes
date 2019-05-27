@@ -1,10 +1,8 @@
 <!DOCTYPE HTML>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
-
 <head>
   <title>Aceleradora Ágil - Esqueleto Ambulante</title>
 </head>
-
 <body>
   <section>
     <section class="container">
@@ -17,14 +15,13 @@
           <div th:if="${Erro} != null">
             <span th:text="${Erro.mensagem}"></span>
           </div>
-
           <div class="box">
 
-            <form id="formCriaLista" th:action="'/minha-lista/cadastro'" method="post">
+            <form id="formCriaLista" th:action="'@{/minhas-listas/criar}'" method="post">
               <div class="field column is-6 is-offset-3">
                 <label class="label">Nome*</label>
                 <div class="control">
-                  <input class="input" type="text" name="nome" placeholder="Ex.: Minha Lista Compras 1">
+                  <input class="input" type="text" name="nome" th:field="*{lista.nome}" placeholder="Ex.: Minha Lista Compras 1">
                 </div>
                 <div class="help-block"></div>
               </div>
@@ -56,5 +53,4 @@
     </section>
   </section>
 </body>
-
 </html>

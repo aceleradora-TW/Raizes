@@ -4,14 +4,17 @@ import 'animate.css'
 import '../scss/styles.scss'
 import '@fengyuanchen/validator';
 import CriarLista from './pages/criaLista'
-import Burger from './components/menu-burger'
+import EditarLista from './pages/editaLista'
 import minhasListas from './pages/minha-lista'
+import Burger from './components/menu-burger'
 
 $(function () {
   CriarLista.validaFormulario();
 
 });
-
+$(function () {
+    EditarLista.validaFormulario();
+});
 window.minhasListas = minhasListas;
 
 window.Burger = Burger;

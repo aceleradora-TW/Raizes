@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <section class="section">
+    <section class="container">
+      <h1 class="title centraliza-texto">Minhas listas</h1>
+      <div th:if="${mensagemSalvoComSucesso} != null">
+        <span th:text="${mensagemSalvoComSucesso}"></span>
+      </div>
+      <div th:if="${erro} != null">
+        <span th:text="${erro.mensagem}"></span>
+      </div>
+      <div class="columns">
+        <div class="column is-12">
+          <div class="box">
+            <div class="field">
+              <div class="control">
+                <p class="centraliza-texto" th:if="${listasCriadas.isEmpty()}">Não há listas criadas.</p>
+                <ul class="lista-produtos">
+                  <li th:each="lista: ${listasCriadas}">
+                    <span th:text="${lista.nome}"></span>
+                    <div class="mb-0 flex end buttons has-addons">
+                      <a class="button rz-botao" type="submit" th:href="@{/minhas-listas/{id}/editar/(id=${lista.id})}">
+                        <i class="fas fa-edit"></i>
+                      </a>
+                      <span class="button rz-botao">
+                        <i class="fas fa-shopping-basket"></i>
+                      </span>
+                      <form th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post" name="meuform"
+                        th:onsubmit="return minhasListas.exibeConfirmacaDeExclusaoDaLista()">
+                        <button type="submit" class="button rz-botao">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </form>
+                    </div>
+                    <hr>
+                  </li>
+                </ul>
+                <div class="flex space-between">
+                  <a class="button is-primary" type="submit" th:href="@{/}">Voltar</a>
+                  <a class="button is-primary" type="submit" th:href="@{/minhas-listas/criar}">Nova Lista</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</body>
+</html>
