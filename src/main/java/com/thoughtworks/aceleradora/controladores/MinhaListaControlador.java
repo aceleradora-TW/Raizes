@@ -133,8 +133,7 @@ public class MinhaListaControlador {
         listaDoBanco.setNome(listaDoFront.getNome());
         minhaListaServico.salvar(listaDoBanco);
 
-        String mensagemDeSucesso = "Sua lista foi salva com sucesso!";
-        redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", mensagemDeSucesso);
+        redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", "Sua lista foi salva com sucesso!");
 
         return "redirect:/minhas-listas";
     }
