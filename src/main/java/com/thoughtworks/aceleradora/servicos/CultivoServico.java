@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class CultivoServico {
-    CultivoRepositorio repositorio;
+   private CultivoRepositorio repositorio;
 
     public CultivoServico(CultivoRepositorio repositorio) {
         this.repositorio = repositorio;
