@@ -3,27 +3,26 @@ package com.thoughtworks.aceleradora.dominio;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Entity(name = "categorias")
+@Entity(name = "tipos_de_cultivos")
 @Access(AccessType.FIELD)
-public class Categoria {
+public class Cultivo {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String nome;
 
-    @OneToMany(mappedBy = "categoria")
+    @OneToMany(mappedBy = "cultivo")
     @OrderBy(value="nome")
     private List<Produto> produtos;
 
-    public Categoria() {
+    public Cultivo(){
     }
 
-    public Categoria(String nome) {
+    public Cultivo(String nome) {
         this.nome = nome;
     }
 
@@ -39,15 +38,15 @@ public class Categoria {
         return nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public List<Produto> getProdutos() {
         return produtos;
     }
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 }
