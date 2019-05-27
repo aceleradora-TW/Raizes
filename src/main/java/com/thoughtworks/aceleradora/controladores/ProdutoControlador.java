@@ -57,16 +57,10 @@ public class ProdutoControlador {
 
     @PostMapping("/cadastro")
     public String salvarProduto (Produto produtoQueVem, Model modelo) {
-
-        Produto produtoQueVai = new Produto();
-
-
+        
         if (!produtoQueVem.getNome().trim().isEmpty()) {
-            produtoQueVai.setNome(produtoQueVem.getNome());
-            produtoQueVai.setCategoria(produtoQueVem.getCategoria());
-            produtoQueVai.setCultivo(produtoQueVem.getCultivo());
 
-            produtoServico.salvar(produtoQueVai);
+            produtoServico.salvar(produtoQueVem);
 
             String mensagem = "Seu produto foi cadastrado com sucesso!";
             modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
