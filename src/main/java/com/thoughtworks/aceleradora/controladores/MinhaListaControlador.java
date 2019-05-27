@@ -96,34 +96,49 @@ public class MinhaListaControlador {
         Optional<MinhaLista> listaDoBanco = minhaListaServico.encontraUm(id);
         List<Produto> produtosParaSeremRemovidos = new ArrayList<>();
         MinhaLista lista = listaDoBanco.get();
+        long idLista = listaDoBanco.get().getId();
+        Erro erro = new Erro("Erro ao salvar a lista");
 
-        if (listaDoBanco.isPresent()) {
-            List<Produto> produtosDoBanco = lista.getProdutos();
-            List<Produto> produtosFront = listaDoFront.getProdutos();
-            Erro erro = new Erro("Erro ao salvar a lista!");
-
-            if (listaDoFront.getNome().trim().isEmpty()) {
-                redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
-                return "redirect:/minhas-listas/editar-lista/{id}";
-            }
-
-            for (Produto produto : produtosDoBanco) {
-                if (!produtosFront.contains(produto)) {
-                    produtosParaSeremRemovidos.add(produto);
-                }
-            }
-
-            if (produtosDoBanco.size() == produtosParaSeremRemovidos.size() || !(produtoServico.removerTodos(produtosDoBanco, produtosParaSeremRemovidos))) {
-                redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
-                return "redirect:/minhas-listas/editar-lista/{id}";
-            }
-
-            lista.setNome(listaDoFront.getNome());
-            minhaListaServico.salvar(lista);
-
-            String mensagemDeSucesso = "Sua lista foi salva com sucesso!";
-            redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", mensagemDeSucesso);
+        if (!listaDoBanco.isPresent()) {
+            erro.setMensagem("Lista inexistente");
+            redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
+            return "redirect:/minhas-listas/";
         }
+
+        if (listaDoFront.getNome().trim().isEmpty()) {
+            erro.setMensagem("Nome da lista é obrigatório");
+            redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
+            return "redirect:/minhas-listas/editar-lista/"+ idLista;
+        }
+
+        List<Produto> produtosDoBanco = lista.getProdutos();
+        List<Produto> produtosFront = listaDoFront.getProdutos();
+
+        for (Produto produto : produtosDoBanco) {
+            if (!produtosFront.contains(produto)) {
+                produtosParaSeremRemovidos.add(produto);
+            }
+        }
+
+        if (produtosDoBanco.size() == produtosParaSeremRemovidos.size()) {
+            erro.setMensagem("Selecione pelo menos 1 produto");
+            redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
+            return "redirect:/minhas-listas/editar-lista/"+ idLista;
+        }
+
+        produtoServico.removerTodos(produtosDoBanco, produtosParaSeremRemovidos);
+
+        lista.setNome(listaDoFront.getNome());
+        MinhaLista listaSalva  = minhaListaServico.salvar(lista);
+
+        if (listaSalva == null){
+            redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
+            return "redirect:/minhas-listas/editar-lista/"+ idLista;
+
+        }
+
+        String mensagemDeSucesso = "Sua lista foi salva com sucesso!";
+        redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", mensagemDeSucesso);
         return "redirect:/minhas-listas";
     }
 }

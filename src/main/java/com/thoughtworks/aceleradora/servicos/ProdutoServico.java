@@ -26,12 +26,6 @@ public class ProdutoServico {
     }
 
     public boolean removerTodos(List<Produto> produtosDoBanco, List<Produto> produtosParaSeremRemovidos) {
-        try {
-            if(produtosParaSeremRemovidos.isEmpty()) return true;
-            return produtosDoBanco.removeAll(produtosParaSeremRemovidos);
-
-        } catch (Exception e) {
-            return false;
-        }
+        return produtosDoBanco.removeAll(produtosParaSeremRemovidos);
     }
 }
