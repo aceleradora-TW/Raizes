@@ -1,3 +1,3 @@
 ALTER TABLE produtos
-ADD id_unidade_medida bigint NOT NULL;
-ALTER TABLE produtos ADD constraint fk_unidade_medida foreign key (id_unidade_medida) references unidade_medida(id);
+ADD id_unidades_medidas bigint NOT NULL;
+ALTER TABLE produtos ADD constraint fk_unidades_medidas foreign key (id_unidades_medidas) references unidades_medidas(id);

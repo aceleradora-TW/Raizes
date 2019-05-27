@@ -22,7 +22,7 @@ INSERT
   VALUES ('Hidroponico'), ('Organico');
 
 INSERT
-  INTO produtos (nome, id_categorias, id_tipos_de_cultivos, id_unidade_medida)
+  INTO produtos (nome, id_categorias, id_tipos_de_cultivos, id_unidades_medidas)
   VALUES ('Banana', 1, 2, 1), ('Batata', 2, 2, 1), ('Abacate', 1, 2, 1), ('Beterraba', 2, 2, 1), ('Alface', 2, 1, 2);
 
 INSERT
