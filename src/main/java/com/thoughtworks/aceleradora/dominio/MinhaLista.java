@@ -22,7 +22,7 @@ public class MinhaLista {
     @JoinTable(
             name = "listas_produtos",
             joinColumns = {@JoinColumn(name = "id_lista")},
-            inverseJoinColumns = {@JoinColumn(name = "id_produto")}
+            inverseJoinColumns = {@JoinColumn(name = "id_produtos")}
     )
 
     @JsonIgnoreProperties("listas")
