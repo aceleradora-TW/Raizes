@@ -11,6 +11,8 @@ testes-funcionais/build
 /cypress/videos/
 /cypress/fixtures/
 
+*.iws
+
 # Ignore Gradle GUI config
 gradle-app.setting
 

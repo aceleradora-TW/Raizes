@@ -57,8 +57,6 @@ public class ProdutoControlador {
 
     @PostMapping("/cadastro")
     public String salvarProduto (Produto produtoQueVem, Model modelo) {
-//        Produto produtoSalvo = produtoServico.salvar(produto);
-//        modelo.addAttribute("produtoSalvo", produtoSalvo);
 
         Produto produtoQueVai = new Produto();
 

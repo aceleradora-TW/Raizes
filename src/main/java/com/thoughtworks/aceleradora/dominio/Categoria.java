@@ -18,7 +18,7 @@ public class Categoria {
 
     @OneToMany(mappedBy = "categoria")
     @OrderBy(value="nome")
-    private List<Produto> produtos = new ArrayList<>();
+    private List<Produto> produtos;
 
     public Categoria() {
     }
