@@ -30,7 +30,7 @@
                   <li th:each="lista: ${listasCriadas}">
                     <span th:text="${lista.nome}"></span>
                     <div class="mb-0 flex end buttons has-addons">
-                      <form  th:action="@{'/minhas-listas/editar-lista/' + ${lista.id}}">
+                      <form th:action="@{/minhas-listas/{id}/editar/(id=${lista.id})}" method="get">
                         <button type="submit" class="button rz-botao">
                           <i class="fas fa-edit"></i>
                         </button>

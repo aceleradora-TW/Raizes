@@ -16,7 +16,7 @@
         <div class="columns">
             <div class="column is-6">
                 <div class="box">
-                    <form id="formEditaLista" th:action="'/minhas-listas/editar-lista/' + ${lista.id} + '/salvar'" method="post">
+                    <form id="formEditaLista" th:action="@{/minhas-listas/{id}/editar(id=${lista.id})}" method="post">
                         <div class="field">
                             <input class="input" type="text" name="nome" th:value="${lista.nome}" placeholder="Ex.: Minha Lista Compras 1">
                             <div class="help-block"></div>

@@ -79,7 +79,7 @@ public class MinhaListaControlador {
         return "redirect:/minhas-listas";
     }
 
-    @GetMapping("/editar-lista/{id}")
+    @GetMapping("/{id}/editar/")
     public String pegaLista(Model modelo, @PathVariable("id") Long id, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
         MinhaLista minhaLista = minhaListaServico.encontraUm(id);
         breadcrumb
@@ -96,7 +96,7 @@ public class MinhaListaControlador {
         return "minha-lista/editar";
     }
 
-    @PostMapping("/editar-lista/{id}/salvar")
+    @PostMapping("/{id}/editar")
     public String removerItem(MinhaLista listaDoFront, @PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
         MinhaLista listaDoBanco = minhaListaServico.encontraUm(id);
         Erro erro = new Erro("Erro ao salvar a lista!");
@@ -110,7 +110,7 @@ public class MinhaListaControlador {
         if (listaDoFront.getNome().trim().isEmpty()) {
             erro.setMensagem("Nome da lista é obrigatório.");
             redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
-            return "redirect:/minhas-listas/editar-lista/{id}";
+            return "redirect:/minhas-listas/{id}/editar/";
         }
 
         List<Produto> produtosDoBanco = listaDoBanco.getProdutos();
@@ -122,12 +122,12 @@ public class MinhaListaControlador {
         if (produtosDoBanco.size() == produtosParaSeremRemovidos.size()) {
             erro.setMensagem("Selecione pelo menos 1 produto.");
             redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
-            return "redirect:/minhas-listas/editar-lista/{id}";
+            return "redirect:/minhas-listas/{id}/editar/";
         }
 
         if (!produtoServico.removerTodos(produtosDoBanco, produtosParaSeremRemovidos)) {
             redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
-            return "redirect:/minhas-listas/editar-lista/{id}";
+            return "redirect:/minhas-listas/{id}/editar/";
         }
 
         listaDoBanco.setNome(listaDoFront.getNome());
