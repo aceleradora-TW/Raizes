@@ -11,7 +11,7 @@ testes-funcionais/build
 /cypress/videos/
 /cypress/fixtures/
 *.iws
-esqueleto-ambulante.ipr
+*.ipr
 
 # Ignore Gradle GUI config
 gradle-app.setting
