@@ -1,4 +1,4 @@
-CREATE TABLE listas_produtos (
+create table listas_produtos (
     id serial primary key,
     id_produtos bigint not null,
     id_lista bigint not null,
