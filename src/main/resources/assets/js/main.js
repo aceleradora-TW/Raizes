@@ -4,18 +4,18 @@ import 'animate.css'
 import '../scss/styles.scss'
 import '@fengyuanchen/validator';
 import CriarLista from './pages/criaLista'
-
+import EditarLista from './pages/editaLista'
+import minhasListas from './pages/minha-lista'
 
 $(function () {
     CriarLista.validaFormulario();   
          
 });
 
-
-
-
-
-import minhasListas from './pages/minha-lista'
+$(function () {
+    EditarLista.validaFormulario();   
+         
+});
 
 
 window.minhasListas = minhasListas;
