@@ -113,16 +113,11 @@ public class MinhaListaControlador {
             return "redirect:/minhas-listas/editar-lista/{id}";
         }
 
-        List<Produto> produtosParaSeremRemovidos = new ArrayList<>();
         List<Produto> produtosDoBanco = listaDoBanco.getProdutos();
         List<Produto> produtosFront = listaDoFront.getProdutos();
+        List<Produto> produtosParaSeremRemovidos = minhaListaServico.pegaProdutosParaSeremRemovidos(produtosFront, produtosDoBanco);
 
 
-        for (Produto produto : produtosDoBanco) {
-            if (!produtosFront.contains(produto)) {
-                produtosParaSeremRemovidos.add(produto);
-            }
-        }
 
         if (produtosDoBanco.size() == produtosParaSeremRemovidos.size()) {
             erro.setMensagem("Selecione pelo menos 1 produto.");
