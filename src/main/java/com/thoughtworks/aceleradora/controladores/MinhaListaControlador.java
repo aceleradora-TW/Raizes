@@ -80,27 +80,31 @@ public class MinhaListaControlador {
     }
 
     @GetMapping("/editar-lista/{id}")
-    public String pegaLista(Model modelo, @PathVariable("id") Long id, Breadcrumb breadcrumb) {
-        Optional<MinhaLista> lista = minhaListaServico.encontraUm(id);
+    public String pegaLista(Model modelo, @PathVariable("id") Long id, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
+        MinhaLista minhaLista = minhaListaServico.encontraUm(id);
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("editar lista", "/minha-lista/editar-lista/{id}");
 
-        modelo.addAttribute("lista", lista.get());
+        if(minhaLista == null) {
+            Erro erro = new Erro("Lista inexistente.");
+            redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
+            return "redirect:/minhas-listas/";
+        }
 
+        modelo.addAttribute("lista", minhaLista);
         return "minha-lista/editar";
     }
 
     @PostMapping("/editar-lista/{id}/salvar")
     public String removerItem(MinhaLista listaDoFront, @PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
-        Optional<MinhaLista> listaDoBanco = minhaListaServico.encontraUm(id);
-        MinhaLista lista = listaDoBanco.get();
+        MinhaLista listaDoBanco = minhaListaServico.encontraUm(id);
         Erro erro = new Erro("Erro ao salvar a lista!");
 
-        if (!listaDoBanco.isPresent()) {
+        if (listaDoBanco == null) {
             erro.setMensagem("Lista inexistente.");
             redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
-            return "redirect:/minhas-listas/editar-lista/{id}";
+            return "redirect:/minhas-listas/";
         }
 
         if (listaDoFront.getNome().trim().isEmpty()) {
@@ -110,7 +114,7 @@ public class MinhaListaControlador {
         }
 
         List<Produto> produtosParaSeremRemovidos = new ArrayList<>();
-        List<Produto> produtosDoBanco = lista.getProdutos();
+        List<Produto> produtosDoBanco = listaDoBanco.getProdutos();
         List<Produto> produtosFront = listaDoFront.getProdutos();
 
 
@@ -131,8 +135,8 @@ public class MinhaListaControlador {
             return "redirect:/minhas-listas/editar-lista/{id}";
         }
 
-        lista.setNome(listaDoFront.getNome());
-        minhaListaServico.salvar(lista);
+        listaDoBanco.setNome(listaDoFront.getNome());
+        minhaListaServico.salvar(listaDoBanco);
 
         String mensagemDeSucesso = "Sua lista foi salva com sucesso!";
         redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", mensagemDeSucesso);

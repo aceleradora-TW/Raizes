@@ -24,8 +24,14 @@ public class MinhaListaServico {
         }
     }
 
-    public Optional<MinhaLista> encontraUm(Long id) {
-        return repositorio.findById(id);
+    public MinhaLista encontraUm(Long id) {
+        try {
+            MinhaLista minhaLista = repositorio.findById(id).get();
+            return minhaLista;
+
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public List<MinhaLista> pegarListasCriadas() {
