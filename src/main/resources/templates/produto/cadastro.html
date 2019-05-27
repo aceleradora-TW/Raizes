@@ -12,16 +12,22 @@
       <h1 class="title">Cadastrar Produto</h1>
       <div class="columns">
         <div class="column is-6">
-          <div th:if="${Erro} != null">
-            <span th:text="${Erro.mensagem}"></span>
+
+          <div th:if="${erro} != null">
+            <span th:text="${erro.mensagem}"></span>
           </div>
+
+          <div th:if="${mensagemSalvoComSucesso} != null">
+            <span th:text="${mensagemSalvoComSucesso}"></span>
+          </div>
+
           <div class="box">
 
             <form id="formCadastraProduto" th:action="'/produtos/cadastro'" method="post">
               <div class="field">
                 <label class="label">Nome do Produto</label>
                 <div class="control">
-                  <input class="input" type="text" placeholder="Ex.: Maçã" />
+                  <input class="input" name="nome" type="text" placeholder="Ex.: Maçã" />
                 </div>
                 <div class="help-block"></div>
               </div>
@@ -29,8 +35,8 @@
               <div class="field">
                 <label class="label">Categoria</label>
                 <div class="select">
-                    <select form="formCadastraProduto" id="categorias" name="categorias">
-                      <option th:each="categoria: ${categorias}" th:text="${categoria.nome}" ></option>
+                    <select form="formCadastraProduto" id="categorias" name="categoria">
+                      <option th:each="categoria: ${categorias}" th:text="${categoria.nome}" th:value="${categoria.id}" ></option>
                     </select>
                   </div>
                 <div class="help-block"></div>
@@ -38,11 +44,11 @@
 
               <div class="field">
                   <label class="label">Tipo de Cultivo</label>
-                  <div class="select">
-                    <select form="formCadastraProduto" id="cultivos" name="cultivos">
-                      <option th:each="cultivo: ${cultivos}" th:text="${cultivo.nome}" ></option>
-                    </select>
-                  </div>
+                <div class="select">
+                  <select form="formCadastraProduto" id="cultivos" name="cultivo">
+                    <option th:each="cultivo: ${cultivos}" th:text="${cultivo.nome}" th:value="${cultivo.id}"></option>
+                  </select>
+                </div>
                   <div class="help-block"></div>
               </div>
   

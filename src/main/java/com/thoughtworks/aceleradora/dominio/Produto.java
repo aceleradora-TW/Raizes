@@ -13,7 +13,6 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
     private String nome;
 
     @ManyToOne
@@ -21,20 +20,29 @@ public class Produto {
     @JsonIgnoreProperties("produtos")
     private Categoria categoria;
 
-
-    @JoinColumn(name = "id_tipos_de_cultivos")
+    @ManyToOne
+    @JoinColumn(name = "id_tipos_de_cultivos" )
     @JsonIgnoreProperties("produtos")
     private Cultivo cultivo;
 
-    public Cultivo getCultivo() {
-        return cultivo;
-    }
-
-    public void setCultivo(Cultivo cultivo) {
-        this.cultivo = cultivo;
-    }
-
     public Produto() {
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Categoria getCategoria() {
@@ -45,16 +53,12 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public Produto(String nome) {
-        this.nome = nome;
+    public Cultivo getCultivo() {
+        return cultivo;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public Long getId() {
-        return id;
+    public void setCultivo(Cultivo cultivo) {
+        this.cultivo = cultivo;
     }
 
     public String toString() {

@@ -3,6 +3,7 @@ package com.thoughtworks.aceleradora.dominio;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -13,12 +14,11 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
     private String nome;
 
     @OneToMany(mappedBy = "categoria")
     @OrderBy(value="nome")
-    private List<Produto> produtos;
+    private List<Produto> produtos = new ArrayList<>();
 
     public Categoria() {
     }

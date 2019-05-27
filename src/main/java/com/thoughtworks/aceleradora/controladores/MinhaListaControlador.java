@@ -65,6 +65,7 @@ public class MinhaListaControlador {
 
             return "redirect:/minhas-listas/criar";
         }
+
         return "redirect:/minhas-listas";
     }
 

@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.servicos;
 
 
+import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.repositorios.ProdutoRepositorio;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,16 @@ public class ProdutoServico {
     public List<Produto> pegarTodos(){
         return repositorio.findAll();
     }
+
+    public Produto salvar(Produto produto) {
+        try {
+            return repositorio.save(produto);
+        } catch(Exception e) {
+            return null;
+        }
+
+    }
+
 
 
 }

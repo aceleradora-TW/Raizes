@@ -8,6 +8,7 @@ import java.util.List;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "tipos_de_cultivos")
+@Access(AccessType.FIELD)
 public class Cultivo {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -15,11 +16,14 @@ public class Cultivo {
     private String nome;
 
     @OneToMany(mappedBy = "cultivo")
+    @OrderBy(value="nome")
     private List<Produto> produtos;
 
-    public Cultivo(String nome, List<Produto> produtos) {
+    public Cultivo(){
+    }
+
+    public Cultivo(String nome) {
         this.nome = nome;
-        this.produtos = produtos;
     }
 
     public Long getId() {
