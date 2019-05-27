@@ -47,7 +47,11 @@ public class ProdutoControlador {
     }
 
     @PostMapping("/cadastro")
-    public String salvarProduto (Produto produtoQueVem, Model modelo) {
+    public String salvarProduto (Produto produtoQueVem, Model modelo, Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Produtos", "/produtos")
+                .pagina("Cadastro", "/produtos/cadastro");
 
         if (!produtoQueVem.getNome().trim().isEmpty()) {
 
