@@ -12,10 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 @Controller
@@ -36,12 +33,6 @@ public class ProdutoControlador {
         this.cultivoServico = cultivoServico;
     }
 
-    @GetMapping
-    @ResponseBody
-    public List<Produto> pegarProdutos() {
-        return produtoServico.pegarTodos();
-    }
-
     @GetMapping("/cadastro")
     public String cadastrarProduto(Model modelo, Breadcrumb breadcrumb) {
         breadcrumb
@@ -57,7 +48,7 @@ public class ProdutoControlador {
 
     @PostMapping("/cadastro")
     public String salvarProduto (Produto produtoQueVem, Model modelo) {
-        
+
         if (!produtoQueVem.getNome().trim().isEmpty()) {
 
             produtoServico.salvar(produtoQueVem);
