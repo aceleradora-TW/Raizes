@@ -98,11 +98,13 @@ public class MinhaListaControlador {
         Erro erro = new Erro("Erro ao salvar a lista!");
 
         if (!listaDoBanco.isPresent()) {
+            erro.setMensagem("Lista inexistente.");
             redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
             return "redirect:/minhas-listas/editar-lista/{id}";
         }
 
         if (listaDoFront.getNome().trim().isEmpty()) {
+            erro.setMensagem("Nome da lista é obrigatório.");
             redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
             return "redirect:/minhas-listas/editar-lista/{id}";
         }
@@ -119,6 +121,7 @@ public class MinhaListaControlador {
         }
 
         if (produtosDoBanco.size() == produtosParaSeremRemovidos.size()) {
+            erro.setMensagem("Selecione pelo menos 1 produto.");
             redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
             return "redirect:/minhas-listas/editar-lista/{id}";
         }
