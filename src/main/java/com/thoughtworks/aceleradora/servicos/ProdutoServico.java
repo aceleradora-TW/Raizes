@@ -21,6 +21,10 @@ public class ProdutoServico {
         return repositorio.findAll();
     }
 
+    public Produto salvar(Produto produto) {
+            return repositorio.save(produto);
+    }
+
     public Optional<Produto> encontraUm(Long id) {
         return repositorio.findById(id);
     }
