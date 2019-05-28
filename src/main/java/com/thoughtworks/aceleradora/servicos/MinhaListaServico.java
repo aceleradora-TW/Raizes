@@ -1,9 +1,11 @@
 package com.thoughtworks.aceleradora.servicos;
 
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
+import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.repositorios.MinhaListaRepositorio;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,22 +26,33 @@ public class MinhaListaServico {
         }
     }
 
+    public MinhaLista encontraUm(Long id) {
+        try {
+            MinhaLista minhaLista = repositorio.findById(id).get();
+            return minhaLista;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public List<MinhaLista> pegarListasCriadas() {
         return repositorio.findAll();
     }
 
-    public void removerListaCriada(Long idLista) {
-        repositorio.deleteById(idLista);
-    }
+    public void removerListaCriada(Long idLista) { repositorio.deleteById(idLista);}
 
-    public Optional<MinhaLista> findByNome(String nome) {
-        return repositorio.findByNome(nome);
-    }
+    public Optional<MinhaLista> findByNome(String nome) { return repositorio.findByNome(nome);}
 
-    public Optional<MinhaLista> encontraUm(Long id) {
-        return repositorio.findById(id);
-    }
-    public void deletar(Long id){
-        repositorio.deleteById(id);
+    public List<Produto> pegaProdutosParaSeremRemovidos(List<Produto> produtosFront, List<Produto> produtosDoBanco) {
+        List<Produto> produtosParaSeremRemovidos = new ArrayList<>();
+
+        for (Produto produto : produtosDoBanco) {
+            if (!produtosFront.contains(produto)) {
+                produtosParaSeremRemovidos.add(produto);
+            }
+        }
+
+        return produtosParaSeremRemovidos;
     }
 }

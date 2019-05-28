@@ -54,6 +54,7 @@ public class MinhaLista {
         return nome;
     }
 
+
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
@@ -61,5 +62,6 @@ public class MinhaLista {
     public List<Produto> getProdutos() {
         return produtos;
     }
+
 
 }
