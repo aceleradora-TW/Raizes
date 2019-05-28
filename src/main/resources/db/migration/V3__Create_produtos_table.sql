@@ -1,4 +1,4 @@
-CREATE TABLE produtos (
+create table produtos (
 
   id serial primary key,
   nome varchar(255) not null,
