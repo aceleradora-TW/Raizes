@@ -10,5 +10,7 @@ export default {
         required: true
       }
     }); 
-  }
+  },
+
+  exibeConfirmacaoDeCancelamento: () => confirm("Realmente deseja calcelar a edição? Os dados não serão salvos.")
 }

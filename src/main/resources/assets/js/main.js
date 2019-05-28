@@ -6,29 +6,15 @@ import '@fengyuanchen/validator';
 import CriarLista from './pages/criaLista'
 import EditarLista from './pages/editaLista'
 import minhasListas from './pages/minha-lista'
+import mensagemCancelar  from './pages/mensagem'
+import validaEditar from './pages/validaAdicionarProdutos'
 
 $(function () {
     CriarLista.validaFormulario();   
-         
-});
-
-$(function () {
-    EditarLista.validaFormulario();   
-         
-});
-
-
-window.minhasListas = minhasListas;
-
-import mensagemCancelar  from './pages/mensagem'
-
-import validaEditar from './pages/validaAdicionarProdutos'
-
-
- $(function () {
     validaEditar.validacaoEditar();   
-
-
+    EditarLista.validaFormulario();
+         
+    window.minhasListas = minhasListas;
+    window.EditarLista = EditarLista;
+    window.exibirMensagem = mensagemCancelar;
 });
-
-window.exibirMensagem = mensagemCancelar;
