@@ -7,26 +7,52 @@
 </head>
 <body>
 <section class="section">
-    
-    <section class="container"> 
+    <section class="container">
         <h1 class="title centraliza-texto">Feijoada de Domingo</h1>
         <div class="columns">
-            
             <div class="column is-12">
                 <form>
                     <h3>Cebola</h3>
-                <div class="">
-                    <div class = "flex equal-sizing flex-row">
-                        <label class="radio">
-                        <input type="radio" name="answer">
-                        Aldo Produtor</label>
-                        <span>Orgânico</span>
+                    <div class="box">
+                        <div class = "flex equal-sizing flex-row">
+                            <label class="radio">
+                                <input type="radio" name="answer">
+                                <span>Aldo Produtor</span>
+                            </label>
+                            <span>Porto Alegre, RS</span>
+
+                        </div>
+                        <div>
+                            <div class = "flex equal-sizing flex-row">
+
+                                <span>Orgânico</span>
+                                <span>Valor: R$ 5,00</span>
+                                <label class="label">Quantidade:</label>
+                                <input class="input" type="text" placeholder="Text input">
+                            </div>
+                        </div>
                     </div>
-                        
-                </div>
-                <div class="box">
+                    <div class="box">
+                        <div class = "flex equal-sizing flex-row">
+                            <label class="radio">
+                                <input type="radio" name="answer">
+                                <span>João Severo</span>
+                            </label>
+                            <span>Gravataí, RS</span>
+                        </div>
+                        <div>
+                                <div class = "flex equal-sizing flex-row">
+                                    <span>Orgânico</span>
+                                    <span>Valor: R$ 5,00</span>
+                                    <label class="label">Quantidade:</label>
+                                    <input class="input" type="text" placeholder="Text input">
+                                </div>
+                            </div>
                     </div>
-                <div class="field">
+                    <div class="box">
+
+                    </div>
+                    <div class="field">
                         <div class="control">
                             <div class="flex space-between">
                                 <a class="button is-primary" type="submit" th:href="@{/}">Voltar</a>
