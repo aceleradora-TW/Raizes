@@ -1,2 +1,2 @@
-ALTER TABLE listas ADD CONSTRAINT nome_unico UNIQUE(nome);
-ALTER TABLE listas ALTER COLUMN nome SET NOT NULL;
+alter table listas add constraint nome_unico UNIQUE(nome);
+alter table listas alter column nome set not null;

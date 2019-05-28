@@ -9,7 +9,7 @@ import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Entity(name = "produtor")
+@Entity(name = "produtores")
 @Access(AccessType.FIELD)
 public class Produtor {
 
@@ -21,8 +21,8 @@ public class Produtor {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
-            name = "produtos_produtor",
-            joinColumns = {@JoinColumn(name = "id_produtor")},
+            name = "produtos_produtores",
+            joinColumns = {@JoinColumn(name = "id_produtores")},
             inverseJoinColumns = {@JoinColumn(name = "id_produtos")}
     )
 

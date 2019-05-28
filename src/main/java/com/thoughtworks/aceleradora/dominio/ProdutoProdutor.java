@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Entity(name = "produtos_produtor")
+@Entity(name = "produtos_produtores")
 @Access(AccessType.FIELD)
 public class ProdutoProdutor {
 
@@ -22,7 +22,7 @@ public class ProdutoProdutor {
     Produto produto;
 
     @ManyToOne
-    @JoinColumn(name = "id_produtor")
+    @JoinColumn(name = "id_produtores")
     Produtor produtor;
 
     public ProdutoProdutor() {
