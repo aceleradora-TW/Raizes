@@ -31,9 +31,12 @@
 
                 <div class="column columns is-multiline is-10 is-offset-1" th:each="categoria: ${categorias}">
                   <h2 class="column is-12" th:text="${categoria.nome}"></h2>
-                  <div class="column is-4" th:each="produto: ${categoria.produtos}">
-                    <input class="checkbox" type="checkbox" name="produtos" th:value="${produto.id}">
-                    <label class="checkbox" th:text="${produto.nome}"></label>
+                  <div th:each="produto: ${categoria.produtos}">
+                    <span class="bigcheck">
+                      <input class="checkbox" type="checkbox" name="produtos" th:value="${produto.id}" th:id="${produto.nome}">
+                      <label class="checkbox" th:text="${produto.nome}" th:for="${produto.nome}"></label>
+                      <i class="fas fa-check-circle"></i>
+                    </span>
                   </div>
                 </div>
 

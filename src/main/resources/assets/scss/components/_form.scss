@@ -1,27 +1,36 @@
-input[type='checkbox'].bigcheck + span.bigcheck-target:after {
-    content: "\f096"; /* In fontawesome, is an open square (fa-square-o) */
-    background: #000;
-  
-  }
-  input[type='checkbox'].bigcheck:checked + span.bigcheck-target:after {
-    content: "\f046"; /* fontawesome checked box (fa-check-square-o) */
-    background: #000;
-  }
-  span.bigcheck { 
-    display: block;
-    padding: 0.5em;;
-  }
-  input[type="checkbox"], input[type="radio"] {
-    vertical-align: baseline;
-    display: none;
-  }
-  input[type='checkbox']:checked ~ label {
-    background-color: #cfe3a9;
-    padding: 6px;
-    border-radius: 6px;
-    color: $secondary-color;
+span.bigcheck {
+  display: block;
+  padding: 0.5em;
 }
+input[type="checkbox"],
+input[type="radio"] {
+  vertical-align: baseline;
+  display: none;
+}
+input[type="checkbox"]:checked ~ label {
+  background-color: #cfe3a9;
+  padding: 6px 16px;
+  border-radius: 6px;
+  color: $secondary-color;
+}
+input[type="checkbox"]:checked ~ .fa-check-circle {
+  visibility: visible;
+  opacity: 100;
+  content: "\f046";
+}
+input[type="checkbox" i] {
+  visibility: hidden;
+  display: none;
+  opacity: 0;
+}
+input[type="checkbox"]:checked
 .input:focus {
-    border-color: $third-color;
-    box-shadow: 0 0 0 0.125em rgba(160, 197, 100, 0.54);
+  border-color: $third-color;
+  box-shadow: 0 0 0 0.125em rgba(160, 197, 100, 0.54);
+}
+.bigcheck {
+  min-height: 48px;
+}
+label {
+  padding: 6px;
 }

@@ -21,10 +21,9 @@
     background-color: white;
     border-bottom: 3.5px solid $third-color;
     box-shadow: 2px -3px 10px 0px #5a5959;
+    font-family: 'Raleway', sans-serif;
 }
-
-
-
-
-
-
+.primary, .primary a {
+    color: $primary-color;
+    font-weight: 500;
+}
