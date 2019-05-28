@@ -1,4 +1,4 @@
-describe('Testa ambiente de produção', function() {
+describe('Testa ambiente de homologação', function() {
     it('Carrega página do raízes', function() {
         cy.visit('https://raizes-homologacao.herokuapp.com/')
 
