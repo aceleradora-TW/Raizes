@@ -27,9 +27,16 @@ public class PedidoControlador {
         this.minhaListaServico = minhaListaServico;
     }
 
+    @GetMapping
+    public String pedidos(Model modelo, Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedido/pedidos");
+        return "/pedido/pedidos";
+    }
 
     @GetMapping("/{id}/visualizar")
-    public String visualizatPedido( @PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
+    public String visualizarPedido( @PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
         MinhaLista lista = minhaListaServico.encontraUm(id);
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
