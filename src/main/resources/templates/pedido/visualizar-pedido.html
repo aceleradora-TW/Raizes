@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Aceleradora Ágil - Esqueleto Ambulante</title>
+</head>
+<body>
+<section class="section">
+    <section class="container">
+        <h1 class="title">Visualizar pedido</h1>
+        <div class="columns">
+            <div class="column is-6">
+                <div class="box">
+                    <form id="formVisualizarPedido" th:action="@{/pedidos/{id}/visualizar(id=${lista.id})}" method="post">
+                        <div class="field">
+                            <input class="input input-fancy" type="text" name="nome" th:value="${lista.nome}" disabled>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+</body>
+</html>
