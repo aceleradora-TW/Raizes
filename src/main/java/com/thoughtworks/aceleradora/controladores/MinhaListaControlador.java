@@ -93,6 +93,9 @@ public class MinhaListaControlador {
             return "redirect:/minhas-listas/";
         }
 
+        modelo.addAttribute("lista", new MinhaLista());
+        List<Categoria> categorias = categoriaServico.pegarCategorias();
+        modelo.addAttribute("categorias", categorias);
         modelo.addAttribute("lista", minhaLista);
         return "minha-lista/editar";
     }
