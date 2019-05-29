@@ -55,4 +55,13 @@ public class MinhaListaServico {
 
         return produtosParaSeremRemovidos;
     }
+    public List<Produto> pegaProdutosParaSeremAdicionados(List<Produto> produtosFront, List<Produto> produtosDoBanco){
+        List<Produto> produtosParaSeremAdicionados = new ArrayList<>();
+        for(Produto produto : produtosDoBanco){
+            if(!produtosFront.contains(produto)){
+                produtosParaSeremAdicionados.add(produto);
+            }
+        }
+        return produtosParaSeremAdicionados;
+    }
 }

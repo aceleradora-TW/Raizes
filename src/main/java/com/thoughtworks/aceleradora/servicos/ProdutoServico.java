@@ -22,7 +22,7 @@ public class ProdutoServico {
     }
 
     public Produto salvar(Produto produto) {
-            return repositorio.save(produto);
+        return repositorio.save(produto);
     }
 
     public Optional<Produto> encontraUm(Long id) {
@@ -31,8 +31,18 @@ public class ProdutoServico {
 
     public boolean removerTodos(List<Produto> produtosDoBanco, List<Produto> produtosParaSeremRemovidos) {
         try {
-            if(produtosParaSeremRemovidos.isEmpty()) return true;
+            if (produtosParaSeremRemovidos.isEmpty()) return true;
             return produtosDoBanco.removeAll(produtosParaSeremRemovidos);
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean adicionaTodos(List<Produto> produtosDoBanco, List<Produto> produtosParaSeremAdicionados) {
+        try {
+            if (produtosParaSeremAdicionados.isEmpty()) return true;
+            return produtosDoBanco.addAll(produtosParaSeremAdicionados);
 
         } catch (Exception e) {
             return false;
