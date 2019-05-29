@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt-br" th:fragment="layout(title, content)" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title th:replace="${title}"></title>
-    <link href="/css/app.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title th:replace="${title}"></title>
+  <link href="/css/app.css" rel="stylesheet">
 </head>
-
 <body class="has-background-light">
-    <header>
-        <nav class="navbar is-mobile tw-navigation" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="ml-2 navbar-item icon-only" th:href="@{/}">
-                    <svg class="navbar-item nav-icon">
-                        <use xlink:href="/svg/spritmap.svg#sprite-skull"></use>
-                    </svg>
-                </a>
-                <a class="navbar-item" th:href="@{/minhas-listas/criar}">
-                    <p class="titulo-nav">Criar Lista de Produtos</p>
-                </a>
-                <a class="navbar-item" th:href="@{/minhas-listas}">
-                    <p class="titulo-nav">Minhas Listas</p>
-                </a>
-            </div>
-        </nav>
+  <header>
+      <nav class="navbar is-mobile tw-navigation" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="ml-2 navbar-item icon-only" th:href="@{/}">
+            <svg class="navbar-item nav-icon">
+              <use xlink:href="/svg/spritmap.svg#sprite-skull"></use>
+            </svg>
+          </a>
+          <a class="navbar-item" th:href="@{/minhas-listas/criar}">
+              <p class="titulo-nav">Criar Lista de Produtos</p>
+          </a>
+          <a class="navbar-item" th:href="@{/minhas-listas}">
+            <p class="titulo-nav">Minhas Listas</p>
+          </a>
+          <a class="navbar-item" th:href="@{/pedidos}">
+            <p class="titulo-nav">Pedidos</p>
+          </a>
+        </div>
+      </nav>
         <nav class="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
-            <ul>
-                <li th:each="pagina : ${@breadcrumb.paginas}"
+          <ul>
+            <li th:each="pagina : ${@breadcrumb.paginas}"
                     th:classappend="${@breadcrumb.ehPaginaAtiva(pagina)} ? 'is-active' : ''">
-                    <a th:href="${pagina.url}" th:text="${pagina.titulo}"></a>
-                </li>
-            </ul>
+              <a th:href="${pagina.url}" th:text="${pagina.titulo}"></a>
+            </li>
+          </ul>
         </nav>
-    </header>
-
-    <main th:replace="${content}"></main>
-    <div class="notification is-info">
-        <button class="delete"></button>
-        <div class="body"></div>
-    </div>
-    <script src="/js/app.js"></script>
+  </header>
+  <main th:replace="${content}"></main>
+  <div class="notification is-info">
+    <button class="delete"></button>
+    <div class="body"></div>
+  </div>
+  <script src="/js/app.js"></script>
 </body>
-
 </html>
