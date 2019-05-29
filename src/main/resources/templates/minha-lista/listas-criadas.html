@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title></title>
@@ -10,31 +9,37 @@
   <section class="section">
     <section class="container">
       <h1 class="title">Minhas listas</h1>
+      <div th:if="${mensagemSalvoComSucesso} != null">
+        <span th:text="${mensagemSalvoComSucesso}"></span>
+      </div>
+      <div th:if="${erro} != null">
+        <span th:text="${erro.mensagem}"></span>
+      </div>
       <div class="columns">
         <div class="column is-12">
-          <div class="box rz-list striped">
+          <div class="box">
             <div class="field">
               <div class="control">
-                <ul>
-                  <li class="rz-list row" th:each="lista: ${listasCriadas}">
-                    <span th:text="${lista.nome}">
-                    </span>
-                    <div class="mb-0 ml-auto flex end buttons has-addons">
+                <p class="centraliza-texto" th:if="${listasCriadas.isEmpty()}">Não há listas criadas.</p>
+                  <ul>
+                      <li class="rz-list row" th:each="lista: ${listasCriadas}">
+                          <span th:text="${lista.nome}"></span>
+                          <div class="mb-0 ml-auto flex end buttons has-addons">
                       <span class="button rz-button list-style">
                         <i class="fas fa-edit"></i>
                       </span>
-                      <span class="button rz-button list-style">
+                      <span class="button rz-button list-style" th:href="@{/pedidos/realizar-pedido}">
                         <i class="fas fa-shopping-basket"></i>
                       </span>
-                      <form th:action="@{'/minha-lista/listas-criadas/excluir/' + ${lista.id}}" method="post"
-                        name="meuform" th:onsubmit="return minhasListas.exibeConfirmacaDeExclusaoDaLista()">
-                        <button type="submit" class="button rz-button list-style">
+                      <form th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post" name="meuform"
+                        th:onsubmit="return minhasListas.exibeConfirmacaDeExclusaoDaLista()">
+                        <button type="submit" class="button rz-botao">
                           <i class="fas fa-trash-alt"></i>
                         </button>
                       </form>
                     </div>
                     <hr>
-                  </li>
+                      </li>
                 </ul>
                 <div class="rz-list row">
                   <form th:action="'/'" method="get">
