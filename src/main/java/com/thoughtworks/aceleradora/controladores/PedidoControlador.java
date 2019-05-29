@@ -18,4 +18,15 @@ public class PedidoControlador{
                 .pagina("Pedidos", "/pedido/pedidos");
         return "/pedido/pedidos";
     }
+
+    @GetMapping("/realizar-pedido")
+    public String realizarPedidos(Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("realizar pedido", "/pedido/pedidos");
+        return "pedido/realizar-pedido";
+    }
+
+
+
 }
