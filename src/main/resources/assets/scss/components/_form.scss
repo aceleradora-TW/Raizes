@@ -7,24 +7,21 @@ input[type="radio"] {
   vertical-align: baseline;
   display: none;
 }
-input[type="checkbox"]:checked ~ label {
+input[type="checkbox"]:checked + .bigcheck   {
   background-color: #cfe3a9;
   padding: 6px 16px;
   border-radius: 6px;
+  position: relative;
   color: $secondary-color;
 }
-input[type="checkbox"]:checked ~ .fa-check-circle {
-  visibility: visible;
-  opacity: 100;
-  content: "\f046";
-}
-input[type="checkbox" i] {
-  visibility: hidden;
-  display: none;
-  opacity: 0;
-}
-input[type="checkbox"]:checked
-.input:focus {
+.input:focus,
+.input.is-focused,
+.input:active,
+.input.is-active,
+.textarea:focus,
+.textarea.is-focused,
+.textarea:active,
+.textarea.is-active {
   border-color: $third-color;
   box-shadow: 0 0 0 0.125em rgba(160, 197, 100, 0.54);
 }
