@@ -5,18 +5,14 @@ import '../scss/styles.scss'
 import '@fengyuanchen/validator';
 import CriarLista from './pages/criaLista'
 import EditarLista from './pages/editaLista'
-import minhasListas from './pages/minha-lista'
+import MinhasListas from './pages/minha-lista'
+import RealizarPedido from './pages/realizarPedido'
 
 $(function () {
     CriarLista.validaFormulario();   
+    EditarLista.validaFormulario();  
+    RealizarPedido.exibeConfirmacaDeCancelamento(); 
          
+    window.minhasListas = MinhasListas;
+    window.RealizarPedido = RealizarPedido;
 });
-
-$(function () {
-    EditarLista.validaFormulario();   
-         
-});
-
-
-window.minhasListas = minhasListas;
-
