@@ -22,13 +22,14 @@ public class PedidoControlador {
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Início", "/");
 
+
     @Autowired
     public PedidoControlador(MinhaListaServico minhaListaServico) {
         this.minhaListaServico = minhaListaServico;
     }
 
     @GetMapping
-    public String pedidos(Model modelo, Breadcrumb breadcrumb) {
+    public String pedidos(Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedido/pedidos");
@@ -36,7 +37,7 @@ public class PedidoControlador {
     }
 
     @GetMapping("/{id}/visualizar")
-    public String visualizarPedido( @PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
+    public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
         MinhaLista lista = minhaListaServico.encontraUm(id);
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
@@ -48,14 +49,11 @@ public class PedidoControlador {
     }
 
     @PostMapping("/{id}/visualizar")
-    public String visualizarPedido(MinhaLista minhaLista, @PathVariable("id") Long id, Breadcrumb breadcrumb) {
-        MinhaLista lista = minhaListaServico.encontraUm(id);
+    public String visualizarPedido(Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Visualizar pedido", "/pedidos/visualizar");
-
-        lista.setNome(minhaLista.getNome());
         return "pedido/visualizar-pedido";
     }
 }

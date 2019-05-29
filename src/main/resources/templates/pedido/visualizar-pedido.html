@@ -13,10 +13,21 @@
                 <div class="box">
                     <form id="formVisualizarPedido" th:action="@{/pedidos/{id}/visualizar(id=${lista.id})}" method="post">
                         <div class="field">
-                            <input class="input input-fancy" type="text" name="nome" th:value="${lista.nome}" disabled>
+                            <h1 class="title centraliza-texto">Feijoada de domingo</h1>
                         </div>
-                        <div class="flex space-between">
-                            <a class="button is-primary" th:href="@{/}">Voltar</a>
+                        <div class="columns">
+                            <div class="column is-12">
+                                <div class="box">
+                                    <div class="field">
+                                        <div class="control">
+                                            <h4><b>Aldo Produtor</b></h4>
+                                            <div class="flex space-between">
+                                                <a class="button is-primary" th:href="@{/}">Voltar</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
