@@ -1,5 +1,4 @@
 package com.thoughtworks.aceleradora.controladores;
-
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.util.function.Consumer;
 
 @Controller
@@ -21,7 +19,6 @@ public class PedidoControlador {
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Início", "/");
-
 
     @Autowired
     public PedidoControlador(MinhaListaServico minhaListaServico) {
@@ -55,5 +52,12 @@ public class PedidoControlador {
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Visualizar pedido", "/pedidos/visualizar");
         return "pedido/visualizar-pedido";
+    }
+    @GetMapping("/realizar-pedido")
+    public String realizarPedidos(Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("realizar pedido", "/pedido/pedidos");
+        return "pedido/realizar-pedido";
     }
 }
