@@ -5,7 +5,7 @@ import '../scss/styles.scss'
 import '@fengyuanchen/validator';
 import CriarLista from './pages/criaLista'
 import EditarLista from './pages/editaLista'
-import MinhasListas from './pages/minha-lista'
+import minhasListas from './pages/minha-lista'
 import RealizarPedido from './pages/realizarPedido'
 
 $(function () {
@@ -13,6 +13,7 @@ $(function () {
     EditarLista.validaFormulario();  
     RealizarPedido.exibeConfirmacaDeCancelamento(); 
          
-    window.minhasListas = MinhasListas;
-    window.RealizarPedido = RealizarPedido;
 });
+
+window.minhasListas = minhasListas;
+window.RealizarPedido = RealizarPedido;
