@@ -17,7 +17,7 @@
           </div>
           <div class="box">
 
-            <form id="formCriaLista" th:action="'@{/minhas-listas/criar}'" method="post">
+            <form id="formCriaLista" th:action="@{/minhas-listas/criar}" method="post">
               <div class="field column is-6 is-offset-3">
                 <label class="label">Nome*</label>
                 <div class="control">
@@ -35,8 +35,8 @@
                     <span class="bigcheck">
                       <input class="checkbox" type="checkbox" name="produtos" th:value="${produto.id}" th:id="${produto.nome}">
                       <label class="checkbox" th:text="${produto.nome}" th:for="${produto.nome}"></label>
-                      <i class="fas fa-check-circle"></i>
-                    </span>
+                      <span class="check"><i class="far fa-check-circle"></i></span>
+                    </span>   
                   </div>
                 </div>
 

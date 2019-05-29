@@ -1,18 +1,21 @@
 span.bigcheck {
   display: block;
   padding: 0.5em;
+  min-height: 50px;
+  position: relative;
 }
 input[type="checkbox"],
 input[type="radio"] {
   vertical-align: baseline;
   display: none;
 }
-input[type="checkbox"]:checked + .bigcheck   {
+input[type="checkbox"]:checked ~ label {
   background-color: #cfe3a9;
-  padding: 6px 16px;
+  padding: 5px 23px 5px 28px;
+  margin-left: -5px;
   border-radius: 6px;
   position: relative;
-  color: $secondary-color;
+  color: #394d17;
 }
 .input:focus,
 .input.is-focused,
@@ -25,9 +28,18 @@ input[type="checkbox"]:checked + .bigcheck   {
   border-color: $third-color;
   box-shadow: 0 0 0 0.125em rgba(160, 197, 100, 0.54);
 }
-.bigcheck {
-  min-height: 48px;
+.checkbox {
+  padding: 5px 1px 12px 22px;
 }
-label {
-  padding: 6px;
+span.check {
+  overflow: visible;
+  visibility: hidden;
+}
+input[type="checkbox"]:checked ~ span.check {
+  visibility: visible;
+  position: absolute;
+  color: #394d17;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
 }

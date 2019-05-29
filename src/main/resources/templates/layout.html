@@ -1,67 +1,71 @@
 <!DOCTYPE html>
-<html lang="pt-br" th:fragment="layout(title, content)" xmlns:th="http://www.thymeleaf.org" class="has-background-light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html lang="pt-br" th:fragment="layout(title, content)" xmlns:th="http://www.thymeleaf.org">
 
-    <title th:replace="${title}"></title>
-    <link href="/css/app.css" rel="stylesheet">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title th:replace="${title}"></title>
+  <link href="/css/app.css" rel="stylesheet">
 </head>
 
 <body class="has-background-light">
-    <header>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" th:href="@{/}">
-                    <i class="fab fa-pagelines"></i>
-                    <span class="m-2">Raízes</span>
-                </a>
-                <a class="navbar-item" th:href="@{/minhas-listas/criar}">
-                    <p class="titulo-nav">Criar Lista de Produtos</p>
-                </a>
-                <a class="navbar-item" th:href="@{/minhas-listas}">
-                    <p class="titulo-nav">Minhas Listas</p>
-                </a>
-            </div>
-        </nav>
-        <nav class="m-2 ml-5 breadcrumb has-arrow-separator" aria-label="breadcrumbs">
-            <ul>
-                <li th:each="pagina : ${@breadcrumb.paginas}"
-                    th:classappend="${@breadcrumb.ehPaginaAtiva(pagina)} ? 'is-active' : ''">
-                    <a th:href="${pagina.url}" th:text="${pagina.titulo}"></a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <div class="main">
+  <header>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" th:href="@{/}">
+          <i class="fab fa-pagelines"></i>
+          <span class="m-2">Raízes</span>
+        </a>
+        <a class="navbar-item" th:href="@{/minhas-listas/criar}">
+          <p class="titulo-nav">Criar Lista de Produtos</p>
+          <a class="navbar-item" th:href="@{/minhas-listas}">
+            <p class="titulo-nav">Minhas Listas</p>
+          </a>
+          <a class="navbar-item" th:href="@{/pedidos}">
+            <p class="titulo-nav">Pedidos</p>
+          </a>
+      </div>
+    </nav>
+    <nav class="m-2 ml-5 breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+      <ul>
+        <li th:each="pagina : ${@breadcrumb.paginas}"
+          th:classappend="${@breadcrumb.ehPaginaAtiva(pagina)} ? 'is-active' : ''">
+          <a th:href="${pagina.url}" th:text="${pagina.titulo}"></a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="main">
     <main th:replace="${content}"></main>
     <div class="notification is-info">
-        <button class="delete"></button>
-        <div class="body"></div>
+      <button class="delete"></button>
+      <div class="body"></div>
     </div>
+  </div>
+  <footer class="rz-footer">
+    <span class="navbar-item siga">Siga a gente</span>
+    <div class="flex flex-row rz-footer texto ">
+      <a class="navbar-item" href="/">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a class="navbar-item" href="/">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a class="navbar-item" href="/">
+        <i class="fab fa-instagram"></i>  
+      </a>
     </div>
-    <footer class="rz-footer">
-        <span class="navbar-item siga">Siga a gente</span>
-        <div class="flex flex-row rz-footer texto ">
-            <a class="navbar-item" href="/">
-                <i class="fab fa-facebook"></i>
-            </a>
-            <a class="navbar-item" href="/">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a class="navbar-item" href="/">
-                <i class="fab fa-instagram"></i>
-            </a>
-        </div>
-        <div class="navbar-brand has-text-left">
-            <a class="navbar-item" href="/">
-                <i class="fab fa-pagelines"></i>
-                <span class="m-2 primary">Raízes</span>
-            </a>
-            <span class="m-2 navbar-item primary">Thoughtworks © 2019</span>
-        </div>
-    </footer>
-    <script src="/js/app.js"></script>
+    <div class="navbar-brand has-text-left">
+      <a class="navbar-item" href="/">
+        <i class="fab fa-pagelines"></i>
+        <span class="m-2 primary">Raízes</span>
+      </a>
+      <span class="m-2 navbar-item primary">Thoughtworks © 2019</span>
+    </div>
+  </footer>
+  <script src="/js/app.js"></script>
 </body>
+
 </html>
