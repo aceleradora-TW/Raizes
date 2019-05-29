@@ -5,13 +5,14 @@ import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.repositorios.ProdutoRepositorio;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.List;
 
 @Service
 public class ProdutoServico {
 
     private ProdutoRepositorio repositorio;
+    private MinhaListaServico minhaListaServico;
 
     public ProdutoServico(ProdutoRepositorio repositorio) {
         this.repositorio = repositorio;
@@ -39,13 +40,14 @@ public class ProdutoServico {
         }
     }
 
-    public boolean adicionaTodos(List<Produto> produtosDoBanco, List<Produto> produtosParaSeremAdicionados) {
-        try {
-            if (produtosParaSeremAdicionados.isEmpty()) return true;
-            return produtosDoBanco.addAll(produtosParaSeremAdicionados);
 
-        } catch (Exception e) {
-            return false;
-        }
-    }
 }
+//    public List<ProdutoDTO> mandaListaProdutosDTO(MinhaLista listaProdutosDTO, @PathVariable("id") Long id){
+//        for(Produto produtos: produtos){
+//            if(produtosDTO.contains(produtosChecados)){
+//                produtoDTO.setChecado = true;
+//            }
+//            else produtoDTO.setChecado = false;
+//        }
+//        return listaProdutosDTO;
+//    }

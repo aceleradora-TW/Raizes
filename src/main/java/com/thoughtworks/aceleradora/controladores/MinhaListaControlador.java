@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/minhas-listas")
@@ -81,23 +82,34 @@ public class MinhaListaControlador {
     }
 
     @GetMapping("/{id}/editar/")
-    public String pegaLista(Model modelo, @PathVariable("id") Long id, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
-        MinhaLista minhaLista = minhaListaServico.encontraUm(id);
+    public String pegaLista(MinhaLista listaDoFront, Model modelo, @PathVariable("id") Long id, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
+        List<Produto> produtos = produtoServico.pegarTodos();
+        List<Produto> lista = listaDoFront.getProdutos();
+
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("editar lista", "/minha-lista/editar-lista/{id}");
 
-        if(minhaLista == null) {
-            Erro erro = new Erro("Lista inexistente.");
-            redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
-            return "redirect:/minhas-listas/";
+        if(lista != null ){
+
+            List<ProdutoDTO> listaChecada = checadoTrue(produtos, lista);
+            modelo.addAttribute("produtos", listaChecada);
+//            modelo.addAttribute("lista", checadoTrue(produtos, listaDoFront));
+        } else {
+            modelo.addAttribute("produtos", produtos);
+
         }
 
-        modelo.addAttribute("lista", new MinhaLista());
-        List<Categoria> categorias = categoriaServico.pegarCategorias();
-        modelo.addAttribute("categorias", categorias);
-        modelo.addAttribute("lista", minhaLista);
         return "minha-lista/editar";
+    }
+
+    private List<ProdutoDTO> checadoTrue(List<Produto> todosProdutos, List<Produto> produtosChecados){
+
+        List<ProdutoDTO> listaChecada = todosProdutos
+                .stream()
+                .map(produto -> new ProdutoDTO(produto.getNome(), true)).collect(Collectors.toList());
+
+        return listaChecada;
     }
 
     @PostMapping("/{id}/editar")
