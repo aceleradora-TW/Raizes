@@ -1,23 +1,27 @@
 .rz-list {
+  align-items: center;
+  margin-bottom: 0;
+  padding: 0px 60px 10px;
+
+  &.striped {
+    li {
+      &:nth-child(even) {
+        background: $striped-row;
+      }
+      &:nth-child(odd) {
+        background: #fff;
+      }
+    }
+  }
+
+  &.row {
+    display: flex;
     align-items: center;
-    margin-bottom: 0;
-    padding: 0px 60px 10px;
-
-    &.striped{
-        li {
-            &:nth-child(even) {background: $striped-row}
-            &:nth-child(odd) {background: #FFF}
-        }
-    }
-
-    &.row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 30px;
-    }
+    justify-content: space-between;
+    padding: 10px 30px;
+  }
 }
 
 .box {
-    padding: 20px 0px;
+  padding: 20px 0px;
 }

@@ -1,8 +1,10 @@
+export default burger;
+
+let nav = $(".navbar-burger");
+let menu = $(".navbar-menu");
 const burger = () => {
-    $(".navbar-burger").click(function() {
-        $(".navbar-burger").toggleClass("is-active");
-        $(".navbar-menu").toggleClass("is-active");
+    nav.click(function() {
+        nav.toggleClass("is-active");
+        menu.toggleClass("is-active");
     });  
 }
-
-export default burger;

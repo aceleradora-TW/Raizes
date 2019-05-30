@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
 
 .rz-button {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: $btn-color;
   color: $primary-color;
   margin-bottom: 0;
@@ -14,11 +14,9 @@
   }
 
   &:hover {
-      border: 1px solid $btn-hover;
-      background: $btn-hover;
-      color: white;
-      font-weight: bold;
-  } 
-
-  
+    border: 1px solid $btn-hover;
+    background: $btn-hover;
+    color: white;
+    font-weight: bold;
+  }
 }

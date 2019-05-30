@@ -1,29 +1,28 @@
 .tw-navigation {
-
-
-    .nav-icon {
-        width: 40px;
-        height: 40px;
-        padding: 0;
+  .nav-icon {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+  }
+  .navbar-item {
+    &.icon-only {
+      padding: 0;
     }
-    .navbar-item {
-        &.icon-only {
-            padding: 0;
-        }
-    }
+  }
 }
 
 .is-active.navbar-burger {
-    position: fixed;
+  position: fixed;
 }
 
-.navbar{
-    background-color: white;
-    border-bottom: 3.5px solid $third-color;
-    box-shadow: 2px -3px 10px 0px #5a5959;
-    font-family: 'Raleway', sans-serif;
+.navbar {
+  background-color: white;
+  border-bottom: 3.5px solid $third-color;
+  box-shadow: 2px -3px 10px 0px #5a5959;
+  font-family: "Raleway", sans-serif;
 }
-.primary, .primary a {
-    color: $primary-color;
-    font-weight: 500;
+.primary,
+.primary a {
+  color: $primary-color;
+  font-weight: 500;
 }

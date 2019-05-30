@@ -2,24 +2,22 @@
 @import "~bulma/bulma";
 
 // font-awesome
-@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
 
 // Config
-@import 'config/variables';
-@import 'config/custom-helpers';
-@import 'config/base';
-@import 'config/headers';
+@import "config/variables";
+@import "config/custom-helpers";
+@import "config/base";
 
 // helpers
-@import 'helpers/spacing';
-@import 'helpers/flex';
+@import "helpers/spacing";
+@import "helpers/flex";
 
 // Components
-@import 'components/lists';
-@import 'components/nav';
-@import 'components/notification';
-@import 'components/validator';
-@import 'components/buttons';
-@import 'components/footer';
-@import 'components/form';
-@import 'components/body';
+@import "components/lists";
+@import "components/nav";
+@import "components/notification";
+@import "components/validator";
+@import "components/buttons";
+@import "components/footer";
+@import "components/form";
