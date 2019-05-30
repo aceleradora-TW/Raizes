@@ -13,7 +13,7 @@ $(function () {
     CriarLista.validaFormulario();   
     EditarLista.validaFormulario();
     RealizarPedido.exibeConfirmacaDeCancelamento();
-         
+    minhasListas.exibeConfirmacaDeExclusaoDaLista();
 });
 window.minhasListas = minhasListas;
 window.RealizarPedido = RealizarPedido;

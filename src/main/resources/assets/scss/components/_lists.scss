@@ -2,7 +2,6 @@
   align-items: center;
   margin-bottom: 0;
   padding: 0px 60px 10px;
-
   &.striped {
     li {
       &:nth-child(even) {
@@ -18,10 +17,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 30px;
+    padding: 10px 30px 0px 30px;
   }
 }
 
 .box {
   padding: 20px 0px;
+}
+ul.lista-pedidos {
+  margin-top: -18px;
 }
