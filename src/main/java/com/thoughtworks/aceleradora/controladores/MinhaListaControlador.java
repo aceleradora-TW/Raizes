@@ -107,8 +107,10 @@ public class MinhaListaControlador {
 
         List<Categoria> categorias = categoriaServico.pegarCategorias();
 
-        modelo.addAttribute("categorias", categorias.);
-        modelo.addAttribute("lista", listaFinal);
+//        modelo.addAttribute("categorias", categorias);
+        modelo.addAttribute("lista", listaExistente);
+        modelo.addAttribute("listaNova", listaExistente);
+
 
         return "minha-lista/editar";
     }

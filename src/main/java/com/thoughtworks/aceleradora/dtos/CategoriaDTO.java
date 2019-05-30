@@ -17,8 +17,7 @@ public class CategoriaDTO {
     public CategoriaDTO(Categoria categoria) {
         categoria.setId(id);
         categoria.setNome(nome);
-        categoria.setProdutos(produtos);
-
+//        categoria.setProdutos();
     }
 
     public CategoriaDTO(String nome) {

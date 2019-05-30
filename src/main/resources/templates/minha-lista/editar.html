@@ -26,27 +26,35 @@
                 <label class="label">Selecione produtos:</label>
                 <div class="control">
 
-                  <ul class="categorias">
-                    <li th:each="categoria: ${categorias}">
-                      <h3 class="centraliza-texto" th:text="${categoria.nome}"></h3>
-                      <ul class="lista-produtos">
-                        <li th:each="produto: ${categoria.produtos}">
-                          <label class="checkbox">
-                            <div th:if="${produto.isChecado}">
-                              <input  type="checkbox" name="produtos" th:value="${produto.id}" checked>
-                            </div>  
-
-                            <div th:if="${!produto.isChecado}">
-                              <input type="checkbox" name="produtos" th:value="${produto.id}" >
-                            </div>
-
-                            <span th:text="${produto.nome}">
-                            </span>
-                          </label>
-                        </li>
-                      </ul>
+                  <ul class="lista-produtos">
+                    <li th:each="produto: ${lista.produtos}">
+                      <label class="checkbox">
+                        <input type="checkbox" name="produtos" th:value="${produto.id}" checked>
+                        <span th:text="${produto}">
+                        </span>
+                      </label>
                     </li>
                   </ul>
+
+                  <!-- <ul class="categorias">
+                      <li th:each="categoria: ${categorias}">
+                        <h3 class="centraliza-texto" th:text="${categoria.nome}"></h3>
+                        <ul class="lista-produtos">
+                          <li th:each="produto: ${categoria.produtos}">
+                            <label class="checkbox">
+                              <div th:if="${lista.isChecado}">
+                                <input  type="checkbox" name="produtos" th:value="${produto.id}" checked>
+                              </div>    
+                              <div th:if="${lista.isChecado}"></div>
+                              <input type="checkbox" name="produtos" th:value="${produto.id}" >
+                              
+                              <span th:text="${produto.nome}">
+                              </span>
+                            </label>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul> -->
 
                   <div class="help-block"></div>
                 </div>
