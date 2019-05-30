@@ -3,6 +3,7 @@ package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.dominio.Produtor;
+import com.thoughtworks.aceleradora.servicos.PedidoServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
 import com.thoughtworks.aceleradora.servicos.ProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +23,21 @@ import java.util.function.Consumer;
 public class PedidoControlador {
     private ProdutoServico produtoServico;
     private ProdutorServico produtorServico;
+    private PedidoServico pedidoServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Página Inicial", "/");
 
     @Autowired
-    public PedidoControlador(ProdutoServico produtoServico, ProdutorServico produtorServico) {
+    public PedidoControlador(ProdutoServico produtoServico,
+                             ProdutorServico produtorServico,
+                             PedidoServico pedidoServico) {
         this.produtoServico = produtoServico;
         this.produtorServico = produtorServico;
+        this.pedidoServico = pedidoServico;
     }
+
+
 
     @GetMapping
     public String pedidos(Model modelo, Breadcrumb breadcrumb) {
@@ -60,6 +67,12 @@ public class PedidoControlador {
         mapa.put("produtores", produtores);
 
         return mapa;
+    }
+
+    @ResponseBody
+    @GetMapping("/produtosDosProdutores")
+    public List<Produto> pegarProdutosDosProduores() {
+        return pedidoServico.pegarListaDeProdutosDosProdutores();
     }
 
 }

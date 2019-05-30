@@ -29,6 +29,10 @@ public class ProdutoServico {
         return repositorio.findById(id);
     }
 
+    public Produto encontraProdutoPorId(Long id) {
+        return repositorio.findById(id);
+    }
+
     public boolean removerTodos(List<Produto> produtosDoBanco, List<Produto> produtosParaSeremRemovidos) {
         try {
             if(produtosParaSeremRemovidos.isEmpty()) return true;
