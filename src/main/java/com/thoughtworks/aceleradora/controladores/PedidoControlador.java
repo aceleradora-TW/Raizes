@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,9 +72,10 @@ public class PedidoControlador {
 
     @ResponseBody
     @GetMapping("/produtosDosProdutores")
-    public List<Produtor> pegarProdutosDosProduores() {
-        Produto produto = produtoServico.encontraUm(3L);
-        return pedidoServico.procurarProdutores(produto);
+    public  Map<Produto, List<Produtor>> pegarProdutosDosProduores() {
+        List<Produto> produtos = produtoServico.pegarTodos();
+
+        return pedidoServico.pegarProdutoresDosProdutos(produtos);
     }
 
 }
