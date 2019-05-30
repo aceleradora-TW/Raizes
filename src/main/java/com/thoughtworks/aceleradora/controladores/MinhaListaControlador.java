@@ -59,7 +59,7 @@ public class MinhaListaControlador {
     @PostMapping("/criar")
     public String salvarLista(MinhaLista lista, RedirectAttributes atributosRedirecionamento) {
         if (minhaListaServico.salvar(lista) == null) {
-            Erro erro = new Erro("Falhou na criação da lista");
+            Erro erro = new Erro("Já existe uma lista cadastrada com esse nome!");
             atributosRedirecionamento.addFlashAttribute("Erro", erro);
 
             return "redirect:/minhas-listas/criar";
