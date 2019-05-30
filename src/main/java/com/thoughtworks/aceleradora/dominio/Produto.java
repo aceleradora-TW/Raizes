@@ -25,9 +25,16 @@ public class Produto {
     @JsonIgnoreProperties("produtos")
     private Cultivo cultivo;
 
-    public Produto() {
+    public Produto(String nome) {
     }
 
+    public Produto() {}
+
+    public Produto(Long id, String nome, Categoria categoria, Cultivo cultivo) {
+        this.nome = nome;
+        this.categoria = categoria;
+        this.cultivo = cultivo;
+    }
 
     public Long getId() {
         return id;

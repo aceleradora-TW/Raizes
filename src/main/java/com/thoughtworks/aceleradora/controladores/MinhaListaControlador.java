@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dtos.ProdutoDTO;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
@@ -12,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -82,35 +82,37 @@ public class MinhaListaControlador {
     }
 
     @GetMapping("/{id}/editar/")
-    public String pegaLista(MinhaLista listaDoFront, Model modelo, @PathVariable("id") Long id, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
-        List<Produto> produtos = produtoServico.pegarTodos();
-        List<Produto> lista = listaDoFront.getProdutos();
+    public String pegaLista(Model modelo, @PathVariable("id") Long id, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
+        MinhaLista listaExistente = minhaListaServico.encontraUm(id);
+        List<Produto> listaTodosProdutos = produtoServico.pegarTodos();
+        List<ProdutoDTO> listaFinal = new ArrayList<>();
 
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("editar lista", "/minha-lista/editar-lista/{id}");
 
-        if(lista != null ){
-
-            List<ProdutoDTO> listaChecada = checadoTrue(produtos, lista);
-            modelo.addAttribute("produtos", listaChecada);
-//            modelo.addAttribute("lista", checadoTrue(produtos, listaDoFront));
-        } else {
-            modelo.addAttribute("produtos", produtos);
-
+        if (listaExistente == null) {
+            Erro erro = new Erro("Lista inexistente.");
+            redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
+            return "redirect:/minhas-listas/";
         }
+
+        for (Produto produto : listaTodosProdutos) {
+            for (Produto produtoFront : listaExistente.getProdutos()) {
+                if (produtoFront.equals(produto)){
+                    listaFinal.add(new ProdutoDTO(produto, true));
+                }
+            }
+        }
+
+        List<Categoria> categorias = categoriaServico.pegarCategorias();
+
+        modelo.addAttribute("categorias", categorias.);
+        modelo.addAttribute("lista", listaFinal);
 
         return "minha-lista/editar";
     }
 
-    private List<ProdutoDTO> checadoTrue(List<Produto> todosProdutos, List<Produto> produtosChecados){
-
-        List<ProdutoDTO> listaChecada = todosProdutos
-                .stream()
-                .map(produto -> new ProdutoDTO(produto.getNome(), true)).collect(Collectors.toList());
-
-        return listaChecada;
-    }
 
     @PostMapping("/{id}/editar")
     public String removerItem(MinhaLista listaDoFront, @PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {

@@ -42,12 +42,3 @@ public class ProdutoServico {
 
 
 }
-//    public List<ProdutoDTO> mandaListaProdutosDTO(MinhaLista listaProdutosDTO, @PathVariable("id") Long id){
-//        for(Produto produtos: produtos){
-//            if(produtosDTO.contains(produtosChecados)){
-//                produtoDTO.setChecado = true;
-//            }
-//            else produtoDTO.setChecado = false;
-//        }
-//        return listaProdutosDTO;
-//    }
