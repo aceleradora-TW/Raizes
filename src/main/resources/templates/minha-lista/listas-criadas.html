@@ -28,9 +28,9 @@
                       <a class="button rz-botao" type="submit" th:href="@{/minhas-listas/{id}/editar/(id=${lista.id})}">
                         <i class="fas fa-edit"></i>
                       </a>
-                      <span class="button rz-botao">
+                      <a class="button rz-botao" th:href="@{/pedidos/realizar-pedido}">
                         <i class="fas fa-shopping-basket"></i>
-                      </span>
+                      </a>
                       <form th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post" name="meuform"
                         th:onsubmit="return minhasListas.exibeConfirmacaDeExclusaoDaLista()">
                         <button type="submit" class="button rz-botao">

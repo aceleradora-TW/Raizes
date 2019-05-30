@@ -8,13 +8,16 @@ import EditarLista from './pages/editaLista'
 import minhasListas from './pages/minha-lista'
 import mensagemCancelar  from './pages/mensagem'
 import validaEditar from './pages/validaAdicionarProdutos'
+import RealizarPedido from './pages/realizarPedido'
 
 $(function () {
-    CriarLista.validaFormulario();   
-    validaEditar.validacaoEditar();   
+    CriarLista.validaFormulario();
+    validaEditar.validacaoEditar();
     EditarLista.validaFormulario();
+    RealizarPedido.exibeConfirmacaDeCancelamento();
          
-    window.minhasListas = minhasListas;
-    window.EditarLista = EditarLista;
-    window.exibirMensagem = mensagemCancelar;
 });
+window.EditarLista = EditarLista;
+window.exibirMensagem = mensagemCancelar;
+window.minhasListas = minhasListas;
+window.RealizarPedido = RealizarPedido;
