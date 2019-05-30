@@ -72,7 +72,8 @@ public class PedidoControlador {
     @ResponseBody
     @GetMapping("/produtosDosProdutores")
     public List<Produtor> pegarProdutosDosProduores() {
-        return pedidoServico.procurarProdutores();
+        Produto produto = produtoServico.encontraUm(3L);
+        return pedidoServico.procurarProdutores(produto);
     }
 
 }

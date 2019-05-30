@@ -39,26 +39,22 @@ public class PedidoServico {
 
     }
 
-    public List<Produtor> procurarProdutores() {
-        List<Produtor> produtores = produtorServico.pegarTodosProdutores();
-        Optional<Produto> produtoOptional = produtoServico.encontraUm(4L);
-        Produto produtoBeterraba = produtoOptional.get();
+    public List<Produtor> procurarProdutores(Produto produto) {
+        List<Produtor> todosProdutores = produtorServico.pegarTodosProdutores();
+        List<Produto> produtosDoProdutor = new ArrayList<>();
+        List<Produtor> produtoresDoProduto = new ArrayList<>();
 
-        List<Produto> produtos = new ArrayList<>();
-        List<Produtor> produtoresDeBeterraba = new ArrayList<>();
-
-        for (Produtor produtor : produtores) {
+        for (Produtor produtor : todosProdutores) {
             List<Produto> produtosAtual = produtor.getProdutos();
 
-            for (Produto produto : produtosAtual) {
-                if(produto.equals(produtoBeterraba)) {
-                    produtoresDeBeterraba.add(produtor);
+            for (Produto produtoDoProdutor : produtosAtual) {
+                if(produtoDoProdutor.equals(produto)) {
+                    produtoresDoProduto.add(produtor);
                 }
-
             }
         }
 
-        return produtoresDeBeterraba;
+        return produtoresDoProduto;
     }
 
 //    public List<ProdutoProdutor> pegarProdutoresDosProdutos(MinhaLista minhaLista) {
