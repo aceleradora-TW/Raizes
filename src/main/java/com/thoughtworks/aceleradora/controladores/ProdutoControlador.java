@@ -54,6 +54,7 @@ public class ProdutoControlador {
 
         modelo.addAttribute("categorias",categoriaServico.pegarCategorias());
         modelo.addAttribute("cultivos", cultivoServico.pegarCultivos());
+        modelo.addAttribute("produtos", produtoServico.pegarTodos());
 
         return "produto/cadastro";
     }
