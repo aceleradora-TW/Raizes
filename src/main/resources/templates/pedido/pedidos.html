@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
-<html lang="pt-br">
-
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title></title>
@@ -29,7 +28,7 @@
                   <span class="flex-column">Pendente</span>
                   <span class="flex-column ">00/00/00 </span>
                   <div class="mb-3 flex end buttons has-addons">
-                    <span class="button rz-button list-style" th:href="@{/pedidos/9/visualizar}">
+                    <span class="button rz-button list-style" th:href="@{/pedidos/9}">
                       <i class="fas fa-eye"></i>
                     </span>
                     <span class="button rz-button list-style">
@@ -68,6 +67,7 @@
             </div>
           </div>
         </div>
+      </div>
     </section>
   </section>
 </body>

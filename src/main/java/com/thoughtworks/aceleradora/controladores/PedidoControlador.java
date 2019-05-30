@@ -33,24 +33,15 @@ public class PedidoControlador {
         return "/pedido/pedidos";
     }
 
-    @GetMapping("/{id}/visualizar")
+    @GetMapping("/{id}")
     public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
         MinhaLista lista = minhaListaServico.encontraUm(id);
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
-                .pagina("Visualizar pedido", "/pedidos/visualizar");
+                .pagina("Visualizar pedido", "/pedidos");
 
         modelo.addAttribute("lista", lista);
-        return "pedido/visualizar-pedido";
-    }
-
-    @PostMapping("/{id}/visualizar")
-    public String visualizarPedido(Breadcrumb breadcrumb) {
-        breadcrumb
-                .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Pedidos", "/pedidos")
-                .pagina("Visualizar pedido", "/pedidos/visualizar");
         return "pedido/visualizar-pedido";
     }
     @GetMapping("/realizar-pedido")
