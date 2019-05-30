@@ -60,8 +60,8 @@ public class PedidoServico {
         Map<Produto, List<Produtor>> mapa = new HashMap<>();
 
         for (Produto produto: listaDeProdutos) {
-            List<Produtor> produtores = new ArrayList<>();
-            produtores = procurarProdutores(produto);
+            List<Produtor> produtores = procurarProdutores(produto);
+            //
             mapa.put(produto, produtores);
         }
         return mapa;
