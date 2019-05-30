@@ -6,22 +6,20 @@ body {
   background-color: white;
 }
 
+.box {
+  $box-padding: 0;
+}
+
 .title {
   color: $secondary-color;
 }
 
 h1 {
-  font-family: 'Roboto', sans-serif;
   color: $secondary-color;
   text-align: center;
   }
 
-.box {
-  $box-padding: 0;
-}
-
 h2 {
-  font-family: 'Roboto', sans-serif;
   color: $secondary-color;
   text-align: center;
   font-size: 1.5em;
@@ -29,9 +27,7 @@ h2 {
 }
 
 h3 {
-  font-family: 'Roboto', sans-serif;
   color: $secondary-color;
   text-align: center;
   font-size: 1.0em;
 }
-
