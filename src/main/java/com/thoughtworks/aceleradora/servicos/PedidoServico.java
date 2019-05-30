@@ -39,9 +39,11 @@ public class PedidoServico {
 
     }
 
-    public List<Produtor> procuraProdutores(Optional<Produto> produtoBeterraba) {
+    public List<Produtor> procurarProdutores() {
         List<Produtor> produtores = produtorServico.pegarTodosProdutores();
-        produtoBeterraba = produtoServico.encontraUm(4L);
+        Optional<Produto> produtoOptional = produtoServico.encontraUm(4L);
+        Produto produtoBeterraba = produtoOptional.get();
+
         List<Produto> produtos = new ArrayList<>();
         List<Produtor> produtoresDeBeterraba = new ArrayList<>();
 

@@ -71,8 +71,8 @@ public class PedidoControlador {
 
     @ResponseBody
     @GetMapping("/produtosDosProdutores")
-    public List<Produto> pegarProdutosDosProduores() {
-        return pedidoServico.pegarListaDeProdutosDosProdutores();
+    public List<Produtor> pegarProdutosDosProduores() {
+        return pedidoServico.procurarProdutores();
     }
 
 }
