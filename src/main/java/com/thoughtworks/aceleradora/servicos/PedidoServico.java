@@ -3,9 +3,7 @@ import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.repositorios.PedidoRepositorio;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PedidoServico {
@@ -55,6 +53,18 @@ public class PedidoServico {
         }
 
         return produtoresDoProduto;
+    }
+
+
+    public Map<Produto, List<Produtor>> pegarProdutoresDosProdutos(List<Produto> listaDeProdutos){
+        Map<Produto, List<Produtor>> mapa = new HashMap<>();
+
+        for (Produto produto: listaDeProdutos) {
+            List<Produtor> produtores = new ArrayList<>();
+            produtores = procurarProdutores(produto);
+            mapa.put(produto, produtores);
+        }
+        return mapa;
     }
 
 //    public List<ProdutoProdutor> pegarProdutoresDosProdutos(MinhaLista minhaLista) {
