@@ -11,14 +11,15 @@
       <div class="columns">
         <div class="column is-12">
           <div class="box">
+            <form id="formPedido" th:action="@{/pedidos/listar}" method="post">
             <div class="field">
               <div class="control">
                 <div class="flex equal-sizing flex-row">
                   <span>Pedidos</span>
                 </div>
                 <ul class="lista-pedidos">
-                  <li class="equal-sizing flex flex-row vertical-center">
-                    <span class="flex-column ">Pedido1</span>
+                  <li class="equal-sizing flex flex-row vertical-center" th:each="listar: ${lista-pedidos}">
+                    <span th:text="${pedidos}"></span>
                     <div class="mb-0 flex end buttons has-addons">
                       <span class="button rz-botao">
                         <i class="fas fa-eye"></i>
