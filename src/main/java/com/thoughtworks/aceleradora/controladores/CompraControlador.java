@@ -28,12 +28,12 @@ public class CompraControlador {
 
 
     @GetMapping
-    public String comprasfeitas(Model modelo, Breadcrumb breadcrumb) {
+    public String comprasFeitas(Model modelo, Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Pedidos", "/pedido/pedidos");
-        modelo.addAttribute("compras", compraServico.pegarCompras());
-        return "/pedido/pedidos";
+                .pagina("Compras", "/pedido/compras");
+        modelo.addAttribute("comprasFeitas", compraServico.pegarCompras());
+        return "/pedido/compras";
     }
 
     @GetMapping("/{id}")

@@ -17,7 +17,7 @@
                   <span>Compras</span>
                 </div>
                 <ul class="lista-pedidos">
-                  <li th:each="compras: ${comprasfeitas}">
+                  <li th:each="compras: ${comprasFeitas}">
                     <span th:text="${compras.nome}"></span>
                     <div class="mb-0 flex end buttons has-addons">
                       <a class="button rz-botao" th:href="@{/pedidos/9}">
