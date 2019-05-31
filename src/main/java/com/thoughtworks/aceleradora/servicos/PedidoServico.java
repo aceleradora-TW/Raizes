@@ -67,20 +67,6 @@ public class PedidoServico {
         return mapa;
     }
 
-//    public List<ProdutoProdutor> pegarProdutoresDosProdutos(MinhaLista minhaLista) {
-//        //1. percorrer a lista
-//        //2. pegar todos os produtores de um produto
-//        //3. armazenar produtores em nova lista
-//        //4. retornar lista de produtores encontrados
-//
-//        List<ProdutoProdutor> listaDeProdutoresPorProdutos = new ArrayList<>();
-//
-//        for (Produto produto : minhaLista.getProdutos()) {
-//            listaDeProdutoresPorProdutos = produtoProdutorServico.pegaProdutores(produto);
-//
-//        }
-//
-//        return listaDeProdutoresPorProdutos;
-//    }
+
 
 }

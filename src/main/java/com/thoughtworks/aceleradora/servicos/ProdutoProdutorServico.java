@@ -9,6 +9,7 @@ import com.thoughtworks.aceleradora.repositorios.ProdutorRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutoProdutorServico {
@@ -24,13 +25,33 @@ public class ProdutoProdutorServico {
         this.produtoRepositorio = produtoRepositorio;
     }
 
-    private List<Produtor> pegarProdutores() {
+    public List<Produtor> pegaProdutores() {
         return produtorRepositorio.findAll();
 
     }
 
-    private List<Produto> pegarProduto() {
-        return produtoRepositorio.findAll();
+    public List<ProdutoProdutor> pegaTodosProdutoProdutor() {
+        return repositorio.findAll();
 
+    }
+
+//    public ProdutoProdutor pegaPrecoEQuantidade(){
+//        Produto produto = new Produto();
+//        produto.setNome("Banana");
+//        Produtor produtor = new Produtor();
+//        produtor.setNome("Aldo");
+//
+//        ProdutoProdutor produtoTeste = new ProdutoProdutor();
+//        produtoTeste.setQuantidadeEstoque(10);
+//        produtoTeste.setProduto(produto);
+//        produtoTeste.setProdutor(produtor);
+
+//        return produtoTeste;
+
+//    }
+
+    public ProdutoProdutor encontraUm(Long id) {
+        Optional<ProdutoProdutor> produtoProdutorOptional = repositorio.findById(id);
+        return produtoProdutorOptional.get();
     }
 }

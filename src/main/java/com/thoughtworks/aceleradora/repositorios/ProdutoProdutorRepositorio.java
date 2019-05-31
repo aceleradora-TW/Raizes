@@ -9,6 +9,4 @@ import java.util.List;
 @Repository
 public interface ProdutoProdutorRepositorio extends CrudRepository<ProdutoProdutor, Long> {
         List<ProdutoProdutor> findAll();
-
-
 }

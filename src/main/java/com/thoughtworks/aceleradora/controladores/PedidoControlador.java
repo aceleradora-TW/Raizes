@@ -1,13 +1,7 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.MinhaLista;
-import com.thoughtworks.aceleradora.dominio.Produto;
-import com.thoughtworks.aceleradora.dominio.Produtor;
-import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
-import com.thoughtworks.aceleradora.servicos.PedidoServico;
-import com.thoughtworks.aceleradora.servicos.ProdutoServico;
-import com.thoughtworks.aceleradora.servicos.ProdutorServico;
+import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +24,7 @@ public class PedidoControlador {
     private ProdutorServico produtorServico;
     private PedidoServico pedidoServico;
     private MinhaListaServico minhaListaServico;
+    private ProdutoProdutorServico produtoProdutorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Início", "/");
@@ -38,11 +33,13 @@ public class PedidoControlador {
     public PedidoControlador(ProdutoServico produtoServico,
                              ProdutorServico produtorServico,
                              PedidoServico pedidoServico,
-                             MinhaListaServico minhaListaServico) {
+                             MinhaListaServico minhaListaServico,
+                             ProdutoProdutorServico produtoProdutorServico) {
         this.produtoServico = produtoServico;
         this.produtorServico = produtorServico;
         this.pedidoServico = pedidoServico;
         this.minhaListaServico = minhaListaServico;
+        this.produtoProdutorServico = produtoProdutorServico;
     }
 
     @GetMapping
@@ -94,5 +91,19 @@ public class PedidoControlador {
 
         return pedidoServico.pegarProdutoresDosProdutos(produtos);
     }
+
+//    @ResponseBody
+//    @GetMapping("/preco-quantidade")
+//    public ProdutoProdutor mostraPrecoEQuantidade() {
+//        return produtoProdutorServico.pegaPrecoEQuantidade();
+//    }
+
+    @ResponseBody
+    @GetMapping("/produto-produtor")
+    public ProdutoProdutor mostraUmProdutoProdutor() {
+
+        return produtoProdutorServico.encontraUm(1L);
+    }
+
 
 }
