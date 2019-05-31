@@ -7,22 +7,22 @@
 </head><body>
   <section class="section">
     <section class="container">
-      <h1 class="title centraliza-texto">Pedidos</h1>
+      <h1 class="title centraliza-texto">Compras</h1>
       <div class="columns">
         <div class="column is-12">
           <div class="box">
             <div class="field">
               <div class="control">
                 <div class="flex equal-sizing flex-row">
-                  <span>Pedidos</span>
+                  <span>Compras</span>
                 </div>
                 <ul class="lista-pedidos">
-                  <li th:each="pedido: ${pedidosCriados}">
-                    <span th:text="${pedido.nome}"></span>
+                  <li th:each="compras: ${comprasfeitas}">
+                    <span th:text="${compras.nome}"></span>
                     <div class="mb-0 flex end buttons has-addons">
-                      <span class="button rz-botao">
+                      <a class="button rz-botao" th:href="@{/pedidos/9}">
                         <i class="fas fa-eye"></i>
-                      </span>
+                      </a>
                       <span class="button rz-botao">
                         <i class="fas fa-edit"></i>
                       </span>                 
@@ -32,14 +32,12 @@
                         </span>
                       </div>
                     </div>
-
-                    
                   </li>
                 </ul>          
               </div>
               <div class="flex space-between">
-                <a class="button is-primary" type="submit" th:href="@{/}">Voltar</a>
-                <a class="button is-primary" type="submit" th:href="@{/minhas-listas}">Novo Pedido</a>
+                <a class="button is-primary" th:href="@{/}">Voltar</a>
+                <a class="button is-primary" th:href="@{/minhas-listas}">Novo Pedido</a>
               </div> 
             </div>
           </div>

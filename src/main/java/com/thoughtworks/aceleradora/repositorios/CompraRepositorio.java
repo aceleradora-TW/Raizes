@@ -1,15 +1,15 @@
 package com.thoughtworks.aceleradora.repositorios;
 
-import com.thoughtworks.aceleradora.dominio.Pedido;
+import com.thoughtworks.aceleradora.dominio.Compras;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface PedidoRepositorio extends CrudRepository<Pedido, Long> {
+public interface CompraRepositorio extends CrudRepository<Compras, Long> {
 
-    List<Pedido> findAll();
+    List<Compras> findAll();
 
 
 }
