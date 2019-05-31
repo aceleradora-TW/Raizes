@@ -47,7 +47,7 @@ public class MinhaListaControlador {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Minhas Listas", "/minhas-listas")
-                .pagina("Cadastro", "/minhas-listas/cadastro");
+                .pagina("Cadastro", "/minhas-listas/criar");
 
         modelo.addAttribute("lista", new MinhaLista());
         List<Categoria> categorias = categoriaServico.pegarCategorias();
@@ -62,7 +62,7 @@ public class MinhaListaControlador {
             Erro erro = new Erro("Já existe uma lista cadastrada com esse nome!");
             atributosRedirecionamento.addFlashAttribute("Erro", erro);
 
-            return "redirect:/minhas-listas/criar";
+            return "redirect:/minhas-listas/cadastro";
         }
 
         return "redirect:/minhas-listas";

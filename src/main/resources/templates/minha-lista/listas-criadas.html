@@ -45,12 +45,8 @@
                 </ul>
                 <hr>
                 <div class="rz-list row">
-                  <form th:action="'/'" method="get">
-                    <button class="button rz-button is-rounded" type="submit">Voltar</button>
-                  </form>
-                  <form th:action="'/minha-lista/cadastro'" method="get">
-                    <button class="button rz-button is-rounded" type="submit">Nova Lista</button>
-                  </form>
+                 <a class="button rz-button is-rounded" type="submit" th:href="@{/}">Voltar</a>
+                  <a class="button rz-button is-rounded" type="submit" th:href="@{/minhas-listas/criar}">Nova Lista</a>
                 </div>
               </div>
             </div>
