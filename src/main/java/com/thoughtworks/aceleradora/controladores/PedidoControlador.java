@@ -48,7 +48,7 @@ public class PedidoControlador {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedido/pedidos");
-        return "/pedido/pedidos";
+        return "pedido/pedidos";
     }
 
     @GetMapping("/{id}")
