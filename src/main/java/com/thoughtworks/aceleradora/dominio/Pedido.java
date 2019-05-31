@@ -12,7 +12,13 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private ProdutoProdutor produtoProdutor;
+
+    //private ProdutoProdutor produtoProdutor;
     private Integer quantidade;
+
+
+    public Pedido() {
+    }
+
 
 }

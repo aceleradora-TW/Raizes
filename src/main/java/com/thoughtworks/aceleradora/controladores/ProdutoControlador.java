@@ -3,16 +3,23 @@ package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.Erro;
 import com.thoughtworks.aceleradora.dominio.Produto;
+import com.thoughtworks.aceleradora.dominio.Produtor;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.CultivoServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
+import com.thoughtworks.aceleradora.servicos.ProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 @Controller
@@ -22,15 +29,18 @@ public class ProdutoControlador {
     private ProdutoServico produtoServico;
     private CategoriaServico categoriaServico;
     private CultivoServico cultivoServico;
+    private ProdutorServico produtorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Início", "/");
 
     @Autowired
-    public ProdutoControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico, CultivoServico cultivoServico) {
+    public ProdutoControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico,
+                              CultivoServico cultivoServico, ProdutorServico produtorServico) {
         this.produtoServico = produtoServico;
         this.categoriaServico = categoriaServico;
         this.cultivoServico = cultivoServico;
+        this.produtorServico = produtorServico;
     }
 
     @GetMapping("/cadastro")
@@ -40,7 +50,7 @@ public class ProdutoControlador {
                 .pagina("Produtos", "/produtos")
                 .pagina("Cadastro", "/produtos/cadastro");
 
-        modelo.addAttribute("categorias",categoriaServico.pegarCategorias());
+        modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
         modelo.addAttribute("cultivos", cultivoServico.pegarCultivos());
         modelo.addAttribute("produtos", produtoServico.pegarTodos());
 
@@ -48,7 +58,7 @@ public class ProdutoControlador {
     }
 
     @PostMapping("/cadastro")
-    public String salvarProduto (Produto produtoQueVem, Model modelo, Breadcrumb breadcrumb) {
+    public String salvarProduto(Produto produtoQueVem, Model modelo, Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Produtos", "/produtos")
@@ -67,4 +77,5 @@ public class ProdutoControlador {
 
         return "produto/cadastro";
     }
+
 }

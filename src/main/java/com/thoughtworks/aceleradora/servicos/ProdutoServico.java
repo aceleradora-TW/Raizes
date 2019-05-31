@@ -25,8 +25,9 @@ public class ProdutoServico {
             return repositorio.save(produto);
     }
 
-    public Optional<Produto> encontraUm(Long id) {
-        return repositorio.findById(id);
+    public Produto encontraUm(Long id) {
+        Optional<Produto> produto = repositorio.findById(id);
+        return produto.get();
     }
 
     public boolean removerTodos(List<Produto> produtosDoBanco, List<Produto> produtosParaSeremRemovidos) {
