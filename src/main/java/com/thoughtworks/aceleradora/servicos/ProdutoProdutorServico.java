@@ -25,33 +25,15 @@ public class ProdutoProdutorServico {
         this.produtoRepositorio = produtoRepositorio;
     }
 
-    public List<Produtor> pegaProdutores() {
-        return produtorRepositorio.findAll();
-
-    }
-
     public List<ProdutoProdutor> pegaTodosProdutoProdutor() {
         return repositorio.findAll();
 
     }
 
-//    public ProdutoProdutor pegaPrecoEQuantidade(){
-//        Produto produto = new Produto();
-//        produto.setNome("Banana");
-//        Produtor produtor = new Produtor();
-//        produtor.setNome("Aldo");
-//
-//        ProdutoProdutor produtoTeste = new ProdutoProdutor();
-//        produtoTeste.setQuantidadeEstoque(10);
-//        produtoTeste.setProduto(produto);
-//        produtoTeste.setProdutor(produtor);
-
-//        return produtoTeste;
-
-//    }
-
     public ProdutoProdutor encontraUm(Long id) {
         Optional<ProdutoProdutor> produtoProdutorOptional = repositorio.findById(id);
         return produtoProdutorOptional.get();
     }
+
+
 }
