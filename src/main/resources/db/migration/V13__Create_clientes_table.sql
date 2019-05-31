@@ -1,8 +1,8 @@
 create table clientes (
     id serial primary key,
     nome varchar(255) not null,
-    id_usuario int not null,
+    id_usuarios bigint not null,
 
-    constraint fk_usuario foreign key (id_usuario) references usuarios(id)
+    constraint fk_usuarios foreign key (id_usuarios) references usuarios(id)
 
 );
