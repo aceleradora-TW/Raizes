@@ -57,53 +57,46 @@ public class PedidoControlador {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
-                .pagina("Visualizar pedido", "/pedidos");
+                .pagina("Visualizar Pedido", "/pedidos");
 
         modelo.addAttribute("lista", lista);
         return "pedido/visualizar-pedido";
     }
 
-    @GetMapping("/realizar-pedido")
-    public String realizarPedidos(Breadcrumb breadcrumb) {
+    @GetMapping("/realizar")
+    public String realizarPedido(Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Realizar Pedido", "/pedido/pedidos");
         return "pedido/realizar-pedido";
     }
 
-    @ResponseBody
-    @GetMapping("/teste")
-    public Map listaProdutosProdutores(Model modelo) {
-        Map<String, List> mapa = new HashMap<>();
-
-        List<Produto> produtos = produtoServico.pegarTodos();
-        List<Produtor> produtores = produtorServico.pegarTodosProdutores();
-
-        mapa.put("produtos", produtos);
-        mapa.put("produtores", produtores);
-
-        return mapa;
+    @PostMapping("/realizar")
+    public String salvarPedido(Pedido pedido){
+        pedidoServico.salvar(pedido);
+        return "redirect:/pedidos";
     }
 
     @ResponseBody
-    @GetMapping("/produtosDosProdutores")
-    public  Map<Produto, List<Produtor>> pegarProdutosDosProduores() {
+    @GetMapping("/lista-produtores")
+    public  Map<Produto, List<Produtor>> mostraProdutosComProdutores() {
         List<Produto> produtos = produtoServico.pegarTodos();
 
         return pedidoServico.pegarProdutoresDosProdutos(produtos);
     }
 
-//    @ResponseBody
-//    @GetMapping("/preco-quantidade")
-//    public ProdutoProdutor mostraPrecoEQuantidade() {
-//        return produtoProdutorServico.pegaPrecoEQuantidade();
-//    }
+
+    @ResponseBody
+    @GetMapping("/produto-produtor/{id}")
+    public ProdutoProdutor mostraPrecoEQuantidadeDeProdutoDeUmProdutor(Long id) {
+
+        return produtoProdutorServico.encontraUm(id);
+    }
 
     @ResponseBody
     @GetMapping("/produto-produtor")
-    public ProdutoProdutor mostraUmProdutoProdutor() {
-
-        return produtoProdutorServico.encontraUm(1L);
+    public List<ProdutoProdutor> mostraPrecoEQuantidadeDeTodosProdutos() {
+        return produtoProdutorServico.pegaTodosProdutoProdutor();
     }
 
 
