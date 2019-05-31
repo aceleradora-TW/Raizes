@@ -12,12 +12,10 @@ public class CategoriaDTO {
 
     private List<ProdutoDTO> produtos = new ArrayList<>();
 
-    public CategoriaDTO() {
-    }
-    public CategoriaDTO(Categoria categoria) {
-        categoria.setId(id);
-        categoria.setNome(nome);
-//        categoria.setProdutos();
+    public CategoriaDTO(Categoria categoria,  List<ProdutoDTO> listaFinal) {
+        this.id = categoria.getId();
+        this.nome = categoria.getNome();
+        this.produtos = listaFinal;
     }
 
     public CategoriaDTO(String nome) {

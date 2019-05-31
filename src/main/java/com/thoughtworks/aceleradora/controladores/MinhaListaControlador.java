@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dtos.CategoriaDTO;
 import com.thoughtworks.aceleradora.dtos.ProdutoDTO;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
@@ -105,12 +106,15 @@ public class MinhaListaControlador {
             }
         }
 
-        List<Categoria> categorias = categoriaServico.pegarCategorias();
+        List<CategoriaDTO> categorias = categoriaServico
+                .pegarCategorias()
+                .stream()
+                .map(cat ->cat.paraDTO(listaFinal))
+                .collect(Collectors.toList());
 
-//        modelo.addAttribute("categorias", categorias);
-        modelo.addAttribute("lista", listaExistente);
-        modelo.addAttribute("listaNova", listaExistente);
 
+
+        modelo.addAttribute("categorias", categorias);
 
         return "minha-lista/editar";
     }
