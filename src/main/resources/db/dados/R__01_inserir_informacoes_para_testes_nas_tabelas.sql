@@ -31,7 +31,7 @@ alter SEQUENCE usuarios_id_seq RESTART with 1;
 
 
 insert
-  into usuarios (email, senha, tipoUsuario)
+  into usuarios (email, senha, tipo_usuario)
   values ('email@produtor.com', 'senha', 0), ('email@cliente.com', 'senha', 1);
 
 insert
