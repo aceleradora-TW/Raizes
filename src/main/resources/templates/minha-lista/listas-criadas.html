@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title></title>
 </head>
-
 <body>
   <section class="section">
     <section class="container">
@@ -18,15 +16,20 @@
         <span th:text="${erro.mensagem}"></span>
       </div>
       <div class="columns">
-        <div class="column is-12">
-          <div class="box rz-list striped">
+        <div class="column box is-12 rz-list striped">
             <div class="field">
               <div class="control">
+                  <ul>
+                      <li class="rz-list row rx-0">
+                        <h3 class="flex-column subtitle">Nome da lista</h3>
+                      </li>
+                      <hr>
+                    </ul>
                 <p class="centraliza-texto" th:if="${listasCriadas.isEmpty()}">Não há listas criadas.</p>
-                <ul>
+                <ul class= "listas">
                   <li class="rz-list row" th:each="lista: ${listasCriadas}">
-                    <span th:text="${lista.nome}"></span>
-                    <div class="mb-0 ml-auto flex end buttons has-addons">
+                    <span class= "flex-column" th:text="${lista.nome}"></span>
+                    <div class="mb-3 ml-auto flex end buttons has-addons">
                       <a class="button rz-button list-style">
                         <i class="fas fa-edit"></i>
                       </a>
@@ -40,23 +43,18 @@
                         </button>
                       </form>
                     </div>
-                    <hr>
                   </li>
                 </ul>
-                <hr>
-                <div class="rz-list row">
-                 <a class="button rz-button is-rounded" type="submit" th:href="@{/}">Voltar</a>
-                  <a class="button rz-button is-rounded" type="submit" th:href="@{/minhas-listas/criar}">Nova Lista</a>
-                </div>
               </div>
             </div>
+            <div class="rz-list row">
+                <a class="button rz-button is-rounded" type="submit" th:href="@{/}">Voltar</a>
+                 <a class="button rz-button is-rounded" type="submit" th:href="@{/minhas-listas/criar}">Nova Lista</a>
+               </div>
           </div>
         </div>
       </div>
-
     </section>
-
   </section>
 </body>
-
 </html>
