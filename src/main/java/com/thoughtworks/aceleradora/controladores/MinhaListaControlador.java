@@ -99,10 +99,10 @@ public class MinhaListaControlador {
         }
 
         for (Produto produto : listaTodosProdutos) {
-            for (Produto produtoFront : listaExistente.getProdutos()) {
-                if (produtoFront.equals(produto)){
-                    listaFinal.add(new ProdutoDTO(produto, true));
-                }
+            if(listaExistente.getProdutos().contains(produto)){
+                listaFinal.add(new ProdutoDTO(produto, true));
+            } else{
+                listaFinal.add(new ProdutoDTO(produto, false));
             }
         }
 
@@ -112,9 +112,8 @@ public class MinhaListaControlador {
                 .map(cat ->cat.paraDTO(listaFinal))
                 .collect(Collectors.toList());
 
-
-
         modelo.addAttribute("categorias", categorias);
+        modelo.addAttribute("lista", listaExistente);
 
         return "minha-lista/editar";
     }
@@ -142,7 +141,6 @@ public class MinhaListaControlador {
         List<Produto> produtosParaSeremRemovidos = minhaListaServico.pegaProdutosParaSeremRemovidos(produtosFront, produtosDoBanco);
 
 
-
         if (produtosDoBanco.size() == produtosParaSeremRemovidos.size()) {
             erro.setMensagem("Selecione pelo menos 1 produto.");
             redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
@@ -161,7 +159,4 @@ public class MinhaListaControlador {
 
         return "redirect:/minhas-listas";
     }
-
 }
-
-

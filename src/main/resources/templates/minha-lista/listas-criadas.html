@@ -25,7 +25,7 @@
                   <li th:each="lista: ${listasCriadas}">
                     <span th:text="${lista.nome}"></span>
                     <div class="mb-0 flex end buttons has-addons">
-                      <a class="button rz-botao" type="submit" th:href="@{/minhas-listas/{id}/editar/(id=${lista.id})}">
+                      <a class="button rz-botao" th:href="@{/minhas-listas/{id}/editar/(id=${lista.id})}">
                         <i class="fas fa-edit"></i>
                       </a>
                       <a class="button rz-botao" th:href="@{/pedidos/realizar-pedido}">

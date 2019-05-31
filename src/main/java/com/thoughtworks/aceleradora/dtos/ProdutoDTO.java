@@ -3,17 +3,18 @@ package com.thoughtworks.aceleradora.dtos;
 
 import com.thoughtworks.aceleradora.dominio.Produto;
 
-public class ProdutoDTO  extends Produto{
+public class ProdutoDTO  extends Produto {
     private boolean checado;
+
 
     public ProdutoDTO(Produto produto, boolean checado) {
         super(
-                produto.getId(),
+                produto.getId().longValue(),
                 produto.getNome(),
                 produto.getCategoria(),
                 produto.getCultivo()
         );
-        this.checado = checado = false;
+        this.checado = checado;
     }
 
     public boolean isChecado() {

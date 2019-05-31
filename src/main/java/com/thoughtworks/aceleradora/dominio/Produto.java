@@ -31,6 +31,7 @@ public class Produto {
     public Produto() {}
 
     public Produto(Long id, String nome, Categoria categoria, Cultivo cultivo) {
+        this.id = id;
         this.nome = nome;
         this.categoria = categoria;
         this.cultivo = cultivo;

@@ -1,11 +1,9 @@
 <!DOCTYPE HTML>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
-
 <head>
   <meta charset="UTF-8">
   <title>Aceleradora Ágil - Esqueleto Ambulante</title>
 </head>
-
 <body>
   <section class="section">
     <section class="container">
@@ -25,48 +23,32 @@
               <div class="field">
                 <label class="label">Selecione produtos:</label>
                 <div class="control">
-
-                  <ul class="lista-produtos">
-                    <li th:each="produto: ${lista.produtos}">
-                      <label class="checkbox">
-                        <input type="checkbox" name="produtos" th:value="${produto.id}" checked>
-                        <span th:text="${produto}">
-                        </span>
-                      </label>
+                  <ul class="categorias">
+                    <li th:each="categoria : ${categorias}">
+                      <h3 class="centraliza-texto" th:text="${categoria.nome}"></h3>
+                      <ul class="lista-produtos">
+                        <li th:each="produto: ${categoria.produtos}">
+                          <label class="checkbox">
+                            <!--                            <div th:if="${lista.isChecado()}">-->
+                            <input type="checkbox" name="produtos" th:value="${produto.id}">
+                            <!--                            </div>-->
+                            <!--                            <div th:if="${lista.isChecado()}">-->
+                            <input type="checkbox" name="produtos" th:value="${produto.id}">
+                            <!--                            </div>-->
+                            <span th:text="${produto.nome}"></span>
+                          </label>
+                        </li>
+                      </ul>
                     </li>
                   </ul>
-
-                  <!-- <ul class="categorias">
-                      <li th:each="categoria: ${categorias}">
-                        <h3 class="centraliza-texto" th:text="${categoria.nome}"></h3>
-                        <ul class="lista-produtos">
-                          <li th:each="produto: ${categoria.produtos}">
-                            <label class="checkbox">
-                              <div th:if="${lista.isChecado}">
-                                <input  type="checkbox" name="produtos" th:value="${produto.id}" checked>
-                              </div>    
-                              <div th:if="${lista.isChecado}"></div>
-                              <input type="checkbox" name="produtos" th:value="${produto.id}" >
-                              
-                              <span th:text="${produto.nome}">
-                              </span>
-                            </label>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul> -->
-
                   <div class="help-block"></div>
                 </div>
               </div>
               <div class="field">
                 <div class="control">
                   <div class="flex space-between">
-
                     <a class="button is-primary" th:href="@{/minhas-listas}"
                       th:onclick="return EditarLista.exibeConfirmacaoDeCancelamento()">Cancelar</a>
-
-
                     <button class="button is-primary" type="submit">Salvar</button>
                   </div>
                 </div>
@@ -78,5 +60,4 @@
     </section>
   </section>
 </body>
-
 </html>
