@@ -17,8 +17,8 @@
                   <span>Pedidos</span>
                 </div>
                 <ul class="lista-pedidos">
-                  <li class="equal-sizing flex flex-row vertical-center">
-                    <span class="flex-column ">Pedido1</span>
+                  <li th:each="pedido: ${pedidosCriados}">
+                    <span th:text="${pedido.nome}"></span>
                     <div class="mb-0 flex end buttons has-addons">
                       <span class="button rz-botao">
                         <i class="fas fa-eye"></i>
@@ -32,6 +32,8 @@
                         </span>
                       </div>
                     </div>
+
+                    
                   </li>
                 </ul>          
               </div>

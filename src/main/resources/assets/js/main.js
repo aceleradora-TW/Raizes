@@ -7,6 +7,8 @@ import CriarLista from './pages/criaLista'
 import EditarLista from './pages/editaLista'
 import minhasListas from './pages/minha-lista'
 import RealizarPedido from './pages/realizarPedido'
+import Pedidos from './pages/pedidos'
+
 
 $(function () {
     CriarLista.validaFormulario();   
@@ -17,3 +19,4 @@ $(function () {
 
 window.minhasListas = minhasListas;
 window.RealizarPedido = RealizarPedido;
+window.Pedidos = Pedidos;

@@ -40,9 +40,14 @@ public class MinhaListaServico {
         return repositorio.findAll();
     }
 
-    public void removerListaCriada(Long idLista) { repositorio.deleteById(idLista);}
+    public void removerListaCriada(Long idLista) {
+        repositorio.deleteById(idLista);
+    }
 
-    public Optional<MinhaLista> findByNome(String nome) { return repositorio.findByNome(nome);}
+
+    public Optional<MinhaLista> findByNome(String nome) {
+        return repositorio.findByNome(nome);
+    }
 
     public List<Produto> pegaProdutosParaSeremRemovidos(List<Produto> produtosFront, List<Produto> produtosDoBanco) {
         List<Produto> produtosParaSeremRemovidos = new ArrayList<>();
