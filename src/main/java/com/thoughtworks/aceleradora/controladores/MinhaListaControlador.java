@@ -2,7 +2,6 @@ package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dtos.CategoriaDTO;
-import com.thoughtworks.aceleradora.dtos.ProdutoDTO;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
@@ -12,10 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/minhas-listas")
@@ -85,12 +82,10 @@ public class MinhaListaControlador {
     @GetMapping("/{id}/editar/")
     public String pegaLista(Model modelo, @PathVariable("id") Long id, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
         MinhaLista listaExistente = minhaListaServico.encontraUm(id);
-        List<Produto> listaTodosProdutos = produtoServico.pegarTodos();
-        List<ProdutoDTO> listaFinal = new ArrayList<>();
 
         breadcrumb
-                .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("editar lista", "/minha-lista/editar-lista/{id}");
+            .aproveitar(partesComunsDoBreadCrumb)
+            .pagina("editar lista", "/minha-lista/editar-lista/{id}");
 
         if (listaExistente == null) {
             Erro erro = new Erro("Lista inexistente.");
@@ -98,19 +93,8 @@ public class MinhaListaControlador {
             return "redirect:/minhas-listas/";
         }
 
-        for (Produto produto : listaTodosProdutos) {
-            if(listaExistente.getProdutos().contains(produto)){
-                listaFinal.add(new ProdutoDTO(produto, true));
-            } else{
-                listaFinal.add(new ProdutoDTO(produto, false));
-            }
-        }
-
-        List<CategoriaDTO> categorias = categoriaServico
-                .pegarCategorias()
-                .stream()
-                .map(cat ->cat.paraDTO(listaFinal))
-                .collect(Collectors.toList());
+        List<CategoriaDTO> categorias = categoriaServico.pegarCategoriasDto();
+        categorias = categoriaServico.setaChecados(categorias, listaExistente.getProdutos());
 
         modelo.addAttribute("categorias", categorias);
         modelo.addAttribute("lista", listaExistente);
@@ -120,7 +104,7 @@ public class MinhaListaControlador {
 
 
     @PostMapping("/{id}/editar")
-    public String removerItem(MinhaLista listaDoFront, @PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvarLista(MinhaLista listaDoFront, @PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
         MinhaLista listaDoBanco = minhaListaServico.encontraUm(id);
         Erro erro = new Erro("Erro ao salvar a lista!");
 
@@ -136,27 +120,19 @@ public class MinhaListaControlador {
             return "redirect:/minhas-listas/{id}/editar/";
         }
 
-        List<Produto> produtosDoBanco = listaDoBanco.getProdutos();
         List<Produto> produtosFront = listaDoFront.getProdutos();
-        List<Produto> produtosParaSeremRemovidos = minhaListaServico.pegaProdutosParaSeremRemovidos(produtosFront, produtosDoBanco);
 
-
-        if (produtosDoBanco.size() == produtosParaSeremRemovidos.size()) {
+        if (produtosFront.size() == 0) {
             erro.setMensagem("Selecione pelo menos 1 produto.");
             redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
             return "redirect:/minhas-listas/{id}/editar/";
         }
 
-        if (!produtoServico.removerTodos(produtosDoBanco, produtosParaSeremRemovidos)) {
-            redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
-            return "redirect:/minhas-listas/{id}/editar/";
-        }
-
         listaDoBanco.setNome(listaDoFront.getNome());
+        listaDoBanco.setProdutos(produtosFront);
         minhaListaServico.salvar(listaDoBanco);
 
         redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", "Sua lista foi salva com sucesso!");
-
         return "redirect:/minhas-listas";
     }
 }

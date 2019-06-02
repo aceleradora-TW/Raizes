@@ -54,8 +54,8 @@ public class Categoria {
         this.nome = nome;
     }
 
-    public CategoriaDTO paraDTO(List<ProdutoDTO> listaFinal){
-        return new CategoriaDTO(this, listaFinal);
+    public CategoriaDTO paraDTO(){
+        return new CategoriaDTO(this);
 
     }
 }

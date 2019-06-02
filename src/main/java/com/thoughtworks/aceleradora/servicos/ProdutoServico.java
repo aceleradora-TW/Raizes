@@ -30,15 +30,5 @@ public class ProdutoServico {
         return repositorio.findById(id);
     }
 
-    public boolean removerTodos(List<Produto> produtosDoBanco, List<Produto> produtosParaSeremRemovidos) {
-        try {
-            if (produtosParaSeremRemovidos.isEmpty()) return true;
-            return produtosDoBanco.removeAll(produtosParaSeremRemovidos);
-
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
 
 }

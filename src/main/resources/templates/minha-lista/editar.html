@@ -29,12 +29,8 @@
                       <ul class="lista-produtos">
                         <li th:each="produto: ${categoria.produtos}">
                           <label class="checkbox">
-                            <!--                            <div th:if="${lista.isChecado()}">-->
-                            <input type="checkbox" name="produtos" th:value="${produto.id}">
-                            <!--                            </div>-->
-                            <!--                            <div th:if="${lista.isChecado()}">-->
-<!--                            <input type="checkbox" name="produtos" th:value="${produto.id}">-->
-                            <!--                            </div>-->
+                            <input th:if="${produto.isChecado()}" type="checkbox" name="produtos" th:value="${produto.id}" checked>
+                            <input th:if="!${produto.isChecado()}" type="checkbox" name="produtos" th:value="${produto.id}">
                             <span th:text="${produto.nome}"></span>
                           </label>
                         </li>
