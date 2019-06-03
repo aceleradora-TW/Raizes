@@ -2,6 +2,8 @@ package com.thoughtworks.aceleradora.servicos;
 
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.Produto;
+import com.thoughtworks.aceleradora.dtos.CategoriaDTO;
+import com.thoughtworks.aceleradora.dtos.ProdutoDTO;
 import com.thoughtworks.aceleradora.repositorios.MinhaListaRepositorio;
 import org.springframework.stereotype.Service;
 

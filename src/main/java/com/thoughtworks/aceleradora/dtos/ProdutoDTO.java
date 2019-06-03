@@ -7,14 +7,13 @@ public class ProdutoDTO  extends Produto {
     private boolean checado;
 
 
-    public ProdutoDTO(Produto produto, boolean checado) {
+    public ProdutoDTO(Produto produto) {
         super(
                 produto.getId().longValue(),
                 produto.getNome(),
                 produto.getCategoria(),
                 produto.getCultivo()
         );
-        this.checado = checado;
     }
 
     public boolean isChecado() {

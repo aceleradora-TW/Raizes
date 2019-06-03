@@ -5,6 +5,7 @@ import com.thoughtworks.aceleradora.dominio.Produto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CategoriaDTO {
     private Long id;
@@ -12,10 +13,10 @@ public class CategoriaDTO {
 
     private List<ProdutoDTO> produtos = new ArrayList<>();
 
-    public CategoriaDTO(Categoria categoria,  List<ProdutoDTO> listaFinal) {
+    public CategoriaDTO(Categoria categoria) {
         this.id = categoria.getId();
         this.nome = categoria.getNome();
-        this.produtos = listaFinal;
+        this.produtos = mapeiaProdutosParaDto(categoria.getProdutos());
     }
 
     public CategoriaDTO(String nome) {
@@ -44,6 +45,10 @@ public class CategoriaDTO {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    private List<ProdutoDTO> mapeiaProdutosParaDto(List<Produto> produtos) {
+        return produtos.stream().map(produto -> new ProdutoDTO(produto)).collect(Collectors.toList());
     }
 
 }

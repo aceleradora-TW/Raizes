@@ -60,6 +60,7 @@ public class MinhaListaControlador {
 
     @PostMapping("/criar")
     public String salvarLista(MinhaLista lista, RedirectAttributes atributosRedirecionamento) {
+
 //        if (minhaListaServico.salvar(lista) == null) {
 //            Erro erro = new Erro("Já existe uma lista cadastrada com esse nome!");
 //            atributosRedirecionamento.addFlashAttribute("Erro", erro);
@@ -85,8 +86,6 @@ public class MinhaListaControlador {
     @GetMapping("/{id}/editar/")
     public String pegaLista(Model modelo, @PathVariable("id") Long id, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
         MinhaLista listaExistente = minhaListaServico.encontraUm(id);
-        List<Produto> listaTodosProdutos = produtoServico.pegarTodos();
-        List<ProdutoDTO> listaFinal = new ArrayList<>();
 
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
@@ -98,19 +97,8 @@ public class MinhaListaControlador {
             return "redirect:/minhas-listas/";
         }
 
-        for (Produto produto : listaTodosProdutos) {
-            if(listaExistente.getProdutos().contains(produto)){
-                listaFinal.add(new ProdutoDTO(produto, true));
-            } else{
-                listaFinal.add(new ProdutoDTO(produto, false));
-            }
-        }
-
-        List<CategoriaDTO> categorias = categoriaServico
-                .pegarCategorias()
-                .stream()
-                .map(categoria ->categoria.paraDTO(listaFinal))
-                .collect(Collectors.toList());
+        List<CategoriaDTO> categorias = categoriaServico.pegarCategoriasDto();
+        categorias = categoriaServico.setaChecados(categorias, listaExistente.getProdutos());
 
         modelo.addAttribute("categorias", categorias);
         modelo.addAttribute("lista", listaExistente);
@@ -120,7 +108,7 @@ public class MinhaListaControlador {
 
 
     @PostMapping("/{id}/editar")
-    public String removerItem(MinhaLista listaDoFront, @PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvaLista(MinhaLista listaDoFront, @PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
         MinhaLista listaDoBanco = minhaListaServico.encontraUm(id);
         Erro erro = new Erro("Erro ao salvar a lista!");
 

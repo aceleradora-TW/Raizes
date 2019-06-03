@@ -32,7 +32,7 @@
                         <i class="fas fa-shopping-basket"></i>
                       </a>
                       <form th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post" name="meuform"
-                        th:onsubmit="return minhasListas.exibeConfirmacaDeExclusaoDaLista()">
+                        th:onsubmit="return minhasListas.exibeConfirmacaoq2DeExclusaoDaLista()">
                         <button type="submit" class="button rz-button list-style">
                           <i class="fas fa-trash-alt"></i>
                         </button>
