@@ -7,6 +7,7 @@ import java.util.List;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "cidades")
+@Access(AccessType.FIELD)
 public class Cidade {
 
     @Id
@@ -20,11 +21,9 @@ public class Cidade {
 
     @OneToMany(mappedBy = "cidade")
     @OrderBy(value="nome")
-    private List<Cidade> cidades;
+    private List<Endereco> enderecos;
 
-    public Cidade(String nome, Estado estado) {
-        this.nome = nome;
-        this.estado = estado;
+    public Cidade() {
     }
 
     public Long getId() {

@@ -1,7 +1,5 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -23,12 +21,7 @@ public class Endereco {
     @JoinColumn(name = "id_cidades")
     private Cidade cidade;
 
-    public Endereco(String rua, int numero, String complemento, String bairro, Cidade cidade) {
-        this.rua = rua;
-        this.numero = numero;
-        this.complemento = complemento;
-        this.bairro = bairro;
-        this.cidade = cidade;
+    public Endereco() {
     }
 
     public Long getId() {

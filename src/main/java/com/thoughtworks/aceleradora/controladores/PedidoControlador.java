@@ -1,13 +1,15 @@
 package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
+import com.thoughtworks.aceleradora.dominio.Endereco;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
+import com.thoughtworks.aceleradora.repositorios.EnderecoRepositorio;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.function.Consumer;
 
 @Controller
@@ -15,13 +17,16 @@ import java.util.function.Consumer;
 public class PedidoControlador {
 
     private MinhaListaServico minhaListaServico;
+    private EnderecoRepositorio enderecoRepositorio;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Início", "/");
 
     @Autowired
-    public PedidoControlador(MinhaListaServico minhaListaServico) {
+    public PedidoControlador(MinhaListaServico minhaListaServico,
+                             EnderecoRepositorio enderecoRepositorio) {
         this.minhaListaServico = minhaListaServico;
+        this.enderecoRepositorio = enderecoRepositorio;
     }
 
     @GetMapping
@@ -49,5 +54,11 @@ public class PedidoControlador {
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("realizar pedido", "/pedido/pedidos");
         return "pedido/realizar-pedido";
+    }
+
+    @ResponseBody
+    @GetMapping("/localidade-produtor")
+    public List<Endereco> mostraEnderecoDosProdutores() {
+        return enderecoRepositorio.findAll();
     }
 }

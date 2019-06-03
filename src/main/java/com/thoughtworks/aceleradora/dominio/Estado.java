@@ -7,6 +7,7 @@ import java.util.List;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "estados")
+@Access(AccessType.FIELD)
 public class Estado {
 
     @Id
@@ -19,8 +20,7 @@ public class Estado {
     @OrderBy(value="nome")
     private List<Cidade> cidades;
 
-    public Estado(String uf) {
-        this.uf = uf;
+    public Estado() {
     }
 
     public Long getId() {
