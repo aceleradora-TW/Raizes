@@ -7,7 +7,6 @@ import CriarLista from './pages/criaLista'
 import EditarLista from './pages/editaLista'
 import minhasListas from './pages/minha-lista'
 import RealizarPedido from './pages/realizarPedido'
-import message from './pages/mensagemSalvar'
 
 $(function () {
     CriarLista.validaFormulario();   
