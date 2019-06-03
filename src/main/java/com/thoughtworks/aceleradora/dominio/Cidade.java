@@ -2,6 +2,8 @@ package com.thoughtworks.aceleradora.dominio;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "cidades")
@@ -15,6 +17,10 @@ public class Cidade {
     @ManyToOne
     @JoinColumn(name = "id_estados" )
     private Estado estado;
+
+    @OneToMany(mappedBy = "cidade")
+    @OrderBy(value="nome")
+    private List<Cidade> cidades;
 
     public Cidade(String nome, Estado estado) {
         this.nome = nome;
