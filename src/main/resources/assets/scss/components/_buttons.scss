@@ -1,7 +1,20 @@
-.rz-botao {
+.rz-button {
+  font-family: "Roboto", sans-serif;
+  background-color: $btn-color;
+  color: $primary-color;
+  margin-bottom: 0;
+
+  &.list-style {
+    &:last-child {
+      border-bottom-left-radius: 0px;
+      border-top-left-radius: 0px;
+    }
+  }
+
   &:hover {
-      border: 1px solid $hover-botao;
-      background: $hover-botao;
-      color: $white;
-  } 
+    border: 1px solid $btn-hover;
+    background: $btn-hover;
+    color: white;
+    font-weight: bold;
+  }
 }

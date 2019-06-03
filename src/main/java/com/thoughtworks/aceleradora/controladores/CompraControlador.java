@@ -33,7 +33,7 @@ public class CompraControlador {
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Compras", "/pedido/compras");
         modelo.addAttribute("comprasFeitas", compraServico.pegarCompras());
-        return "/pedido/compras";
+        return "pedido/compras";
     }
 
     @GetMapping("/{id}")

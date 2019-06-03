@@ -7,14 +7,16 @@ import CriarLista from './pages/criaLista'
 import EditarLista from './pages/editaLista'
 import minhasListas from './pages/minha-lista'
 import RealizarPedido from './pages/realizarPedido'
+import message from './pages/mensagemSalvar'
 import Pedidos from './pages/pedidos'
 
 
 $(function () {
     CriarLista.validaFormulario();   
-    EditarLista.validaFormulario();  
-    RealizarPedido.exibeConfirmacaDeCancelamento(); 
-         
+    EditarLista.validaFormulario();
+    RealizarPedido.exibeConfirmacaDeCancelamento();
+    minhasListas.exibeConfirmacaDeExclusaoDaLista();
+    Pedidos.exibeConfirmacaDeExclusaoDoPedido();
 });
 
 window.minhasListas = minhasListas;
