@@ -3,6 +3,7 @@ import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.Endereco;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.repositorios.EnderecoRepositorio;
+import com.thoughtworks.aceleradora.servicos.EnderecoServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,16 +18,16 @@ import java.util.function.Consumer;
 public class PedidoControlador {
 
     private MinhaListaServico minhaListaServico;
-    private EnderecoRepositorio enderecoRepositorio;
+    private EnderecoServico enderecoServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Início", "/");
 
     @Autowired
     public PedidoControlador(MinhaListaServico minhaListaServico,
-                             EnderecoRepositorio enderecoRepositorio) {
+                             EnderecoServico enderecoServico) {
         this.minhaListaServico = minhaListaServico;
-        this.enderecoRepositorio = enderecoRepositorio;
+        this.enderecoServico = enderecoServico;
     }
 
     @GetMapping
@@ -57,8 +58,8 @@ public class PedidoControlador {
     }
 
     @ResponseBody
-    @GetMapping("/localidade-produtor")
-    public List<Endereco> mostraEnderecoDosProdutores() {
-        return enderecoRepositorio.findAll();
+    @GetMapping("/enderecos")
+    public List<Endereco> mostraEndereco() {
+        return enderecoServico.pegaTodos();
     }
 }
