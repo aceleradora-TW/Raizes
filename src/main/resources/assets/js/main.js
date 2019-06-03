@@ -1,5 +1,5 @@
 window.$ = window.jQuery = require('jquery')
-import '@fortawesome/fontawesome-free/js/all'
+import '@fortawesome/fontawesome-free/js/all';
 import 'animate.css'
 import '../scss/styles.scss'
 import '@fengyuanchen/validator';
@@ -14,8 +14,6 @@ $(function () {
     CriarLista.validaFormulario();
     validaEditar.validacaoEditar();
     EditarLista.validaFormulario();
-    RealizarPedido.exibeConfirmacaDeCancelamento();
-         
 });
 window.EditarLista = EditarLista;
 window.exibirMensagem = mensagemCancelar;

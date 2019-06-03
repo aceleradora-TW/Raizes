@@ -47,16 +47,16 @@ public class MinhaListaControlador {
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Minhas Listas", "/minhas-listas")
                 .pagina("Cadastro", "/minhas-listas/cadastro");
-
-        modelo.addAttribute("lista", new MinhaLista());
         List<Categoria> categorias = categoriaServico.pegarCategorias();
         modelo.addAttribute("categorias", categorias);
+        modelo.addAttribute("pagina", "criar");
 
         return "minha-lista/cadastro";
     }
 
     @PostMapping("/criar")
     public String salvarLista(MinhaLista lista, RedirectAttributes atributosRedirecionamento) {
+        lista.
         if (minhaListaServico.salvar(lista) == null) {
             Erro erro = new Erro("Já existe uma lista cadastrada com esse nome!");
             atributosRedirecionamento.addFlashAttribute("Erro", erro);

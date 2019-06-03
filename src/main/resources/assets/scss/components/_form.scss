@@ -1,0 +1,60 @@
+.rz-form {
+  span.bigcheck {
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+    min-height: 50px;
+    position: relative;
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    vertical-align: baseline;
+    display: none;
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    ~ label {
+      padding: 5px 23px 5px 28px;
+      border: 1px solid #cfe2a9;
+    }
+    ~ span.check {
+      position: absolute;
+      visibility: hidden;
+      color: #394d17;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-left: 6px;
+    }
+
+    &:checked {
+      ~ label {
+        background-color: #cfe3a9;
+        border-radius: 6px;
+        position: relative;
+        color: #394d17;
+      }
+  
+      ~ span.check {
+        visibility: visible;
+      }
+    }
+  }
+  .input:focus,
+  .input.is-focused,
+  .input:active,
+  .input.is-active,
+  .textarea:focus,
+  .textarea.is-focused,
+  .textarea:active,
+  .textarea.is-active {
+    border-color: $third-color;
+    box-shadow: 0 0 0 0.125em rgba(160, 197, 100, 0.54);
+  }
+  .checkbox {
+    padding: 5px 1px 12px 22px;
+  }
+  span.check {
+    overflow: visible;
+    visibility: hidden;
+  }
+}

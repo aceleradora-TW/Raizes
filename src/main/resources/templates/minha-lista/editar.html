@@ -1,53 +1,39 @@
 <!DOCTYPE HTML>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Aceleradora Ágil - Esqueleto Ambulante</title>
 </head>
+
 <body>
-  <section class="section">
+  <section>
     <section class="container">
       <h1 class="title">Editar Lista</h1>
+      <h3 class="subtitle">*Campos obrigatórios.</h3>
       <div th:if="${erro} != null">
         <span th:text="${erro.mensagem}"></span>
       </div>
       <div class="columns">
-        <div class="column is-6">
-          <div class="box">
-            <form id="formEditaLista" th:action="@{/minhas-listas/{id}/editar(id=${lista.id})}" method="post">
-              <div class="field">
-                <input class="input" type="text" name="nome" th:value="${lista.nome}"
-                  placeholder="Ex.: Minha Lista Compras 1">
-                <div class="help-block"></div>
-              </div>
-              <div class="field">
-                <label class="label">Selecione produtos:</label>
-                <div class="control">
-                  <ul class="categorias">
-                    <li th:each="categoria : ${categorias}">
-                      <h3 class="centraliza-texto" th:text="${categoria.nome}"></h3>
-                      <ul class="lista-produtos">
-                        <li th:each="produto: ${categoria.produtos}">
-                          <label class="checkbox">
-                            <input th:if="${produto.isChecado()}" type="checkbox" name="produtos" th:value="${produto.id}" checked>
-                            <input th:if="!${produto.isChecado()}" type="checkbox" name="produtos" th:value="${produto.id}">
-                            <span th:text="${produto.nome}"></span>
-                          </label>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                  <div class="help-block"></div>
-                </div>
-              </div>
-              <div class="field">
-                <div class="control">
-                  <div class="flex space-between">
-                    <a class="button is-primary" th:href="@{/minhas-listas}"
-                      th:onclick="return EditarLista.exibeConfirmacaoDeCancelamento()">Cancelar</a>
-                    <button class="button is-primary" type="submit">Salvar</button>
+        <div class="column is-12">
+          <div class="rz-box box">
+            <form class="rz-form" id="formEditaLista" th:action="@{/minhas-listas/{id}/editar(id=${lista.id})}"
+              method="post">
+              <div class="rz-box-body">
+                <div class="column is-6 is-offset-3">
+                  <label class="label">Nome*</label>
+                  <div class="field">
+                    <input class="input" type="text" name="nome" th:field="*{lista.nome}" th:value="${lista.nome}"
+                      placeholder="Ex.: Minha Lista Compras 1">
+                    <div class="help-block"></div>
                   </div>
                 </div>
+                <div th:replace="fragments/seletor_produtos" th:with="categorias=${categorias}"></div>
+              </div>
+              <div class="rz-box-footer flex space-between">
+                <a class="button rz-button is-rounded" th:href="@{/minhas-listas}"
+                  th:onclick="return EditarLista.exibeConfirmacaoDeCancelamento()">Cancelar</a>
+                <button class="button rz-button is-rounded" type="submit">Salvar</button>
               </div>
             </form>
           </div>
@@ -56,4 +42,5 @@
     </section>
   </section>
 </body>
+
 </html>
