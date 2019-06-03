@@ -1,6 +1,9 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.Breadcrumb;
+import com.thoughtworks.aceleradora.dominio.MinhaLista;
+import com.thoughtworks.aceleradora.dominio.Pedido;
+import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,12 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 
 @Controller
@@ -64,13 +63,16 @@ public class PedidoControlador {
     }
 
     @GetMapping("/realizar")
-    public String realizarPedido(Breadcrumb breadcrumb, Model modelo, Long id) {
+    public String realizarPedido(Breadcrumb breadcrumb, Model modelo)  {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Realizar Pedido", "/pedido/pedidos");
-        modelo.addAttribute("pedido", new Pedido());
+                .pagina("Pedidos", "/pedidos")
+                .pagina("Realizar Pedido", "/pedidos");
+
         List<ProdutoProdutor> produtoProdutores = produtoProdutorServico.pegaTodosProdutoProdutor();
         modelo.addAttribute("produtoProdutores", produtoProdutores);
+
+        modelo.addAttribute("pedido", new Pedido());
 
         return "pedido/realizar-pedido";
     }
@@ -80,34 +82,5 @@ public class PedidoControlador {
         pedidoServico.salvar(pedido);
         return "redirect:/pedidos";
     }
-
-    @ResponseBody
-    @GetMapping("/lista-produtores")
-    public  Map<Produto, List<Produtor>> mostraProdutosComProdutores() {
-        List<Produto> produtos = produtoServico.pegarTodos();
-
-        return pedidoServico.pegarProdutoresDosProdutos(produtos);
-    }
-
-
-    @ResponseBody
-    @GetMapping("/produto-produtor/{id}")
-    public ProdutoProdutor mostraPrecoEQuantidadeDeProdutoDeUmProdutor(Long id) {
-
-        return produtoProdutorServico.encontraUm(id);
-    }
-
-    @ResponseBody
-    @GetMapping("/produto-produtor")
-    public List<ProdutoProdutor> mostraPrecoEQuantidadeDeTodosProdutos() {
-        return produtoProdutorServico.pegaTodosProdutoProdutor();
-    }
-
-//    @ResponseBody
-//    @GetMapping("/mostra-tudo")
-//    public  Map<Produto,List<ProdutoProdutor>> mostraTudo(List<Produto> listaDeProdutos ) {
-//        return pedidoServico.pegarTodaInformacaoDeProduto(listaDeProdutos);
-//    }
-
 
 }

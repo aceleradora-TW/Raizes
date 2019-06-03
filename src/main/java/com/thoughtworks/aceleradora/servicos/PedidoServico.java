@@ -1,9 +1,15 @@
 package com.thoughtworks.aceleradora.servicos;
-import com.thoughtworks.aceleradora.dominio.*;
+
+import com.thoughtworks.aceleradora.dominio.Pedido;
+import com.thoughtworks.aceleradora.dominio.Produto;
+import com.thoughtworks.aceleradora.dominio.Produtor;
 import com.thoughtworks.aceleradora.repositorios.PedidoRepositorio;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class PedidoServico {
@@ -64,29 +70,6 @@ public class PedidoServico {
             mapa.put(produto, produtores);
         }
         return mapa;
-    }
-
-
-    public Map<Produto,List<ProdutoProdutor>> pegarTodaInformacaoDeProduto(List<Produto> listaDeProdutos){
-        Map<Produto,List<ProdutoProdutor>> mapa = new HashMap<>();
-        //1.Fazer getProdutos de produtoProdutor funcionar
-        //2.Equivaler o produto de ProdutoProdutor com o produto que eu quero.
-        //3.O resultado de todos os preco&qtd do produto, virá uma lista de preco e quantidade daquele produto
-        // Ex: recebo Maça e quero achar MAÇA em produtoProdutor
-        // acho a maça e pego o preço&qtd dela(que é o produtoProdutor)
-        //Adiciono esses valores numa lista de ProdutoProdutor da MAÇA
-        //Acho os produtores de MAÇA, procuro com o for cada preco e quantidade
-        //de cda produtor e adiciono esse prodprod numa lista final.
-//        ProdutoProdutor produtoProdutor = new ProdutoProdutor();
-//        List<ProdutoProdutor> produtoprodutores = produtoProdutorServico.pegaTodosProdutoProdutor();
-//        for (Produto produto: listaDeProdutos){
-//            if (produtoProdutor.getProduto().equals(produto)) {
-//                List<Produtor> produtores = procurarProdutores(produto);
-//                mapa.put(produto, produtoprodutores);
-//            }}
-
-        return mapa;
-
     }
 
     public Pedido salvar(Pedido pedido) {

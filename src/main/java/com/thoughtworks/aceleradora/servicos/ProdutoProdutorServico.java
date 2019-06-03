@@ -1,8 +1,6 @@
 package com.thoughtworks.aceleradora.servicos;
 
-import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
-import com.thoughtworks.aceleradora.dominio.Produtor;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import com.thoughtworks.aceleradora.repositorios.ProdutoRepositorio;
 import com.thoughtworks.aceleradora.repositorios.ProdutorRepositorio;

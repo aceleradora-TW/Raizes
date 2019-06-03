@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title></title>
 </head>
-
 <body>
   <section class="section">
     <section class="container">
@@ -14,113 +12,34 @@
       <div class="columns" th:each="produtoProdutor: ${produtoProdutores}">
         <div class="column is-12">
           <form>
-              <div th:each="produto: ${produtoProdutor.produtos}">
+            <div th:each="produto: ${produtoProdutor.produto}">
               <h3 th:text="${produto.nome}"></h3>
-              <div class="box">
+              <div class="box" th:each="produtor: ${produtoProdutor.produtor}">
                 <div class="flex equal-sizing flex-row">
                   <label class="radio">
                     <input type="radio" name="produtores" th:value="${produtor.id}" th:id="${produtor.nome}">
                     <span th:text="${produtor.nome}"></span>
                   </label>
-  
                   <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
                   <i class="fas fa-truck"></i>
                 </div>
                 <div>
                   <div class="flex equal-sizing flex-row">
-                    <span th:text="${produto.cultivo}"><i class="fas fa-spa"></i></span>
-                    <span th:text="${produtoProdutor.preco}"></span>
-                    <label class="label">Quantidade: <input size="5" type="text" placeholder="Ex: 4" name="quantidade" th:field="*{pedido.quantidade}" ></label>
+                    <div class="flex flex-row ">
+                      <i class="fas fa-spa "></i>
+                      <span th:text="${produto.cultivo.nome}"></span>
+                    </div>
+                    <div class="flex flex-row ">
+                      <span>Valor: R$</span>
+                      <span th:text="${produtoProdutor.preco}"></span>
+                    </div>
+                    <label class="label">Quantidade:
+                      <input size="5" type="text" placeholder="Ex: 4" name="quantidade" th:field="*{pedido.quantidade}">
+                    </label>
                     <span>Total: R$ 0,00</span>
                   </div>
                 </div>
               </div>
-
-
-
-              <div class="column columns is-multiline is-10 is-offset-1" th:each="categoria: ${categorias}">
-                  <h2 class="column is-12" th:text="${categoria.nome}"></h2>
-                  <div th:each="produto: ${categoria.produtos}">
-                    <span class="bigcheck">
-                      <input class="checkbox" type="checkbox" name="produtos" th:value="${produto.id}" th:id="${produto.nome}">
-                      <label class="checkbox" th:text="${produto.nome}" th:for="${produto.nome}"></label>
-                      <span class="check"><i class="far fa-check-circle"></i></span>
-                    </span>   
-                  </div>
-                </div>
-
-
-
-
-            <!-- <h3>Cebola</h3>
-            <div class="box">
-              <div class="flex equal-sizing flex-row">
-                <label class="radio">
-                  <input type="radio" name="answer">
-                  <span>Aldo Produtor</span>
-                </label>
-
-                <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                <i class="fas fa-truck"></i>
-              </div>
-              <div>
-                <div class="flex equal-sizing flex-row">
-                  <span><i class="fas fa-spa"></i> Orgânico</span>
-                  <span th:text="${produtoProdutor.preco}"></span>
-                  <label class="label">Quantidade: <input size="5" type="text" placeholder="Ex: 4"></label>
-                  <span>Total: R$ 0,00</span>
-                </div>
-              </div>
-            </div>
-            <div class="box">
-              <div class="flex equal-sizing flex-row">
-                <label class="radio">
-                  <input type="radio" name="answer">
-                  <span>João Severo</span>
-                </label>
-
-                <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                <i class="fas fa-truck"></i>
-              </div>
-              <div>
-                <div class="flex equal-sizing flex-row">
-                  <span><i class="fas fa-tint"></i> Hidropônico</span>
-                  <span>Valor: R$ 5,00</span>
-                  <label class="label">Quantidade: <input size="5" type="text" placeholder="Ex: 4"></label>
-                  <span>Total: R$ 0,00</span>
-                </div>
-              </div>
-            </div>
-            <div class="box">
-              <div class="flex equal-sizing flex-row">
-                <label class="radio">
-                  <input type="radio" name="answer">
-                  <span>Maria Silva</span>
-                </label>
-
-                <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                <i class="fas fa-truck"></i>
-              </div>
-              <div>
-                <div class="flex equal-sizing flex-row">
-                  <span><i class="fas fa-sun"></i> Convencional</span>
-                  <span>Valor: R$ 5,00</span>
-                  <label class="label">Quantidade: <input size="5" type="text" placeholder="Ex: 4"></label>
-                  <span>Total: R$ 0,00</span>
-                </div>
-              </div>
-
-
-            </div>
-            <span>Total do Pedido: R$ 0,00</span>
-            <div class="field">
-              <div class="control">
-                <div class="flex space-between">
-                  <a class="button is-primary" th:href="@{/minhas-listas}"
-                    th:onclick="return RealizarPedido.exibeConfirmacaoDeCancelamento()">Cancelar</a>                  
-                  <a class="button is-primary" th:href="@{/realizar}">Salvar</a>
-                </div>
-              </div> -->
             </div>
           </form>
         </div>
@@ -128,5 +47,4 @@
     </section>
   </section>
 </body>
-
 </html>
