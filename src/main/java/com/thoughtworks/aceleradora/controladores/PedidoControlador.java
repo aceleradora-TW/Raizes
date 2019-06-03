@@ -62,19 +62,27 @@ public class PedidoControlador {
         return "pedido/visualizar-pedido";
     }
 
-    @GetMapping("/realizar")
-    public String realizarPedido(Breadcrumb breadcrumb, Model modelo)  {
+    @GetMapping("{id}/realizar")
+    public String realizarPedido(@PathVariable("idLista") Long id, Breadcrumb breadcrumb, Model modelo)  {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Realizar Pedido", "/pedidos");
 
+        MinhaLista listaDeProdutos = minhaListaServico.encontraUm(id);
+
+        modelo.addAttribute("listaDeProdutos", listaDeProdutos);
+
+        ProdutoProdutor produtoProdutor = new ProdutoProdutor();
+
+
         List<ProdutoProdutor> produtoProdutores = produtoProdutorServico.pegaTodosProdutoProdutor();
+//        List<ProdutoProdutor> produtoProdutores = produtoProdutorServico.pegaListadeProdutos();
         modelo.addAttribute("produtoProdutores", produtoProdutores);
 
         modelo.addAttribute("pedido", new Pedido());
 
-        return "pedido/realizar-pedido";
+        return "redirect:/pedidos/{id}/realizar/";
     }
 
     @PostMapping("/realizar")

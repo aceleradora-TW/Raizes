@@ -30,9 +30,11 @@
                       <a class="button rz-button list-style">
                         <i class="fas fa-edit"></i>
                       </a>
-                      <a class="button rz-button list-style">
-                        <i class="fas fa-shopping-basket"></i>
-                      </a>
+                      <form th:action="@{/pedidos/{idLista}/realizar(idLista=${lista.id})}" method="get" name="meuform">
+                        <button type="submit" class="button rz-button list-style">
+                          <i class="fas fa-shopping-basket"></i>
+                        </button>
+                      </form>        
                       <form th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post" name="meuform"
                         th:onsubmit="return minhasListas.exibeConfirmacaoDeExclusaoDaLista()">
                         <button type="submit" class="button rz-button list-style">
