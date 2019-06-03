@@ -6,10 +6,8 @@
 <body>
   <section>
     <section class="container">
-
       <h1 class="title">Criar Lista</h1>
       <h3 class="subtitle">*Campos obrigatórios.</h3>
-
       <div class="columns">
         <div class="column is-12">
           <div th:if="${Erro} != null">
@@ -24,10 +22,7 @@
                 </div>
                 <div class="help-block"></div>
               </div>
-
-
               <div class="categorias rz-list">
-
                 <div class="column columns is-multiline is-10 is-offset-1" th:each="categoria: ${categorias}">
                   <h2 class="column is-12" th:text="${categoria.nome}"></h2>
                   <div th:each="produto: ${categoria.produtos}">
@@ -38,15 +33,12 @@
                     </span>   
                   </div>
                 </div>
-
                 <div class="field">
                   <div class="control flex end">
-                    <button class="button rz-button is-rounded" type="submit">Salvar</button>
+                    <button class="button rz-button is-rounded" type="submit" >Salvar</button>
                   </div>
                 </div>
-
                 <div class="help-block"></div>
-
               </div>
             </form>
           </div>
