@@ -12,8 +12,8 @@ import message from './pages/mensagemSalvar'
 $(function () {
     CriarLista.validaFormulario();   
     EditarLista.validaFormulario();
-    RealizarPedido.exibeConfirmacaDeCancelamento();
-    minhasListas.exibeConfirmacaDeExclusaoDaLista();
+    RealizarPedido.exibeConfirmacaoDeCancelamento();
+    minhasListas.exibeConfirmacaoDeExclusaoDaLista();
 });
 window.minhasListas = minhasListas;
 window.RealizarPedido = RealizarPedido;
