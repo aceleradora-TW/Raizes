@@ -1,5 +1,6 @@
 package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
+import com.thoughtworks.aceleradora.dominio.Compras;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.CompraServico;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.function.Consumer;
 
@@ -55,6 +57,11 @@ public class CompraControlador {
         return "pedido/realizar-pedido";
     }
 
+    @PostMapping("/{id}/excluir")
+    public String removerCompra(Compras compra, @PathVariable("id") Long id) {
+        compraServico.removerCompra(id);
+        return "redirect:/compras";
+    }
 
 
 }

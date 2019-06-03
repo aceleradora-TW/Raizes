@@ -30,4 +30,10 @@ public class CompraServico {
         }
     }
 
+    public void removerCompra(Long idCompra) {
+        repositorio.deleteById(idCompra);
+    }
+
+
+
 }

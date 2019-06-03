@@ -11,6 +11,8 @@ public interface CompraRepositorio extends CrudRepository<Compras, Long> {
 
     List<Compras> findAll();
 
+    void deleteById(Long id);
+
 
 }
 
