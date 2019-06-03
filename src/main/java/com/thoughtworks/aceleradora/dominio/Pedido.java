@@ -1,8 +1,8 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -13,7 +13,11 @@ public class Pedido {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    //private ProdutoProdutor produtoProdutor;
+    @ManyToOne
+    @JoinColumn(name = "id_produto_produtores")
+    @JsonIgnoreProperties("produtos")
+    private ProdutoProdutor produtoProdutor;
+
     private Integer quantidade;
 
 

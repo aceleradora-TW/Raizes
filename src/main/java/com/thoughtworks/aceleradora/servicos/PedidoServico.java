@@ -10,6 +10,7 @@ public class PedidoServico {
     private PedidoRepositorio repositorio;
     private ProdutoServico produtoServico;
     private ProdutorServico produtorServico;
+    private ProdutoProdutorServico produtoProdutorServico;
 
 
     public PedidoServico(PedidoRepositorio repositorio,
@@ -66,8 +67,8 @@ public class PedidoServico {
     }
 
 
-    public Map<Produto,Map<List<Produtor>, ProdutoProdutor>> pegarTodaInformacaoDeProduto(){
-        Map<Produto,Map<List<Produtor>, ProdutoProdutor>> mapa = new HashMap<>();
+    public Map<Produto,List<ProdutoProdutor>> pegarTodaInformacaoDeProduto(List<Produto> listaDeProdutos){
+        Map<Produto,List<ProdutoProdutor>> mapa = new HashMap<>();
         //1.Fazer getProdutos de produtoProdutor funcionar
         //2.Equivaler o produto de ProdutoProdutor com o produto que eu quero.
         //3.O resultado de todos os preco&qtd do produto, virá uma lista de preco e quantidade daquele produto
@@ -76,6 +77,13 @@ public class PedidoServico {
         //Adiciono esses valores numa lista de ProdutoProdutor da MAÇA
         //Acho os produtores de MAÇA, procuro com o for cada preco e quantidade
         //de cda produtor e adiciono esse prodprod numa lista final.
+//        ProdutoProdutor produtoProdutor = new ProdutoProdutor();
+//        List<ProdutoProdutor> produtoprodutores = produtoProdutorServico.pegaTodosProdutoProdutor();
+//        for (Produto produto: listaDeProdutos){
+//            if (produtoProdutor.getProduto().equals(produto)) {
+//                List<Produtor> produtores = procurarProdutores(produto);
+//                mapa.put(produto, produtoprodutores);
+//            }}
 
         return mapa;
 

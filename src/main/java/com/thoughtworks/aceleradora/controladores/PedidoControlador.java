@@ -64,10 +64,14 @@ public class PedidoControlador {
     }
 
     @GetMapping("/realizar")
-    public String realizarPedido(Breadcrumb breadcrumb) {
+    public String realizarPedido(Breadcrumb breadcrumb, Model modelo, Long id) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Realizar Pedido", "/pedido/pedidos");
+        modelo.addAttribute("pedido", new Pedido());
+        List<ProdutoProdutor> produtoProdutores = produtoProdutorServico.pegaTodosProdutoProdutor();
+        modelo.addAttribute("produtoProdutores", produtoProdutores);
+
         return "pedido/realizar-pedido";
     }
 
@@ -98,6 +102,12 @@ public class PedidoControlador {
     public List<ProdutoProdutor> mostraPrecoEQuantidadeDeTodosProdutos() {
         return produtoProdutorServico.pegaTodosProdutoProdutor();
     }
+
+//    @ResponseBody
+//    @GetMapping("/mostra-tudo")
+//    public  Map<Produto,List<ProdutoProdutor>> mostraTudo(List<Produto> listaDeProdutos ) {
+//        return pedidoServico.pegarTodaInformacaoDeProduto(listaDeProdutos);
+//    }
 
 
 }
