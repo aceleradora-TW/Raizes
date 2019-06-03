@@ -1,52 +1,52 @@
 <!DOCTYPE HTML>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
-
 <head>
   <title>Aceleradora Ágil - Esqueleto Ambulante</title>
 </head>
-
 <body>
-  <section class="section">
+  <section>
     <section class="container">
-      <h1 class="title">Crie a sua Lista</h1>
+
+      <h1 class="title">Criar Lista</h1>
+      <h3 class="subtitle">*Campos obrigatórios.</h3>
+
       <div class="columns">
-        <div class="column is-6">
+        <div class="column is-12">
           <div th:if="${Erro} != null">
             <span th:text="${Erro.mensagem}"></span>
           </div>
           <div class="box">
             <form id="formCriaLista" th:action="@{/minhas-listas/criar}" method="post">
-              <div class="field">
-                <label class="label">Nome da sua Lista</label>
+              <div class="field column is-6 is-offset-3">
+                <label class="label">Nome*</label>
                 <div class="control">
-                  <input class="input" type="text" th:field="*{lista.nome}" placeholder="Ex.: Minha Lista Compras 1" />
+                  <input class="input" type="text" name="nome" th:field="*{lista.nome}" placeholder="Ex.: Minha Lista Compras 1">
                 </div>
                 <div class="help-block"></div>
               </div>
-              <div class="field">
-                <label class="label">Selecione produtos:</label>
-                <div class="control">
-                  <ul class="categorias">
-                    <li th:each="categoria: ${categorias}">
-                      <h3 class="centraliza-texto" th:text="${categoria.nome}"></h3>
-                      <ul class="lista-produtos">
-                        <li th:each="produto: ${categoria.produtos}">
-                          <label class="checkbox">
-                            <input type="checkbox" name="produtos" th:value="${produto.id}">
-                            <span th:text="${produto.nome}">
-                            </span>
-                          </label>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
+
+
+              <div class="categorias rz-list">
+
+                <div class="column columns is-multiline is-10 is-offset-1" th:each="categoria: ${categorias}">
+                  <h2 class="column is-12" th:text="${categoria.nome}"></h2>
+                  <div th:each="produto: ${categoria.produtos}">
+                    <span class="bigcheck">
+                      <input class="checkbox" type="checkbox" name="produtos" th:value="${produto.id}" th:id="${produto.nome}">
+                      <label class="checkbox" th:text="${produto.nome}" th:for="${produto.nome}"></label>
+                      <span class="check"><i class="far fa-check-circle"></i></span>
+                    </span>   
+                  </div>
                 </div>
+
+                <div class="field">
+                  <div class="control flex end">
+                    <button class="button rz-button is-rounded" type="submit">Salvar</button>
+                  </div>
+                </div>
+
                 <div class="help-block"></div>
-              </div>
-              <div class="field">
-                <div class="control flex end">
-                  <button class="button is-primary " type="submit">Salvar</button>
-                </div>
+
               </div>
             </form>
           </div>
@@ -55,5 +55,4 @@
     </section>
   </section>
 </body>
-
 </html>
