@@ -24,9 +24,12 @@ public class MinhaLista {
             joinColumns = {@JoinColumn(name = "id_lista")},
             inverseJoinColumns = {@JoinColumn(name = "id_produtos")}
     )
-
     @JsonIgnoreProperties("listas")
     private List<Produto> produtos = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "id_clientes")
+    private Cliente cliente;
 
     public MinhaLista() {
 
@@ -40,6 +43,14 @@ public class MinhaLista {
     public void setId(Long id) {
         this.id = id;
 
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public void setNome(String nome) {
