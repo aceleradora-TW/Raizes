@@ -21,7 +21,7 @@ public class ProdutoServico {
 
     public Resposta<List<Produto>> pegarTodos() {
         try {
-            return new Resposta<List<Produto>>("null", repositorio.findAll());
+            return new Resposta<List<Produto>>(null, repositorio.findAll());
         }catch (Exception e) {
             return new Resposta(e.getMessage(),null);
         }

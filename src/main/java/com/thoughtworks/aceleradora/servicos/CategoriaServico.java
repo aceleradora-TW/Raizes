@@ -7,7 +7,6 @@ import com.thoughtworks.aceleradora.dtos.CategoriaDTO;
 import com.thoughtworks.aceleradora.dtos.ProdutoDTO;
 import com.thoughtworks.aceleradora.repositorios.CategoriaRepositorio;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +22,7 @@ public class CategoriaServico {
     public Resposta<List<Categoria>> pegarCategorias() {
 
         try {
-            return new Resposta<List<Categoria>>("null", repositorio.findAll());
+            return new Resposta<List<Categoria>>(null, repositorio.findAll());
         }catch (Exception e) {
             return new Resposta(e.getMessage(),null);
         }
