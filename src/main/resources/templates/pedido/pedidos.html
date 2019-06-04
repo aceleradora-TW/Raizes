@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <section class="section">
+    <section class="container">
+      <h1 class="title centraliza-texto">Pedidos</h1>
+      <div class="columns">
+        <div class="column is-12">
+          <div class="box rz-box">
+            <div class="rz-box-body px-0 pb-0">
+              <table class="rz-table striped">
+                <thead class="table-header">
+                  <th class="">Pedidos</th>
+                  <th class="">Status geral</th>
+                  <th class="">Inicio de entrega</th>
+                </thead>
+                <tbody class="table-body">
+                  <tr>
+                    <td>Beterraba</td>
+                    <td>Pendente</td>
+                    <td>00/00/00</td>
+                  </tr>
+                  <tr>
+                    <td>Beterraba</td>
+                    <td>Pendente</td>
+                    <td>00/00/00</td>
+                  </tr>
+                  <tr>
+                    <td>Beterraba</td>
+                    <td>Pendente</td>
+                    <td>00/00/00</td>
+                  </tr>
+                  <tr>
+                    <td>Beterraba</td>
+                    <td>Pendente</td>
+                    <td>00/00/00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="rz-box-footer flex space-between p-3">
+              <a class="button rz-button is-rounded" th:href="@{/}">Voltar</a>
+              <a class="button rz-button is-rounded" th:href="@{/minhas-listas}">Novo Pedido</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</body>
+</html>

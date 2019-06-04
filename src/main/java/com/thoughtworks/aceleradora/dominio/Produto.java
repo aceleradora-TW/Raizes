@@ -1,9 +1,7 @@
 package com.thoughtworks.aceleradora.dominio;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
-
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "produtos")
@@ -25,9 +23,17 @@ public class Produto {
     @JsonIgnoreProperties("produtos")
     private Cultivo cultivo;
 
-    public Produto() {
+    public Produto(String nome) {
     }
 
+    public Produto() {}
+
+    public Produto(Long id, String nome, Categoria categoria, Cultivo cultivo) {
+        this.id = id;
+        this.nome = nome;
+        this.categoria = categoria;
+        this.cultivo = cultivo;
+    }
 
     public Long getId() {
         return id;

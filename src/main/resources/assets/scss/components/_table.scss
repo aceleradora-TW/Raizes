@@ -1,0 +1,22 @@
+.rz-table {
+  width: 100%;
+  .table-header th {
+    text-align: center;
+  }
+  .table-body{
+    tr {
+      td {
+        padding: 12px;
+        text-align: center;
+      }
+    }
+  }
+  &.striped {
+    .table-body tr:nth-child(odd) {
+      background: $striped-row;
+    }
+    tr:nth-child(even) {
+      background: #fff;
+    }
+  }
+}

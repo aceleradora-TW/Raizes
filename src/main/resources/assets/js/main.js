@@ -12,10 +12,8 @@ import Compras from './pages/compras'
 $(function () {
     CriarLista.validaFormulario();   
     EditarLista.validaFormulario();
-    RealizarPedido.exibeConfirmacaoDeCancelamento();
-    minhasListas.exibeConfirmacaoDeExclusaoDaLista();
-    Compras.exibeConfirmacaoDeExclusaoDaCompra();
 });
 window.minhasListas = minhasListas;
+window.EditaLista = EditarLista;
 window.RealizarPedido = RealizarPedido;
 window.Compras = Compras;

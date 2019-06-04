@@ -2,6 +2,7 @@ package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.Compras;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
+import com.thoughtworks.aceleradora.dominio.Resposta;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.CompraServico;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +41,14 @@ public class CompraControlador {
 
     @GetMapping("/{id}")
     public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
-        MinhaLista lista = minhaListaServico.encontraUm(id);
+
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Visualizar pedido", "/pedidos");
 
-        modelo.addAttribute("lista", lista);
+        Resposta pedido = minhaListaServico.encontraUm(id);
+        modelo.addAttribute("pedido", pedido.getDados());
         return "pedido/visualizar-pedido";
     }
     @GetMapping("/realizar-pedido")
