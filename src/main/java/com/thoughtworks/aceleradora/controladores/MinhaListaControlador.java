@@ -37,7 +37,7 @@ public class MinhaListaControlador {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Minhas Listas", "/minha-lista/listas-criadas");
-        modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
+        modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas().getDados());
         return "minha-lista/listas-criadas";
     }
 
