@@ -21,10 +21,6 @@ public class Cidade {
     @JoinColumn(name = "id_estados" )
     private Estado estado;
 
-    @OneToMany(mappedBy = "cidade")
-    @OrderBy(value="nome")
-    private List<Endereco> enderecos;
-
     public Cidade() {
     }
 
