@@ -41,15 +41,18 @@ public class ProdutoProdutorServico {
 
 //    public List<ProdutoProdutor> pegaListadeProdutos(Long id){
 //        MinhaLista lista = minhaListaRepositorio.findById(id).get();
-//        List<Produto> listaDeProdutos= lista.getProdutos();
+//
+//        List<Produto> listaDeProdutos = lista.getProdutos();
+//
 //        ProdutoProdutor produtoProdutor = new ProdutoProdutor();
+//
 //        List<ProdutoProdutor> listaDeProdutoProdutor = new ArrayList<ProdutoProdutor>();
 //
 //        for(int i = 0; i < lista.getProdutos().size(); i++) {
 //            if (produtoProdutor.getProduto().getId().equals(lista.getProdutos().get(i).getId())) {
 //
 //
-//                listaDeProdutoProdutor.add(produtoProdutor.getProduto(). getId(id));
+//                listaDeProdutoProdutor.add(produtoProdutor.getProduto().getId(id));
 //            }
 //        }
 //

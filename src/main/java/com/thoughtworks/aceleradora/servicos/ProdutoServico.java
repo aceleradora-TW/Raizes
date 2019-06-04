@@ -33,6 +33,7 @@ public class ProdutoServico {
         }
     }
 
+    
     public Resposta<Produto> encontraUm(Long id) {
         try {
             return new Resposta<Produto>(null, repositorio.findById(id).get());

@@ -46,6 +46,5 @@ public class MinhaListaServico {
         } catch (Exception e) {
             return new Resposta(e.getMessage(),false);
         }
-
     }
 }

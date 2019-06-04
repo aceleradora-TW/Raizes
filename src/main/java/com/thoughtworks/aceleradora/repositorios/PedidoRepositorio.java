@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PedidoRepositorio extends CrudRepository<Pedido, Long> {
-
+    
 }

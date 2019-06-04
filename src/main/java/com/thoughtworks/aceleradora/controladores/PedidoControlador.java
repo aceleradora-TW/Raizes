@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -66,25 +67,19 @@ public class PedidoControlador {
     }
 
     @GetMapping("{id}/realizar")
-    public String realizarPedido(@PathVariable("idLista") Long id, Breadcrumb breadcrumb, Model modelo)  {
+    public String realizarPedido(@PathVariable("idLista") Long id, Breadcrumb breadcrumb, Model modelo, RedirectAttributes redirecionamentoDeAtributos)  {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Realizar Pedido", "/pedidos");
 
-        MinhaLista listaDeProdutos = minhaListaServico.encontraUm(id);
+        Resposta<MinhaLista> listaDoBanco = minhaListaServico.encontraUm(id);
+        redirecionamentoDeAtributos.addFlashAttribute("resposta", listaDoBanco);
 
-        modelo.addAttribute("listaDeProdutos", listaDeProdutos);
+        modelo.addAttribute("lista",listaDoBanco);
 
-        ProdutoProdutor produtoProdutor = new ProdutoProdutor();
-
-
-        List<ProdutoProdutor> produtoProdutores = produtoProdutorServico.pegaTodosProdutoProdutor();
-//        List<ProdutoProdutor> produtoProdutores = produtoProdutorServico.pegaListadeProdutos();
-        modelo.addAttribute("produtoProdutores", produtoProdutores);
-
+        modelo.addAttribute("produtoProdutores", produtoProdutorServico.pegaTodosProdutoProdutor());
         modelo.addAttribute("pedido", new Pedido());
-
         return "redirect:/pedidos/{id}/realizar/";
     }
 
