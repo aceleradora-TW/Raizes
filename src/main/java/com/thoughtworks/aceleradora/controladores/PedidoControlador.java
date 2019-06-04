@@ -5,6 +5,8 @@ import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.Pedido;
 import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.servicos.*;
+import com.thoughtworks.aceleradora.dominio.Resposta;
+import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,13 +54,14 @@ public class PedidoControlador {
 
     @GetMapping("/{id}")
     public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
-        MinhaLista lista = minhaListaServico.encontraUm(id);
+
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Visualizar Pedido", "/pedidos");
 
-        modelo.addAttribute("lista", lista);
+        Resposta pedido = minhaListaServico.encontraUm(id);
+        modelo.addAttribute("pedido", pedido.getDados());
         return "pedido/visualizar-pedido";
     }
 

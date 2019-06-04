@@ -20,6 +20,6 @@ public class ProdutoController {
     @ResponseBody
     @GetMapping("/produtos")
     List<Produto> pegarTodosOsProdutos() {
-        return  produtoServico.pegarTodos();
+        return  produtoServico.pegarTodos().getDados();
     }
 }

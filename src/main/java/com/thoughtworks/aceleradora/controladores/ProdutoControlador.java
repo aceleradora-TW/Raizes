@@ -1,7 +1,7 @@
 package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.Erro;
+import com.thoughtworks.aceleradora.dominio.Resposta;
 import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.CultivoServico;
@@ -46,7 +46,7 @@ public class ProdutoControlador {
 
         modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
         modelo.addAttribute("cultivos", cultivoServico.pegarCultivos());
-        modelo.addAttribute("produtos", produtoServico.pegarTodos());
+        modelo.addAttribute("produtos", produtoServico.pegarTodos().getDados());
 
         return "produto/cadastro";
     }
@@ -65,8 +65,8 @@ public class ProdutoControlador {
             String mensagem = "Seu produto foi cadastrado com sucesso!";
             modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
         } else {
-            Erro erro = new Erro("Erro ao salvar seu produto!");
-            modelo.addAttribute("erro", erro);
+            Resposta resposta = new Resposta("Resposta ao salvar seu produto!");
+            modelo.addAttribute("erro", resposta);
         }
 
         return "produto/cadastro";

@@ -11,9 +11,8 @@ import RealizarPedido from './pages/realizarPedido'
 $(function () {
     CriarLista.validaFormulario();   
     EditarLista.validaFormulario();
-    RealizarPedido.exibeConfirmacaoDeCancelamento();
-    minhasListas.exibeConfirmacaoDeExclusaoDaLista();
 });
 
 window.minhasListas = minhasListas;
+window.EditaLista = EditarLista;
 window.RealizarPedido = RealizarPedido;

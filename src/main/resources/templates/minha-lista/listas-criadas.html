@@ -4,64 +4,51 @@
 
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>Minhas Listas</title>
 </head>
 
 <body>
   <section class="section">
     <section class="container">
       <h1 class="title centraliza-texto">Minhas listas</h1>
-      <div th:if="${mensagemSalvoComSucesso} != null">
-        <span th:text="${mensagemSalvoComSucesso}"></span>
-      </div>
-      <div th:if="${erro} != null">
-        <span th:text="${erro.mensagem}"></span>
+      <div th:if="${resposta}">
+        <span th:text="${resposta.mensagem}"></span>
       </div>
       <div class="columns">
         <div class="column is-12">
-          <div class="box rz-list striped">
-            <div class="field">
-              <div class="control">
-                <p class="centraliza-texto" th:if="${listasCriadas.isEmpty()}">Não há listas criadas.</p>
-                <ul>
-                  <li class="rz-list row" th:each="lista: ${listasCriadas}">
-                    <span th:text="${lista.nome}"></span>
-                    <div class="mb-0 ml-auto flex end buttons has-addons">
-                      <a class="button rz-button list-style">
-                        <i class="fas fa-edit"></i>
-                      </a>
-                      <form th:action="@{/pedidos/{idLista}/realizar(idLista=${lista.id})}" method="get" name="meuform">
-                        <button type="submit" class="button rz-button list-style">
-                          <i class="fas fa-shopping-basket"></i>
-                        </button>
-                      </form>        
-                      <form th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post" name="meuform"
-                        th:onsubmit="return minhasListas.exibeConfirmacaoDeExclusaoDaLista()">
-                        <button type="submit" class="button rz-button list-style">
-                          <i class="fas fa-trash-alt"></i>
-                        </button>
-                      </form>
-                    </div>
-                    <hr>
-                  </li>
-                </ul>
-                <hr>
-                <div class="rz-list row">
-                  <form th:action="'/'" method="get">
-                    <button class="button rz-button is-rounded" type="submit">Voltar</button>
-                  </form>
-                  <form th:action="'/minha-lista/cadastro'" method="get">
-                    <button class="button rz-button is-rounded" type="submit">Nova Lista</button>
-                  </form>
-                </div>
-              </div>
+          <div class="box rz-box">
+            <div class="rz-box-body p-0">
+              <p class="centraliza-texto" th:if="${listasCriadas.isEmpty()}">Não há listas criadas.</p>
+              <ul class="rz-list striped">
+                <li class="rz-list-item" th:each="lista: ${listasCriadas}">
+                  <span th:text="${lista.nome}"></span>
+                  <div class="mb-0 flex end buttons has-addons">
+                    <a class="button rz-button" th:href="@{/minhas-listas/{id}/editar/(id=${lista.id})}">
+                      <i class="fas fa-edit"></i>
+                    </a>
+                    <a class="button rz-button list-style">
+                      <i class="fas fa-shopping-basket"></i>
+                    </a>
+                    <form th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post" name="meuform"
+                      th:onsubmit="return minhasListas.exibeConfirmacaoDeExclusaoDaLista()">
+                      <button type="submit" class="button rz-button list-style">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </form>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="rz-box-footer flex space-between p-3">
+              <a href="/" class="button rz-button is-rounded">Voltar</a>
+              <a href="/minhas-listas/criar" class="button rz-button is-rounded">Nova Lista</a>
             </div>
           </div>
         </div>
       </div>
-
+      </div>
+      </div>
     </section>
-
   </section>
 </body>
 
