@@ -19,7 +19,7 @@ public class PedidoControlador {
     private MinhaListaServico minhaListaServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
-            .pagina("Início", "/");
+            .pagina("Página Inicial", "/");
 
     @Autowired
     public PedidoControlador(MinhaListaServico minhaListaServico) {
@@ -30,7 +30,7 @@ public class PedidoControlador {
     public String pedidos(Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Pedidos", "/pedido/pedidos");
+                .pagina("Compras", "/pedido/pedidos");
         return "pedido/pedidos";
     }
 
