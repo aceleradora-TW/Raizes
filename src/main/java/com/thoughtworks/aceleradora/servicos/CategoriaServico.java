@@ -2,6 +2,7 @@ package com.thoughtworks.aceleradora.servicos;
 
 import com.thoughtworks.aceleradora.dominio.Categoria;
 import com.thoughtworks.aceleradora.dominio.Produto;
+import com.thoughtworks.aceleradora.dominio.Resposta;
 import com.thoughtworks.aceleradora.dtos.CategoriaDTO;
 import com.thoughtworks.aceleradora.dtos.ProdutoDTO;
 import com.thoughtworks.aceleradora.repositorios.CategoriaRepositorio;
@@ -19,12 +20,17 @@ public class CategoriaServico {
         this.repositorio = repositorio;
     }
 
-    public List<Categoria> pegarCategorias() {
-        return repositorio.findAll();
+    public Resposta<List<Categoria>> pegarCategorias() {
+
+        try {
+            return new Resposta<List<Categoria>>("null", repositorio.findAll());
+        }catch (Exception e) {
+            return new Resposta(e.getMessage(),null);
+        }
     }
 
     public List<CategoriaDTO> pegarCategoriasDto() {
-        return this.pegarCategorias()
+        return this.pegarCategorias().getDados()
             .stream()
             .map(categoria -> categoria.paraDTO())
             .collect(Collectors.toList());

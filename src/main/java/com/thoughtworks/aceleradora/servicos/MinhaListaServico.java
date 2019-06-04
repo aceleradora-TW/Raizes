@@ -2,6 +2,7 @@ package com.thoughtworks.aceleradora.servicos;
 
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.Produto;
+import com.thoughtworks.aceleradora.dominio.Resposta;
 import com.thoughtworks.aceleradora.repositorios.MinhaListaRepositorio;
 import org.springframework.stereotype.Service;
 
@@ -18,21 +19,19 @@ public class MinhaListaServico {
         this.repositorio = repositorio;
     }
 
-    public MinhaLista salvar(MinhaLista lista) {
+    public Resposta<MinhaLista> salvar(MinhaLista lista) {
         try {
-            return repositorio.save(lista);
+            return new Resposta<MinhaLista>("Registro Efetivado!",repositorio.save(lista));
         } catch(Exception e) {
-            return null;
+            return new Resposta(e.getMessage(),null);
         }
     }
 
-    public MinhaLista encontraUm(Long id) {
+    public Resposta<MinhaLista> encontraUm(Long id) {
         try {
-            MinhaLista minhaLista = repositorio.findById(id).get();
-            return minhaLista;
-
+             return new Resposta<MinhaLista>(null, repositorio.findById(id).get());
         } catch (Exception e) {
-            return null;
+            return new Resposta(e.getMessage(),null);
         }
     }
 

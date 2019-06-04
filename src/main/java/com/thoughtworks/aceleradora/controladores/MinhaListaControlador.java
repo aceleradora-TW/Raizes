@@ -47,7 +47,7 @@ public class MinhaListaControlador {
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Minhas Listas", "/minhas-listas")
                 .pagina("Cadastro", "/minhas-listas/cadastro");
-        List<Categoria> categorias = categoriaServico.pegarCategorias();
+        List<Categoria> categorias = categoriaServico.pegarCategorias().getDados();
         modelo.addAttribute("categorias", categorias);
         modelo.addAttribute("pagina", "criar");
 
@@ -56,20 +56,19 @@ public class MinhaListaControlador {
 
     @PostMapping("/criar")
     public String salvarLista(MinhaLista lista, RedirectAttributes atributosRedirecionamento) {
-        if (minhaListaServico.salvar(lista) == null) {
-            Erro erro = new Erro("Já existe uma lista cadastrada com esse nome!");
-            atributosRedirecionamento.addFlashAttribute("Erro", erro);
+        Resposta r = minhaListaServico.salvar(lista);
+        atributosRedirecionamento.addFlashAttribute("resposta", r);
 
+        if (r.getDados() == null) {
             return "redirect:/minhas-listas/criar";
         }
-
         return "redirect:/minhas-listas";
     }
 
     @ResponseBody
     @GetMapping("/pegarCategorias")
     public List<Categoria> salvarLista() {
-        return categoriaServico.pegarCategorias();
+        return categoriaServico.pegarCategorias().getDados();
     }
 
     @PostMapping("/{id}/excluir")
@@ -80,23 +79,21 @@ public class MinhaListaControlador {
 
     @GetMapping("/{id}/editar/")
     public String pegaLista(Model modelo, @PathVariable("id") Long id, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
-        MinhaLista listaExistente = minhaListaServico.encontraUm(id);
-
         breadcrumb
             .aproveitar(partesComunsDoBreadCrumb)
             .pagina("editar lista", "/minha-lista/editar-lista/{id}");
 
-        if (listaExistente == null) {
-            Erro erro = new Erro("Lista inexistente.");
-            redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
+        Resposta<MinhaLista> listaResposta = minhaListaServico.encontraUm(id);
+        redirecionamentoDeAtributos.addFlashAttribute("resposta", listaResposta);
+
+        if (listaResposta.getDados() == null) {
             return "redirect:/minhas-listas/";
         }
 
         List<CategoriaDTO> categorias = categoriaServico.pegarCategoriasDto();
-        categorias = categoriaServico.setaChecados(categorias, listaExistente.getProdutos());
-
+        categorias = categoriaServico.setaChecados(categorias, listaResposta.getDados().getProdutos());
         modelo.addAttribute("categorias", categorias);
-        modelo.addAttribute("lista", listaExistente);
+        modelo.addAttribute("lista", listaResposta.getDados());
 
         return "minha-lista/editar";
     }
@@ -104,34 +101,34 @@ public class MinhaListaControlador {
 
     @PostMapping("/{id}/editar")
     public String salvarLista(MinhaLista listaDoFront, @PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
-        MinhaLista listaDoBanco = minhaListaServico.encontraUm(id);
-        Erro erro = new Erro("Erro ao salvar a lista!");
+        MinhaLista listaDoBanco = minhaListaServico.encontraUm(id).getDados();
+        Resposta resposta = new Resposta("Resposta ao salvar a lista!");
 
         if (listaDoBanco == null) {
-            erro.setMensagem("Lista inexistente.");
-            redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
+            resposta.setMensagem("Lista inexistente.");
+            redirecionamentoDeAtributos.addFlashAttribute("resposta", resposta);
             return "redirect:/minhas-listas/";
         }
 
         if (listaDoFront.getNome().trim().isEmpty()) {
-            erro.setMensagem("Nome da lista é obrigatório.");
-            redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
+            resposta.setMensagem("Nome da lista é obrigatório.");
+            redirecionamentoDeAtributos.addFlashAttribute("resposta", resposta);
             return "redirect:/minhas-listas/{id}/editar/";
         }
 
         List<Produto> produtosFront = listaDoFront.getProdutos();
 
         if (produtosFront.size() == 0) {
-            erro.setMensagem("Selecione pelo menos 1 produto.");
-            redirecionamentoDeAtributos.addFlashAttribute("erro", erro);
+            resposta.setMensagem("Selecione pelo menos 1 produto.");
+            redirecionamentoDeAtributos.addFlashAttribute("resposta", resposta);
             return "redirect:/minhas-listas/{id}/editar/";
         }
 
         listaDoBanco.setNome(listaDoFront.getNome());
         listaDoBanco.setProdutos(produtosFront);
-        minhaListaServico.salvar(listaDoBanco);
+        Resposta r = minhaListaServico.salvar(listaDoBanco);
 
-        redirecionamentoDeAtributos.addFlashAttribute("mensagemSalvoComSucesso", "Sua lista foi salva com sucesso!");
+        redirecionamentoDeAtributos.addFlashAttribute("resposta", r);
         return "redirect:/minhas-listas";
     }
 }
