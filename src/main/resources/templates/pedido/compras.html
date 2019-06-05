@@ -10,6 +10,9 @@
 <section class="section">
   <section class="container">
     <h1 class="title centraliza-texto">Compras</h1>
+    <div th:if="${resposta}">
+      <span th:text="${resposta.mensagem}"></span>
+    </div>
     <div class="columns">
       <div class="column is-12">
         <div class="box rz-box">
@@ -26,7 +29,7 @@
                   <span th:text="${compras.nome}"></span>
                 </td>
                 <td>Pendente</td>
-                <td class="flex">
+                <td class="flex center">
                   <a class="button rz-button list-style" th:href="@{/pedidos/2}">
                     <i class="fas fa-eye"></i></a>
                   <a class="button rz-button list-style">
