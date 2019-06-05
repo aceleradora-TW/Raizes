@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.servicos;
 
 import com.thoughtworks.aceleradora.dominio.Compras;
+import com.thoughtworks.aceleradora.dominio.Resposta;
 import com.thoughtworks.aceleradora.repositorios.CompraRepositorio;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,5 @@ public class CompraServico {
     public void removerCompra(Long idCompra) {
         repositorio.deleteById(idCompra);
     }
-
-
 
 }
