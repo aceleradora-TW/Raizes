@@ -3,10 +3,14 @@ package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.Pedido;
+import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
+import com.thoughtworks.aceleradora.dominio.MinhaLista;
+import com.thoughtworks.aceleradora.dominio.Pedido;
 import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.servicos.*;
 import com.thoughtworks.aceleradora.dominio.Resposta;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
+import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,32 +59,32 @@ public class PedidoControlador {
 
     @GetMapping("/{id}")
     public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
-
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
-                .pagina("Visualizar Pedido", "/pedidos");
+                .pagina("Visualizar pedido", "/pedidos");
 
-        Resposta pedido = minhaListaServico.encontraUm(id);
-        modelo.addAttribute("pedido", pedido.getDados());
-        return "pedido/visualizar-pedido";
+        try {
+            modelo.addAttribute("pedido",  minhaListaServico.encontraUm(id));
+
+            return "pedido/visualizar-pedido";
+        } catch (ListaNaoEncontradaExcecao e) {
+            return "redirect:/pedidos";
+        }
     }
-
-    @GetMapping("{id}/realizar")
-    public String realizarPedido(@PathVariable("idLista") Long id, Breadcrumb breadcrumb, Model modelo, RedirectAttributes redirecionamentoDeAtributos)  {
+    @GetMapping("/realizar-pedido")
+    public String realizarPedidos(Breadcrumb breadcrumb, Model modelo) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Pedidos", "/pedidos")
-                .pagina("Realizar Pedido", "/pedidos");
-
-        Resposta<MinhaLista> listaDoBanco = minhaListaServico.encontraUm(id);
-        redirecionamentoDeAtributos.addFlashAttribute("resposta", listaDoBanco);
-
+                .pagina("realizar pedido", "/pedido/pedidos");
+        List<MinhaLista> listaDoBanco = minhaListaServico.encontraUm(id);
         modelo.addAttribute("lista",listaDoBanco);
 
+
+        ProdutoProdutorServico produtoProdutorServico;
         modelo.addAttribute("produtoProdutores", produtoProdutorServico.pegaTodosProdutoProdutor());
         modelo.addAttribute("pedido", new Pedido());
-        return "redirect:/pedidos/{id}/realizar/";
+        return "pedido/realizar-pedido";
     }
 
     @PostMapping("/realizar")
