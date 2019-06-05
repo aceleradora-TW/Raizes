@@ -27,8 +27,8 @@ public class MinhaLista {
     @JsonIgnoreProperties("listas")
     private List<Produto> produtos = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = "id_clientes")
+    @ManyToOne
+    @JoinColumn(name="id_clientes")
     private Cliente cliente;
 
     public MinhaLista() {
