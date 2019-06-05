@@ -6,47 +6,31 @@
 <body>
   <section>
     <section class="container">
-
       <h1 class="title">Criar Lista</h1>
       <h3 class="subtitle">*Campos obrigatórios.</h3>
-
+      <div th:if="${resposta}">
+        <span th:text="${resposta.mensagem}"></span>
+      </div>
       <div class="columns">
         <div class="column is-12">
-          <div th:if="${Erro} != null">
-            <span th:text="${Erro.mensagem}"></span>
-          </div>
-          <div class="box">
-            <form id="formCriaLista" th:action="@{/minhas-listas/criar}" method="post">
-              <div class="field column is-6 is-offset-3">
-                <label class="label">Nome*</label>
-                <div class="control">
-                  <input class="input" type="text" name="nome" th:field="*{lista.nome}" placeholder="Ex.: Minha Lista Compras 1">
+          <div class="rz-box box">
+            <form class="rz-form" id="formCriaLista" th:action="@{/minhas-listas/criar}" method="post">
+              <div class="rz-box-body">
+                <div class="column is-6 is-offset-3">
+                  <label class="label">Nome*</label>
+                  <div class="field">
+                    <input class="input" type="text" name="nome" placeholder="Ex.: Minha Lista Compras 1">
+                    <div class="help-block"></div>
+                  </div>
                 </div>
-                <div class="help-block"></div>
+                <div th:replace="fragments/seletor_produtos"
+                th:with="categorias=${categorias}, lista=${lista} ?: null">
+                </div>
               </div>
-
-
-              <div class="categorias rz-list">
-
-                <div class="column columns is-multiline is-10 is-offset-1" th:each="categoria: ${categorias}">
-                  <h2 class="column is-12" th:text="${categoria.nome}"></h2>
-                  <div th:each="produto: ${categoria.produtos}">
-                    <span class="bigcheck">
-                      <input class="checkbox" type="checkbox" name="produtos" th:value="${produto.id}" th:id="${produto.nome}">
-                      <label class="checkbox" th:text="${produto.nome}" th:for="${produto.nome}"></label>
-                      <span class="check"><i class="far fa-check-circle"></i></span>
-                    </span>   
-                  </div>
-                </div>
-
-                <div class="field">
-                  <div class="control flex end">
-                    <button class="button rz-button is-rounded" type="submit">Salvar</button>
-                  </div>
-                </div>
-
-                <div class="help-block"></div>
-
+              <div class="rz-box-footer flex space-between">
+                <a class="button rz-button is-rounded" th:href="@{/minhas-listas}"
+                  th:onclick="return EditarLista.exibeConfirmacaoDeCancelamento()">Cancelar</a>
+                <button class="button rz-button is-rounded" type="submit">Salvar</button>
               </div>
             </form>
           </div>

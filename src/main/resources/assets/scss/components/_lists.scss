@@ -1,13 +1,20 @@
 .rz-list {
   align-items: center;
   margin-bottom: 0;
-  padding: 0px 60px 10px;
+
+  .rz-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+  }
+
   &.striped {
-    li {
-      &:nth-child(even) {
-        background: #f5f5f5;
-      }
+    .rz-list-item {
       &:nth-child(odd) {
+        background: $striped-row;
+      }
+      &:nth-child(even) {
         background: #fff;
       }
     }
@@ -19,11 +26,4 @@
     justify-content: space-between;
     padding: 10px 30px 0px 30px;
   }
-}
-
-.box {
-  padding: 20px 0px;
-}
-ul.listas {
-  margin-top: -18px;
 }

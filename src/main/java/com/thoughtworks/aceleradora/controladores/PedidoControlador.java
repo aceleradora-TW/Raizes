@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
+import com.thoughtworks.aceleradora.dominio.Resposta;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ public class PedidoControlador {
     private MinhaListaServico minhaListaServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
-            .pagina("Início", "/");
+            .pagina("Página Inicial", "/");
 
     @Autowired
     public PedidoControlador(MinhaListaServico minhaListaServico) {
@@ -29,19 +30,20 @@ public class PedidoControlador {
     public String pedidos(Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Pedidos", "/pedido/pedidos");
+                .pagina("Compras", "/pedido/pedidos");
         return "pedido/pedidos";
     }
 
     @GetMapping("/{id}")
     public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
-        MinhaLista lista = minhaListaServico.encontraUm(id);
+
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Visualizar pedido", "/pedidos");
 
-        modelo.addAttribute("lista", lista);
+        Resposta pedido = minhaListaServico.encontraUm(id);
+        modelo.addAttribute("pedido", pedido.getDados());
         return "pedido/visualizar-pedido";
     }
     @GetMapping("/realizar-pedido")
