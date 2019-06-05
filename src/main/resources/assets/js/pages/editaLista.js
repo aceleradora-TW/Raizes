@@ -1,5 +1,6 @@
 import Validator from '../utils/validator'
 
+
 export default {
   validaFormulario: () => {
     const validador = new Validator('#formEditaLista'); 
@@ -9,8 +10,7 @@ export default {
       rules: {
         required: true
       }
-    }); 
+    });
   },
-
-  exibeConfirmacaoDeCancelamento: () => confirm("Realmente deseja calcelar a edição? Os dados não serão salvos.")
+  exibeConfirmacaoDeCancelamento: () => window.Modal.warning().show("Realmente deseja calcelar a edição? Os dados não serão salvos.")
 }

@@ -7,11 +7,14 @@ import CriarLista from './pages/criaLista'
 import EditarLista from './pages/editaLista'
 import minhasListas from './pages/minha-lista'
 import RealizarPedido from './pages/realizarPedido'
+import Modal from './components/modal'
 
 $(function () {
     CriarLista.validaFormulario();   
     EditarLista.validaFormulario();
+    
+    window.minhasListas = minhasListas;
+    window.EditaLista = EditarLista;
+    window.RealizarPedido = RealizarPedido;
+    window.Modal = new Modal();
 });
-window.minhasListas = minhasListas;
-window.EditaLista = EditarLista;
-window.RealizarPedido = RealizarPedido;

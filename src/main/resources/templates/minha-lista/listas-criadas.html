@@ -18,7 +18,7 @@
         <div class="column is-12">
           <div class="box rz-box">
             <div class="rz-box-body p-0">
-              <p class="centraliza-texto" th:if="${listasCriadas.isEmpty()}">Não há listas criadas.</p>
+              <p class="m-2 has-text-centered" th:if="${listasCriadas.isEmpty()}">Não há listas criadas.</p>
               <ul class="rz-list striped">
                 <li class="rz-list-item row rx-0" th:each="lista: ${listasCriadas}">
                   <span th:text="${lista.nome}"></span>
