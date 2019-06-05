@@ -1,7 +1,6 @@
 package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.Compras;
-import com.thoughtworks.aceleradora.dominio.MinhaLista;
+import com.thoughtworks.aceleradora.dominio.Compra;
 import com.thoughtworks.aceleradora.dominio.Resposta;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.CompraServico;
@@ -34,7 +33,7 @@ public class CompraControlador {
     public String comprasFeitas(Model modelo, Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Compras", "/pedido/compras");
+                .pagina("Compra", "/pedido/compras");
         modelo.addAttribute("comprasFeitas", compraServico.pegarCompras());
         return "pedido/compras";
     }
@@ -60,7 +59,7 @@ public class CompraControlador {
     }
 
     @PostMapping("/{id}/excluir")
-    public String removerCompra(Compras compra, @PathVariable("id") Long id) {
+    public String removerCompra(Compra compra, @PathVariable("id") Long id) {
         compraServico.removerCompra(id);
         return "redirect:/compras";
     }

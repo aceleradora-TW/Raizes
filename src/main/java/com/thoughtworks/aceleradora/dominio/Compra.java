@@ -7,7 +7,7 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "Compras")
-public class Compras {
+public class Compra {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -15,10 +15,10 @@ public class Compras {
     private String nome;
 
 
-    public Compras() {
+    public Compra() {
     }
 
-    public Compras(String nome, long id) {
+    public Compra(String nome, long id) {
         this.nome = nome;
         this.id = id;
     }

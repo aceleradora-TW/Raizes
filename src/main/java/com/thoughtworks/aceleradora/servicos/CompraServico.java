@@ -1,7 +1,6 @@
 package com.thoughtworks.aceleradora.servicos;
 
-import com.thoughtworks.aceleradora.dominio.Compras;
-import com.thoughtworks.aceleradora.dominio.Resposta;
+import com.thoughtworks.aceleradora.dominio.Compra;
 import com.thoughtworks.aceleradora.repositorios.CompraRepositorio;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +16,13 @@ public class CompraServico {
     }
 
 
-    public List<Compras> pegarCompras() {
+    public List<Compra> pegarCompras() {
         return repositorio.findAll();
     }
 
-    public Compras encontraUm(Long id) {
+    public Compra encontraUm(Long id) {
         try {
-            Compras compra = repositorio.findById(id).get();
+            Compra compra = repositorio.findById(id).get();
             return compra;
 
         } catch (Exception e) {
