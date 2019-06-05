@@ -21,7 +21,6 @@ import java.util.function.Consumer;
 @RequestMapping("/minhas-listas")
 public class MinhaListaControlador {
 
-    private ProdutoServico produtoServico;
     private MinhaListaServico minhaListaServico;
     private CategoriaServico categoriaServico;
 
@@ -29,8 +28,7 @@ public class MinhaListaControlador {
             .pagina("Página Inicial", "/");
 
     @Autowired
-    public MinhaListaControlador(ProdutoServico produtoServico, MinhaListaServico minhaListaServico, CategoriaServico categoriaServico) {
-        this.produtoServico = produtoServico;
+    public MinhaListaControlador(MinhaListaServico minhaListaServico, CategoriaServico categoriaServico) {
         this.minhaListaServico = minhaListaServico;
         this.categoriaServico = categoriaServico;
     }
@@ -60,7 +58,7 @@ public class MinhaListaControlador {
     }
 
     @PostMapping("/criar")
-    public String salvarLista(@Valid MinhaLista minhaLista, BindingResult resultadoValidacao, Model modelo) {
+    public String salvarLista(@Valid MinhaLista minhaLista, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
         if(resultadoValidacao.hasErrors()) {
             modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
             modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
@@ -68,9 +66,11 @@ public class MinhaListaControlador {
             return "minha-lista/cadastro";
         }
 
-        minhaLista = minhaListaServico.salvar(minhaLista);
+        minhaListaServico.salvar(minhaLista);
 
-        return "redirect:/minhas-listas/" + minhaLista.getId() + "/editar";
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Lista criada com sucesso");
+
+        return "redirect:/minhas-listas";
     }
 
     @PostMapping("/{id}/excluir")
@@ -84,7 +84,7 @@ public class MinhaListaControlador {
     public String pegaLista(@PathVariable("id") Long id, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos, Model modelo) {
         breadcrumb
             .aproveitar(partesComunsDoBreadCrumb)
-            .pagina("editar lista", "/minha-lista/editar-lista/{id}");
+            .pagina("Editar lista", "/minha-lista/editar-lista/{id}");
 
         try {
             modelo.addAttribute("minhaLista", minhaListaServico.encontraUm(id));
@@ -101,7 +101,7 @@ public class MinhaListaControlador {
 
     @PostMapping("/{id}/editar")
     public String salvarLista(@Valid MinhaLista minhaLista, BindingResult resultadoValidacao, RedirectAttributes redirecionamentoDeAtributos, Model modelo) {
-        if(resultadoValidacao.hasErrors()) {
+        if (resultadoValidacao.hasErrors()) {
             modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
             modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
 
@@ -112,13 +112,5 @@ public class MinhaListaControlador {
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Lista atualizada com sucesso");
 
         return "redirect:/minhas-listas";
-    }
-
-
-    // Isso aqu devia estar em webservice hein gurizada medonha
-    @ResponseBody
-    @GetMapping("/pegarCategorias")
-    public List<Categoria> salvarLista() {
-        return categoriaServico.pegarCategorias();
     }
 }

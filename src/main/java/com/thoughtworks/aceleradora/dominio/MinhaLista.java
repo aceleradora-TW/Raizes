@@ -31,7 +31,6 @@ public class MinhaLista {
     @NotEmpty(message = "É necessário selecionar ao menos um produto")
     private List<Produto> produtos = new ArrayList<>();
 
-<<<<<<< Updated upstream
     @ManyToOne
     @JoinColumn(name="id_clientes")
     private Cliente cliente;
@@ -45,8 +44,6 @@ public class MinhaLista {
 
     }
 
-=======
->>>>>>> Stashed changes
     public void setId(Long id) {
         this.id = id;
 

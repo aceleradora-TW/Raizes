@@ -14,7 +14,7 @@
             <input type="checkbox" name="produtos"
                    th:value="${produto.id}"
                    th:id="${produto.nome}"
-                   th:checked="${minhaLista != null and minhaLista.produtos.contains(produto)}">
+                   th:checked="${minhaLista.produtos.contains(produto)}">
             <label class="checkbox" th:text="${produto.nome}" th:for="${produto.nome}"></label>
             <span class="check"><i class="far fa-check-circle"></i></span>
           </span>
