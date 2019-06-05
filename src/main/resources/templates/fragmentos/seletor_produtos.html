@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+</head>
+
+<body>
+  <ul class="field categorias">
+    <li class="" th:each="categoria : ${categorias}">
+      <h2 class="centraliza-texto" th:text="${categoria.nome}"></h2>
+      <ul class="lista-produtos flex flex-row wrap center">
+        <li th:each="produto : ${categoria.produtos}">
+          <span class="bigcheck">
+            <input type="checkbox" name="produtos"
+                   th:value="${produto.id}"
+                   th:id="${produto.nome}"
+                   th:checked="${minhaLista != null and minhaLista.produtos.contains(produto)}">
+            <label class="checkbox" th:text="${produto.nome}" th:for="${produto.nome}"></label>
+            <span class="check"><i class="far fa-check-circle"></i></span>
+          </span>
+        </li>
+      </ul>
+    </li>
+    <div class="help-block"></div>
+  </ul>
+</body>
+
+</html>
