@@ -13,26 +13,23 @@ public class Produto {
     private Long id;
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "id_categorias")
-    @JsonIgnoreProperties("produtos")
+
+    @Enumerated
     private Categoria categoria;
 
-    @ManyToOne
-    @JoinColumn(name = "id_tipos_de_cultivos" )
-    @JsonIgnoreProperties("produtos")
-    private Cultivo cultivo;
+    @Enumerated
+    private UnidadeDeMedida unidadeDeMedida;
 
     public Produto(String nome) {
     }
 
     public Produto() {}
 
-    public Produto(Long id, String nome, Categoria categoria, Cultivo cultivo) {
-        this.id = id;
+
+    public Produto(String nome, Categoria categoria, UnidadeDeMedida unidadeDeMedida) {
         this.nome = nome;
         this.categoria = categoria;
-        this.cultivo = cultivo;
+        this.unidadeDeMedida = unidadeDeMedida;
     }
 
     public Long getId() {
@@ -59,12 +56,12 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public Cultivo getCultivo() {
-        return cultivo;
+    public UnidadeDeMedida getUnidadeDeMedida() {
+        return unidadeDeMedida;
     }
 
-    public void setCultivo(Cultivo cultivo) {
-        this.cultivo = cultivo;
+    public void setUnidadeDeMedida(UnidadeDeMedida unidadeDeMedida) {
+        this.unidadeDeMedida = unidadeDeMedida;
     }
 
     public String toString() {
