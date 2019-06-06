@@ -2,6 +2,8 @@ package com.thoughtworks.aceleradora.dominio;
 
 import javax.persistence.*;
 
+import java.util.List;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "clientes")
@@ -16,6 +18,9 @@ public class Cliente {
     @OneToOne
     @JoinColumn(name = "id_usuarios")
     private Usuario usuario;
+
+    @OneToMany(mappedBy="cliente")
+    private List<MinhaLista> minhasListas;
 
     public Cliente() {
     }
