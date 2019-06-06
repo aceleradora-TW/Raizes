@@ -9,7 +9,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "produtos_produtores")
 @Access(AccessType.FIELD)
-public class ProdutoProdutor extends Produto{
+public class ProdutoProdutor{
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
