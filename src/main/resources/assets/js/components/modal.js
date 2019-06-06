@@ -2,6 +2,7 @@ export default class Modal {
   constructor(selector = '#Modal') {
     this.elem = document.querySelector(selector)
     this.elemTituloModal = $(this.elem).find('.modal-card-title');
+    this.okButton = $(this.elem).find('.ok-button');
 
     // this.addEventListener('modal:show', function () {
     //   console.log("opened")
@@ -35,6 +36,11 @@ export default class Modal {
   close() {
     this.elem.classList.toggle('is-active')
     this.on_close()
+  }
+  okAction(callback) {
+    console.log(callback);
+    
+    return this;
   }
 
   init() {

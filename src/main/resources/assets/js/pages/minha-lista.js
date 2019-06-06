@@ -1,3 +1,9 @@
 export default {
-    exibeConfirmacaoDeExclusaoDaLista: () => confirm("Realmente deseja excluir a lista selecionada?")
+    exibeConfirmacaoDeExclusaoDaLista: (deleteItemForm) => {
+        $(deleteItemForm).submit()
+        return window.Modal
+        .warning()
+        .show('Você tem certeza que deseja excluir esta lista?')
+        
+    }
 }

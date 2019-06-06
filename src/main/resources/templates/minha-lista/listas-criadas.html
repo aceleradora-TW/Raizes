@@ -29,7 +29,7 @@
                     <a class="button rz-button list-style">
                       <i class="fas fa-shopping-basket"></i>
                     </a>
-                    <form th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post" name="meuform"
+                    <form name="deleteItemForm" th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post"
                       th:onsubmit="return minhasListas.exibeConfirmacaoDeExclusaoDaLista()">
                       <button type="submit" class="button rz-button list-style">
                         <i class="fas fa-trash-alt"></i>
