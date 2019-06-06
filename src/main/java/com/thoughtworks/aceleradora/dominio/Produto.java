@@ -14,8 +14,11 @@ public class Produto {
     private String nome;
 
 
-    @Enumerated
+    @ManyToOne
+    @JoinColumn(name = "id_categorias")
+    @JsonIgnoreProperties("produtos")
     private Categoria categoria;
+
 
     @Enumerated
     private UnidadeDeMedida unidadeDeMedida;
