@@ -1,4 +1,4 @@
 export default {
     exibeConfirmacaoDeCancelamento: () => window.Modal.warning()
-    .show("Realmente deseja calcelar o pedido? O pedido não será salvo.")
+    .show("Realmente deseja calcelar a edição? Os dados não serão salvos.")
 }

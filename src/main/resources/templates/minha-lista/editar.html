@@ -36,7 +36,8 @@
               <div class="rz-box-footer flex space-between">
                 <a class="button rz-button is-rounded" th:href="@{/minhas-listas}"
                   th:onclick="return EditaLista.exibeConfirmacaoDeCancelamento()">Cancelar</a>
-                <button class="button rz-button is-rounded" type="submit">Salvar</button>
+                <a class="button rz-button is-rounded" th:href="@{/minhas-listas}"
+                  th:onclick="return EditaLista.exibeConfirmacaoDeSalvo()">Salvar</a>
               </div>
             </form>
           </div>

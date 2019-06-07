@@ -12,5 +12,9 @@ export default {
       }
     });
   },
-  exibeConfirmacaoDeCancelamento: () => window.Modal.warning().show("Realmente deseja calcelar a edição? Os dados não serão salvos.")
+  exibeConfirmacaoDeCancelamento: () => window.Modal.warning()
+  .show("Realmente deseja calcelar a edição? Os dados não serão salvos."),
+  
+  exibeConfirmacaoDeSalvo: () => window.Modal.success()
+  .show("Lista salva com sucesso!")
 }

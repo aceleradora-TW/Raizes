@@ -10,5 +10,11 @@ export default {
         required: true
       }
     }); 
-  }
+  },
+  exibeConfirmacaoDeCancelamento: () => window.Modal.warning()
+  .show("Realmente deseja sair sem salvar a lista? Os dados não serão salvos."),
+
+  exibeConfirmacaoDeSalvo: () => window.Modal.success()
+  .show("Lista salva com sucesso!")
+  
 }
