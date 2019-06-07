@@ -1,7 +1,7 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "produtos")
@@ -16,23 +16,23 @@ public class Produto {
 
     @ManyToOne
     @JoinColumn(name = "id_categorias")
-    @JsonIgnoreProperties("produtos")
     private Categoria categoria;
 
 
-    @Enumerated
-    private UnidadeDeMedida unidadeDeMedida;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "unidade_medida")
+    private UnidadeMedida unidadeMedida;
 
     public Produto(String nome) {
     }
 
     public Produto() {}
 
-
-    public Produto(String nome, Categoria categoria, UnidadeDeMedida unidadeDeMedida) {
+    public Produto(Long id, String nome, Categoria categoria, UnidadeMedida unidadeMedida) {
+        this.id = id;
         this.nome = nome;
         this.categoria = categoria;
-        this.unidadeDeMedida = unidadeDeMedida;
+        this.unidadeMedida = unidadeMedida;
     }
 
     public Long getId() {
@@ -59,12 +59,12 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public UnidadeDeMedida getUnidadeDeMedida() {
-        return unidadeDeMedida;
+    public UnidadeMedida getUnidadeMedida() {
+        return unidadeMedida;
     }
 
-    public void setUnidadeDeMedida(UnidadeDeMedida unidadeDeMedida) {
-        this.unidadeDeMedida = unidadeDeMedida;
+    public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
+        this.unidadeMedida = unidadeMedida;
     }
 
     public String toString() {
