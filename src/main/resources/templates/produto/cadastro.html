@@ -39,7 +39,7 @@
                 <label class="label">Tipo de Cultivo</label>
                 <div class="select">
                   <select form="formCadastraProduto" id="cultivos" name="cultivo">
-                    <option th:each="cultivo: ${cultivos}" th:text="${cultivo.nome}" th:value="${cultivo.id}"></option>
+                    <option th:each="cultivo: ${cultivos}" th:text="${cultivo.codigo}"></option>
                   </select>
                 </div>
                 <div class="help-block"></div>
