@@ -15,6 +15,7 @@ public class CategoriaServico {
     }
 
     public List<Categoria> pegarCategorias() {
-        return repositorio.findAll();
+        List<Categoria> categorias = repositorio.findAll();
+        return categorias;
     }
 }
