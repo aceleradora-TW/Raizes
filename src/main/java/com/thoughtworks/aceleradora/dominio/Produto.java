@@ -13,11 +13,9 @@ public class Produto {
     private Long id;
     private String nome;
 
-
     @ManyToOne
     @JoinColumn(name = "id_categorias")
     private Categoria categoria;
-
 
     @Enumerated(EnumType.STRING)
     @Column(name = "unidade_medida")
