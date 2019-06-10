@@ -1,7 +1,9 @@
 package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
+import com.thoughtworks.aceleradora.dominio.Pedido;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
+import com.thoughtworks.aceleradora.servicos.PedidoServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +17,15 @@ import java.util.function.Consumer;
 public class PedidoControlador {
 
     private MinhaListaServico minhaListaServico;
+    private PedidoServico pedidoServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Página Inicial", "/");
 
     @Autowired
-    public PedidoControlador(MinhaListaServico minhaListaServico) {
+    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico) {
         this.minhaListaServico = minhaListaServico;
+        this.pedidoServico = pedidoServico;
     }
 
     @GetMapping
@@ -40,12 +44,13 @@ public class PedidoControlador {
                 .pagina("Visualizar pedido", "/pedidos");
 
         try {
-            modelo.addAttribute("pedido",  minhaListaServico.encontraUm(id));
-
+            modelo.addAttribute("pedido",  pedidoServico.encontraUm(id));
             return "pedido/visualizar-pedido";
+
         } catch (ListaNaoEncontradaExcecao e) {
             return "redirect:/pedidos";
         }
+
     }
     @GetMapping("/realizar-pedido")
     public String realizarPedidos(Breadcrumb breadcrumb) {
