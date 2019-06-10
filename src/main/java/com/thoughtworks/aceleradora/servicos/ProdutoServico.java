@@ -17,12 +17,13 @@ public class ProdutoServico {
         this.repositorio = repositorio;
     }
 
-    public Resposta<List<Produto>> pegarTodos() {
-        try {
-            return new Resposta<List<Produto>>(null, repositorio.findAll());
-        }catch (Exception e) {
-            return new Resposta(e.getMessage(),null);
-        }
+    public List<Produto> pegarTodos() {
+//        try {
+//            return new Resposta<List<Produto>>(null, repositorio.findAll());
+//        }catch (Exception e) {
+//            return new Resposta(e.getMessage(),null);
+//        }
+        return repositorio.findAll();
     }
 
     public Resposta<Produto> salvar(Produto produto) {

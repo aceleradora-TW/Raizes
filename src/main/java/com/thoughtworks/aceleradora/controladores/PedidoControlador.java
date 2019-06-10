@@ -1,26 +1,15 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.MinhaLista;
-import com.thoughtworks.aceleradora.dominio.Pedido;
+import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
-import com.thoughtworks.aceleradora.dominio.MinhaLista;
-import com.thoughtworks.aceleradora.dominio.Pedido;
-import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.servicos.*;
-import com.thoughtworks.aceleradora.dominio.Resposta;
-import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
-import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 @Controller
@@ -72,19 +61,16 @@ public class PedidoControlador {
             return "redirect:/pedidos";
         }
     }
-    @GetMapping("/realizar-pedido")
-    public String realizarPedidos(Breadcrumb breadcrumb, Model modelo) {
+
+    @GetMapping("/{id}/realizar-pedido")
+    public String realizarPedidos(Breadcrumb breadcrumb, Model modelo, @PathVariable("id") Long id) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("realizar pedido", "/pedido/pedidos");
-        List<MinhaLista> listaDoBanco = minhaListaServico.encontraUm(id);
-        modelo.addAttribute("lista",listaDoBanco);
+        MinhaLista listaDoBanco = minhaListaServico.encontraUm(id);
 
-
-        ProdutoProdutorServico produtoProdutorServico;
-        modelo.addAttribute("produtoProdutores", produtoProdutorServico.pegaTodosProdutoProdutor());
-        modelo.addAttribute("pedido", new Pedido());
-        return "pedido/realizar-pedido";
+        modelo.addAttribute("produtoProdutores", produtoProdutorServico.pegaListadeProdutos(id));
+        return "pedidos/{id}/realizar-pedido";
     }
 
     @PostMapping("/realizar")
@@ -92,5 +78,28 @@ public class PedidoControlador {
         pedidoServico.salvar(pedido);
         return "redirect:/pedidos";
     }
+
+    @ResponseBody
+    @GetMapping("/lista-produtores")
+    public Map<Produto, List<Produtor>> mostraProdutosComProdutores() {
+        List<Produto> produtos = produtoServico.pegarTodos();
+
+        return pedidoServico.pegarProdutoresDosProdutos(produtos);
+    }
+
+
+    @ResponseBody
+    @GetMapping("/produto-produtor/{id}")
+    public ProdutoProdutor mostraPrecoEQuantidadeDeProdutoDeUmProdutor(Long id) {
+
+        return produtoProdutorServico.encontraUm(id);
+    }
+
+    @ResponseBody
+    @GetMapping("/produto-produtor")
+    public List<ProdutoProdutor> mostraPrecoEQuantidadeDeTodosProdutos() {
+        return produtoProdutorServico.pegaTodosProdutoProdutor();
+    }
+
 
 }

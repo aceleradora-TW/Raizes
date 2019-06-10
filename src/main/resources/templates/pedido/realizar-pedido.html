@@ -9,76 +9,38 @@
 <section class="section">
     <section class="container">
         <h1 class="title centraliza-texto">Feijoada de Domingo</h1>
+
         <div class="columns">
             <div class="column is-12">
-                <form>
-                    <h3>Cebola</h3>
-                    <div class="box">
-                        <div class = "flex equal-sizing flex-row">
-                            <label class="radio">
-                                <input type="radio" name="answer">
-                                <span>Aldo Produtor</span>
-                            </label>
-
-                            <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                            <i class="fas fa-truck"></i>
-                        </div>
-                        <div>
-                            <div class = "flex equal-sizing flex-row">
-                                <span><i class="fas fa-spa"></i> Orgânico</span>
-                                <span>Valor: R$ 5,00</span>
-                                <label class="label">Quantidade: <input size="5" type="text" placeholder="Ex: 4"></label>
-                                <span>Total: R$ 0,00</span>
+                <form class="rz-form" id="formEditaLista" th:action="@{/pedidos/{id}/realizar-pedido}"
+                      method="post">
+                    <p>SOCORRO</p>
+                    <div th:each="produto: ${produtoProdutores.produto}">
+                        <h3 th:text="${produto.nome}"></h3>
+                        <div class="box" th:each="produtor: ${produtoProdutores.produtor}">
+                            <div class="flex equal-sizing flex-row">
+                                <label class="radio">
+                                    <input type="radio" name="produtores" th:value="${produtor.id}" th:id="${produtor.nome}">
+                                    <span th:text="${produtor.nome}"></span>
+                                </label>
+                                <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
+                                <i class="fas fa-truck"></i>
                             </div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class = "flex equal-sizing flex-row">
-                            <label class="radio">
-                                <input type="radio" name="answer">
-                                <span>João Severo</span>
-                            </label>
-
-                            <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                            <i class="fas fa-truck"></i>
-                        </div>
-                        <div>
-                            <div class = "flex equal-sizing flex-row">
-                                <span><i class="fas fa-tint"></i> Hidropônico</span>
-                                <span>Valor: R$ 5,00</span>
-                                <label class="label">Quantidade: <input size="5" type="text" placeholder="Ex: 4"></label>
-                                <span>Total: R$ 0,00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class = "flex equal-sizing flex-row">
-                            <label class="radio">
-                                <input type="radio" name="answer">
-                                <span>Maria Silva</span>
-                            </label>
-
-                            <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                            <i class="fas fa-truck"></i>
-                        </div>
-                        <div>
-                            <div class = "flex equal-sizing flex-row">
-                                <span><i class="fas fa-sun"></i> Convencional</span>
-                                <span>Valor: R$ 5,00</span>
-                                <label class="label">Quantidade: <input size="5" type="text" placeholder="Ex: 4"></label>
-                                <span>Total: R$ 0,00</span>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <span>Total do Pedido: R$ 0,00</span>
-                    <div class="field"> 
-                        <div class="control">
-                            <div class="flex space-between">
-                                <a class="button is-primary" th:href="@{/minhas-listas}"
-                                    th:onclick="return RealizarPedido.exibeConfirmacaoDeCancelamento()">Cancelar</a>
-                                <a class="button is-primary" type="submit" th:href="@{/}">Avançar</a>
+                            <div>
+                                <div class="flex equal-sizing flex-row">
+                                    <div class="flex flex-row ">
+                                        <i class="fas fa-spa "></i>
+                                        <span th:text="${produto.cultivo.nome}"></span>
+                                    </div>
+                                    <div class="flex flex-row ">
+                                        <span>Valor: R$</span>
+                                        <span th:text="${produtoProdutor.preco}"></span>
+                                    </div>
+                                    <label class="label">Quantidade:
+                                        <input size="5" type="text" placeholder="Ex: 4" name="quantidade" th:field="*{pedido.quantidade}">
+                                    </label>
+                                    <span>Total: R$ 0,00</span>
+                                </div>
                             </div>
                         </div>
                     </div>

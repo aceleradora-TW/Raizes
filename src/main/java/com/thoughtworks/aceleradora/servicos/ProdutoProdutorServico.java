@@ -31,7 +31,6 @@ public class ProdutoProdutorServico {
 
     public List<ProdutoProdutor> pegaTodosProdutoProdutor() {
         return repositorio.findAll();
-
     }
 
     public ProdutoProdutor encontraUm(Long id) {
@@ -39,26 +38,26 @@ public class ProdutoProdutorServico {
         return produtoProdutorOptional.get();
     }
 
-//    public List<ProdutoProdutor> pegaListadeProdutos(Long id){
-//        MinhaLista lista = minhaListaRepositorio.findById(id).get();
-//
-//        List<Produto> listaDeProdutos = lista.getProdutos();
-//
-//        ProdutoProdutor produtoProdutor = new ProdutoProdutor();
-//
-//        List<ProdutoProdutor> listaDeProdutoProdutor = new ArrayList<ProdutoProdutor>();
-//
-//        for(int i = 0; i < lista.getProdutos().size(); i++) {
-//            if (produtoProdutor.getProduto().getId().equals(lista.getProdutos().get(i).getId())) {
-//
-//
-//                listaDeProdutoProdutor.add(produtoProdutor.getProduto().getId(id));
-//            }
-//        }
-//
-//
-//        return listaDeProdutoProdutor;
-//    }
+    public List<ProdutoProdutor> pegaListadeProdutos(Long id){
+        MinhaLista lista = minhaListaRepositorio.findById(id).get();
+
+        List<Produto> listaDeProdutos = lista.getProdutos();
+
+        List<ProdutoProdutor> produtoProdutor = new ArrayList<>();
+
+        List<ProdutoProdutor> listaDeProdutoProdutor = new ArrayList<ProdutoProdutor>();
+
+        for(int i = 0; i < lista.getProdutos().size(); i++) {
+            if (produtoProdutor.get(i).getProduto().getId().equals(lista.getProdutos().get(i).getId())) {
+
+
+                listaDeProdutoProdutor.get(i).setProduto(lista.getProdutos().get(i));
+            }
+        }
+
+
+        return listaDeProdutoProdutor;
+    }
 
 
 }

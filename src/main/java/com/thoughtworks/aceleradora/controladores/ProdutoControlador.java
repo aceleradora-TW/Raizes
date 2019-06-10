@@ -43,7 +43,7 @@ public class ProdutoControlador {
 
         modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
         modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
-        modelo.addAttribute("produtos", produtoServico.pegarTodos().getDados());
+        modelo.addAttribute("produtos", produtoServico.pegarTodos());
 
         return "produto/cadastro";
     }

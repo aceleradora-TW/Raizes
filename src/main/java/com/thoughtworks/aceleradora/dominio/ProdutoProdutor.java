@@ -64,22 +64,6 @@ public class ProdutoProdutor{
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public Produtor getProdutor() {
-        return produtor;
-    }
-
-    public void setProdutor(Produtor produtor) {
-        this.produtor = produtor;
-    }
-
     public TipoDeCultivo getTipoDeCultivo() {
         return tipoDeCultivo;
     }
