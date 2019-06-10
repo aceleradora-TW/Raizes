@@ -13,7 +13,7 @@ import Pedido from './pages/pedido'
 
 $(function () {
     CriarLista.validaFormulario();   
-    EditarLista.validaFormulario();
+    EditaLista.validaFormulario();
     
     window.MinhasListas = MinhasListas;
     window.EditaLista = EditaLista;

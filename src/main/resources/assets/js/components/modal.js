@@ -2,15 +2,8 @@ export default class Modal {
   constructor(selector = '#Modal') {
     this.elem = document.querySelector(selector)
     this.elemTituloModal = $(this.elem).find('.modal-card-title');
-    this.okButton = $(this.elem).find('.ok-button');
-
-    // this.addEventListener('modal:show', function () {
-    //   console.log("opened")
-    // })
-
-    // this.addEventListener("modal:close", function () {
-    //   console.log("closed")
-    // })
+    this.okButton = $(this.elem).find('#okButton');
+    this.cancelButton = $(this.elem).find('#cancelButton');
 
     this.init()
   }
@@ -18,8 +11,7 @@ export default class Modal {
   show(textoDoCorpo) {
     const corpoModal = $(this.elem).find('.modal-card-body span');
     corpoModal.text(textoDoCorpo);
-    this.elem.classList.toggle('is-active')
-    this.on_show()
+    this.elem.classList.add('is-active')
     return false;
   }
 
@@ -34,36 +26,37 @@ export default class Modal {
 
 
   close() {
-    this.elem.classList.toggle('is-active')
-    this.on_close()
+    this.elem.classList.remove('is-active')
   }
-  okAction(callback) {
-    console.log(callback);
-    
+
+  okAction(text, callback) {
+    this.doAction(this.okButton, text, callback)
     return this;
   }
+  cancelAction(text, callback) {
+    this.doAction(this.cancelButton, text, callback)
+    return this;
+  }
+
+  doAction(el, text, callback) {
+    el.text(text);
+    el.on('click', () => {
+      
+      if(callback){callback()};
+      this.close();
+    });
+  }
+
 
   init() {
     var modalClose = $(this.elem).find('.is-modal-close')
     var that = this;
-    modalClose.each(function (i,e) {
+    modalClose.each(function (i, e) {
             
       $(e).on("click", function () {
         that.close();
-        var event = new Event('modal:close')
-        that.elem.dispatchEvent(event);
       })
     })
-  }
-
-  on_show() {
-    var event = new Event('modal:show')
-    this.elem.dispatchEvent(event);
-  }
-
-  on_close() {
-    var event = new Event('modal:close')
-    this.elem.dispatchEvent(event);
   }
 
   addEventListener(event, callback) {

@@ -12,9 +12,11 @@ export default {
       }
     });
   },
-  exibeConfirmacaoDeCancelamento: () => window.Modal.warning()
-  .show("Realmente deseja calcelar a edição? Os dados não serão salvos."),
+  exibeConfirmacaoDeCancelamento: (href) => Modal
+  .warning()
+  .okAction("Sim", () => { window.location.href =  href })
+  .cancelAction("Não")
+  .show("Realmente deseja cancelar a edição? Os dados não serão salvos."),
   
-  exibeConfirmacaoDeSalvo: () => window.Modal.success()
-  .show("Lista salva com sucesso!")
+  salvar: (Form) => true
 }
