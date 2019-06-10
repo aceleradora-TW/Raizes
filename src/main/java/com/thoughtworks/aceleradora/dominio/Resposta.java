@@ -1,5 +1,6 @@
 package com.thoughtworks.aceleradora.dominio;
 
+@Deprecated
 public class Resposta<T> {
     private String mensagem;
     private T dados;

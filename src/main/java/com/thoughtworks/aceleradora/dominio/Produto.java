@@ -1,7 +1,9 @@
 package com.thoughtworks.aceleradora.dominio;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "produtos")
@@ -13,26 +15,27 @@ public class Produto {
     private Long id;
     private String nome;
 
+
     @ManyToOne
     @JoinColumn(name = "id_categorias")
     @JsonIgnoreProperties("produtos")
     private Categoria categoria;
 
-    @ManyToOne
-    @JoinColumn(name = "id_tipos_de_cultivos" )
-    @JsonIgnoreProperties("produtos")
-    private Cultivo cultivo;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "unidade_medida")
+    private UnidadeMedida unidadeMedida;
 
     public Produto(String nome) {
     }
 
     public Produto() {}
 
-    public Produto(Long id, String nome, Categoria categoria, Cultivo cultivo) {
+    public Produto(Long id, String nome, Categoria categoria, UnidadeMedida unidadeMedida) {
         this.id = id;
         this.nome = nome;
         this.categoria = categoria;
-        this.cultivo = cultivo;
+        this.unidadeMedida = unidadeMedida;
     }
 
     public Long getId() {
@@ -59,12 +62,12 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public Cultivo getCultivo() {
-        return cultivo;
+    public UnidadeMedida getUnidadeMedida() {
+        return unidadeMedida;
     }
 
-    public void setCultivo(Cultivo cultivo) {
-        this.cultivo = cultivo;
+    public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
+        this.unidadeMedida = unidadeMedida;
     }
 
     public String toString() {
