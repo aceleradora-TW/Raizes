@@ -2,7 +2,6 @@ package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
-import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,9 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -23,17 +20,15 @@ public class ProdutoControlador {
 
     private ProdutoServico produtoServico;
     private CategoriaServico categoriaServico;
-    private ProdutoProdutorServico produtoProdutorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Início", "/");
 
 
     @Autowired
-    public ProdutoControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico, ProdutoProdutorServico produtoProdutorServico) {
+    public ProdutoControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico) {
         this.produtoServico = produtoServico;
         this.categoriaServico = categoriaServico;
-        this.produtoProdutorServico = produtoProdutorServico;
     }
 
     @GetMapping("/cadastro")
@@ -43,10 +38,8 @@ public class ProdutoControlador {
                 .pagina("Produtos", "/produtos")
                 .pagina("Cadastro", "/produtos/cadastro");
 
-
-
         modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
-        modelo.addAttribute("cultivos", produtoProdutorServico.pegaTiposDeCultivos());
+        modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
         modelo.addAttribute("produtos", produtoServico.pegarTodos().getDados());
 
         return "produto/cadastro";

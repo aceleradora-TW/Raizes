@@ -25,7 +25,8 @@ public class ProdutoProdutor{
     @JoinColumn(name = "id_produtores")
     Produtor produtor;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
+    @Column(name="tipo_de_cultivo")
     private TipoDeCultivo tipoDeCultivo;
 
     public ProdutoProdutor() {
