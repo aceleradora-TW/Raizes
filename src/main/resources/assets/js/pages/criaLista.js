@@ -16,4 +16,5 @@ export default {
   .okAction("Sim", () => { window.location.href =  href })
   .cancelAction("Não")
   .show("Realmente deseja sair sem salvar a lista? Os dados não serão salvos.")
+  
 }

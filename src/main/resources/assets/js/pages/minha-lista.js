@@ -1,8 +1,11 @@
 export default {
     exibeConfirmacaoDeExclusaoDaLista: (deleteItemForm) => {
         $(deleteItemForm).submit()
-        return window.Modal
-        .warning()
-        .show('Você tem certeza que deseja excluir esta lista?')        
+        return window.onload = function() {
+            window.Modal
+            .success()
+            .okAction("Ok")
+            .show('Você tem certeza que deseja excluir esta lista?')
+          };                
     }
 }

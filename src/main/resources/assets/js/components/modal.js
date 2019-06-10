@@ -30,10 +30,12 @@ export default class Modal {
   }
 
   okAction(text, callback) {
+    this.okButton.show();
     this.doAction(this.okButton, text, callback)
     return this;
   }
   cancelAction(text, callback) {
+    this.cancelButton.show();
     this.doAction(this.cancelButton, text, callback)
     return this;
   }

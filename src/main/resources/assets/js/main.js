@@ -10,17 +10,16 @@ import RealizarPedido from './pages/realizarPedido'
 import Modal from './components/modal'
 import EditaPedido from './pages/editaPedido'
 import Pedido from './pages/pedido'
-import ModalSucesso from './components/modal-sucesso'
 
 $(function () {
     CriarLista.validaFormulario();   
     EditaLista.validaFormulario();
     
     window.MinhasListas = MinhasListas;
+    window.CriarLista = CriarLista;
     window.EditaLista = EditaLista;
     window.RealizarPedido = RealizarPedido;
     window.Modal = new Modal();
     window.EditaPedido = EditaPedido;
     window.Pedido = Pedido;
-    window.ModalSucesso = new ModalSucesso();
 });

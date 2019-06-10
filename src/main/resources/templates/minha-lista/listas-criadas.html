@@ -12,7 +12,14 @@
     <section class="container">
       <h1 class="title centraliza-texto">Minhas listas</h1>
       <div th:if="${mensagem}">
-        <span th:text="${mensagem}"></span>
+        <script>
+          window.onload = function() {
+            window.Modal
+            .success()
+            .okAction("Ok")
+            .show("Lista salva com sucesso!")
+          };
+          </script>
       </div>
       <div class="columns">
         <div class="column is-12">
@@ -30,8 +37,8 @@
                       <i class="fas fa-shopping-basket"></i>
                     </a>
                     <form name="deleteItemForm" th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post"
-                      th:onsubmit="return minhasListas.exibeConfirmacaoDeExclusaoDaLista()">
-                      <button type="submit" class="button rz-button list-style">
+                      th:onsubmit="return minhasListas.exibeConfirmacaoDeExclusaoDaLista('/minhas-listas')">
+                      <button type="submit" class="button rz-button list-style" th:onclick="return minhasListas.exibeConfirmacaoDeExclusaoDaLista('/minhas-listas')">
                         <i class="fas fa-trash-alt"></i>
                       </button>
                     </form>
