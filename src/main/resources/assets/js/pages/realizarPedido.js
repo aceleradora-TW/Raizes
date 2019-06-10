@@ -1,4 +1,7 @@
 export default {
-    exibeConfirmacaoDeCancelamento: () => window.Modal.warning()
-    .show("Realmente deseja calcelar o pedido? O pedido não será salvo.")
+  exibeConfirmacaoDeCancelamento: (href) => Modal
+  .warning()
+  .okAction("Sim", () => { window.location.href =  href })
+  .cancelAction("Não")
+  .show("Realmente deseja cancelar? Os dados não serão salvos.")
 }

@@ -11,10 +11,9 @@ export default {
       }
     }); 
   },
-  exibeConfirmacaoDeCancelamento: () => window.Modal.warning()
-  .show("Realmente deseja sair sem salvar a lista? Os dados não serão salvos."),
-
-  exibeConfirmacaoDeSalvo: () => window.Modal.success()
-  .show("Lista salva com sucesso!")
-  
+  exibeConfirmacaoDeCancelamento: (href) => Modal
+  .warning()
+  .okAction("Sim", () => { window.location.href =  href })
+  .cancelAction("Não")
+  .show("Realmente deseja sair sem salvar a lista? Os dados não serão salvos.")
 }

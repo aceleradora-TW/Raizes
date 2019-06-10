@@ -1,6 +1,5 @@
 import Validator from '../utils/validator'
 
-
 export default {
   validaFormulario: () => {
     const validador = new Validator('#formEditaLista'); 
@@ -18,5 +17,9 @@ export default {
   .cancelAction("Não")
   .show("Realmente deseja cancelar a edição? Os dados não serão salvos."),
   
-  salvar: (Form) => true
+  salvar: (Form) => true,
+
+  exibeConfirmacaoDeSalvo: () => window.ModalSucesso
+  .warning()
+  .show("Lista salva com sucesso!")
 }
