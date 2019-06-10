@@ -34,6 +34,7 @@ export default class Modal {
     this.doAction(this.okButton, text, callback)
     return this;
   }
+  
   cancelAction(text, callback) {
     this.cancelButton.show();
     this.doAction(this.cancelButton, text, callback)

@@ -4,7 +4,8 @@ export default {
         return window.onload = function() {
             window.Modal
             .success()
-            .okAction("Ok")
+            .okAction("Sim", () => {$(deleteItemForm).submit()})
+            .cancelAction("Não")
             .show('Você tem certeza que deseja excluir esta lista?')
           };                
     }
