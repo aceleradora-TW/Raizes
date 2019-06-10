@@ -37,8 +37,8 @@
                       <i class="fas fa-shopping-basket"></i>
                     </a>
                     <form name="deleteItemForm" th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post"
-                      th:onsubmit="return MinhasListas.exibeConfirmacaoDeExclusaoDaLista('/minhas-listas')">
-                      <button type="submit" class="button rz-button list-style" th:onclick="return MinhasListas.exibeConfirmacaoDeExclusaoDaLista('/minhas-listas')">
+                      th:onsubmit="MinhasListas.exibeConfirmacaoDeExclusaoDaLista(event)">
+                      <button type="submit" class="button rz-button list-style">
                         <i class="fas fa-trash-alt"></i>
                       </button>
                     </form>

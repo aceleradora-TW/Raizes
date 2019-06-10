@@ -1,12 +1,12 @@
 export default {
-    exibeConfirmacaoDeExclusaoDaLista: (deleteItemForm) => {
-        $(deleteItemForm).submit()
-        return window.onload = function() {
-            window.Modal
+    exibeConfirmacaoDeExclusaoDaLista: (event) => {
+        event.preventDefault();
+
+        Modal
             .success()
-            .okAction("Sim", () => {$(deleteItemForm).submit()})
+            .okAction("Sim", () => { event.target.submit(); })
             .cancelAction("Não")
             .show('Você tem certeza que deseja excluir esta lista?')
-          };                
     }
 }
+
