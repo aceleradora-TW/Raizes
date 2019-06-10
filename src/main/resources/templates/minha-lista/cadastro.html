@@ -1,15 +1,20 @@
 <!DOCTYPE HTML>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <title>Aceleradora Ágil - Esqueleto Ambulante</title>
 </head>
+
 <body>
   <section>
     <section class="container">
       <h1 class="title">Criar Lista</h1>
       <h3 class="subtitle">*Campos obrigatórios.</h3>
-      <div th:if="${resposta}">
-        <span th:text="${resposta.mensagem}"></span>
+      <div th:if="${mensagem}">
+        <span th:text="${mensagem}"></span>
+      </div>
+      <div th:if="${erros}">
+        <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
       </div>
       <div class="columns">
         <div class="column is-12">
@@ -23,8 +28,7 @@
                     <div class="help-block"></div>
                   </div>
                 </div>
-                <div th:replace="fragments/seletor_produtos"
-                th:with="categorias=${categorias}, lista=${lista} ?: null">
+                <div th:replace="fragmentos/seletor_produtos">
                 </div>
               </div>
               <div class="rz-box-footer flex space-between">
@@ -39,4 +43,5 @@
     </section>
   </section>
 </body>
+
 </html>
