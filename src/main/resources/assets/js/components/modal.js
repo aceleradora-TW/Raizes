@@ -45,7 +45,7 @@ export default class Modal {
     el.text(text);
     el.on('click', () => {
       
-      if(callback){callback()};
+      if(callback) callback();
       this.close();
     });
   }
