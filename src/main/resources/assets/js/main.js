@@ -4,22 +4,24 @@ import 'animate.css'
 import '../scss/styles.scss'
 import '@fengyuanchen/validator';
 import CriarLista from './pages/criaLista'
-import EditaLista from './pages/editaLista'
-import MinhasListas from './pages/minha-lista'
-import RealizarPedido from './pages/realizarPedido'
+import EditarLista from './pages/editaLista'
+import MinhasListas from './pages/minhaLista'
+import RealizarPedido from './pages/realizaPedido'
 import Modal from './components/modal'
-import EditaPedido from './pages/editaPedido'
+import EditarPedido from './pages/editaPedido'
 import Pedido from './pages/pedido'
+
+
 
 $(function () {
     CriarLista.validaFormulario();   
-    EditaLista.validaFormulario();
-    
+    EditarLista.validaFormulario();
+
     window.MinhasListas = MinhasListas;
-    window.CriarLista = CriarLista;
-    window.EditaLista = EditaLista;
+    window.EditaLista = EditarLista;
     window.RealizarPedido = RealizarPedido;
+    window.CriarLista = CriarLista;
     window.Modal = new Modal();
-    window.EditaPedido = EditaPedido;
+    window.EditaPedido = EditarPedido;
     window.Pedido = Pedido;
 });
