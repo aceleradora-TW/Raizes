@@ -1,5 +1,6 @@
 package com.thoughtworks.aceleradora.servicos;
 
+//import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.Pedido;
 import com.thoughtworks.aceleradora.repositorios.PedidoRepositorio;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,11 @@ public class PedidoServico {
     public List<Pedido> pegarPedidos() {
         return repositorio.findAll();
     }
+
+//    public List<Pedidos> pegarListasCriadas() {
+//        return repositorio.findAll();
+//    }
+
 
     public Pedido encontraUm(Long id) {
         try {

@@ -22,17 +22,18 @@ public class PedidoControlador {
             .pagina("Página Inicial", "/");
 
     @Autowired
-    public PedidoControlador(MinhaListaServico minhaListaServico) {
+    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico) {
         this.minhaListaServico = minhaListaServico;
+        this.pedidoServico = pedidoServico;
     }
 
     @GetMapping
-    public String pedidos(Breadcrumb breadcrumb, Model modelo) {
+    public String PedidoCriados(Breadcrumb breadcrumb, Model modelo) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedido/pedidos");
 
-//      modelo.addAttribute("pedidosFeitos", pedidoServico.pegarPedidos());
+   modelo.addAttribute("pedidosCriados", pedidoServico.pegarPedidos());
 
         return "pedido/pedidos";
     }
