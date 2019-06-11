@@ -3,6 +3,7 @@ package com.thoughtworks.aceleradora.servicos;
 import com.thoughtworks.aceleradora.dominio.Categoria;
 import com.thoughtworks.aceleradora.repositorios.CategoriaRepositorio;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service

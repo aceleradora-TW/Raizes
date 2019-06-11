@@ -8,47 +8,39 @@
   <title th:replace="${title}"></title>
   <link href="/css/app.css" rel="stylesheet">
 </head>
-<body class="has-background-light">  
+
+<body class="has-background-light">
   <header>
-      <nav class="navbar" role="navigation" aria-label="main navigation">
-          
-<nav role="navigation">
-    <div id="menuToggle">
-      
-     
-      <input type="checkbox" />
-      
-      
-      <span></span>
-      <span></span>
-    <span></span>
-      
-     
-      <ul id="menu">
-        
-        
-        <a class="navbar-item a-menu is-active" th:href="@{/minhas-listas/criar}">
-          <li>Criar Lista de Produtos</li></a>
-        <a class="navbar-item a-menu" th:href="@{/minhas-listas}">
-          <li>Minhas Listas</li></a>
-        <a class="navbar-item a-menu" th:href="@{/pedidos}">
-         <li>Compras</li></a> 
-   
-      </ul>
-    </div>
-    
-  </nav>
-  <div>
-      <a class="navbar-item" id="icone" th:href="@{/}">
-        <i class="fab fa-pagelines"></i>
-        <span class="m-2">Raízes</span>
-      </a>
-    </div>
+    <nav class="navbar flex flex-row" role="navigation" aria-label="main navigation">
 
-      </nav>
+      
+          <div id="menuToggle">
 
-    
-<!-- <div id="navbar-burger-body" class="navbar-menu">
+              <input type="checkbox" />
+              <span></span>
+              <span></span>
+              <span></span>
+      
+              <ul id="menu">
+                <a class="navbar-item a-menu is-active" th:href="@{/minhas-listas/criar}">
+                  <li>Criar Lista de Produtos</li></a>
+                <a class="navbar-item a-menu" th:href="@{/minhas-listas}">
+                  <li>Minhas Listas</li></a>
+                <a class="navbar-item a-menu" th:href="@{/pedidos}">
+                  <li>Compras</li></a>
+              </ul>
+              
+            </div>
+        <a class="navbar-item" id="icone" th:href="@{/}">
+          <i class="fab fa-pagelines"></i>
+          <span class="m-2">Raízes</span>
+        </a>
+      
+
+    </nav>
+
+
+    <!-- <div id="navbar-burger-body" class="navbar-menu">
               <div class="navbar-brand">
 
                 <a class="navbar-item is-active" th:href="@{/minhas-listas/criar}">
@@ -90,7 +82,7 @@
 
 
 
-  
+
   <div class="main animated fadeIn">
     <main th:replace="${content}"></main>
     <div class="notification is-info">
@@ -108,7 +100,7 @@
         <i class="fab fa-twitter"></i>
       </a>
       <a class="navbar-item" href="/">
-        <i class="fab fa-instagram"></i>  
+        <i class="fab fa-instagram"></i>
       </a>
     </div>
     <div class="navbar-brand has-text-left">
