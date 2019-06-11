@@ -89,8 +89,8 @@ public class MinhaListaControlador {
     @GetMapping("/{id}/editar")
     public String pegaLista(@PathVariable("id") Long id, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos, Model modelo) {
         breadcrumb
-            .aproveitar(partesComunsDoBreadCrumb)
-            .pagina("Editar lista", "/minha-lista/editar-lista/{id}");
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Editar lista", "/minha-lista/editar-lista/" + id);
 
         try {
             modelo.addAttribute("minhaLista", minhaListaServico.encontraUm(id));
