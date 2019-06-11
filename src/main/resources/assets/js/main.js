@@ -5,13 +5,13 @@ import '../scss/styles.scss'
 import '@fengyuanchen/validator';
 import CriarLista from './pages/criaLista'
 import EditarLista from './pages/editaLista'
-import minhasListas from './pages/minha-lista'
-import RealizarPedido from './pages/realizarPedido'
+import MinhasListas from './pages/minhaLista'
+import RealizarPedido from './pages/realizaPedido'
 
 $(function () {
     CriarLista.validaFormulario();   
     EditarLista.validaFormulario();
 });
-window.minhasListas = minhasListas;
+window.MinhasListas = MinhasListas;
 window.EditaLista = EditarLista;
 window.RealizarPedido = RealizarPedido;
