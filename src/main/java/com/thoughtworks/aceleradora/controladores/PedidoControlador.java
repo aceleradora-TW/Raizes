@@ -1,7 +1,10 @@
 package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.Pedido;
+import com.thoughtworks.aceleradora.dominio.Endereco;
+import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
+import com.thoughtworks.aceleradora.servicos.EnderecoServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.PedidoServico;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.function.Consumer;
 
 @Controller
@@ -19,14 +25,16 @@ public class PedidoControlador {
 
     private MinhaListaServico minhaListaServico;
     private PedidoServico pedidoServico;
+    private EnderecoServico enderecoServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Página Inicial", "/");
 
     @Autowired
-    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico) {
+    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico, EnderecoServico enderecoServico) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
+        this.enderecoServico = enderecoServico;
     }
 
     @GetMapping
@@ -65,11 +73,15 @@ public class PedidoControlador {
         return "pedido/realizar-pedido";
     }
 
+    @ResponseBody
+    @GetMapping("/enderecos")
+    public List<Endereco> mostraEndereco() {
+        return enderecoServico.pegaTodos();
+    }
+
     @PostMapping("/{id}/excluir")
     public String removerPedido(Pedido pedido, @PathVariable("id") Long id) {
         pedidoServico.removerPedido(id);
         return "redirect:/pedidos";
     }
-
-
 }

@@ -29,6 +29,10 @@ public class Produtor {
     @JsonIgnoreProperties("listas")
     private List<Produto> produtos = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "id_endereco")
+    private Endereco endereco;
+
     public Produtor() {
     }
 
@@ -69,6 +73,14 @@ public class Produtor {
 
     public void setPossuiTransporte(boolean possuiTransporte) {
         this.possuiTransporte = possuiTransporte;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
 
