@@ -10,7 +10,7 @@ import RealizarPedido from './pages/realizaPedido'
 import Modal from './components/modal'
 import EditarPedido from './pages/editaPedido'
 import Pedido from './pages/pedido'
-
+import burguer from './components/menu-burger'
 
 
 $(function () {
@@ -24,4 +24,5 @@ $(function () {
     window.Modal = new Modal();
     window.EditaPedido = EditarPedido;
     window.Pedido = Pedido;
+    window.burguer = burguer;
 });

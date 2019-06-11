@@ -8,10 +8,38 @@
   <title th:replace="${title}"></title>
   <link href="/css/app.css" rel="stylesheet">
 </head>
-
-<body class="has-background-light">
+<body class="has-background-light">  
   <header>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item" th:href="@{/}">
+                <i class="fab fa-pagelines"></i>
+                <span class="m-2">Raízes</span>
+              </a>
+              <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenuHeroA" class="navbar-menu">
+              <div class="navbar-end">
+                <a class="navbar-item is-active" th:href="@{/minhas-listas/criar}">
+                  Criar Lista de Produtos
+                </a>
+                <a class="navbar-item" th:href="@{/minhas-listas}">
+                    Minhas Listas
+                </a>
+                <a class="navbar-item" th:href="@{/pedidos}">
+                  Compras
+                </a>                
+              </div>
+            </div>
+          </div>
+      </nav>
+
+    <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" th:href="@{/}">
           <i class="fab fa-pagelines"></i>
@@ -26,7 +54,8 @@
             <p class="titulo-nav">Compras</p>
           </a>
       </div>
-    </nav>
+    </nav> -->
+
     <nav class="m-2 ml-5 breadcrumb has-arrow-separator" aria-label="breadcrumbs">
       <ul>
         <li th:each="pagina : ${@breadcrumb.paginas}"
@@ -35,7 +64,14 @@
         </li>
       </ul>
     </nav>
+
+
+
   </header>
+
+
+
+  
   <div class="main animated fadeIn">
     <main th:replace="${content}"></main>
     <div class="notification is-info">
