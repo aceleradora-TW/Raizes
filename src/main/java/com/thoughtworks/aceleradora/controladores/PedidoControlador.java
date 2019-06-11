@@ -1,5 +1,6 @@
 package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
+import com.thoughtworks.aceleradora.dominio.Pedido;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.PedidoServico;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.function.Consumer;
 
@@ -63,11 +65,11 @@ public class PedidoControlador {
         return "pedido/realizar-pedido";
     }
 
-//    @PostMapping("/{id}/excluir")
-//    public String removerCompra(Pedido pedido, @PathVariable("id") Long id) {
-//        PedidoServico.removerPedido(id);
-//        return "redirect:/compras";
-//    }
+    @PostMapping("/{id}/excluir")
+    public String removerPedido(Pedido pedido, @PathVariable("id") Long id) {
+        pedidoServico.removerPedido(id);
+        return "redirect:/pedidos";
+    }
 
 
 }
