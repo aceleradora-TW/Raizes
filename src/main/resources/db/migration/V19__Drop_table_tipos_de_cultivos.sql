@@ -1,0 +1,1 @@
+drop table tipos_de_cultivos;

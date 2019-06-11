@@ -1,9 +1,6 @@
 package com.thoughtworks.aceleradora.dominio;
 
 
-import com.thoughtworks.aceleradora.dtos.CategoriaDTO;
-import com.thoughtworks.aceleradora.dtos.ProdutoDTO;
-
 import javax.persistence.*;
 
 import java.util.ArrayList;
@@ -52,10 +49,5 @@ public class Categoria {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public CategoriaDTO paraDTO(){
-        return new CategoriaDTO(this);
-
     }
 }
