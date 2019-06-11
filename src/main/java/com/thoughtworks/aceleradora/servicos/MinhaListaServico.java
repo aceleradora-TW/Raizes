@@ -46,17 +46,7 @@ public class MinhaListaServico {
         }
 
     }
-    public List<Produto> pegaProdutosParaSeremRemovidos(List<Produto> produtosFront, List<Produto> produtosDoBanco) {
-        List<Produto> produtosParaSeremRemovidos = new ArrayList<>();
-
-        for (Produto produto : produtosDoBanco) {
-            if (!produtosFront.contains(produto)) {
-                produtosParaSeremRemovidos.add(produto);
-            }
-        }
-
-        return produtosParaSeremRemovidos;
-    }
+   
     public Optional<MinhaLista> findByNome(String nome) {
         return repositorio.findByNome(nome);
     }
