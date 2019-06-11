@@ -1,5 +1,4 @@
 package com.thoughtworks.aceleradora.controladores;
-
 import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
 import com.thoughtworks.aceleradora.servicos.*;
@@ -21,6 +20,8 @@ public class PedidoControlador {
     private PedidoServico pedidoServico;
     private MinhaListaServico minhaListaServico;
     private ProdutoProdutorServico produtoProdutorServico;
+    private EnderecoServico enderecoServico;
+
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Página Inicial", "/");
@@ -30,19 +31,21 @@ public class PedidoControlador {
                              ProdutorServico produtorServico,
                              PedidoServico pedidoServico,
                              MinhaListaServico minhaListaServico,
+                            EnderecoServico enderecoServico,
                              ProdutoProdutorServico produtoProdutorServico) {
         this.produtoServico = produtoServico;
         this.produtorServico = produtorServico;
         this.pedidoServico = pedidoServico;
         this.minhaListaServico = minhaListaServico;
         this.produtoProdutorServico = produtoProdutorServico;
+        this.enderecoServico=enderecoServico;
     }
 
     @GetMapping
     public String pedidos(Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Compras", "/pedido/pedidos");
+                .pagina("Pedidos", "/pedido/pedidos");
         return "pedido/pedidos";
     }
 
@@ -73,12 +76,11 @@ public class PedidoControlador {
         return "pedidos/{id}/realizar-pedido";
     }
 
-    @PostMapping("/realizar")
+    @PostMapping("/realizar-pedido")
     public String salvarPedido(Pedido pedido){
         pedidoServico.salvar(pedido);
         return "redirect:/pedidos";
     }
-
     @ResponseBody
     @GetMapping("/lista-produtores")
     public Map<Produto, List<Produtor>> mostraProdutosComProdutores() {
@@ -102,4 +104,10 @@ public class PedidoControlador {
     }
 
 
+
+    @ResponseBody
+    @GetMapping("/enderecos")
+    public List<Endereco> mostraEndereco() {
+        return enderecoServico.pegaTodos();
+    }
 }

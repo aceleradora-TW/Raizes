@@ -15,49 +15,58 @@ import java.util.Optional;
 
 @Service
 public class ProdutoProdutorServico {
-    private ProdutoProdutorRepositorio repositorio;
+    private ProdutoProdutorRepositorio produtoProdutorRepositorio;
     private ProdutorRepositorio produtorRepositorio;
     private ProdutoRepositorio produtoRepositorio;
     private MinhaListaRepositorio minhaListaRepositorio;
 
-    public ProdutoProdutorServico(ProdutoProdutorRepositorio repositorio,
+    public ProdutoProdutorServico(ProdutoProdutorRepositorio produtoProdutorRepositorio,
                                   ProdutorRepositorio produtorRepositorio,
                                   ProdutoRepositorio produtoRepositorio, MinhaListaRepositorio minhaListaRepositorio) {
-        this.repositorio = repositorio;
+        this.produtoProdutorRepositorio = produtoProdutorRepositorio;
         this.produtorRepositorio = produtorRepositorio;
         this.produtoRepositorio = produtoRepositorio;
         this.minhaListaRepositorio = minhaListaRepositorio;
     }
 
     public List<ProdutoProdutor> pegaTodosProdutoProdutor() {
-        return repositorio.findAll();
+        return produtoProdutorRepositorio.findByProdutoIn(produtoRepositorio.findAll());
     }
 
     public ProdutoProdutor encontraUm(Long id) {
-        Optional<ProdutoProdutor> produtoProdutorOptional = repositorio.findById(id);
+        Optional<ProdutoProdutor> produtoProdutorOptional = produtoProdutorRepositorio.findById(id);
+        produtoProdutorOptional.get().getProduto().getProdutor();
+
+
         return produtoProdutorOptional.get();
     }
 
-    public List<ProdutoProdutor> pegaListadeProdutos(Long id){
+
+
+    public List<ProdutoProdutor> pegaListadeProdutos(Long id) {
         MinhaLista lista = minhaListaRepositorio.findById(id).get();
+        List<Produto> produtos = lista.getProdutos();
 
-        List<Produto> listaDeProdutos = lista.getProdutos();
-
-        List<ProdutoProdutor> produtoProdutor = new ArrayList<>();
-
-        List<ProdutoProdutor> listaDeProdutoProdutor = new ArrayList<ProdutoProdutor>();
-
-        for(int i = 0; i < lista.getProdutos().size(); i++) {
-            if (produtoProdutor.get(i).getProduto().getId().equals(lista.getProdutos().get(i).getId())) {
-
-
-                listaDeProdutoProdutor.get(i).setProduto(lista.getProdutos().get(i));
-            }
-        }
-
-
-        return listaDeProdutoProdutor;
+        return produtoProdutorRepositorio.findByProdutoIn(produtos);
     }
+//    public List<ProdutoProdutor> pegaListadeProdutos(Long id){
+//        MinhaLista lista = minhaListaRepositorio.findById(id).get();
+//
+//        List<Produto> listaDeProdutos = lista.getProdutos();
+//
+//        List<ProdutoProdutor> produtoProdutor = repositorio.findByProdutoIn(produtoRepositorio.findAll());
+//
+//        List<ProdutoProdutor> listaDeProdutoProdutor = new ArrayList<>();
+//
+//        for(int i = 0; i < listaDeProdutos.size(); i++) {
+//            for(int j = 0; j<produtoProdutor.size(); j++){
+//                if (produtoProdutor.get(j).getProduto().getId().equals(lista.getProdutos().get(i).getId())) {
+//                    listaDeProdutoProdutor.add(produtoProdutor.get(j));
+//                }
+//            }
+//        }
+//        return listaDeProdutoProdutor;
+//    }
 
 
 }
