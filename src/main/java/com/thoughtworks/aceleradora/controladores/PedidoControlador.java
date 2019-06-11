@@ -1,4 +1,5 @@
 package com.thoughtworks.aceleradora.controladores;
+
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.Pedido;
 import com.thoughtworks.aceleradora.dominio.Endereco;
@@ -27,23 +28,24 @@ public class PedidoControlador {
     private PedidoServico pedidoServico;
     private EnderecoServico enderecoServico;
 
-    private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
-            .pagina("Página Inicial", "/");
+    private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
+            "/");
 
     @Autowired
-    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico, EnderecoServico enderecoServico) {
+    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico,
+            EnderecoServico enderecoServico) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
         this.enderecoServico = enderecoServico;
     }
 
     @GetMapping
-    public String PedidoCriados(Breadcrumb breadcrumb, Model modelo) {
+    public String pedidoCriados(Breadcrumb breadcrumb, Model modelo) {
         breadcrumb
-                .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Pedidos", "/pedido/pedidos");
+        .aproveitar(partesComunsDoBreadCrumb)
+        .pagina("Pedidos", "/pedido/pedidos");
 
-   modelo.addAttribute("pedidosCriados", pedidoServico.pegarPedidos());
+        modelo.addAttribute("pedidosCriados", pedidoServico.pegarPedidos());
 
         return "pedido/pedidos";
     }
@@ -51,24 +53,21 @@ public class PedidoControlador {
     @GetMapping("/{id}")
     public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
 
-        breadcrumb
-                .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Pedidos", "/pedidos")
-                .pagina("Visualizar pedido", "/pedidos");
+        breadcrumb.aproveitar(partesComunsDoBreadCrumb).pagina("Pedidos", "/pedidos").pagina("Visualizar pedido",
+                "/pedidos");
 
         try {
-            modelo.addAttribute("pedido",  minhaListaServico.encontraUm(id));
+            modelo.addAttribute("pedido", minhaListaServico.encontraUm(id));
 
             return "pedido/visualizar-pedido";
         } catch (ListaNaoEncontradaExcecao e) {
             return "redirect:/pedidos";
         }
     }
+
     @GetMapping("/realizar-pedido")
     public String realizarPedidos(Breadcrumb breadcrumb) {
-        breadcrumb
-                .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("realizar pedido", "/pedido/pedidos");
+        breadcrumb.aproveitar(partesComunsDoBreadCrumb).pagina("realizar pedido", "/pedido/pedidos");
 
         return "pedido/realizar-pedido";
     }
@@ -80,7 +79,7 @@ public class PedidoControlador {
     }
 
     @PostMapping("/{id}/excluir")
-    public String removerPedido(Pedido pedido, @PathVariable("id") Long id) {
+    public String removerPedido(@PathVariable("id") Long id) {
         pedidoServico.removerPedido(id);
         return "redirect:/pedidos";
     }
