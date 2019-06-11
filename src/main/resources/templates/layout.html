@@ -11,20 +11,46 @@
 <body class="has-background-light">  
   <header>
       <nav class="navbar" role="navigation" aria-label="main navigation">
-          <div class="container">
-            <div class="navbar-brand">
-              <a class="navbar-item" th:href="@{/}">
-                <i class="fab fa-pagelines"></i>
-                <span class="m-2">Raízes</span>
-              </a>
-              <span class="navbar-burger burger" data-target="navbarMenuHeroA">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
-            </div>
-            <div id="navbarMenuHeroA" class="navbar-menu">
-              <div class="navbar-end">
+          
+<nav role="navigation">
+    <div id="menuToggle">
+      
+     
+      <input type="checkbox" />
+      
+      
+      <span></span>
+      <span></span>
+    <span></span>
+      
+     
+      <ul id="menu">
+        
+        
+        <a class="navbar-item a-menu is-active" th:href="@{/minhas-listas/criar}">
+          <li>Criar Lista de Produtos</li></a>
+        <a class="navbar-item a-menu" th:href="@{/minhas-listas}">
+          <li>Minhas Listas</li></a>
+        <a class="navbar-item a-menu" th:href="@{/pedidos}">
+         <li>Compras</li></a> 
+   
+      </ul>
+    </div>
+    
+  </nav>
+  <div>
+      <a class="navbar-item" id="icone" th:href="@{/}">
+        <i class="fab fa-pagelines"></i>
+        <span class="m-2">Raízes</span>
+      </a>
+    </div>
+
+      </nav>
+
+    
+<!-- <div id="navbar-burger-body" class="navbar-menu">
+              <div class="navbar-brand">
+
                 <a class="navbar-item is-active" th:href="@{/minhas-listas/criar}">
                   Criar Lista de Produtos
                 </a>
@@ -33,29 +59,22 @@
                 </a>
                 <a class="navbar-item" th:href="@{/pedidos}">
                   Compras
-                </a>                
+                </a>            
               </div>
-            </div>
           </div>
-      </nav>
-
-    <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" th:href="@{/}">
-          <i class="fab fa-pagelines"></i>
-          <span class="m-2">Raízes</span>
-        </a>
-        <a class="navbar-item" th:href="@{/minhas-listas/criar}">
-          <p class="titulo-nav">Criar Lista de Produtos</p>
-          <a class="navbar-item" th:href="@{/minhas-listas}">
-            <p class="titulo-nav">Minhas Listas</p>
-          </a>
-          <a class="navbar-item" th:href="@{/pedidos}">
-            <p class="titulo-nav">Compras</p>
-          </a>
-      </div>
-    </nav> -->
-
+          <div class="container">
+              <div class="navbar-start">
+                <span class="navbar-burger rz-burger" data-target="navbar-burger-body">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                </span>
+                <a class="navbar-item" th:href="@{/}">
+                  <i class="fab fa-pagelines"></i>
+                  <span class="m-2">Raízes</span>
+                </a>              
+            </div>
+          </div> -->
     <nav class="m-2 ml-5 breadcrumb has-arrow-separator" aria-label="breadcrumbs">
       <ul>
         <li th:each="pagina : ${@breadcrumb.paginas}"

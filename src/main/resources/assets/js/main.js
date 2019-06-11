@@ -24,5 +24,5 @@ $(function () {
     window.Modal = new Modal();
     window.EditaPedido = EditarPedido;
     window.Pedido = Pedido;
-    window.burguer = burguer;
+    burguer();
 });
