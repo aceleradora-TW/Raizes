@@ -65,10 +65,7 @@ public class MinhaLista {
         return id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
+    public String getNome() { return nome; }
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;

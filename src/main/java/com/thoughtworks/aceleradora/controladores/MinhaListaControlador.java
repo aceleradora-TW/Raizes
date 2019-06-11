@@ -75,6 +75,7 @@ public class MinhaListaControlador {
 
     @PostMapping("/{id}/excluir")
     public String removerListaCriada(@PathVariable("id") Long id) {
+
         minhaListaServico.removerListaCriada(id);
 
         return "redirect:/minhas-listas";
@@ -89,7 +90,6 @@ public class MinhaListaControlador {
         try {
             modelo.addAttribute("minhaLista", minhaListaServico.encontraUm(id));
             modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
-
             return "minha-lista/editar";
         } catch (ListaNaoEncontradaExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
@@ -97,7 +97,6 @@ public class MinhaListaControlador {
             return "redirect:/minhas-listas/";
         }
     }
-
 
     @PostMapping("/{id}/editar")
     public String salvarLista(@Valid MinhaLista minhaLista, BindingResult resultadoValidacao, RedirectAttributes redirecionamentoDeAtributos, Model modelo) {

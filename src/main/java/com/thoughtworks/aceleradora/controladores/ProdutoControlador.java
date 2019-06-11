@@ -1,6 +1,8 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.Breadcrumb;
+import com.thoughtworks.aceleradora.dominio.Produto;
+import com.thoughtworks.aceleradora.dominio.TipoDeCultivo;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
 
 @Controller
@@ -42,7 +43,7 @@ public class ProdutoControlador {
 
         modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
         modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
-        modelo.addAttribute("produtos", produtoServico.pegarTodos().);
+        modelo.addAttribute("produtos", produtoServico.pegarTodos());
 
         return "produto/cadastro";
     }
@@ -53,22 +54,18 @@ public class ProdutoControlador {
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Produtos", "/produtos")
                 .pagina("Cadastro", "/produtos/cadastro");
-
         try {
             produtoQueVem.getNome().trim();
             produtoServico.salvar(produtoQueVem);
 
             String mensagem = "Seu produto foi cadastrado com sucesso!";
             modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
-
-        }
-
-        catch (ProdutoNaoSalvoExcecao e){
+        } catch (ProdutoNaoSalvoExcecao e){
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
-            return "redirect: /produtos/cadastro";
+            return "redirect:/produtos/cadastro";
         }
 
-        return "produto/cadastro";
+        return "redirect:/produtos/cadastro";
     }
 }
