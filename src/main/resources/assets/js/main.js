@@ -13,7 +13,6 @@ $(function () {
     EditarLista.validaFormulario();
 });
 
-window.minhasListas = minhasListas;
 window.MinhasListas = MinhasListas;
 window.EditaLista = EditarLista;
 window.RealizarPedido = RealizarPedido;
