@@ -58,7 +58,12 @@ public class MinhaListaControlador {
     }
 
     @PostMapping("/criar")
-    public String salvarLista(@Valid MinhaLista minhaLista, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvarLista(@Valid MinhaLista minhaLista, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos, Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Minhas Listas", "/minhas-listas")
+                .pagina("Cadastro", "/minhas-listas/cadastro");
+
         if(resultadoValidacao.hasErrors()) {
             modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
             modelo.addAttribute("categorias", categoriaServico.pegarCategorias());

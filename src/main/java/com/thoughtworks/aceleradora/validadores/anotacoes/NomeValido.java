@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Target({ ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NomeValido {
-    String message() default "Lista com nome inválido/duplicado";
+    String message() default "Lista com nome inválido e/ou já existente";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
