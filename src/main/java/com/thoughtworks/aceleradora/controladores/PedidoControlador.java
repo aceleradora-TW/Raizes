@@ -33,7 +33,7 @@ public class PedidoControlador {
 
     @Autowired
     public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico,
-            EnderecoServico enderecoServico) {
+                             EnderecoServico enderecoServico) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
         this.enderecoServico = enderecoServico;
@@ -42,8 +42,8 @@ public class PedidoControlador {
     @GetMapping
     public String pedidoCriados(Breadcrumb breadcrumb, Model modelo) {
         breadcrumb
-        .aproveitar(partesComunsDoBreadCrumb)
-        .pagina("Pedidos", "/pedido/pedidos");
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedido/pedidos");
 
         modelo.addAttribute("pedidosCriados", pedidoServico.pegarPedidos());
 
@@ -53,8 +53,9 @@ public class PedidoControlador {
     @GetMapping("/{id}")
     public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
 
-        breadcrumb.aproveitar(partesComunsDoBreadCrumb).pagina("Pedidos", "/pedidos").pagina("Visualizar pedido",
-                "/pedidos");
+        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedidos")
+                .pagina("Visualizar pedido", "/pedidos");
 
         try {
             modelo.addAttribute("pedido", minhaListaServico.encontraUm(id));
@@ -65,11 +66,13 @@ public class PedidoControlador {
         }
     }
 
-    @GetMapping("{id}/realizar-pedido")
-    public String realizarPedidos(Breadcrumb breadcrumb, @PathVariable("listaId") Long id) {
-        breadcrumb.aproveitar(partesComunsDoBreadCrumb).pagina("realizar pedido", "/pedido/pedidos");
+    @GetMapping("/{listaId}/realizar-pedido")
+    public String realizarPedidos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo) {
+        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
+                .pagina("realizar pedido", "/pedido/pedidos");
 
-        return "pedido/realizar-pedido";
+        modelo.addAttribute("pedidos" , pedidoServico.pegaListaDeProdutosPorProdutores(listaId));
+        return "pedidos/{listaId}/realizar-pedido";
     }
 
     @ResponseBody

@@ -26,7 +26,7 @@
                     <a class="button rz-button" th:href="@{/minhas-listas/{id}/editar/(id=${lista.id})}">
                       <i class="fas fa-edit"></i>
                     </a>
-                    <a class="button rz-button list-style">
+                    <a class="button rz-button list-style" th:href="@{/pedidos/{listaId}/realizar-pedido/(listaId=${lista.id})}">
                       <i class="fas fa-shopping-basket"></i>
                     </a>
                     <form th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post" name="meuform"
