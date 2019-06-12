@@ -46,14 +46,14 @@ public class ProdutoControlador {
     }
 
     @PostMapping("/cadastro")
-    public String salvarProduto (Produto produtoQueVem, Model modelo, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvarProduto (Produto produto, Model modelo, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Produtos", "/produtos")
                 .pagina("Cadastro", "/produtos/cadastro");
         try {
-            produtoQueVem.getNome().trim();
-            produtoServico.salvar(produtoQueVem);
+            produto.setNome(produto.getNome().trim());
+            produtoServico.salvar(produto);
 
             String mensagem = "Seu produto foi cadastrado com sucesso!";
             modelo.addAttribute("mensagemSalvoComSucesso", mensagem);

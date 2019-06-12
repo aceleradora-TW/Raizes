@@ -17,6 +17,14 @@ public class ValidaListaNome implements ConstraintValidator<NomeValido, String> 
 
     @Override
     public boolean isValid(String nomeLista, ConstraintValidatorContext context) {
-        return !repositorio.findByNome(nomeLista).isPresent() && !nomeLista.trim().isEmpty();
+        return nomeAindaNaoExisteNoBanco(nomeLista) && nomeNaoEstaVazio(nomeLista);
+    }
+
+    private boolean nomeAindaNaoExisteNoBanco(String nome) {
+        return repositorio.findByNome(nome).isEmpty();
+    }
+
+    private boolean nomeNaoEstaVazio(String nome) {
+        return !nome.trim().isEmpty();
     }
 }
