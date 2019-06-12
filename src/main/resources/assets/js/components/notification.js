@@ -43,4 +43,5 @@ export default class Notification {
     const body = this.$notification.querySelector('.body');
     body.innerText = message;
   }
+
 }
