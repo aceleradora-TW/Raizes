@@ -1,8 +1,8 @@
 export default {
-  openNav: () =>{
-    document.getElementById("mySidenav").style.width = "250px";
+  abreSanduiche: () =>{
+    document.getElementById("sanduiche").style.transform = "translatex(0)";
   },  
-  closeNav: () => {
-    document.getElementById("mySidenav").style.width = "0";
+  fechaSanduiche: () => {
+    document.getElementById("sanduiche").style.transform = "translateX(-250px)";
   }
 }
