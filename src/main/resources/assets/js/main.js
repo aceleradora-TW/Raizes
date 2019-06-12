@@ -7,22 +7,24 @@ import CriarLista from './pages/criaLista'
 import EditarLista from './pages/editaLista'
 import MinhasListas from './pages/minhaLista'
 import RealizarPedido from './pages/realizaPedido'
-import Modal from './components/modal'
-import EditarPedido from './pages/editaPedido'
+import Pedidos from './pages/pedidos'
 import Pedido from './pages/pedido'
-import burger from './components/menu-burger'
 
 
 $(function () {
     CriarLista.validaFormulario();   
     EditarLista.validaFormulario();
 
+
+
     window.MinhasListas = MinhasListas;
     window.EditaLista = EditarLista;
     window.RealizarPedido = RealizarPedido;
+    window.Pedidos = Pedidos;
+    window.Pedido = Pedido;
     window.CriarLista = CriarLista;
     window.Modal = new Modal();
     window.EditaPedido = EditarPedido;
-    window.Pedido = Pedido;
     window.burger = burger;
+
 });

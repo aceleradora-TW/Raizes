@@ -10,6 +10,10 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+      javax:
+        persistence:
+          validation:
+            mode: none
   thymeleaf:
     cache: false
   devtools:

@@ -1,20 +1,21 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.Breadcrumb;
+import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
-import com.thoughtworks.aceleradora.servicos.ProdutoServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.function.Consumer;
 
 @Controller
@@ -58,7 +59,12 @@ public class MinhaListaControlador {
     }
 
     @PostMapping("/criar")
-    public String salvarLista(@Valid MinhaLista minhaLista, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvarLista(@Valid MinhaLista minhaLista, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos, Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Minhas Listas", "/minhas-listas")
+                .pagina("Cadastro", "/minhas-listas/cadastro");
+
         if(resultadoValidacao.hasErrors()) {
             modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
             modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
@@ -97,7 +103,6 @@ public class MinhaListaControlador {
             return "redirect:/minhas-listas/";
         }
     }
-
 
     @PostMapping("/{id}/editar")
     public String salvarLista(@Valid MinhaLista minhaLista, BindingResult resultadoValidacao, RedirectAttributes redirecionamentoDeAtributos, Model modelo) {

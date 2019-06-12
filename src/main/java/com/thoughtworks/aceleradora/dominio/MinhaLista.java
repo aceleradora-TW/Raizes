@@ -1,10 +1,10 @@
 package com.thoughtworks.aceleradora.dominio;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.thoughtworks.aceleradora.validadores.anotacoes.NomeValido;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class MinhaLista {
     private Long id;
 
     @Column(unique = true)
-    @NotEmpty(message = "Nome não pode ser vazio!")
+    @NomeValido
     private String nome;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -65,10 +65,7 @@ public class MinhaLista {
         return id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
+    public String getNome() { return nome; }
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
