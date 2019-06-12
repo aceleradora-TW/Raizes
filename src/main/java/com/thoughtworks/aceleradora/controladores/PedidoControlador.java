@@ -6,6 +6,7 @@ import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
 import com.thoughtworks.aceleradora.servicos.EnderecoServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.PedidoServico;
+import com.thoughtworks.aceleradora.servicos.ProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,16 +22,19 @@ public class PedidoControlador {
     private MinhaListaServico minhaListaServico;
     private PedidoServico pedidoServico;
     private EnderecoServico enderecoServico;
+    private ProdutorServico produtorServico;
+
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Página Inicial", "/");
 
     @Autowired
     public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico,
-            EnderecoServico enderecoServico) {
+            EnderecoServico enderecoServico, ProdutorServico produtorServico) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
         this.enderecoServico = enderecoServico;
+        this.produtorServico = produtorServico;
     }
 
     @GetMapping
@@ -54,9 +58,11 @@ public class PedidoControlador {
         try {
 
             modelo.addAttribute("pedido", pedidoServico.encontraUm(id));
-            return "pedido/visualizar-pedido";
 
-        } catch (ListaNaoEncontradaExcecao e) {
+//            modelo.addAttribute("produtor", produtorServico.encontraUm(id));
+            return "pedido/visualizar-pedido";
+        }
+        catch (ListaNaoEncontradaExcecao e) {
             return "redirect:/pedidos";
         }
 
