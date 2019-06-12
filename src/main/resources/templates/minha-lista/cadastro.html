@@ -10,7 +10,7 @@
     <section class="container">
         <h1 class="title">Criar Lista</h1>
         <h3 class="subtitle">*Campos obrigatórios.</h3>
-        <div th:if="${mensagem}">
+        <div th:if="${mensagem} != null">
             <span th:text="${mensagem}"></span>
         </div>
         <div th:if="${erros}">
