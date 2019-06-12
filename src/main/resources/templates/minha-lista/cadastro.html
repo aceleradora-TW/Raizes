@@ -2,46 +2,46 @@
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Aceleradora Ágil - Esqueleto Ambulante</title>
+    <title>Aceleradora Ágil - Esqueleto Ambulante</title>
 </head>
 
 <body>
-  <section>
+<section>
     <section class="container">
-      <h1 class="title">Criar Lista</h1>
-      <h3 class="subtitle">*Campos obrigatórios.</h3>
-      <div th:if="${mensagem}">
-        <span th:text="${mensagem}"></span>
-      </div>
-      <div th:if="${erros}">
-        <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
-      </div>
-      <div class="columns">
-        <div class="column is-12">
-          <div class="rz-box box">
-            <form class="rz-form" id="formCriaLista" th:action="@{/minhas-listas/criar}" method="post">
-              <div class="rz-box-body">
-                <div class="column is-6 is-offset-3">
-                  <label class="label">Nome*</label>
-                  <div class="field">
-                    <input class="input" type="text" name="nome" placeholder="Ex.: Minha Lista Compras 1">
-                    <div class="help-block"></div>
-                  </div>
-                </div>
-                <div th:replace="fragmentos/seletor_produtos">
-                </div>
-              </div>
-              <div class="rz-box-footer flex space-between">
-                <a class="button rz-button is-rounded" th:href="@{/minhas-listas}"
-                  th:onclick="return EditarLista.exibeConfirmacaoDeCancelamento()">Cancelar</a>
-                <button class="button rz-button is-rounded" type="submit">Salvar</button>
-              </div>
-            </form>
-          </div>
+        <h1 class="title">Criar Lista</h1>
+        <h3 class="subtitle">*Campos obrigatórios.</h3>
+        <div th:if="${mensagem} != null">
+            <span th:text="${mensagem}"></span>
         </div>
-      </div>
+        <div th:if="${erros}">
+            <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
+        </div>
+        <div class="columns">
+            <div class="column is-12">
+                <div class="rz-box box">
+                    <form class="rz-form" id="formCriaLista" th:action="@{/minhas-listas/criar}" method="post">
+                        <div class="rz-box-body">
+                            <div class="column is-6 is-offset-3">
+                                <label class="label">Nome*</label>
+                                <div class="field">
+                                    <input class="input" type="text" name="nome" placeholder="Ex.: Minha Lista Compras 1">
+                                    <div class="help-block"></div>
+                                </div>
+                            </div>
+                            <div th:replace="fragmentos/seletor_produtos">
+                            </div>
+                        </div>
+                        <div class="rz-box-footer flex space-between">
+                            <a class="button rz-button is-rounded" th:href="@{/minhas-listas}"
+                               th:onclick="return EditarLista.exibeConfirmacaoDeCancelamento()">Cancelar</a>
+                            <button class="button rz-button is-rounded" type="submit">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
-  </section>
+</section>
 </body>
 
 </html>

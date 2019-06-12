@@ -4,7 +4,6 @@ import com.thoughtworks.aceleradora.dominio.Pedido;
 import com.thoughtworks.aceleradora.repositorios.PedidoRepositorio;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.PushBuilder;
 import java.util.List;
 
 @Service
@@ -12,8 +11,14 @@ public class PedidoServico {
 
     private PedidoRepositorio repositorio;
 
+
     public PedidoServico(PedidoRepositorio repositorio) {
         this.repositorio = repositorio;
+    }
+
+
+    public List<Pedido> pegarPedidos() {
+        return repositorio.findAll();
     }
 
     public Pedido encontraUm(Long id) {
@@ -22,13 +27,8 @@ public class PedidoServico {
         return pedidos;
     }
 
-    public List<Pedido> ordenaPedido(List<Pedido> pedidos){
-        List<Pedido> pedidosOrdenadas;
-
-//        for (pedido: pedidos) {
-//
-//        }
-
-        return null;
+    public void removerPedido(Long idCompra) {
+        repositorio.deleteById(idCompra);
     }
+
 }
