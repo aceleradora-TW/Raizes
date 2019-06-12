@@ -14,6 +14,7 @@ $(function () {
     CriarLista.validaFormulario();   
     EditarLista.validaFormulario();
 });
+
 window.MinhasListas = MinhasListas;
 window.EditaLista = EditarLista;
 window.RealizarPedido = RealizarPedido;

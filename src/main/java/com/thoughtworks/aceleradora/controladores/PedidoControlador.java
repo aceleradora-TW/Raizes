@@ -1,9 +1,6 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.Pedido;
-import com.thoughtworks.aceleradora.dominio.Endereco;
-import com.thoughtworks.aceleradora.dominio.MinhaLista;
+import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
 import com.thoughtworks.aceleradora.servicos.EnderecoServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 @Controller
@@ -75,6 +73,7 @@ public class PedidoControlador {
         return "pedidos/{listaId}/realizar-pedido";
     }
 
+
     @ResponseBody
     @GetMapping("/enderecos")
     public List<Endereco> mostraEndereco() {
@@ -86,4 +85,5 @@ public class PedidoControlador {
         pedidoServico.removerPedido(id);
         return "redirect:/pedidos";
     }
+
 }

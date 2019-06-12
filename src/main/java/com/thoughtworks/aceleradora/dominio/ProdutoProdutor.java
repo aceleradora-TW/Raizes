@@ -55,24 +55,13 @@ public class ProdutoProdutor{
         return quantidadeEstoque;
     }
 
+    public double getProdutoQuantidadeEstoque(Produto produto) {
+
+        return quantidadeEstoque;
+    }
+
     public void setQuantidadeEstoque(double quantidadeEstoque) {
         this.quantidadeEstoque = quantidadeEstoque;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public Produtor getProdutor() {
-        return produtor;
-    }
-
-    public void setProdutor(Produtor produtor) {
-        this.produtor = produtor;
     }
 
     public TipoDeCultivo getTipoDeCultivo() {
@@ -89,5 +78,21 @@ public class ProdutoProdutor{
 
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public Produtor getProdutor() {
+        return produtor;
+    }
+
+    public void setProdutor(Produtor produtor) {
+        this.produtor = produtor;
     }
 }

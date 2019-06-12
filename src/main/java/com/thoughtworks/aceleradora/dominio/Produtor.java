@@ -19,6 +19,10 @@ public class Produtor {
     private String nome;
     private boolean possuiTransporte;
 
+    @OneToMany
+    @JoinColumn(name = "id_produtos")
+    Produto produto;
+
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "produtos_produtores",
@@ -36,11 +40,19 @@ public class Produtor {
     public Produtor() {
     }
 
-    public Produtor(String nome, List<Produto> produtos, boolean possuiTransporte) {
+    public Produtor(String nome, boolean possuiTransporte, Produto produto, List<Produto> produtos) {
         this.nome = nome;
-        this.produtos = produtos;
         this.possuiTransporte = possuiTransporte;
+        this.produto = produto;
+        this.produtos = produtos;
+    }
 
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
     public Long getId() {
