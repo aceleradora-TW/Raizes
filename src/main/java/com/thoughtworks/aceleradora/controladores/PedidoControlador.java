@@ -65,8 +65,8 @@ public class PedidoControlador {
         }
     }
 
-    @GetMapping("/realizar-pedido")
-    public String realizarPedidos(Breadcrumb breadcrumb) {
+    @GetMapping("{id}/realizar-pedido")
+    public String realizarPedidos(Breadcrumb breadcrumb, @PathVariable("listaId") Long id) {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb).pagina("realizar pedido", "/pedido/pedidos");
 
         return "pedido/realizar-pedido";

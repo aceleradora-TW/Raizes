@@ -9,8 +9,8 @@ import com.thoughtworks.aceleradora.repositorios.PedidoRepositorio;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.PushBuilder;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PedidoServico {
@@ -19,14 +19,22 @@ public class PedidoServico {
     private MinhaListaRepositorio minhaListaRepositorio;
     private ProdutoProdutorRepositorio produtoProdutorRepositorio;
 
-    public PedidoServico(PedidoRepositorio repositorio) {
-        this.pedidorepositorio = repositorio;
+    public PedidoServico(PedidoRepositorio pedidorepositorio,
+                         MinhaListaRepositorio minhaListaRepositorio,
+                         ProdutoProdutorRepositorio produtoProdutorRepositorio) {
+        this.pedidorepositorio = pedidorepositorio;
+        this.minhaListaRepositorio = minhaListaRepositorio;
+        this.produtoProdutorRepositorio = produtoProdutorRepositorio;
     }
 
     public Pedido encontraUm(Long id) {
         Pedido pedidos = pedidorepositorio.findById(id).get();
 
         return pedidos;
+    }
+
+    public List<Pedido> pegarPedidos() {
+        return pedidorepositorio.findAll();
     }
 
     public List<Pedido> ordenaPedido(List<Pedido> pedidos){
@@ -38,11 +46,19 @@ public class PedidoServico {
 
         return null;
     }
+    public void removerPedido(Long idCompra) {
+        pedidorepositorio.deleteById(idCompra);
+    }
 
-    public List<ProdutoProdutor> pegaListaDeProdutosPorProdutores(String listaId) {
-        MinhaLista lista = minhaListaRepositorio.findById(listaId).get();
-        List<Produto> produtos = lista.getProdutos();
+
+    public List<ProdutoProdutor> pegaListaDeProdutosPorProdutores(Long listaId) {
+        Optional<MinhaLista> lista = minhaListaRepositorio.findById(listaId);
+        List<Produto> produtos = lista.get().getProdutos();
 
         return produtoProdutorRepositorio.findByProdutoIn(produtos);
     }
 }
+
+
+
+
