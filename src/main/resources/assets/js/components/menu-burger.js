@@ -1,5 +1,8 @@
-export default function() {
-  $('.navbar-burger').on("click", function() {
-    $('#navbar-burger-body, .navbar-burger').toggleClass('is-active');
-  });
+export default {
+  openNav: () =>{
+    document.getElementById("mySidenav").style.width = "250px";
+  },  
+  closeNav: () => {
+    document.getElementById("mySidenav").style.width = "0";
+  }
 }

@@ -11,13 +11,12 @@ export default {
       }
     });
   },
+  salvar: (Form) => true,
+
   exibeConfirmacaoDeCancelamento: (href) => Modal
   .warning()
   .okAction("Sim", () => { window.location.href =  href })
   .cancelAction("Não")
-  .show("Realmente deseja cancelar a edição? Os dados não serão salvos."),
-  
-  salvar: (Form) => true
-
+  .show("Realmente deseja cancelar a edição? Os dados não serão salvos.")
   
 }
