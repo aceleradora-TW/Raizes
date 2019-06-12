@@ -2,12 +2,10 @@ package com.thoughtworks.aceleradora.servicos;
 
 
 import com.thoughtworks.aceleradora.dominio.Produto;
-import com.thoughtworks.aceleradora.dominio.Resposta;
 import com.thoughtworks.aceleradora.repositorios.ProdutoRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProdutoServico {
@@ -18,27 +16,16 @@ public class ProdutoServico {
         this.repositorio = repositorio;
     }
 
-    public Resposta<List<Produto>> pegarTodos() {
-        try {
-            return new Resposta<List<Produto>>(null, repositorio.findAll());
-        }catch (Exception e) {
-            return new Resposta(e.getMessage(),null);
-        }
+    public List<Produto> pegarTodos() {
+            return repositorio.findAll();
     }
 
-    public Resposta<Produto> salvar(Produto produto) {
-        try {
-            return new Resposta<Produto>("Registro Efetivado!", repositorio.save(produto));
-        }catch (Exception e) {
-            return new Resposta(e.getMessage(),null);
-        }
+    public Produto salvar (Produto produto) {
+        return repositorio.save(produto);
     }
 
-    public Resposta<Produto> encontraUm(Long id) {
-        try {
-            return new Resposta<Produto>(null, repositorio.findById(id).get());
-        } catch (Exception e) {
-            return new Resposta(e.getMessage(),null);
-        }
+    public Produto encontraUm(Long id) {
+        return repositorio.findById(id).get();
     }
+
 }
