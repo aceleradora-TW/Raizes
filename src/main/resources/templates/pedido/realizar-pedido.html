@@ -16,6 +16,7 @@
                 <div class="column is-12">
                     <form class="rz-form" id="formEditaLista" th:action="@{/pedidos/{id}/realizar-pedido}"
                         method="post">
+
                         <div th:each="produtoProdutor : ${produtoProdutores}">
                             <h3 th:text="${produtoProdutor.produto.nome}"></h3>
                             <div class="box">
@@ -25,7 +26,7 @@
                                             th:id="${produtoProdutor.produtor.nome}">
                                         <span th:text="${produtoProdutor.produtor.nome}"></span>
                                     </label>
-                                    <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
+                                    <span><i class="fas fa-map-marker-alt"></i>  <span th:text="${produtoProdutor.produtor.endereco.cidade.nome}"></span>
                                     <i class="fas fa-truck"></i>
                                 </div>
                                 <div>
