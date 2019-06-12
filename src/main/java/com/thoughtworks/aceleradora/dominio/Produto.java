@@ -16,10 +16,6 @@ public class Produto {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "id_produtores")
-    Produtor produtor;
-
-    @ManyToOne
     @JoinColumn(name = "id_categorias")
     @JsonIgnoreProperties("produtos")
     private Categoria categoria;
@@ -34,19 +30,10 @@ public class Produto {
 
     public Produto() {}
 
-    public Produto(String nome, Produtor produtor, Categoria categoria, UnidadeMedida unidadeMedida) {
+    public Produto(String nome, Categoria categoria, UnidadeMedida unidadeMedida) {
         this.nome = nome;
-        this.produtor = produtor;
         this.categoria = categoria;
         this.unidadeMedida = unidadeMedida;
-    }
-
-    public Produtor getProdutor() {
-        return produtor;
-    }
-
-    public void setProdutor(Produtor produtor) {
-        this.produtor = produtor;
     }
 
     public Long getId() {

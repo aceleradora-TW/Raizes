@@ -25,7 +25,6 @@ public class Pedido {
     @OneToMany(mappedBy="pedido")
     private List<PedidoProdutoProdutor> pedidosProdutosProdutores;
 
-
     public Pedido() {
     }
 

@@ -1,11 +1,6 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -16,43 +11,21 @@ public class Produtor {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
     private String nome;
     private boolean possuiTransporte;
 
-    @OneToMany
-    @JoinColumn(name = "id_produtos")
-    Produto produto;
-
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "produtos_produtores",
-            joinColumns = {@JoinColumn(name = "id_produtores")},
-            inverseJoinColumns = {@JoinColumn(name = "id_produtos")}
-    )
-
-    @JsonIgnoreProperties("listas")
-    private List<Produto> produtos = new ArrayList<>();
-
     @ManyToOne
-    @JoinColumn(name = "id_endereco")
+    @JoinColumn(name = "id_enderecos")
     private Endereco endereco;
 
     public Produtor() {
     }
 
-    public Produtor(String nome, boolean possuiTransporte, Produto produto, List<Produto> produtos) {
+    public Produtor(String nome, boolean possuiTransporte, Endereco endereco) {
         this.nome = nome;
         this.possuiTransporte = possuiTransporte;
-        this.produto = produto;
-        this.produtos = produtos;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+        this.endereco = endereco;
     }
 
     public Long getId() {
@@ -69,14 +42,6 @@ public class Produtor {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
     }
 
     public boolean isPossuiTransporte() {

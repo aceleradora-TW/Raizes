@@ -69,8 +69,10 @@ public class PedidoControlador {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("realizar pedido", "/pedido/pedidos");
 
-        modelo.addAttribute("pedidos" , pedidoServico.pegaListaDeProdutosPorProdutores(listaId));
-        return "pedidos/{listaId}/realizar-pedido";
+        modelo.addAttribute("produtoProdutores" , pedidoServico.pegaListaDeProdutosPorProdutores(listaId));
+        modelo.addAttribute("pedido", new Pedido());
+
+        return "pedido/realizar-pedido";
     }
 
 
