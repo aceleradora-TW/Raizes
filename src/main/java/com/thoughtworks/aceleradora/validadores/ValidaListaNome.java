@@ -21,7 +21,7 @@ public class ValidaListaNome implements ConstraintValidator<NomeValido, String> 
     }
 
     private boolean nomeAindaNaoExisteNoBanco(String nome) {
-        return repositorio.findByNome(nome).isEmpty();
+        return repositorio.findByNome(nome).isPresent();
     }
 
     private boolean nomeNaoEstaVazio(String nome) {
