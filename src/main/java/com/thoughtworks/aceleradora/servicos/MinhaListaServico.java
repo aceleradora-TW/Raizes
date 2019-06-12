@@ -46,4 +46,9 @@ public class MinhaListaServico {
         }
 
     }
+   
+    public Optional<MinhaLista> findByNome(String nome) {
+        return repositorio.findByNome(nome);
+    }
+
 }
