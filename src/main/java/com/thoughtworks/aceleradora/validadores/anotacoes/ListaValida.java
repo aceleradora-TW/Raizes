@@ -1,7 +1,7 @@
 package com.thoughtworks.aceleradora.validadores.anotacoes;
 
 
-import com.thoughtworks.aceleradora.validadores.ValidaListaNome;
+import com.thoughtworks.aceleradora.validadores.ListaValidador;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -10,11 +10,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = ValidaListaNome.class)
-@Target({ ElementType.FIELD })
+@Constraint(validatedBy = ListaValidador.class)
+@Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface NomeValido {
-    String message() default "Lista com nome inválido e/ou já existente";
+public @interface ListaValida {
+    String message() default "Lista inválida";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
