@@ -2,9 +2,7 @@ package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
-import com.thoughtworks.aceleradora.servicos.EnderecoServico;
-import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
-import com.thoughtworks.aceleradora.servicos.PedidoServico;
+import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -28,6 +27,8 @@ public class PedidoControlador {
     private MinhaListaServico minhaListaServico;
     private PedidoServico pedidoServico;
     private EnderecoServico enderecoServico;
+    private ProdutoServico produtoServico;
+    private ProdutorServico produtorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
             "/");
@@ -112,6 +113,18 @@ public class PedidoControlador {
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
 
         return "redirect:/pedidos";
+    }
+
+
+    @ResponseBody
+    @GetMapping("/teste")
+    public Map listaProdutosProdutores(Model modelo) {
+        Map<String, List> mapa = new HashMap<>();
+        List<Produto> produtos = produtoServico.pegarTodos();
+        List<Produtor> produtores = produtorServico.pegarTodosProdutores();
+        mapa.put("produtos", produtos);
+        mapa.put("produtores", produtores);
+        return mapa;
     }
 
 }

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -54,9 +55,17 @@ public class ProdutoProdutorServicoTest {
                 produtoProdutorServico.organizarProdutoresDeProdutos(produtosProdutores);
 
         //Entao deve retornar uma lista de produtores de produtos distintos
-        Assert.assertEquals(produtoresDeProdutos.size(), eq(2));
 
+        assertThat(produtoresDeProdutos.size(), equalTo(2));
 
+        for (ProdutoresDeProdutos produtoOrganizado : produtoresDeProdutos) {
+            if (produtoOrganizado.getProduto().equals(banana)) {
+                assertThat(produtoOrganizado.getProdutores().size(), equalTo(2));
+            } else {
+                assertThat(produtoOrganizado.getProdutores().size(), equalTo(1));
+                assertThat(produtoOrganizado.getProdutores().get(0), equalTo(leoProdutor));
+            }
+        }
     }
 
 }

@@ -1,17 +1,13 @@
 package com.thoughtworks.aceleradora.servicos;
 
-import com.thoughtworks.aceleradora.dominio.MinhaLista;
-import com.thoughtworks.aceleradora.dominio.Pedido;
-import com.thoughtworks.aceleradora.dominio.Produto;
-import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
+import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.repositorios.ClienteRepositorio;
 import com.thoughtworks.aceleradora.repositorios.MinhaListaRepositorio;
 import com.thoughtworks.aceleradora.repositorios.PedidoRepositorio;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PedidoServico {
@@ -20,15 +16,21 @@ public class PedidoServico {
     private MinhaListaRepositorio minhaListaRepositorio;
     private ProdutoProdutorRepositorio produtoProdutorRepositorio;
     private ClienteServico clienteServico;
+    private ProdutoServico produtoServico;
+    private ProdutorServico produtorServico;
 
     public PedidoServico(PedidoRepositorio pedidorepositorio,
                          MinhaListaRepositorio minhaListaRepositorio,
                          ProdutoProdutorRepositorio produtoProdutorRepositorio,
-                         ClienteServico clienteServico) {
+                         ClienteServico clienteServico,
+                         ProdutoServico produtoServico,
+                         ProdutorServico produtorServico) {
         this.pedidorepositorio = pedidorepositorio;
         this.minhaListaRepositorio = minhaListaRepositorio;
         this.produtoProdutorRepositorio = produtoProdutorRepositorio;
         this.clienteServico = clienteServico;
+        this.produtoServico = produtoServico;
+        this.produtorServico = produtorServico;
     }
 
     public Pedido encontraUm(Long id) {
@@ -56,6 +58,7 @@ public class PedidoServico {
         pedido.setCliente(clienteServico.encontraNeiva());
         return pedidorepositorio.save(pedido);
     }
+
 }
 
 
