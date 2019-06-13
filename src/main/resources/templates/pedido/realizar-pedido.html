@@ -10,21 +10,18 @@
 <body>
 <section class="section">
     <section class="container">
-
         <div class="columns">
             <div class="column is-12">
                 <form class="rz-form" id="formRealizarPedido" th:action="@{/pedidos/{id}/realizar-pedido}"
                       method="post">
-                    
                       <h1 class="title centraliza-texto" th:text="${listaNome}"></h1>
-                    
                     <div th:each="produtoProdutor : ${produtoProdutores}">
                         <h3 th:text="${produtoProdutor.produto.nome}"></h3>
                         <div class="box">
                             <div class="flex equal-sizing flex-row">
-                                <label th:for="${produtoProdutor.produtor.nome}"></label>
-                                <input type="radio" class="radio" name="produtores" th:value="${produtoProdutor.produtor.id}"
+                                <input type="radio" class="radio" name="produtores" th:value="${produtoProdutor.produtor.nome}"
                                        th:id="${produtoProdutor.produtor.id}" th:text="${produtoProdutor.produtor.nome}">
+<!--                                <span th:text="${produtoProdutor.produtor.nome}"></span>-->
                                 <span><i class="fas fa-map-marker-alt"></i></span>
                                 <span th:text="${produtoProdutor.produtor.endereco.cidade.nome}"></span>,
                                 <span th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
@@ -49,15 +46,11 @@
                         </div>
                     </div>
                 </form>
-
                 <div class="rz-box-footer flex space-between">
                   <a class="button rz-button is-rounded" th:href="@{/minhas-listas}"
                      th:onclick="return EditaLista.exibeConfirmacaoDeCancelamento()">Cancelar</a>
                   <button class="button rz-button is-rounded" type="submit">Salvar</button>
               </div>
-
-
-
             </div>
         </div>
     </section>

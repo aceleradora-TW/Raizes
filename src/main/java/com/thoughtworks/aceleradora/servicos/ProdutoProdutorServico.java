@@ -1,6 +1,5 @@
 package com.thoughtworks.aceleradora.servicos;
 
-import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.dominio.Produtor;
@@ -15,6 +14,7 @@ import java.util.Map;
 @Service
 public class ProdutoProdutorServico {
     private ProdutoProdutorRepositorio produtoProdutorRepositorio;
+
 
     public ProdutoProdutorServico(ProdutoProdutorRepositorio produtoProdutorRepositorio) {
         this.produtoProdutorRepositorio = produtoProdutorRepositorio;
@@ -37,6 +37,5 @@ public class ProdutoProdutorServico {
         }
         return new ArrayList<>(mapaDeProdutoresDeProdutos.values());
     }
-
 
 }

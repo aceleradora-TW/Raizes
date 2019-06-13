@@ -14,4 +14,6 @@ public interface ProdutoProdutorRepositorio extends CrudRepository<ProdutoProdut
 
     List<ProdutoProdutor> findByProdutoIn(List<Produto> produtos);
 
+    List<ProdutoProdutor> findAll();
+
 }

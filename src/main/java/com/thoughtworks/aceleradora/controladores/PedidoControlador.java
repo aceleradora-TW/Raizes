@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,12 +35,14 @@ public class PedidoControlador {
             "/");
 
     @Autowired
-    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico,
-                             EnderecoServico enderecoServico) {
+    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico, EnderecoServico enderecoServico, ProdutoServico produtoServico, ProdutorServico produtorServico) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
         this.enderecoServico = enderecoServico;
+        this.produtoServico = produtoServico;
+        this.produtorServico = produtorServico;
     }
+
 
     @GetMapping
     public String pedidoCriados(Breadcrumb breadcrumb, Model modelo) {
@@ -118,7 +121,7 @@ public class PedidoControlador {
 
     @ResponseBody
     @GetMapping("/teste")
-    public Map listaProdutosProdutores(Model modelo) {
+    public Map listaProdutosProdutores() {
         Map<String, List> mapa = new HashMap<>();
         List<Produto> produtos = produtoServico.pegarTodos();
         List<Produtor> produtores = produtorServico.pegarTodosProdutores();
@@ -126,5 +129,12 @@ public class PedidoControlador {
         mapa.put("produtores", produtores);
         return mapa;
     }
+
+    @ResponseBody
+    @GetMapping("/teste2")
+    public List<Produto> listaProdutosProdutoress() {
+        return produtoServico.pegarTodos();
+    }
+
 
 }
