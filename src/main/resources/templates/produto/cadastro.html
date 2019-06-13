@@ -16,19 +16,22 @@
           <div class="box">
             <form id="formCadastraProduto" th:action="@{/produtos/cadastro}" method="post">
               <div class="field">
-                <label class="label">Nome do Produto</label>
-                <div class="control">
-                  <input class="input" name="nome" type="text" placeholder="Ex.: Maçã" />
-                </div>
-                <div class="help-block"></div>
-              </div>
-              <div class="field">
-                <label class="label">Categoria</label>
+                <label class="label">Escolha a categoria</label>
                 <div class="select">
                   <select form="formCadastraProduto" id="categorias" name="categoria">
                     <option th:each="categoria: ${categorias}" th:text="${categoria.nome}" th:value="${categoria.id}">
                     </option>
                   </select>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Escolha o produto</label>
+                <div class="control">
+                  <div class="select">
+                    <select form="formCadastraProduto" id="produtos" name="produto">
+                      <option th:each="produto: ${produtos}" th:text="${produto.nome}"></option>
+                    </select>
+                  </div>
                 </div>
                 <div class="help-block"></div>
               </div>
@@ -39,11 +42,24 @@
                     <option th:each="cultivo: ${cultivos}" th:text="${cultivo.codigo}"></option>
                   </select>
                 </div>
-                <div class="help-block"></div>
               </div>
               <div class="field">
-                <div class="control flex end">
-                  <button class="button is-primary " type="submit">Salvar</button>
+                <label class="label">Quantidade disponível</label>
+                <div class="control">
+                  <input class="input" name="quantidade" type="number" placeholder="Ex.: 15"/>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Valor do produto</label>
+                <div class="control">
+                  <input class="input" name="valor" type="number" placeholder="Ex.: R$ 4,00"/>
+                </div>
+              </div>
+                <div class="help-block"></div>
+              <div class="field">
+                <div class="rz-box-footer flex space-between p-3">
+                  <a href="/" class="button is-primary">Voltar</a>
+                  <button class="button is-primary" type="submit">Salvar</button>
                 </div>
               </div>
             </form>
