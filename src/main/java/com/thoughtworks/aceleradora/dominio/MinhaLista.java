@@ -65,9 +65,4 @@ public class MinhaLista {
     public List<Produto> getProdutos() {
         return produtos;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        return Objects.equals(id, ((MinhaLista) o).id);
-    }
 }
