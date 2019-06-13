@@ -8,48 +8,48 @@
 </head>
 
 <body>
-  <section class="section">
-    <section class="container">
-      <h1 class="title centraliza-texto">Pedidos</h1>
-      <div th:if="${mensagem}">
-        <script th:inline="javascript">
-          /*<![CDATA[*/
+<section class="section">
+  <section class="container">
+    <h1 class="title centraliza-texto">Pedidos</h1>
+    <div th:if="${mensagem}">
+      <script th:inline="javascript">
+        /*<![CDATA[*/
 
-          window.onload = function () {
-            window.Modal
-              .success()
-              .okAction("Ok")
-              .show(/*[[${mensagem}]]*/)
-          };
+        window.onload = function () {
+          window.Modal
+                  .success()
+                  .okAction("Ok")
+                  .show(/*[[${mensagem}]]*/)
+        };
 
-          /*]]>*/
-        </script>
-      </div>
-      <div>
-        <p th:if="${pedidosCriados.isEmpty()}">Não há listas criadas.</p>
-      </div>
-      <div class="columns">
-        <div class="column is-12">
-          <div class="box rz-box">
-            <div class="rz-box-body px-0 pb-0">
-              <table class="rz-table striped">
-                <thead class="table-header">
-                  <th class="">Pedidos</th>
-                  <th class="">Status geral</th>
-                  <th class="">Ações</th>
-                </thead>
-                <tbody class="table-body">
-                  <tr th:each="pedido: ${pedidosCriados}">
-                    <td>
-                      <span th:text="${pedido.nome}"></span>
-                    </td>
-                    <td>Pendente</td>
-                    <td class="flex center">
-                      <a class="button rz-button list-style" th:href="@{/pedidos/2}">
-                        <i class="fas fa-eye"></i></a>
-                      <a class="button rz-button list-style">
-                        <i class="fas fa-edit"></i></a>
-                      <form th:action="@{/pedidos/{id}/excluir(id=${pedido.id})}" method="post" name="meuform"
+        /*]]>*/
+      </script>
+    </div>
+    <div>
+      <p th:if="${pedidosCriados.isEmpty()}">Não há listas criadas.</p>
+    </div>
+    <div class="columns">
+      <div class="column is-12">
+        <div class="box rz-box">
+          <div class="rz-box-body px-0 pb-0">
+            <table class="rz-table striped">
+              <thead class="table-header">
+              <th class="">Pedidos</th>
+              <th class="">Status geral</th>
+              <th class="">Ações</th>
+              </thead>
+              <tbody class="table-body">
+              <tr th:each="pedido: ${pedidosCriados}">
+                <td>
+                  <span th:text="${pedido.nome}"></span>
+                </td>
+                <td>Pendente</td>
+                <td class="flex center">
+                  <a class="button rz-button list-style" th:href="@{/pedidos/2}">
+                    <i class="fas fa-eye"></i></a>
+                  <a class="button rz-button list-style">
+                    <i class="fas fa-edit"></i></a>
+                  <form th:action="@{/pedidos/{id}/excluir(id=${pedido.id})}" method="post" name="meuform"
                         th:onsubmit="return Pedidos.exibeConfirmacaoDeExclusaoDoPedido()">
                         <button type="submit" class="button rz-button list-style">
                           <i class="fas fa-trash-alt"></i>

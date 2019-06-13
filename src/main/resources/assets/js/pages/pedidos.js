@@ -1,3 +1,4 @@
 export default {
-    exibeConfirmacaoDeExclusaoDoPedido: () => confirm("Realmente deseja excluir a compra selecionada?")
+    exibeConfirmacaoDeExclusaoDoPedido: () => confirm("Deseja excluir a compra selecionada?")
 }
+
