@@ -84,7 +84,7 @@ public class PedidoControlador {
 
 
         pedidoServico.removerPedido(id);
-        redirecionamentoDeAtributos.addFlashAttribute("mensagemExcluir", "Pedido excluído com sucesso!");
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido excluído com sucesso!");
 
         return "redirect:/pedidos";
     }

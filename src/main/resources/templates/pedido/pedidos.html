@@ -10,8 +10,8 @@
 <section class="section">
   <section class="container">
     <h1 class="title centraliza-texto">Pedidos</h1>
-    <div th:if="${mensagemExcluir}">
-      <span th:text="${mensagemExcluir}"></span>
+    <div th:if="${mensagem}">
+      <span th:text="${mensagem}"></span>
     </div>
     <div>
       <p th:if="${pedidosCriados.isEmpty()}">Não há listas criadas.</p>
