@@ -16,6 +16,7 @@ public class ProdutoProdutor{
     private Long id;
 
     private double quantidadeEstoque;
+
     private BigDecimal preco;
 
     @ManyToOne

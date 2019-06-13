@@ -71,7 +71,7 @@ public class PedidoControlador {
 
         modelo.addAttribute("produtoProdutores" , pedidoServico.pegaListaDeProdutosPorProdutores(listaId));
         modelo.addAttribute("pedido", new Pedido());
-
+        modelo.addAttribute("listaNome", minhaListaServico.encontraUm(listaId).getNome());
         return "pedido/realizar-pedido";
     }
 

@@ -8,52 +8,52 @@
 </head>
 
 <body>
-    <section class="section">
-        <section class="container">
-            <h1 class="title centraliza-texto">Feijoada de Domingo</h1>
+<section class="section">
+    <section class="container">
 
-            <div class="columns">
-                <div class="column is-12">
-                    <form class="rz-form" id="formEditaLista" th:action="@{/pedidos/{id}/realizar-pedido}"
-                        method="post">
 
-                        <div th:each="produtoProdutor : ${produtoProdutores}">
-                            <h3 th:text="${produtoProdutor.produto.nome}"></h3>
-                            <div class="box">
+        <div class="columns">
+            <div class="column is-12">
+                <form class="rz-form" id="formEditaLista" th:action="@{/pedidos/{id}/realizar-pedido}"
+                      method="post">
+                    <h1 th:text="${listaNome}"></h1>
+                    <div th:each="produtoProdutor : ${produtoProdutores}">
+                        <h3 th:text="${produtoProdutor.produto.nome}"></h3>
+                        <div class="box">
+                            <div class="flex equal-sizing flex-row">
+                                <label class="radio">
+                                    <input type="radio" name="produtores" th:value="${produtoProdutor.produtor.id}"
+                                           th:id="${produtoProdutor.produtor.nome}">
+                                    <span th:text="${produtoProdutor.produtor.nome}"></span>
+                                </label>
+                                <span><i class="fas fa-map-marker-alt"></i>  </span>
+                                <span th:text="${produtoProdutor.produtor.endereco.cidade.nome}"></span>,
+                                <span th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div>
                                 <div class="flex equal-sizing flex-row">
-                                    <label class="radio">
-                                        <input type="radio" name="produtores" th:value="${produtoProdutor.produtor.id}"
-                                            th:id="${produtoProdutor.produtor.nome}">
-                                        <span th:text="${produtoProdutor.produtor.nome}"></span>
-                                    </label>
-                                    <span><i class="fas fa-map-marker-alt"></i>  
-                                        <span th:text="${produtoProdutor.produtor.endereco.cidade.nome}"></span>,
-                                        <span th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
-                                    <i class="fas fa-truck"></i>
-                                </div>
-                                <div>
-                                    <div class="flex equal-sizing flex-row">
-                                        <div class="flex flex-row ">
-                                            <i class="fas fa-spa "></i>
-                                            <span th:text="${produtoProdutor.tipoDeCultivo.codigo}"></span>
-                                        </div>
-                                        <div class="flex flex-row ">
-                                            <span>Valor: R$</span>
-                                            <span th:text="${produtoProdutor.preco}"></span>
-                                        </div>
-                                        <label class="label">Quantidade:
-                                            <input size="5" type="text" placeholder="Ex: 4" name="quantidade">
-                                        </label>
-                                        <span>Total: R$ 0,00</span>
+                                    <div class="flex flex-row ">
+                                        <i class="fas fa-spa "></i>
+                                        <span th:text="${produtoProdutor.tipoDeCultivo.codigo}"></span>
                                     </div>
+                                    <div class="flex flex-row ">
+                                        <span>Valor: R$</span>
+                                        <span th:text="${produtoProdutor.preco}"></span>
+                                    </div>
+                                    <label class="label">Quantidade:
+                                        <input size="5" type="text" placeholder="Ex: 4" name="quantidade">
+                                    </label>
+                                    <span>Total: R$ 0,00</span>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
-        </section>
+        </div>
     </section>
+</section>
 </body>
 
 </html>
