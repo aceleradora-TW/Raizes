@@ -19,12 +19,10 @@
   }
 }
 .sanduiche-button{
-  display: block;
   cursor:pointer;
-  background-color: white;
   border-color: transparent;
   color: $third-color;
   position: relative;
-  line-height: 4;
-  left: 5px;
+  left: 15px;
+  top: 20px;
 }
