@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Minhas Listas</title>
+</head>
+
+<body>
+    <section class="section">
+        <section class="container">
+            <h1 class="title centraliza-texto">Meus estoques</h1>
+            <div th:if="${mensagem}">
+                <span th:text="${mensagem}"></span>
+            </div>
+            <div class="columns">
+                <div class="column is-12">
+                    <div class="box rz-box">
+                        <div class="rz-box-body p-0">
+                            <ul class="rz-list striped">
+                                <li class="rz-list-item" th:each="">
+                                    <span th:text="${}"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="rz-box-footer flex space-between p-3">
+                            <a href="/" class="button rz-button is-rounded">Voltar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </section>
+</body>
+
+</html>

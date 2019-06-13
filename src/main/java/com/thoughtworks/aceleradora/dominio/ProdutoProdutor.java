@@ -90,4 +90,6 @@ public class ProdutoProdutor{
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
+
+    public
 }
