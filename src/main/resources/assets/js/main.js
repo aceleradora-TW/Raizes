@@ -10,7 +10,7 @@ import RealizarPedido from './pages/realizaPedido'
 import Pedidos from './pages/pedidos'
 import Pedido from './pages/pedido'
 import Modal from './components/modal'
-import burger from './components/menu-burger'
+import Burger from './components/menu-burger'
 import EditarPedido from './pages/editaPedido'
 
 
@@ -29,6 +29,6 @@ $(function () {
     window.CriarLista = CriarLista;
     window.Modal = new Modal();
     window.EditaPedido = EditarPedido;
-    window.burger = burger;
+    window.Burger = Burger;
 
 });
