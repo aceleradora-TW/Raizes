@@ -1,17 +1,17 @@
 export default class Modal {
   constructor(selector = '#Modal') {
-    this.elem = document.querySelector(selector)
-    this.elemTituloModal = $(this.elem).find('.modal-card-title');
-    this.okButton = $(this.elem).find('#okButton');
-    this.cancelButton = $(this.elem).find('#cancelButton');
+    this.elem = $(selector);
+    this.elemTituloModal = this.elem.find('.modal-card-title');
+    this.okButton = this.elem.find('#okButton');
+    this.cancelButton = this.elem.find('#cancelButton');
 
     this.init()
   }
 
   show(textoDoCorpo) {
-    const corpoModal = $(this.elem).find('.modal-card-body span');
+    const corpoModal = this.elem.find('.modal-card-body span');
     corpoModal.text(textoDoCorpo);
-    this.elem.classList.add('is-active')
+    this.elem.addClass('is-active')
     return false;
   }
 
@@ -26,7 +26,7 @@ export default class Modal {
 
 
   close() {
-    this.elem.classList.remove('is-active')
+    this.elem.removeClass('is-active')
   }
 
   okAction(text, callback) {
@@ -52,17 +52,11 @@ export default class Modal {
 
 
   init() {
-    var modalClose = $(this.elem).find('.is-modal-close')
-    var that = this;
-    modalClose.each(function (i, e) {
-            
-      $(e).on("click", function () {
-        that.close();
+    var modalClose = this.elem.find('.is-modal-close')
+    modalClose.each( (i, e) => {     
+      $(e).on("click", () => {
+        this.close();
       })
     })
-  }
-
-  addEventListener(event, callback) {
-    this.elem.addEventListener(event, callback)
   }
 }

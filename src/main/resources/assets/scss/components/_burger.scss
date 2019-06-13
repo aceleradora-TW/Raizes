@@ -4,32 +4,34 @@
   position: fixed;
   z-index: 1;
   top: 0;
-  left: 0;
+  left: -250px;
   background-color: $third-color;
   overflow-x: hidden;
-  transition: 0.5s;
+  transition: transform 0.5s ease;
   padding-top: 60px;
-  transform: translatex(-250px);
   box-shadow: 0 0 1.5px  #4a4a4a;
-}
 
-.sanduiche a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: white;
-  display: block;
-  transition: 0.3s;
-}
+  a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
 
-.sanduiche a:hover {
-  color: #4a4a4a;
-  
-}
+    &:hover {
+      color: #4a4a4a;
+      
+    }
+  }
+  &.open {
+      transform: translateX(250px);
+  }
 
-.sanduiche .closebtn {
-  position: absolute;
-  top: 0;
-  right: 5px;
-  font-size: 30px;
+  .closebtn {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 30px;
+  }
 }
