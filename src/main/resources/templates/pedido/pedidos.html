@@ -9,7 +9,10 @@
 <body>
 <section class="section">
   <section class="container">
-    <h1 class="title centraliza-texto">Compras</h1>
+    <h1 class="title centraliza-texto">Pedidos</h1>
+    <div th:if="${mensagem}">
+      <span th:text="${mensagem}"></span>
+    </div>
     <div>
       <p th:if="${pedidosCriados.isEmpty()}">Não há listas criadas.</p>
     </div>
@@ -19,7 +22,7 @@
           <div class="rz-box-body px-0 pb-0">
             <table class="rz-table striped">
               <thead class="table-header">
-              <th class="">Compras</th>
+              <th class="">Pedidos</th>
               <th class="">Status geral</th>
               <th class="">Ações</th>
               </thead>
@@ -30,7 +33,7 @@
                 </td>
                 <td>Pendente</td>
                 <td class="flex center">
-                  <a class="button rz-button list-style" th:href="@{/pedidos/1}">
+                  <a class="button rz-button list-style" th:href="@{/pedidos/{id}(id=${pedido.id})}">
                     <i class="fas fa-eye"></i></a>
                   <a class="button rz-button list-style">
                     <i class="fas fa-edit"></i></a>
