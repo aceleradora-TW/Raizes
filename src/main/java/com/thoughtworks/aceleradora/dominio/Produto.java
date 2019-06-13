@@ -25,8 +25,6 @@ public class Produto {
     @Column(name = "unidade_medida")
     private UnidadeMedida unidadeMedida;
 
-    public Produto(String nome) {
-    }
 
     public Produto() {}
 

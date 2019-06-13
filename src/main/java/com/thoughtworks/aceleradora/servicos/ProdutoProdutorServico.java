@@ -16,6 +16,10 @@ public class ProdutoProdutorServico {
         this.produtoProdutorRepositorio = produtoProdutorRepositorio;
     }
 
+    public List<ProdutoresDeProdutos> organizarProdutoresDeProdutos(List<ProdutoProdutor> produtoProdutores) {
+        return null;
+    }
+
 //    public List<ProdutoProdutor> pegaListadeProdutos(Long id) {
 //        MinhaLista lista = minhaListaRepositorio.findById(id).get();
 //        List<Produto> produtos = lista.getProdutos();
