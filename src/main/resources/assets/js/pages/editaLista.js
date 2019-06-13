@@ -9,8 +9,14 @@ export default {
       rules: {
         required: true
       }
-    }); 
+    });
   },
+  salvar: (Form) => true,
 
-  exibeConfirmacaoDeCancelamento: () => confirm("Realmente deseja cancelar a edição? Os dados não serão salvos.")
+  exibeConfirmacaoDeCancelamento: (href) => Modal
+  .warning()
+  .okAction("Sim", () => { window.location.href =  href })
+  .cancelAction("Não")
+  .show("Realmente deseja cancelar a edição? Os dados não serão salvos.")
+  
 }
