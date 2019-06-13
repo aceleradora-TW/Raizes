@@ -2,7 +2,6 @@ package com.thoughtworks.aceleradora.dominio;
 
 
 import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 

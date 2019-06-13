@@ -1,6 +1,8 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.Breadcrumb;
+import com.thoughtworks.aceleradora.dominio.Produto;
+import com.thoughtworks.aceleradora.dominio.TipoDeCultivo;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
@@ -64,5 +66,14 @@ public class ProdutoControlador {
         }
 
         return "redirect:/produtos/cadastro";
+    }
+    @GetMapping("/{id}/editar")
+    public String editarProduto(Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Editar Produto", "/produtos/editar-produto");
+
+
+        return "produto/editar";
     }
 }
