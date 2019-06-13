@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,7 +26,7 @@ public class ProdutoControlador {
     private CategoriaServico categoriaServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
-            .pagina("Início", "/");
+            .pagina("Página inicial", "/");
 
     @Autowired
     public ProdutoControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico) {
@@ -68,12 +69,21 @@ public class ProdutoControlador {
         return "redirect:/produtos/cadastro";
     }
     @GetMapping("/{id}/editar")
-    public String editarProduto(Breadcrumb breadcrumb) {
+    public String editarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Editar Produto", "/produtos/editar-produto");
 
+        modelo.addAttribute("produto", produtoServico.encontraUm(id));
+        return "produto/editar";
+    }
+    @PostMapping("/{id}/editar")
+    public String salvarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Editar Produto", "/produtos/editar-produto");
 
+        modelo.addAttribute("produto", produtoServico.encontraUm(id));
         return "produto/editar";
     }
 }
