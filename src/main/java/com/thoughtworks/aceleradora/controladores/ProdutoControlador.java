@@ -5,6 +5,7 @@ import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.dominio.TipoDeCultivo;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
+import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,15 +25,18 @@ public class ProdutoControlador {
 
     private ProdutoServico produtoServico;
     private CategoriaServico categoriaServico;
+    private ProdutoProdutorServico produtoProdutorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Página inicial", "/");
 
     @Autowired
-    public ProdutoControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico) {
+    public ProdutoControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico, ProdutoProdutorServico produtoProdutorServico) {
         this.produtoServico = produtoServico;
         this.categoriaServico = categoriaServico;
+        this.produtoProdutorServico = produtoProdutorServico;
     }
+
 
     @GetMapping("/cadastro")
     public String cadastrarProduto(Model modelo, Breadcrumb breadcrumb) {
@@ -74,10 +78,11 @@ public class ProdutoControlador {
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Editar Produto", "/produtos/editar-produto");
 
-        modelo.addAttribute("produto", produtoServico.encontraUm(id));
-
+        modelo.addAttribute("produto", produtoProdutorServico.encontraUm(id));
+        modelo.addAttribute("tipo", produtoProdutorServico.pegaTipoDeProduto(id));
         return "produto/editar";
     }
+
     @PostMapping("/{id}/editar")
     public String salvarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id) {
         breadcrumb
@@ -85,6 +90,7 @@ public class ProdutoControlador {
                 .pagina("Editar Produto", "/produtos/editar-produto");
 
         modelo.addAttribute("produto", produtoServico.encontraUm(id));
+
         return "produto/editar";
     }
 }

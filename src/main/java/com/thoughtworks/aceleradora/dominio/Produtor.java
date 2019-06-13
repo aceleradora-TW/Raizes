@@ -1,10 +1,6 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -15,31 +11,21 @@ public class Produtor {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
     private String nome;
     private boolean possuiTransporte;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "produtos_produtores",
-            joinColumns = {@JoinColumn(name = "id_produtores")},
-            inverseJoinColumns = {@JoinColumn(name = "id_produtos")}
-    )
-
-    @JsonIgnoreProperties("listas")
-    private List<Produto> produtos = new ArrayList<>();
-
     @ManyToOne
-    @JoinColumn(name = "id_endereco")
+    @JoinColumn(name = "id_enderecos")
     private Endereco endereco;
 
     public Produtor() {
     }
 
-    public Produtor(String nome, List<Produto> produtos, boolean possuiTransporte) {
+    public Produtor(String nome, boolean possuiTransporte, Endereco endereco) {
         this.nome = nome;
-        this.produtos = produtos;
         this.possuiTransporte = possuiTransporte;
-
+        this.endereco = endereco;
     }
 
     public Long getId() {
@@ -58,14 +44,6 @@ public class Produtor {
         this.nome = nome;
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
-    }
-
     public boolean isPossuiTransporte() {
         return possuiTransporte;
     }
@@ -82,4 +60,3 @@ public class Produtor {
         this.endereco = endereco;
     }
 }
-

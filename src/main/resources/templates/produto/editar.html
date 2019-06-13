@@ -12,8 +12,12 @@
             <div class="column is-6 is-offset-3">
                     <form id="formEditarProduto" th:action="@{/produtos/{id}/editar(id=${produto.id})}" method="post">
                         <div class="field">
-                            <label>Nome do Produto:</label>
+                            <label>Produto:</label>
                             <span th:text="${produto.nome}"></span>
+                        </div>
+                        <div class="field">
+                            <label>Tipo:</label>
+                            <span class="title centraliza-texto" th:text="${tipo}"></span>
                         </div>
                         <div class="field">
                             <div class="control flex end">
