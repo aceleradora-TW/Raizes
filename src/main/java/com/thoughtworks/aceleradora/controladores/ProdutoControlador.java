@@ -75,6 +75,7 @@ public class ProdutoControlador {
                 .pagina("Editar Produto", "/produtos/editar-produto");
 
         modelo.addAttribute("produto", produtoServico.encontraUm(id));
+
         return "produto/editar";
     }
     @PostMapping("/{id}/editar")

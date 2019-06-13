@@ -8,9 +8,8 @@
 <section class="section">
     <section class="container">
         <h1 class="title">Editar Produto</h1>
-        <div class="columns">
-            <div class="column is-6">
-                <div class="box">
+        <div class="rz-box-body box">
+            <div class="column is-6 is-offset-3">
                     <form id="formEditarProduto" th:action="@{/produtos/{id}/editar(id=${produto.id})}" method="post">
                         <div class="field">
                             <label>Nome do Produto:</label>
@@ -25,7 +24,6 @@
                     </form>
                 </div>
             </div>
-        </div>
     </section>
 </section>
 </body>
