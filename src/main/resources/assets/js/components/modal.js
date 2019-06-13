@@ -1,26 +1,26 @@
 export default class Modal {
   constructor(selector = '#Modal') {
     this.elem = $(selector);
-    this.elemTituloModal = this.elem.find('.modal-card-title');
+    this.elemTitle = this.elem.find('.modal-card-title');
     this.okButton = this.elem.find('#okButton');
     this.cancelButton = this.elem.find('#cancelButton');
 
     this.init()
   }
 
-  show(textoDoCorpo) {
-    const corpoModal = this.elem.find('.modal-card-body span');
-    corpoModal.text(textoDoCorpo);
+  show(bodyText) {
+    const body = this.elem.find('.modal-card-body span');
+    body.text(bodyText);
     this.elem.addClass('is-active')
     return false;
   }
 
   warning(){
-    this.elemTituloModal.text("Atenção!")
+    this.elemTitle.text("Atenção!")
     return this;
   }
   success(){
-    this.elemTituloModal.text("Sucesso!")
+    this.elemTitle.text("Sucesso!")
     return this;
   }
 
