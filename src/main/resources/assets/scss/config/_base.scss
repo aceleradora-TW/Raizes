@@ -13,23 +13,33 @@ body {
 }
 
 .title {
-  color: $secondary-color;
+  // color: $secondary-color;
+  color: #78944b;
 }
 
 h1 {
-  color: $secondary-color;
   text-align: center;
+  font-family: 'Neucha';
+  color: #78944b;
 }
 
 h2 {
-  color: $secondary-color;
   text-align: center;
   font-size: 1.5em;
   font-weight: bold;
+  font-family: 'Neucha';
+  color: #78944b;
 }
 
 h3 {
   color: $secondary-color;
   text-align: center;
   font-size: 1em;
+  font-family: 'Neucha';
+}
+.logo img {
+  width: 104px;
+}
+.logo {
+  margin: auto;
 }

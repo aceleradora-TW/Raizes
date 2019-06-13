@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <title>Minhas Listas</title>
+  <title>Raízes</title>
 </head>
-
 <body>
   <section class="section">
     <section class="container">
       <h1 class="title centraliza-texto">Minhas listas</h1>
       <div th:if="${mensagem}">
-        <span th:text="${mensagem}"></span>
+        <script th:inline="javascript">
+          /*<![CDATA[*/
+          window.onload = function () {
+            window.Modal
+              .success()
+              .okAction("Ok")
+              .show(/*[[${mensagem}]]*/)
+          };
+          /*]]>*/
+        </script>
       </div>
       <div class="columns">
         <div class="column is-12">
@@ -20,7 +27,7 @@
             <div class="rz-box-body p-0">
               <p class="centraliza-texto" th:if="${listasCriadas.isEmpty()}">Não há listas criadas.</p>
               <ul class="rz-list striped">
-                <li class="rz-list-item" th:each="lista: ${listasCriadas}">
+                <li class="rz-list-item row rx-0" th:each="lista: ${listasCriadas}">
                   <span th:text="${lista.nome}"></span>
                   <div class="mb-0 flex end buttons has-addons">
                     <a class="button rz-button" th:href="@{/minhas-listas/{id}/editar/(id=${lista.id})}">
@@ -29,8 +36,8 @@
                     <a class="button rz-button list-style">
                       <i class="fas fa-shopping-basket"></i>
                     </a>
-                    <form th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post" name="meuform"
-                      th:onsubmit="return MinhasListas.exibeConfirmacaoDeExclusaoDaLista()">
+                    <form name="deleteItemForm" th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post"
+                      th:onsubmit="return MinhasListas.exibeConfirmacaoDeExclusaoDaLista(deleteItemForm)">
                       <button type="submit" class="button rz-button list-style">
                         <i class="fas fa-trash-alt"></i>
                       </button>
@@ -47,9 +54,7 @@
         </div>
       </div>
       </div>
-      </div>
     </section>
   </section>
 </body>
-
 </html>
