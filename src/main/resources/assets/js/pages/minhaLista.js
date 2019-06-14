@@ -1,9 +1,10 @@
 export default {
-    exibeConfirmacaoDeExclusaoDaLista: (deleteItemForm) => {
-        const Form = $(deleteItemForm)[0];
+    exibeConfirmacaoDeExclusaoDaLista: (event) => {      
+        let form = event.target;
+
         window.Modal
         .success()
-        .okAction("Sim", () => { Form.submit();})
+        .okAction("Sim", () => { form.submit();})
         .cancelAction("Não")
         .show('Você tem certeza que deseja excluir esta lista?');
         return false;
