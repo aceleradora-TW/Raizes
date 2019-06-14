@@ -1,55 +1,53 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Aceleradora Ágil - Esqueleto Ambulante</title>
+    <meta charset="UTF-8">
+    <title>Raízes</title>
 </head>
 <body>
 <section class="section">
-	<section class="container">
-		<h1 class="title" th:text="${pedido.nome}"></h1>
-		<div class="columns">
-			<div class="column is-6">
-				<div class="box">
-					<form id="formVisualizarPedido" th:action="@{/pedidos/{id}(id=${pedido.id})}" method="post">
-						<div class="field">
-						</div>
-						<div class="columns">
-							<div class="column is-12">
-								<div class="box">
-									<div class="field">
-										<div class="control">
-											<span th:each="pedidosProdutosProdutores : ${pedido.pedidosProdutosProdutores}">
-												<h4><b th:text="${pedidosProdutosProdutores.produtoProdutor.produtor.nome}"></b></h4>
-												<div class="flex equal-sizing flex-row">
+    <section class="container">
+        <h1 class="title centraliza-texto" th:text="${pedido.nome}"></h1>
+        <div class="columns">
+            <div class="column is-6">
+                <div class="box">
+                    <form id="formVisualizarPedido" th:action="@{/pedidos/{id}(id=${pedido.id})}" method="post">
+                        <div class="columns">
+                            <div class="column is-12">
+                                <div class="box">
+                                    <div class="field">
+                                        <div class="control">
+                                            <span th:each="pedidosProdutosProdutores : ${pedido.pedidosProdutosProdutores}">
+                                                <h4><b th:text="${pedidosProdutosProdutores.produtoProdutor.produtor.nome}"></b></h4>
+                                                <div class="flex equal-sizing flex-row">
 													<span th:text="${pedidosProdutosProdutores.produtoProdutor.produto}"></span>
 													<span th:text="'R$ ' + ${pedidosProdutosProdutores.produtoProdutor.preco}"></span>
 												</div>
-												<div class="control">
-													<h1 class="title centraliza-texto">Contato:</h1>
-													<div class="flex equal-sizing flex-start flex-row">
-														<span><i class="fas fa-phone"></i></span>
-														<span>(00)0000-00000</span>
-													</div>
-													<div class="flex equal-sizing flex-row">
-														<span><i class="fas fa-envelope"></i></span>
-														<span>email@mail.com</span>
-													</div>
-												</div>
-											</span>
-										</div>
-									</div>
-								</div>
-								<div class="flex space-between">
-									<a class="button is-primary" th:href="@{/pedidos}">Voltar</a>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
+                                                <div class="control">
+                                                    <h1 class="title centraliza-texto">Contato:</h1>
+                                                    <div class="flex equal-sizing flex-start flex-row">
+                                                        <span><i class="fas fa-phone"></i></span>
+                                                        <span>(00)0000-00000</span>
+                                                    </div>
+                                                    <div class="flex equal-sizing flex-row">
+                                                        <span><i class="fas fa-envelope"></i></span>
+                                                        <span>email@mail.com</span>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex space-between">
+                                    <a class="button is-primary" th:href="@{/pedidos}">Voltar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 </section>
 </body>
 </html>

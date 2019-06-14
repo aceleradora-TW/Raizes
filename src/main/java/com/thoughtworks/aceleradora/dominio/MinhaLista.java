@@ -1,16 +1,15 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.thoughtworks.aceleradora.validadores.anotacoes.NomeValido;
+import com.thoughtworks.aceleradora.validadores.anotacoes.ListaValida;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "listas")
+@ListaValida
 public class MinhaLista {
 
     @Id
@@ -18,7 +17,6 @@ public class MinhaLista {
     private Long id;
 
     @Column(unique = true)
-    @NomeValido
     private String nome;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -27,8 +25,7 @@ public class MinhaLista {
             joinColumns = {@JoinColumn(name = "id_lista")},
             inverseJoinColumns = {@JoinColumn(name = "id_produtos")}
     )
-    @JsonIgnoreProperties("listas")
-    @NotEmpty(message = "É necessário selecionar ao menos um produto")
+
     private List<Produto> produtos = new ArrayList<>();
 
     @ManyToOne
@@ -39,18 +36,9 @@ public class MinhaLista {
 
     }
 
-    public MinhaLista(String nome) {
-        this.nome = nome;
-
-    }
-
     public void setId(Long id) {
         this.id = id;
 
-    }
-
-    public Cliente getCliente() {
-        return cliente;
     }
 
     public void setCliente(Cliente cliente) {
@@ -74,6 +62,4 @@ public class MinhaLista {
     public List<Produto> getProdutos() {
         return produtos;
     }
-
-
 }

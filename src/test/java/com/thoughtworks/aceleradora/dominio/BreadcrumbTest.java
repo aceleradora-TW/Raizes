@@ -34,7 +34,7 @@ public class BreadcrumbTest {
 
         breadcrumb
                 .aproveitar(construtorPreguicoso)
-                .pagina("Cadastro", "/minha-lista/cadastro");
+                .pagina("Cadastro", "/minha-lista/criar");
 
         assertThat(breadcrumb.toString(), is("Inicio > Listas > Cadastro"));
     }

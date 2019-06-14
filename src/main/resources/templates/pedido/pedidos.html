@@ -4,14 +4,26 @@
 
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>Raízes</title>
 </head>
+
 <body>
 <section class="section">
   <section class="container">
     <h1 class="title centraliza-texto">Pedidos</h1>
     <div th:if="${mensagem}">
-      <span th:text="${mensagem}"></span>
+      <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        window.onload = function () {
+          window.Modal
+                  .success()
+                  .okAction("Ok")
+                  .show(/*[[${mensagem}]]*/)
+        };
+
+        /*]]>*/
+      </script>
     </div>
     <div>
       <p th:if="${pedidosCriados.isEmpty()}">Não há listas criadas.</p>
@@ -39,23 +51,24 @@
                     <i class="fas fa-edit"></i></a>
                   <form th:action="@{/pedidos/{id}/excluir(id=${pedido.id})}" method="post" name="meuform"
                         th:onsubmit="return Pedidos.exibeConfirmacaoDeExclusaoDoPedido()">
-                    <button type="submit" class="button rz-button list-style">
-                      <i class="fas fa-trash-alt"></i>
-                    </button>
-                  </form>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="rz-box-footer flex space-between p-3">
-            <a class="button rz-button is-rounded" th:href="@{/}">Voltar</a>
-            <a class="button rz-button is-rounded" th:href="@{/minhas-listas}">Novo Pedido</a>
+                        <button type="submit" class="button rz-button list-style">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="rz-box-footer flex space-between p-3">
+              <a class="button rz-button is-rounded" th:href="@{/}">Voltar</a>
+              <a class="button rz-button is-rounded" th:href="@{/minhas-listas}">Novo Pedido</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </section>
-</section>
 </body>
+
 </html>

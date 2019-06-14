@@ -2,7 +2,8 @@
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Aceleradora Ágil - Esqueleto Ambulante</title>
+    <meta charset="UTF-8">
+    <title>Raízes</title>
 </head>
 
 <body>
@@ -32,8 +33,8 @@
                             </div>
                         </div>
                         <div class="rz-box-footer flex space-between">
-                            <a class="button rz-button is-rounded" th:href="@{/minhas-listas}"
-                               th:onclick="return EditarLista.exibeConfirmacaoDeCancelamento()">Cancelar</a>
+                            <button class="button rz-button is-rounded" 
+                               th:onclick="return CriarLista.exibeConfirmacaoDeCancelamento('/minhas-listas')">Cancelar</button>
                             <button class="button rz-button is-rounded" type="submit">Salvar</button>
                         </div>
                     </form>
