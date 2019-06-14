@@ -28,53 +28,32 @@
                     <i class="fas fa-truck"></i>
 
                     <div th:each="produtosProdutores : ${produtoresDeProdutos.produtosProdutores}">
-                    <span th:text="${produtosProdutores.tipoDeCultivo}"></span>
+                      <span th:text="${produtosProdutores.tipoDeCultivo}"></span>
+                      <div class="flex flex-row ">
+                        <span>Valor: R$</span>
+                        <span th:text="${produtosProdutores.preco}"></span>
+                      </div>
+                      <label class="label">Quantidade:
+                        <input size="5" type="text" placeholder="Ex: 4" name="quantidade">
+                      </label>
+                      <span>Total: R$ 0,00</span>
+                    </div>
 
                   </div> <!-- FECHA A LINHA-->
                 </div> <!-- FECHA o FROEACH PRODUTOR-->
 
-                <div>
-                  <div class="flex equal-sizing flex-row">
-                    <div class="flex flex-row ">
-                      <i class="fas fa-spa "></i>
-
-                      <div th:each="produtosProdutores : ${produtoresDeProdutos.produtosProdutores}">
-                        <span th:text="${produtosProdutores.tipoDeCultivo}"></span>
-                        <div class="flex flex-row ">
-                          <span>Valor: R$</span>
-                          <span th:text="${produtosProdutores.preco}"></span>
-                        </div>
-                        <label class="label">Quantidade:
-                          <input size="5" type="text" placeholder="Ex: 4" name="quantidade">
-                        </label>
-                        <span>Total: R$ 0,00</span>
-                      </div>
-
-                      <!-- <div th:each="produtoProdutor : ${produtoProdutores}">
-                        <span th:text="${produtoProdutor.tipoDeCultivo}"></span>
-                        <div class="flex flex-row ">
-                          <span>Valor: R$</span>
-                          <span th:text="${produtoProdutor.preco}"></span>
-                        </div>
-                      </div>  FECHA O FOREACH PRODUTOPRODUTOR
-                      <label class="label">Quantidade:
-                        <input size="5" type="text" placeholder="Ex: 4" name="quantidade">
-                      </label>
-                      <span>Total: R$ 0,00</span> -->
-                    </div>
-                  </div>
-                </div> <!-- FECHA A LINHA-->
+              
                 <!-- </div> FECHA FOREACH PRODUTOR -->
               </div> <!-- FECHA BOX-->
             </div>
-            <!--            </div>-->
-          </form>
-          <div class="rz-box-footer flex space-between">
-            <a class="button rz-button is-rounded" th:href="@{/minhas-listas}"
-              th:onclick="return EditaLista.exibeConfirmacaoDeCancelamento()">Cancelar</a>
-            <button class="button rz-button is-rounded" type="submit">Salvar</button>
-          </div>
         </div>
+        </form>
+        <div class="rz-box-footer flex space-between">
+          <a class="button rz-button is-rounded" th:href="@{/minhas-listas}"
+            th:onclick="return EditaLista.exibeConfirmacaoDeCancelamento()">Cancelar</a>
+          <button class="button rz-button is-rounded" type="submit">Salvar</button>
+        </div>
+      </div>
       </div>
     </section>
   </section>

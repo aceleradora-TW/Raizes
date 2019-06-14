@@ -2,6 +2,8 @@ package com.thoughtworks.aceleradora.dominio;
 
 import javax.persistence.*;
 
+import java.util.Objects;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "produtores")
@@ -58,6 +60,32 @@ public class Produtor {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public String toString() {
+        return "Produtor{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", possuiTransporte=" + possuiTransporte +
+                ", endereco=" + endereco +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Produtor produtor = (Produtor) o;
+        return possuiTransporte == produtor.possuiTransporte &&
+                Objects.equals(id, produtor.id) &&
+                Objects.equals(nome, produtor.nome) &&
+                Objects.equals(endereco, produtor.endereco);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, possuiTransporte, endereco);
     }
 }
 

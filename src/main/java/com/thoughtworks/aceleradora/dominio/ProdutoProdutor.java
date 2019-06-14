@@ -4,6 +4,7 @@ package com.thoughtworks.aceleradora.dominio;
 import javax.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -37,7 +38,6 @@ public class ProdutoProdutor{
     public ProdutoProdutor(double quantidadeEstoque, BigDecimal preco,
                            Produto produto, Produtor produtor,
                            TipoDeCultivo tipoDeCultivo) {
-        super();
         this.quantidadeEstoque = quantidadeEstoque;
         this.preco = preco;
         this.produto = produto;
@@ -96,5 +96,23 @@ public class ProdutoProdutor{
 
     public void setProdutor(Produtor produtor) {
         this.produtor = produtor;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProdutoProdutor that = (ProdutoProdutor) o;
+        return Double.compare(that.quantidadeEstoque, quantidadeEstoque) == 0 &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(preco, that.preco) &&
+                Objects.equals(produto, that.produto) &&
+                Objects.equals(produtor, that.produtor) &&
+                tipoDeCultivo == that.tipoDeCultivo;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, quantidadeEstoque, preco, produto, produtor, tipoDeCultivo);
     }
 }

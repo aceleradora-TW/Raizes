@@ -2,6 +2,8 @@ package com.thoughtworks.aceleradora.dominio;
 
 import javax.persistence.*;
 
+import java.util.Objects;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "enderecos")
@@ -70,5 +72,23 @@ public class Endereco {
 
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Endereco endereco = (Endereco) o;
+        return numero == endereco.numero &&
+                Objects.equals(id, endereco.id) &&
+                Objects.equals(rua, endereco.rua) &&
+                Objects.equals(complemento, endereco.complemento) &&
+                Objects.equals(bairro, endereco.bairro) &&
+                Objects.equals(cidade, endereco.cidade);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, rua, numero, complemento, bairro, cidade);
     }
 }

@@ -6,26 +6,19 @@ import com.thoughtworks.aceleradora.dominio.Produtor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ProdutoresDeProdutos {
 
     private Produto produto;
-    private List<Produtor> produtores;
-    private List<ProdutoProdutor> produtosProdutores;
+    private List<Produtor> produtores = new ArrayList<>();
+    private List<ProdutoProdutor> produtoProdutores = new ArrayList<>();
 
-    public ProdutoresDeProdutos(Produto produto, Produtor produtor) {
-        produtores = new ArrayList<>();
+    public ProdutoresDeProdutos(Produto produto, List<ProdutoProdutor> produtoProdutores) {
         this.produto = produto;
-        produtores.add(produtor);
+        this.produtoProdutores = produtoProdutores;
     }
 
-
-    public ProdutoresDeProdutos(Produto produto, Produtor produtor, ProdutoProdutor produtoProdutor) {
-        produtores = new ArrayList<>();
-        produtosProdutores = new ArrayList<>();
-        this.produto = produto;
-        produtores.add(produtor);
-    }
 
     public Produto getProduto() {
         return produto;
@@ -40,11 +33,11 @@ public class ProdutoresDeProdutos {
     }
 
     public List<ProdutoProdutor> getProdutosProdutores() {
-        return produtosProdutores;
+        return produtoProdutores;
     }
 
     public void setProdutosProdutores(List<ProdutoProdutor> produtosProdutores) {
-        this.produtosProdutores = produtosProdutores;
+        this.produtoProdutores = produtosProdutores;
     }
 
     public List<Produtor> getProdutores() {
@@ -53,5 +46,29 @@ public class ProdutoresDeProdutos {
 
     public boolean adicionaProdutor(Produtor produtor) {
         return produtores.add(produtor);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProdutoresDeProdutos that = (ProdutoresDeProdutos) o;
+        return Objects.equals(produto, that.produto) &&
+                Objects.equals(produtores, that.produtores) &&
+                Objects.equals(produtoProdutores, that.produtoProdutores);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(produto, produtores, produtoProdutores);
+    }
+
+    @Override
+    public String toString() {
+        return "ProdutoresDeProdutos{" +
+                "produto=" + produto +
+                ", produtores=" + produtores +
+                ", produtoProdutores=" + produtoProdutores +
+                '}';
     }
 }

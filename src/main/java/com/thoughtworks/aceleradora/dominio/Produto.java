@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
+import java.util.Objects;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "produtos")
@@ -70,5 +72,20 @@ public class Produto {
         return nome;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Produto produto = (Produto) o;
+        return Objects.equals(id, produto.id) &&
+                Objects.equals(nome, produto.nome) &&
+                Objects.equals(categoria, produto.categoria) &&
+                unidadeMedida == produto.unidadeMedida;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, categoria, unidadeMedida);
+    }
 }
 
