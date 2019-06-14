@@ -36,6 +36,7 @@ public class Produtor {
 
     @OneToOne
     @JoinColumn(name = "id_usuario")
+    @JsonIgnoreProperties("usuarios")
     private Usuario usuario;
 
     public Produtor() {
