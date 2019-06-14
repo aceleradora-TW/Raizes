@@ -14,31 +14,31 @@
             <span th:text="${mensagemSalvoComSucesso}"></span>
           </div>
           <div class="box">
-            <form id="formCadastraProduto" th:action="@{/produtos/cadastro}" method="post">
+            <form id="formCadastraProduto" th:object="${produtoProdutor}" th:action="@{/produtos/cadastro}" method="post">
+              <input type="hidden" th:field="*{produtor}" th:value="${produtoProdutor.produtor.id}">
               <div class="field">
-                <label class="label">Nome do Produto</label>
+                <label class="label">Produto</label>
                 <div class="control">
-                  <input class="input" name="nome" type="text" placeholder="Ex.: Maçã" />
-                </div>
-                <div class="help-block"></div>
-              </div>
-              <div class="field">
-                <label class="label">Categoria</label>
-                <div class="select">
-                  <select form="formCadastraProduto" id="categorias" name="categoria">
-                    <option th:each="categoria: ${categorias}" th:text="${categoria.nome}" th:value="${categoria.id}">
-                    </option>
-                  </select>
+                  <div class="select">
+                    <select th:field="*{produto}">
+                      <option th:each="produto : ${produtos}" th:value="${produto.id}" th:text="${produto.nome}"></option>
+                    </select>
+                  </div>
                 </div>
                 <div class="help-block"></div>
               </div>
               <div class="field">
                 <label class="label">Tipo de Cultivo</label>
                 <div class="select">
-                  <select form="formCadastraProduto" id="cultivos" name="cultivo">
-                    <option th:each="cultivo: ${cultivos}" th:text="${cultivo.codigo}"></option>
+                  <select th:field="*{tipoDeCultivo}">
+                    <option th:each="cultivo : ${cultivos}" th:text="${cultivo.codigo}" th:value="${cultivo.name()}"></option>
                   </select>
                 </div>
+                <div class="help-block"></div>
+              </div>
+              <div class="field">
+                <label class="label">Valor</label>
+                <input th:field="*{preco}">
                 <div class="help-block"></div>
               </div>
               <div class="field">
