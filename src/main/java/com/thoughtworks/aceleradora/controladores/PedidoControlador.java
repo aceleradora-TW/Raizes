@@ -62,11 +62,11 @@ public class PedidoControlador {
 
             return "pedido/visualizar-pedido";
         } catch (ListaNaoEncontradaExcecao e) {
-            return "redirect:/pedidos";
+            return "redirect:/pedidos/{id}/realizar-pedido";
         }
     }
 
-    @GetMapping("/realizar-pedido")
+    @GetMapping("{id}/realizar-pedido")
     public String realizarPedidos(Breadcrumb breadcrumb) {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb).pagina("realizar pedido", "/pedido/pedidos");
 
