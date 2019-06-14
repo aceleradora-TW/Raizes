@@ -36,10 +36,11 @@ public class Produtor {
     public Produtor() {
     }
 
-    public Produtor(String nome, List<Produto> produtos, boolean possuiTransporte) {
+    public Produtor(String nome, List<Produto> produtos, boolean possuiTransporte, String contato) {
         this.nome = nome;
         this.produtos = produtos;
         this.possuiTransporte = possuiTransporte;
+        this.contato = contato;
 
     }
 
@@ -81,6 +82,14 @@ public class Produtor {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public String getContato() {
+        return contato;
+    }
+
+    public void setContato(String contato) {
+        this.contato = contato;
     }
 }
 

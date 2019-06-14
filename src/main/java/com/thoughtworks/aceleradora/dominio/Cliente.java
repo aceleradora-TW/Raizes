@@ -37,6 +37,14 @@ public class Cliente {
         this.nome = nome;
     }
 
+    public String getContato() {
+        return contato;
+    }
+
+    public void setContato(String contato) {
+        this.contato = contato;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
