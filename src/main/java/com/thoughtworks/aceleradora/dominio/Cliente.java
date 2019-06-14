@@ -15,18 +15,22 @@ public class Cliente {
     private String nome;
     private String contato;
 
-    @OneToOne
-    @JoinColumn(name = "id_usuarios")
-    private Usuario usuario;
-
     @OneToMany(mappedBy="cliente")
     private List<MinhaLista> minhasListas;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuarios")
+    private Usuario usuario;
 
     public Cliente() {
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -45,6 +49,14 @@ public class Cliente {
         this.contato = contato;
     }
 
+    public List<MinhaLista> getMinhasListas() {
+        return minhasListas;
+    }
+
+    public void setMinhasListas(List<MinhaLista> minhasListas) {
+        this.minhasListas = minhasListas;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -58,7 +70,10 @@ public class Cliente {
         return "Cliente{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
+                ", contato='" + contato + '\'' +
+                ", minhasListas=" + minhasListas +
                 ", usuario=" + usuario +
                 '}';
     }
+
 }
