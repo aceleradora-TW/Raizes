@@ -30,17 +30,24 @@ public class PedidoControlador {
     private EnderecoServico enderecoServico;
     private ProdutoServico produtoServico;
     private ProdutorServico produtorServico;
+    private ProdutoProdutorServico produtoProdutorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
             "/");
 
     @Autowired
-    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico, EnderecoServico enderecoServico, ProdutoServico produtoServico, ProdutorServico produtorServico) {
+    public PedidoControlador(MinhaListaServico minhaListaServico,
+                             PedidoServico pedidoServico,
+                             EnderecoServico enderecoServico,
+                             ProdutoServico produtoServico,
+                             ProdutorServico produtorServico,
+                             ProdutoProdutorServico produtoProdutorServico) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
         this.enderecoServico = enderecoServico;
         this.produtoServico = produtoServico;
         this.produtorServico = produtorServico;
+        this.produtoProdutorServico = produtoProdutorServico;
     }
 
 
@@ -71,14 +78,22 @@ public class PedidoControlador {
         }
     }
 
+
     @GetMapping("/{listaId}/realizar-pedido")
-    public String realizarPedidos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo) {
+    public String listaProdutoresDeProdutos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo) {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("realizar pedido", "/pedido/pedidos");
 
-        modelo.addAttribute("produtoProdutores" , pedidoServico.pegaListaDeProdutosPorProdutores(listaId));
+//        List<ProdutoProdutor> produtosProdutores = produtoProdutorServico.pegarTodosProdutosProdutores();
+        List<ProdutoProdutor> produtosProdutores = pedidoServico.pegaListaDeProdutosPorProdutores(listaId);
+        List<ProdutoresDeProdutos> produtoresDeProdutos = produtoProdutorServico.organizarProdutoresDeProdutos(produtosProdutores);
+
+
+        modelo.addAttribute("produtoProdutores" , produtosProdutores);
         modelo.addAttribute("pedido", new Pedido());
         modelo.addAttribute("listaNome", minhaListaServico.encontraUm(listaId).getNome());
+        modelo.addAttribute("listaProdutoresDeProdutos", produtoresDeProdutos);
+
         return "pedido/realizar-pedido";
     }
 

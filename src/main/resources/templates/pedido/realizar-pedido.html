@@ -3,58 +3,81 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+  <meta charset="UTF-8">
+  <title></title>
 </head>
 
 <body>
-<section class="section">
+  <section class="section">
     <section class="container">
-        <div class="columns">
-            <div class="column is-12">
-                <form class="rz-form" id="formRealizarPedido" th:action="@{/pedidos/{id}/realizar-pedido}"
-                      method="post">
-                      <h1 class="title centraliza-texto" th:text="${listaNome}"></h1>
-                    <div th:each="produtoProdutor : ${produtoProdutores}">
-                        <h3 th:text="${produtoProdutor.produto.nome}"></h3>
-                        <div class="box">
-                            <div class="flex equal-sizing flex-row">
-                                <input type="radio" class="radio" name="produtores" th:value="${produtoProdutor.produtor.nome}"
-                                       th:id="${produtoProdutor.produtor.id}" th:text="${produtoProdutor.produtor.nome}">
-<!--                                <span th:text="${produtoProdutor.produtor.nome}"></span>-->
-                                <span><i class="fas fa-map-marker-alt"></i></span>
-                                <span th:text="${produtoProdutor.produtor.endereco.cidade.nome}"></span>,
-                                <span th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
-                                <i class="fas fa-truck"></i>
-                            </div>
-                            <div>
-                                <div class="flex equal-sizing flex-row">
-                                    <div class="flex flex-row ">
-                                        <i class="fas fa-spa "></i>
-                                        <span th:text="${produtoProdutor.tipoDeCultivo.codigo}"></span>
-                                    </div>
-                                    <div class="flex flex-row ">
-                                        <span>Valor: R$</span>
-                                        <span th:text="${produtoProdutor.preco}"></span>
-                                    </div>
-                                    <label class="label">Quantidade:
-                                        <input size="5" type="text" placeholder="Ex: 4" name="quantidade">
-                                    </label>
-                                    <span>Total: R$ 0,00</span>
-                                </div>
-                            </div>
+      <div class="columns">
+        <div class="column is-12">
+          <form class="rz-form" id="formRealizarPedido" th:action="@{/pedidos/{id}/realizar-pedido}" method="post">
+            <h1 class="title centraliza-texto" th:text="${listaNome}"></h1>
+
+            <div th:each="produtoresDeProdutos : ${listaProdutoresDeProdutos}">
+              <h3 th:text="${produtoresDeProdutos.produto.nome}"></h3>
+              <div class="box">
+                <div th:each="produtor : ${produtoresDeProdutos.produtores}">
+                  <div class="flex equal-sizing flex-row">
+                    <input th:type="radio" class="radio rz-radio" th:value="${produtor.nome}" th:id="${produtor.id}"
+                      th:text="${produtor.nome}">
+                    <span><i class="fas fa-map-marker-alt"></i></span>
+                    <span th:text="${produtor.endereco.cidade.nome}"></span>,
+                    <span th:text="${produtor.endereco.cidade.estado.uf}"></span>
+                    <i class="fas fa-truck"></i>
+
+                    <div th:each="produtosProdutores : ${produtoresDeProdutos.produtosProdutores}">
+                    <span th:text="${produtosProdutores.tipoDeCultivo}"></span>
+
+                  </div> <!-- FECHA A LINHA-->
+                </div> <!-- FECHA o FROEACH PRODUTOR-->
+
+                <div>
+                  <div class="flex equal-sizing flex-row">
+                    <div class="flex flex-row ">
+                      <i class="fas fa-spa "></i>
+
+                      <div th:each="produtosProdutores : ${produtoresDeProdutos.produtosProdutores}">
+                        <span th:text="${produtosProdutores.tipoDeCultivo}"></span>
+                        <div class="flex flex-row ">
+                          <span>Valor: R$</span>
+                          <span th:text="${produtosProdutores.preco}"></span>
                         </div>
+                        <label class="label">Quantidade:
+                          <input size="5" type="text" placeholder="Ex: 4" name="quantidade">
+                        </label>
+                        <span>Total: R$ 0,00</span>
+                      </div>
+
+                      <!-- <div th:each="produtoProdutor : ${produtoProdutores}">
+                        <span th:text="${produtoProdutor.tipoDeCultivo}"></span>
+                        <div class="flex flex-row ">
+                          <span>Valor: R$</span>
+                          <span th:text="${produtoProdutor.preco}"></span>
+                        </div>
+                      </div>  FECHA O FOREACH PRODUTOPRODUTOR
+                      <label class="label">Quantidade:
+                        <input size="5" type="text" placeholder="Ex: 4" name="quantidade">
+                      </label>
+                      <span>Total: R$ 0,00</span> -->
                     </div>
-                </form>
-                <div class="rz-box-footer flex space-between">
-                  <a class="button rz-button is-rounded" th:href="@{/minhas-listas}"
-                     th:onclick="return EditaLista.exibeConfirmacaoDeCancelamento()">Cancelar</a>
-                  <button class="button rz-button is-rounded" type="submit">Salvar</button>
-              </div>
+                  </div>
+                </div> <!-- FECHA A LINHA-->
+                <!-- </div> FECHA FOREACH PRODUTOR -->
+              </div> <!-- FECHA BOX-->
             </div>
+            <!--            </div>-->
+          </form>
+          <div class="rz-box-footer flex space-between">
+            <a class="button rz-button is-rounded" th:href="@{/minhas-listas}"
+              th:onclick="return EditaLista.exibeConfirmacaoDeCancelamento()">Cancelar</a>
+            <button class="button rz-button is-rounded" type="submit">Salvar</button>
+          </div>
         </div>
+      </div>
     </section>
-</section>
+  </section>
 </body>
 
 </html>

@@ -20,6 +20,10 @@ public class ProdutoProdutorServico {
         this.produtoProdutorRepositorio = produtoProdutorRepositorio;
     }
 
+    public List<ProdutoProdutor> pegarTodosProdutosProdutores (){
+        return produtoProdutorRepositorio.findAll();
+    }
+
     public List<ProdutoresDeProdutos> organizarProdutoresDeProdutos(List<ProdutoProdutor> produtoProdutores) {
         Map<Produto, ProdutoresDeProdutos> mapaDeProdutoresDeProdutos = new HashMap<>();
         for (ProdutoProdutor produtoProdutor : produtoProdutores) {
@@ -37,5 +41,6 @@ public class ProdutoProdutorServico {
         }
         return new ArrayList<>(mapaDeProdutoresDeProdutos.values());
     }
+
 
 }
