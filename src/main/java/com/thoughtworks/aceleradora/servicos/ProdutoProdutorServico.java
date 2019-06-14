@@ -23,7 +23,6 @@ public class ProdutoProdutorServico {
         return repositorio.save(produtoProdutor);
     }
 
-    public ProdutoProdutor encontraUm(Long id){
-        return repositorio.findById(id).get();
-    }
+    public ProdutoProdutor encontraUm(Long id){ return repositorio.findById(id).get(); }
+
 }

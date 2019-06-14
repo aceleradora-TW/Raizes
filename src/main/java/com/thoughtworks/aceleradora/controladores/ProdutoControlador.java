@@ -4,6 +4,7 @@ import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
+import com.thoughtworks.aceleradora.servicos.ProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -21,14 +23,17 @@ public class ProdutoControlador {
 
     private ProdutoServico produtoServico;
     private CategoriaServico categoriaServico;
+    private ProdutoProdutorServico produtoProdutorServico;
+    private ProdutorServico produtorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Início", "/");
 
     @Autowired
-    public ProdutoControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico) {
+    public ProdutoControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico, ProdutoProdutorServico produtoProdutorServico) {
         this.produtoServico = produtoServico;
         this.categoriaServico = categoriaServico;
+        this.produtoProdutorServico = produtoProdutorServico;
     }
 
     @GetMapping("/cadastro")
@@ -46,23 +51,22 @@ public class ProdutoControlador {
     }
 
     @PostMapping("/cadastro")
-    public String salvarProduto (Produto produto, Model modelo, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvarProduto (ProdutoProdutor produtoProdutor,Produtor produtor, Produto produto, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Produtos", "/produtos")
                 .pagina("Cadastro", "/produtos/cadastro");
         try {
-            produto.setNome(produto.getNome().trim());
-            produtoServico.salvar(produto);
 
-            String mensagem = "Seu produto foi cadastrado com sucesso!";
-            modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
+            produtoProdutorServico.salvar(produtoProdutor);
+
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Produto criado com sucesso!");
         } catch (ProdutoNaoSalvoExcecao e){
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
             return "redirect:/produtos/cadastro";
         }
 
-        return "redirect:/produtos/cadastro";
+        return "redirect:/produtos/";
     }
 }
