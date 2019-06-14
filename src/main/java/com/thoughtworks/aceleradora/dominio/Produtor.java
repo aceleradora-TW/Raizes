@@ -3,7 +3,6 @@ package com.thoughtworks.aceleradora.dominio;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +17,7 @@ public class Produtor {
     private Long id;
     private String nome;
     private boolean possuiTransporte;
+    private String contato;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(

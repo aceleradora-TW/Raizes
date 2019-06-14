@@ -12,8 +12,8 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
     private String nome;
+    private String contato;
 
     @OneToOne
     @JoinColumn(name = "id_usuarios")
