@@ -46,6 +46,7 @@ public class ProdutoControlador {
         modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
         modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
         modelo.addAttribute("produtos", produtoServico.pegarTodos());
+        modelo.addAttribute("medida", Arrays.asList(UnidadeMedida.values()))
 
         return "produto/cadastro";
     }
@@ -57,6 +58,11 @@ public class ProdutoControlador {
                 .pagina("Produtos", "/produtos")
                 .pagina("Cadastro", "/produtos/cadastro");
         try {
+//            produtoProdutor.setProdutor(produtorServico.encontraUm( 1L));
+//            produtoProdutor.setProduto(produtoServico.encontraUmNome(produto.getNome()).get());
+//            produtoProdutor.setPreco(produtoProdutor.getPreco());
+//            produtoProdutor.setQuantidadeEstoque(produtoProdutor.getQuantidadeEstoque());
+//            produtoProdutor.setTipoDeCultivo(produtoProdutor.getTipoDeCultivo());
 
             produtoProdutorServico.salvar(produtoProdutor);
 

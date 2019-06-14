@@ -38,26 +38,30 @@
                 </div>
               </div>
 
-              <div class="rz-box-body">
-                <label class="label">Quantidade disponível*</label>
-                <div class="control">
-                  <input class="input" name="quantidade" type="number" placeholder="Ex.: 15" />
+              <div class="flex flex-row">
+
+                <div class="rz-box-body">
+                  <label class="label">Quantidade disponível*</label>
+                  <div class="control">
+                    <input class="input" name="quantidade" type="number" placeholder="Ex.: 15" />
+                  </div>
                 </div>
-              </div>
-              <div class="rz-box-body">
-                <label class="label">Valor do produto*</label>
-                <div class="control">
-                  <input class="input" name="valor" type="number" placeholder="Ex.: R$ 4,00" />
+                <div class="rz-box-body">
+                  <label class="label">Valor do produto*</label>
+                  <div class="control">
+                    <input class="input" name="valor" type="number" placeholder="Ex.: R$ 4,00" />
+                  </div>
                 </div>
-                <span>unididade de medida</span>
+                <!-- <div><span th:each="medida: ${medidas}" th:text="${medida.codigo}"></span></div> -->
+                
+
               </div>
 
-
-                <div class="rz-box-footer flex space-between">
-                  <button class="button rz-button is-rounded" 
-                    th:onclick="return Produtos.exibeConfirmacaoDeCancelamento('/produtos')">Cancelar</button>
-                  <button class="button rz-button is-rounded" type="submit">Salvar</button>
-                </div>
+              <div class="rz-box-footer flex space-between">
+                <button class="button rz-button is-rounded"
+                  th:onclick="return Produtos.exibeConfirmacaoDeCancelamento('/produtos')">Cancelar</button>
+                <button class="button rz-button is-rounded" type="submit">Salvar</button>
+              </div>
               <div class="help-block"></div>
             </form>
 
