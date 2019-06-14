@@ -2,7 +2,6 @@ package com.thoughtworks.aceleradora.dominio;
 
 
 import javax.persistence.*;
-
 import java.math.BigDecimal;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -90,4 +89,5 @@ public class ProdutoProdutor{
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
+
 }

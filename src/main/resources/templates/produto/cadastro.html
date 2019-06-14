@@ -17,54 +17,53 @@
       <div class="columns">
         <div class="column is-12">
           <div class="rz-box box">
-
-            <form class="rz-form" id="formCadastraProduto" th:action="@{/produtos/cadastro}" method="post">
+            <form id="formCadastraProduto" th:object="${produtoProdutor}" th:action="@{/produtos/cadastro}"
+              method="post">
               <div class="rz-box-body">
-                <label class="label">Escolha o produto*</label>
-                <div class="field">
+                <input type="hidden" th:field="*{produtor}" th:value="${produtoProdutor.produtor.id}">
+                <div class="rz-box-body">
+                  <label class="label">Escolha o produto*</label>
                   <div class="select">
-                    <select form="formCadastraProduto" id="produtos" name="produto">
-                      <option th:each="produto: ${produtos}" th:text="${produto.nome}"></option>
+                    <select th:field="*{produto}">
+                      <option th:each="produto : ${produtos}" th:value="${produto.id}" th:text="${produto.nome}">
+                      </option>
                     </select>
                   </div>
                 </div>
-              </div>
-              <div class="rz-box-body">
-                <label class="label">Tipo de Cultivo*</label>
-                <div class="select">
-                  <select form="formCadastraProduto" id="cultivos" name="cultivo">
-                    <option th:each="cultivo: ${cultivos}" th:text="${cultivo.codigo}"></option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="flex flex-row">
-
                 <div class="rz-box-body">
-                  <label class="label">Quantidade disponível*</label>
-                  <div class="control">
-                    <input class="input" name="quantidade" type="number" placeholder="Ex.: 15" />
+                  <label class="label">Tipo de Cultivo*</label>
+                  <div class="select">
+                    <select th:field="*{tipoDeCultivo}">
+                      <option th:each="cultivo : ${cultivos}" th:text="${cultivo.codigo}" th:value="${cultivo.name()}">
+                      </option>
+                    </select>
                   </div>
                 </div>
-                <div class="rz-box-body">
-                  <label class="label">Valor do produto*</label>
-                  <div class="control">
-                    <input class="input" name="valor" type="number" placeholder="Ex.: R$ 4,00" />
+                <div class="flex flex-row">
+                  <div class="rz-box-body">
+                    <label class="label">Quantidade disponível*</label>
+                    <div class="control">
+                      <input class="input" name="quantidadeEstoque" type="number" placeholder="Ex.: 15">
+                    </div>
+                  </div>
+                  <div class="rz-box-body">
+                    <label class="label">Valor do produto*</label>
+                    <div class="control">
+                      <input class="input" th:field="*{preco}" type="number" placeholder="Ex.: 4.00">
+                    </div>
+<!--                    <div th:field="${produto}">-->
+<!--                      <span th:text="${produto}"></span>-->
+<!--                    </div>-->
+                    
                   </div>
                 </div>
-                <!-- <div><span th:each="medida: ${medidas}" th:text="${medida.codigo}"></span></div> -->
-                
-
-              </div>
-
-              <div class="rz-box-footer flex space-between">
-                <button class="button rz-button is-rounded"
-                  th:onclick="return Produtos.exibeConfirmacaoDeCancelamento('/produtos')">Cancelar</button>
-                <button class="button rz-button is-rounded" type="submit">Salvar</button>
-              </div>
-              <div class="help-block"></div>
+                <div class="rz-box-footer flex space-between">
+                  <button class="button rz-button is-rounded"
+                    th:onclick="return Produtos.exibeConfirmacaoDeCancelamento('/produtos')">Cancelar</button>
+                  <button class="button rz-button is-rounded flex-end" type="submit">Salvar</button>
+                </div>
+                <div class="help-block"></div>
             </form>
-
           </div>
         </div>
       </div>
