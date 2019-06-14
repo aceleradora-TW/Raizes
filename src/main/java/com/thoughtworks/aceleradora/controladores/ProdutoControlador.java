@@ -86,20 +86,12 @@ public class ProdutoControlador {
     }
 
     @PostMapping("/{id}/editar")
-    public String salvarProduto(ProdutoProdutor produtoProdutor, Breadcrumb breadcrumb, BindingResult resultadoValidacao, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvarProduto(ProdutoProdutor produtoProdutor, Breadcrumb breadcrumb, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Editar Produto", "/produtos/editar-produto");
 
-        if (resultadoValidacao.hasErrors()) {
-            modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
-            modelo.addAttribute("produtoProdutor", produtoProdutorServico.encontraUm(id));
-
-            return "redirect:/produto/cadastro";
-        }
         try {
-            produtoProdutor.setQuantidadeEstoque(produtoProdutor.getQuantidadeEstoque());
-            produtoProdutor.setPreco(produtoProdutor.getPreco());
             produtoProdutorServico.salvar(produtoProdutor);
 
             String mensagem = "Seu produto foi cadastrado com sucesso!";
