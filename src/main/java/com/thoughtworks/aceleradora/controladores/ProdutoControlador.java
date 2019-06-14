@@ -2,6 +2,7 @@ package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.Produto;
+import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.dominio.TipoDeCultivo;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
@@ -10,6 +11,7 @@ import com.thoughtworks.aceleradora.servicos.ProdutoServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -78,19 +80,36 @@ public class ProdutoControlador {
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Editar Produto", "/produtos/editar-produto");
 
-        modelo.addAttribute("produto", produtoProdutorServico.encontraUm(id));
-        modelo.addAttribute("tipo", produtoProdutorServico.pegaTipoDeProduto(id));
+        modelo.addAttribute("produtoProdutor", produtoProdutorServico.encontraUm(id));
+
         return "produto/editar";
     }
 
     @PostMapping("/{id}/editar")
-    public String salvarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id) {
+    public String salvarProduto(ProdutoProdutor produtoProdutor, Breadcrumb breadcrumb, BindingResult resultadoValidacao, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Editar Produto", "/produtos/editar-produto");
 
-        modelo.addAttribute("produto", produtoServico.encontraUm(id));
+        if (resultadoValidacao.hasErrors()) {
+            modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
+            modelo.addAttribute("produtoProdutor", produtoProdutorServico.encontraUm(id));
 
-        return "produto/editar";
+            return "redirect:/produto/cadastro";
+        }
+        try {
+            produtoProdutor.setQuantidadeEstoque(produtoProdutor.getQuantidadeEstoque());
+            produtoProdutor.setPreco(produtoProdutor.getPreco());
+            produtoProdutorServico.salvar(produtoProdutor);
+
+            String mensagem = "Seu produto foi cadastrado com sucesso!";
+            modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
+        } catch (ProdutoNaoSalvoExcecao e){
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
+
+            return "redirect:/produtos/cadastro";
+        }
+
+        return "redirect:/produto/cadastro";
     }
 }

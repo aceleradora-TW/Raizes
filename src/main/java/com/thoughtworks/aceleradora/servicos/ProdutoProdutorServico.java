@@ -4,8 +4,6 @@ import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class ProdutoProdutorServico {
     private ProdutoProdutorRepositorio repositorio;
@@ -18,7 +16,13 @@ public class ProdutoProdutorServico {
        return repositorio.findById(id).get().getTipoDeCultivo().getCodigo();
     }
 
-    public Optional<ProdutoProdutor> encontraUm(Long id){
-        return repositorio.findById(id);
+    public ProdutoProdutor encontraUm(Long id) {
+        return repositorio.findById(id).get();
     }
+
+    public ProdutoProdutor salvar(ProdutoProdutor produtoProdutor) {
+        return repositorio.save(produtoProdutor);
+    }
+
+
 }

@@ -10,20 +10,28 @@
         <h1 class="title">Editar Produto</h1>
         <div class="rz-box-body box">
             <div class="column is-6 is-offset-3">
-                    <form id="formEditarProduto" th:action="@{/produtos/{id}/editar(id=${produto.id})}" method="post">
+                    <form id="formEditarProduto" th:action="@{/produtos/{id}/editar(id=${produtoProdutor.id})}" method="post">
                         <div class="field">
                             <label>Produto:</label>
-                            <span th:text="${produto.nome}"></span>
+                            <span th:text="${produtoProdutor.produto.nome}"></span>
                         </div>
                         <div class="field">
                             <label>Tipo:</label>
-                            <span class="title centraliza-texto" th:text="${tipo}"></span>
+                            <span th:text="${produtoProdutor.tipoDeCultivo.codigo}"></span>
+                        </div>
+                        <div class="field">
+                            <label>Valor:</label>
+                            <input th:field="${produtoProdutor.preco}" th:value="${produtoProdutor.preco}">
+                        </div>
+                        <div class="field">
+                            <label>Quantidade:</label>
+                            <input type="number" th:field="*{produtoProdutor.quantidadeEstoque}" th:value="${produtoProdutor.quantidadeEstoque}">
                         </div>
                         <div class="field">
                             <div class="control flex end">
-                                <button class="button is-primary " type="submit">Adicionar produto ao estoque</button>
+                                <button class="button is-primary" type="submit">Adicionar produto ao estoque</button>
                             </div>
-                            <button class="button is-primary " type="submit">Voltar</button>
+                            <button class="button is-primary">Voltar</button>
                         </div>
                     </form>
                 </div>
