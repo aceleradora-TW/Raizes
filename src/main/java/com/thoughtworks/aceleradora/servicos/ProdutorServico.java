@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 public class ProdutorServico {
     private ProdutorRepositorio repositorio;
 
+    public ProdutorServico(ProdutorRepositorio repositorio) {
+        this.repositorio = repositorio;
+    }
+
     public Produtor encontraUm(Long id){
         return repositorio.findById(id).get();
     }

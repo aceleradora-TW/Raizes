@@ -11,7 +11,6 @@ import com.thoughtworks.aceleradora.servicos.ProdutoServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,7 +54,7 @@ public class ProdutoControlador {
     }
 
     @PostMapping("/cadastro")
-    public String salvarProduto (Produto produto, Model modelo, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvarProduto(Produto produto, Model modelo, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Produtos", "/produtos")
@@ -66,7 +65,7 @@ public class ProdutoControlador {
 
             String mensagem = "Seu produto foi cadastrado com sucesso!";
             modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
-        } catch (ProdutoNaoSalvoExcecao e){
+        } catch (ProdutoNaoSalvoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
             return "redirect:/produtos/cadastro";
@@ -74,34 +73,40 @@ public class ProdutoControlador {
 
         return "redirect:/produtos/cadastro";
     }
-    @GetMapping("/{id}/editar")
-    public String editarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id) {
-        breadcrumb
-                .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Editar Produto", "/produtos/editar-produto");
 
-        modelo.addAttribute("produtoProdutor", produtoProdutorServico.encontraUm(id));
-
-        return "produto/editar";
-    }
-
-    @PostMapping("/{id}/editar")
-    public String salvarProduto(ProdutoProdutor produtoProdutor, Breadcrumb breadcrumb, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos) {
-        breadcrumb
-                .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Editar Produto", "/produtos/editar-produto");
-
-        try {
-            produtoProdutorServico.salvar(produtoProdutor);
-
-            String mensagem = "Seu produto foi cadastrado com sucesso!";
-            modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
-        } catch (ProdutoNaoSalvoExcecao e){
-            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
-
-            return "redirect:/produtos/cadastro";
-        }
-
-        return "redirect:/produto/cadastro";
-    }
+//    @GetMapping("/{id}/editar")
+//    public String editarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id) {
+//        breadcrumb
+//                .aproveitar(partesComunsDoBreadCrumb)
+//                .pagina("Editar Produto", "/produtos/editar-produto");
+//
+//
+//        ProdutoProdutor produtoProdutor = produtoProdutorServico.encontraUm(id);
+//
+//        modelo.addAttribute("produtoProdutor", produtoProdutor);
+//
+//        return "produto/editar";
+//    }
+//
+//    @PostMapping("/{id}/editar")
+//    public String salvarProduto(
+//            ProdutoProdutor produtoProdutor, Breadcrumb breadcrumb, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos
+//    ) {
+//
+//        try {
+//
+//            System.out.println(">>>>>>>>>>>> " + produtoProdutor.getTipoDeCultivo());
+//
+//            produtoProdutorServico.salvar(produtoProdutor);
+//
+//            String mensagem = "Seu produto foi cadastrado com sucesso!";
+//            modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
+//        } catch (ProdutoNaoSalvoExcecao e) {
+//            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
+//
+//            return "redirect:/produto/editar";
+//        }
+//
+//        return "redirect:/produto/editar";
+//    }
 }
