@@ -1,8 +1,8 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
