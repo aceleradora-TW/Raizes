@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Raízes</title>
 </head>
+
 <body>
     <section class="section">
         <section class="container">
@@ -20,7 +22,12 @@
                                     <span>Aldo Produtor</span>
                                 </label>
                                 <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                                <i class="fas fa-truck"></i>
+                                <span class="span-transport" th:if="${false}">
+                                    <i class="fas fa-truck icon-transport-true"> </i>
+                                </span>
+                                <span class="span-transport" th:unless="${false}">
+                                    <i class="fas fa-truck icon-transport-false"></i>
+                                </span>
                             </div>
                             <div>
                                 <div class="flex equal-sizing flex-row">
@@ -38,9 +45,13 @@
                                     <input type="radio" name="answer">
                                     <span>João Severo</span>
                                 </label>
-
                                 <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                                <i class="fas fa-truck"></i>
+                                <span class="span-transport" th:if="${true}">
+                                    <i class="fas fa-truck icon-transport-true"> </i>
+                                </span>
+                                <span class="span-transport" th:unless="${true}">
+                                    <i class="fas fa-truck icon-transport-false"></i>
+                                </span>
                             </div>
                             <div>
                                 <div class="flex equal-sizing flex-row">
@@ -58,9 +69,13 @@
                                     <input type="radio" name="answer">
                                     <span>Maria Silva</span>
                                 </label>
-
                                 <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                                <i class="fas fa-truck"></i>
+                                <span class="span-transport" th:if="${true}">
+                                    <i class="fas fa-truck icon-transport-true"> </i>
+                                </span>
+                                <span class="span-transport" th:unless="${true}">
+                                    <i class="fas fa-truck icon-transport-false"></i>
+                                </span>
                             </div>
                             <div>
                                 <div class="flex equal-sizing flex-row">
@@ -78,7 +93,8 @@
                                 <div class="rz-box-footer flex space-between">
                                     <button class="button rz-button is-rounded"
                                         th:onclick="return RealizarPedido.exibeConfirmacaoDeCancelamento('/pedidos')">Cancelar</button>
-                                    <a th:href="@{/pedidos}" class="button rz-button is-rounded" type="submit">Salvar</a>
+                                    <a th:href="@{/pedidos}" class="button rz-button is-rounded"
+                                        type="submit">Salvar</a>
                                 </div>
                             </div>
                         </div>
