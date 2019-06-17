@@ -7,9 +7,6 @@ public enum TipoDeCultivo {
 
     private String codigo;
 
-    TipoDeCultivo() {
-    }
-
     TipoDeCultivo(String codigo) {
         this.codigo = codigo;
     }
