@@ -57,13 +57,13 @@ public class PedidoControlador {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb).pagina("Pedidos", "/pedidos").pagina("Visualizar pedido",
                 "/pedidos");
 
-        try {
-            modelo.addAttribute("pedido", minhaListaServico.encontraUm(id));
+//        try {
+//            modelo.addAttribute("pedido", minhaListaServico.encontraUm(id));
 
             return "pedido/visualizar-pedido";
-        } catch (ListaNaoEncontradaExcecao e) {
-            return "redirect:/pedidos";
-        }
+//        } catch (ListaNaoEncontradaExcecao e) {
+//            return "redirect:/pedidos";
+//        }
     }
 
     @GetMapping("/realizar-pedido")
