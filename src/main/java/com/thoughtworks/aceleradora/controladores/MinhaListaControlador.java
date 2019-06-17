@@ -80,8 +80,9 @@ public class MinhaListaControlador {
     }
 
     @PostMapping("/{id}/excluir")
-    public String removerListaCriada(@PathVariable("id") Long id) {
+    public String removerListaCriada(@PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
         minhaListaServico.removerListaCriada(id);
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Lista excluída com sucesso!");
 
         return "redirect:/minhas-listas";
     }
