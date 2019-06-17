@@ -4,6 +4,7 @@ import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.dominio.TipoDeCultivo;
+import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
@@ -75,14 +76,22 @@ public class ProdutoControlador {
     }
 
     @GetMapping("/{id}/editar")
-    public String editarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id) {
+    public String editarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Editar Produto", "/produtos/editar-produto");
+        try {
+            ProdutoProdutor produtoprodutor = produtoProdutorServico.encontraUm(id);
 
-        modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
-        ProdutoProdutor produtoProdutor = produtoProdutorServico.encontraUm(id);
-        modelo.addAttribute("produtoProdutor", produtoProdutor);
+            modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
+            modelo.addAttribute("produtoProdutor", produtoprodutor);
+
+        } catch (ProdutoNaoEncontradoExcecao e){
+            redirecionamentoDeAtributos.addAttribute("mensagem", e.getMessage());
+
+            return "redirect:/produtos/cadastro";
+
+        }
 
         return "produto/editar";
     }
@@ -90,7 +99,7 @@ public class ProdutoControlador {
     @PostMapping("/{id}/editar")
     public String salvarProduto(ProdutoProdutor produtoProdutor, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
 
-  try {
+        try {
             produtoProdutorServico.salvar(produtoProdutor);
 
             String mensagem = "Seu produto foi alterado com sucesso!";
@@ -98,7 +107,7 @@ public class ProdutoControlador {
         } catch (ProdutoNaoSalvoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
-        return "redirect:/produtos/cadastro";
+            return "redirect:/produtos/cadastro";
         }
 
         return "produto/editar";
