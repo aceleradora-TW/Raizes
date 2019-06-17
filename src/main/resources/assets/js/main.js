@@ -8,14 +8,27 @@ import EditarLista from './pages/editaLista'
 import MinhasListas from './pages/minhaLista'
 import RealizarPedido from './pages/realizaPedido'
 import Pedidos from './pages/pedidos'
+import Pedido from './pages/pedido'
+import Modal from './components/modal'
+import Burger from './components/menu-burger'
+import EditarPedido from './pages/editaPedido'
+
 
 
 $(function () {
     CriarLista.validaFormulario();   
     EditarLista.validaFormulario();
-});
 
-window.MinhasListas = MinhasListas;
-window.EditaLista = EditarLista;
-window.RealizarPedido = RealizarPedido;
-window.Pedidos = Pedidos;
+
+
+    window.MinhasListas = MinhasListas;
+    window.EditarLista = EditarLista;
+    window.RealizarPedido = RealizarPedido;
+    window.Pedidos = Pedidos;
+    window.Pedido = Pedido;
+    window.CriarLista = CriarLista;
+    window.Modal = new Modal();
+    window.EditaPedido = EditarPedido;
+    window.Burger = Burger;
+
+});

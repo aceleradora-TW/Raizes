@@ -105,8 +105,12 @@ public class PedidoControlador {
     }
 
     @PostMapping("/{id}/excluir")
-    public String removerPedido(@PathVariable("id") Long id) {
+    public String removerPedido(@PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
+
+
         pedidoServico.removerPedido(id);
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido excluído com sucesso!");
+
         return "redirect:/pedidos";
     }
 
