@@ -1,6 +1,9 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.Breadcrumb;
+import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
+import com.thoughtworks.aceleradora.dominio.TipoDeCultivo;
+import com.thoughtworks.aceleradora.dominio.UnidadeMedida;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
@@ -9,14 +12,12 @@ import com.thoughtworks.aceleradora.servicos.ProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.rmi.server.UnicastRemoteObject;
 import java.util.Arrays;
 import java.util.function.Consumer;
 

@@ -5,7 +5,7 @@ public enum UnidadeMedida {
     LITRO("L"),
     UNIDADE ("Un"),
     GRAMA ("g"),
-    MILILITRO ("ml");
+    MILILITRO ("mL");
 
     private String codigo;
 
@@ -19,4 +19,5 @@ public enum UnidadeMedida {
     public String getCodigo(){
         return codigo;
     }
+
 }

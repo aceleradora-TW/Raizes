@@ -50,9 +50,8 @@
                     <label class="label">Valor do produto*</label>
                     <div class="control">
                       <input class="input" th:field="*{preco}" type="number" placeholder="Ex.: 4.00">
+                      <span>/Kg</span>
                     </div>
-                    <span th:each="medidas : ${medidas}" th:text="${medidas.getCodigo()}">
-                    </span>
                   </div>
                 </div>
                 <div class="rz-box-footer flex space-between">
