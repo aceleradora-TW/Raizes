@@ -21,7 +21,6 @@ public class Categoria {
     @OneToMany(mappedBy = "categoria")
     @OrderBy(value="nome")
     @JsonIgnore()
-    @JsonIgnoreProperties("categorias")
     private List<Produto> produtos = new ArrayList<>();
 
     public Categoria() {
