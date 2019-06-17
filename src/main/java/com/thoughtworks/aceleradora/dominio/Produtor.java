@@ -1,6 +1,6 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 
@@ -11,6 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "produtores")
 @Access(AccessType.FIELD)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Produtor {
 
     @Id
@@ -26,8 +27,8 @@ public class Produtor {
             joinColumns = {@JoinColumn(name = "id_produtores")},
             inverseJoinColumns = {@JoinColumn(name = "id_produtos")}
     )
-
     @JsonIgnoreProperties("listas")
+
     private List<Produto> produtos = new ArrayList<>();
 
     @ManyToOne
@@ -36,7 +37,6 @@ public class Produtor {
 
     @OneToOne
     @JoinColumn(name = "id_usuario")
-    @JsonIgnoreProperties("usuarios")
     private Usuario usuario;
 
     public Produtor() {

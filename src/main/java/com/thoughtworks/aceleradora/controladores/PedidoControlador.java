@@ -54,8 +54,9 @@ public class PedidoControlador {
     @GetMapping("/{id}")
     public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
 
-        breadcrumb.aproveitar(partesComunsDoBreadCrumb).pagina("Pedidos", "/pedidos").pagina("Visualizar pedido",
-                "/pedidos");
+        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedidos")
+                .pagina("Visualizar pedido", "/pedidos");
 
         try {
             modelo.addAttribute("pedido", minhaListaServico.encontraUm(id));
