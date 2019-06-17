@@ -26,7 +26,7 @@ public class ProdutoProdutorServico {
     }
 
 
-    public Map<Produto, List<ProdutoProdutor>> organizarProdutosProdutoresDaListadoCliente (List<ProdutoProdutor> produtosProdutores, Long idLista){
+    public Map<Produto, List<ProdutoProdutor>> organizarProdutosProdutoresDaListadoCliente (Long idLista){
 
         Optional<MinhaLista> lista = minhaListaRepositorio.findById(idLista);
         List<Produto> produtos = lista.get().getProdutos();

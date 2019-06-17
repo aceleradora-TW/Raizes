@@ -1,76 +1,48 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Raízes</title>
 </head>
+
 <body>
     <section class="section">
         <section class="container">
             <div class="columns">
                 <div class="column is-12">
-                    <form class="rz-form" id="formRealizarPedido" th:action="@{/pedidos/{id}/realizar-pedido}" method="post">
+                    <form class="rz-form" id="formRealizarPedido" th:action="@{/pedidos/{id}/realizar-pedido}"
+                        method="post">
                         <h1 class="title centraliza-texto" th:text="${listaNome}"></h1>
 
-                        <div th:each="produtoresDeProdutos : ${listaProdutoresDeProdutos}">
-                            <h3 th:text="${produtoresDeProdutos.key.nome}"></h3>
-                        <div class="box">
-                            <div class="flex equal-sizing flex-row">
-                                <label class="radio">
-                                    <input type="radio" name="answer">
-                                    <span>Aldo Produtor</span>
-                                </label>
-                                <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                                <i class="fas fa-truck"></i>
-                            </div>
-                            <div>
-                                <div class="flex equal-sizing flex-row">
-                                    <span><i class="fas fa-spa"></i> Orgânico</span>
-                                    <span>Valor: R$ 5,00</span>
-                                    <label class="label">Quantidade: <input size="5" type="text"
-                                            placeholder="Ex: 4"></label>
-                                    <span>Total: R$ 0,00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="flex equal-sizing flex-row">
-                                <label class="radio">
-                                    <input type="radio" name="answer">
-                                    <span>João Severo</span>
-                                </label>
-
-                                <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                                <i class="fas fa-truck"></i>
-                            </div>
-                            <div>
-                                <div class="flex equal-sizing flex-row">
-                                    <span><i class="fas fa-tint"></i> Hidropônico</span>
-                                    <span>Valor: R$ 5,00</span>
-                                    <label class="label">Quantidade: <input size="5" type="text"
-                                            placeholder="Ex: 4"></label>
-                                    <span>Total: R$ 0,00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="flex equal-sizing flex-row">
-                                <label class="radio">
-                                    <input type="radio" name="answer">
-                                    <span>Maria Silva</span>
-                                </label>
-
-                                <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                                <i class="fas fa-truck"></i>
-                            </div>
-                            <div>
-                                <div class="flex equal-sizing flex-row">
-                                    <span><i class="fas fa-sun"></i> Convencional</span>
-                                    <span>Valor: R$ 5,00</span>
-                                    <label class="label">Quantidade: <input size="5" type="text"
-                                            placeholder="Ex: 4"></label>
-                                    <span>Total: R$ 0,00</span>
+                        <div th:each="produto : ${produtoresDeProdutos.keySet()}">
+                            <h3 th:text="${produto.nome}"></h3>
+                            <div th:each="produtoProdutor : ${produtoresDeProdutos.get(produto)}">
+                                <div class="box">
+                                    <div class="flex equal-sizing flex-row">
+                                        <label class="radio">
+                                            <input type="radio" name="answer">
+                                            <span th:text="${produtoProdutor.produtor.nome}"></span>
+                                        </label>
+                                        <span><i class="fas fa-map-marker-alt"></i>
+                                            <span th:text="${produtoProdutor.produtor.endereco.cidade.nome}"></span> -
+                                            <span
+                                                th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
+                                        </span>
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                    <div>
+                                        <div class="flex equal-sizing flex-row">
+                                            <span><i class="fas fa-spa"></i>
+                                                <span th:text="${produtoProdutor.tipoDeCultivo}"></span>
+                                            </span>
+                                            <span>Valor: R$ <span th:text="${produtoProdutor.preco}"></span></span>
+                                            <span th:text="${produto.unidadeMedida}"></span></span>
+                                            <label class="label">Quantidade: <input size="5" type="number"
+                                                    placeholder="Ex: 4"></label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +52,8 @@
                                 <div class="rz-box-footer flex space-between">
                                     <button class="button rz-button is-rounded"
                                         th:onclick="return RealizarPedido.exibeConfirmacaoDeCancelamento('/pedidos')">Cancelar</button>
-                                    <a th:href="@{/pedidos}" class="button rz-button is-rounded" type="submit">Salvar</a>
+                                    <a th:href="@{/pedidos}" class="button rz-button is-rounded"
+                                        type="submit">Salvar</a>
                                 </div>
                             </div>
                         </div>

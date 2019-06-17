@@ -85,12 +85,11 @@ public class PedidoControlador {
                 .pagina("realizar pedido", "/pedido/pedidos");
 
         Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
-                produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(pedidoServico.pegaListaDeProdutosPorProdutores(listaId), listaId);
+                produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(listaId);
 
-        //modelo.addAttribute("produtoProdutores" , produtosProdutores);
         modelo.addAttribute("pedido", new Pedido());
         modelo.addAttribute("listaNome", minhaListaServico.encontraUm(listaId).getNome());
-        modelo.addAttribute("listaProdutoresDeProdutos", produtoresDeProdutos);
+        modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
 
         return "pedido/realizar-pedido";
     }
@@ -122,9 +121,6 @@ public class PedidoControlador {
 
         if(resultadoValidacao.hasErrors()) {
             modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
-//            modelo.addAttribute("")
-//            modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
-
             return "pedido/realizar-pedido";
         }
 
@@ -146,15 +142,5 @@ public class PedidoControlador {
         mapa.put("produtores", produtores);
         return mapa;
     }
-
-    @ResponseBody
-    @GetMapping("/teste3")
-    public Map<Produto, List<ProdutoProdutor>> listaProdutosProdutoresss() {
-
-        List<ProdutoProdutor> ppl = pedidoServico.pegaListaDeProdutosPorProdutores(1L);
-        return produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(ppl , 1L);
-    }
-
-
 
 }
