@@ -6,6 +6,7 @@ import com.thoughtworks.aceleradora.repositorios.ProdutoRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutoServico {
@@ -28,4 +29,5 @@ public class ProdutoServico {
         return repositorio.findById(id).get();
     }
 
+    public Optional<Produto> encontraUmNome(String nome) { return repositorio.findByNome(nome); }
 }

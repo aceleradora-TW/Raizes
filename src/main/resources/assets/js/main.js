@@ -12,7 +12,7 @@ import Pedido from './pages/pedido'
 import Modal from './components/modal'
 import Burger from './components/menu-burger'
 import EditarPedido from './pages/editaPedido'
-
+import Produtos from './pages/produtos'
 
 
 $(function () {
@@ -30,5 +30,6 @@ $(function () {
     window.Modal = new Modal();
     window.EditaPedido = EditarPedido;
     window.Burger = Burger;
+    window.Produtos = Produtos;
 
 });
