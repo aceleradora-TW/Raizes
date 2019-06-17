@@ -30,4 +30,8 @@ public class ProdutoServico {
     }
 
     public Optional<Produto> encontraUmNome(String nome) { return repositorio.findByNome(nome); }
+
+    public String encontraUnidadeMedida (Long id){
+        return repositorio.findById(id).get().getUnidadeMedida().getCodigo();
+    }
 }

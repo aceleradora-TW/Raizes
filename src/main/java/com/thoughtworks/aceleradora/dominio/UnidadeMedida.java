@@ -16,7 +16,7 @@ public enum UnidadeMedida {
         this.codigo = codigo;
     }
 
-    public String pegaCodigo(){
+    public String getCodigo(){
         return codigo;
     }
 }
