@@ -88,13 +88,13 @@ public class ProdutoControlador {
     }
 
     @PostMapping("/{id}/editar")
-    public String salvarProduto(ProdutoProdutor produtoProdutor, Produto produto, Breadcrumb breadcrumb, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvarProduto(ProdutoProdutor produtoProdutor, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
 
   try {
             produtoProdutorServico.salvar(produtoProdutor);
 
-            String mensagem = "Seu produto foi cadastrado com sucesso!";
-            modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
+            String mensagem = "Seu produto foi alterado com sucesso!";
+            modelo.addAttribute("mensagem", mensagem);
         } catch (ProdutoNaoSalvoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 

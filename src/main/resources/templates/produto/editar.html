@@ -9,6 +9,9 @@
     <section class="container">
         <h1 class="title">Editar Produto</h1>
         <div class="rz-box-body box">
+            <div th:if="${mensagem}">
+                <span th:text="${mensagem}"></span>
+            </div>
             <div class="column is-6 is-offset-3">
                     <form id="formEditarProduto"
                           th:action="@{/produtos/{id}/editar(id=${produtoProdutor.id})}"
