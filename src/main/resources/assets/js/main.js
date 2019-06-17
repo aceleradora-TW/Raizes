@@ -12,14 +12,12 @@ import Pedido from './pages/pedido'
 import Modal from './components/modal'
 import Burger from './components/menu-burger'
 import EditarPedido from './pages/editaPedido'
-
-
+import CadastraProduto from './pages/cadastraProduto'
 
 $(function () {
     CriarLista.validaFormulario();   
     EditarLista.validaFormulario();
-
-
+    CadastraProduto.atualizaUnidadeMedida();
 
     window.MinhasListas = MinhasListas;
     window.EditarLista = EditarLista;
@@ -30,5 +28,4 @@ $(function () {
     window.Modal = new Modal();
     window.EditaPedido = EditarPedido;
     window.Burger = Burger;
-
 });
