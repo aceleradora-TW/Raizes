@@ -47,24 +47,23 @@ public class PedidoControlador {
         .pagina("Pedidos", "/pedido/pedidos");
 
         modelo.addAttribute("pedidosCriados", pedidoServico.pegarPedidos());
-
         return "pedido/pedidos";
     }
 
     @GetMapping("/{id}/visualizar-pedido")
     public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
 
-        breadcrumb.aproveitar(partesComunsDoBreadCrumb).pagina("Pedidos", "/pedidos").pagina("Visualizar Pedido",
-                "/pedidos");
-
+        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedidos")
+                .pagina("Visualizar Pedido", "/pedidos");
         return "pedido/visualizar-pedido";
     }
 
     @GetMapping("/{id}/realizar-pedido")
     public String realizarPedidos(@PathVariable("id") Long id, Breadcrumb breadcrumb) {
-        breadcrumb.aproveitar(partesComunsDoBreadCrumb).pagina("Pedidos", "/pedidos").pagina("Realizar Pedido",
-                "/pedido/pedidos");
-
+        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedidos")
+                .pagina("Realizar Pedido", "/pedido/pedidos");
         return "pedido/realizar-pedido";
     }
 
@@ -76,7 +75,6 @@ public class PedidoControlador {
 
     @PostMapping("/{id}/excluir")
     public String removerPedido(@PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
-
 
         pedidoServico.removerPedido(id);
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido excluído com sucesso!");
