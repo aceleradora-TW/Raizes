@@ -40,7 +40,7 @@
                   <span class="flex start" th:text="${pedido.nome}"></span>
                 </td>
                 <td class="flex end">
-                  <a class="button rz-button list-style" th:href="@{/pedidos/2}">
+                  <a class="button rz-button list-style" th:href="@{/pedidos/{id}/visualizar-pedido(id=${pedido.id})}">
                     <i class="fas fa-eye"></i>
                   </a>
                   <form th:action="@{/pedidos/{id}/excluir(id=${pedido.id})}" method="post" name="meuform"
