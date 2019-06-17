@@ -41,29 +41,23 @@ public class PedidoControlador {
         .pagina("Pedidos", "/pedido/pedidos");
 
         modelo.addAttribute("pedidosCriados", pedidoServico.pegarPedidos());
-
         return "pedido/pedidos";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/visualizar-pedido")
     public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
 
-        breadcrumb.aproveitar(partesComunsDoBreadCrumb).pagina("Pedidos", "/pedidos").pagina("Visualizar pedido",
-                "/pedidos");
-
-        try {
-            modelo.addAttribute("pedido", minhaListaServico.encontraUm(id));
-
-            return "pedido/visualizar-pedido";
-        } catch (ListaNaoEncontradaExcecao e) {
-            return "redirect:/pedidos";
-        }
+        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedidos")
+                .pagina("Visualizar Pedido", "/pedidos");
+        return "pedido/visualizar-pedido";
     }
 
-    @GetMapping("/realizar-pedido")
-    public String realizarPedidos(Breadcrumb breadcrumb) {
-        breadcrumb.aproveitar(partesComunsDoBreadCrumb).pagina("realizar pedido", "/pedido/pedidos");
-
+    @GetMapping("/{id}/realizar-pedido")
+    public String realizarPedidos(@PathVariable("id") Long id, Breadcrumb breadcrumb) {
+        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedidos")
+                .pagina("Realizar Pedido", "/pedido/pedidos");
         return "pedido/realizar-pedido";
     }
 
@@ -75,7 +69,6 @@ public class PedidoControlador {
 
     @PostMapping("/{id}/excluir")
     public String removerPedido(@PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
-
 
         pedidoServico.removerPedido(id);
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido excluído com sucesso!");
