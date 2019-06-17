@@ -17,6 +17,7 @@ public class Produtor {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
     private String nome;
     private boolean possuiTransporte;
     private String contato;
@@ -50,7 +51,6 @@ public class Produtor {
         this.endereco = endereco;
         this.usuario = usuario;
     }
-
     public Long getId() {
         return id;
     }
