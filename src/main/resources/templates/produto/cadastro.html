@@ -51,10 +51,8 @@
                     <div class="control">
                       <input class="input" th:field="*{preco}" type="number" placeholder="Ex.: 4.00">
                     </div>
-<!--                    <div th:field="${produto}">-->
-<!--                      <span th:text="${produto}"></span>-->
-<!--                    </div>-->
-                    
+                    <option th:each="medidas : ${medidas}" th:text="${medidas.pegaCodigo()}" th:value="${medidas.name()}">
+                    </option>
                   </div>
                 </div>
                 <div class="rz-box-footer flex space-between">
