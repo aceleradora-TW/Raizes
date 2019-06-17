@@ -8,11 +8,13 @@
 <body>
     <section class="section">
         <section class="container">
-            <h1 class="title centraliza-texto">Feijoada de Domingo</h1>
             <div class="columns">
                 <div class="column is-12">
-                    <form>
-                        <h3>Cebola</h3>
+                    <form class="rz-form" id="formRealizarPedido" th:action="@{/pedidos/{id}/realizar-pedido}" method="post">
+                        <h1 class="title centraliza-texto" th:text="${listaNome}"></h1>
+
+                        <div th:each="produtoresDeProdutos : ${listaProdutoresDeProdutos}">
+                            <h3 th:text="${produtoresDeProdutos.key.nome}"></h3>
                         <div class="box">
                             <div class="flex equal-sizing flex-row">
                                 <label class="radio">

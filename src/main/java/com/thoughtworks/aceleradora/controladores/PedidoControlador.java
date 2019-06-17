@@ -84,12 +84,10 @@ public class PedidoControlador {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("realizar pedido", "/pedido/pedidos");
 
-//        List<ProdutoProdutor> produtosProdutores = produtoProdutorServico.pegarTodosProdutosProdutores();
-        List<ProdutoProdutor> produtosProdutores = pedidoServico.pegaListaDeProdutosPorProdutores(listaId);
-        List<ProdutoresDeProdutos> produtoresDeProdutos = produtoProdutorServico.organizarProdutoresDeProdutos(produtosProdutores);
+        Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
+                produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(pedidoServico.pegaListaDeProdutosPorProdutores(listaId), listaId);
 
-
-        modelo.addAttribute("produtoProdutores" , produtosProdutores);
+        //modelo.addAttribute("produtoProdutores" , produtosProdutores);
         modelo.addAttribute("pedido", new Pedido());
         modelo.addAttribute("listaNome", minhaListaServico.encontraUm(listaId).getNome());
         modelo.addAttribute("listaProdutoresDeProdutos", produtoresDeProdutos);
@@ -150,10 +148,13 @@ public class PedidoControlador {
     }
 
     @ResponseBody
-    @GetMapping("/teste2")
-    public List<Produto> listaProdutosProdutoress() {
-        return produtoServico.pegarTodos();
+    @GetMapping("/teste3")
+    public Map<Produto, List<ProdutoProdutor>> listaProdutosProdutoresss() {
+
+        List<ProdutoProdutor> ppl = pedidoServico.pegaListaDeProdutosPorProdutores(1L);
+        return produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(ppl , 1L);
     }
+
 
 
 }
