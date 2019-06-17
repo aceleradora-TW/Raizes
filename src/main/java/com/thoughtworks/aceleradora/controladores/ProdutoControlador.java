@@ -112,4 +112,11 @@ public class ProdutoControlador {
 
         return "produto/editar";
     }
+    @GetMapping("{id}/visualizar-estoque")
+    public String visualizarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Visualizar Produto", "/produtos/visualizar-produto");
+        return "produto/visualizar";
+    }
 }
