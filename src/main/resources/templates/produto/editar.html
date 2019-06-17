@@ -11,7 +11,7 @@
         <div class="rz-box-body box">
             <div class="column is-6 is-offset-3">
                     <form id="formEditarProduto"
-                          th:action="@{/produtoss/{id}/editar(id=${produtoProdutor.id})}"
+                          th:action="@{/produtos/{id}/editar(id=${produtoProdutor.id})}"
                           th:object="${produtoProdutor}"
                           method="post">
                         <input th:type="hidden" th:field="*{produtor.id}"/>
@@ -20,9 +20,14 @@
                             <label>Produto:</label>
                             <input disabled th:type="text" th:field="*{produto.nome}"/>
                         </div>
-                        <div class="field">
-                            <label>Tipo:</label>
-                            <input disabled th:type="text" th:field="*{tipoDeCultivo}" />
+                        <div class="rz-box-body">
+                            <label>Tipo de Cultivo</label>
+                            <div class="select">
+                                <select th:field="*{tipoDeCultivo}">
+                                    <option th:each="cultivo : ${cultivos}" th:text="${cultivo.codigo}" th:value="${cultivo.name()}">
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                         <div class="field">
                             <label>Valor:</label>

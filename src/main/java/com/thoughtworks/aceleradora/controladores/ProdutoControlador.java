@@ -74,39 +74,33 @@ public class ProdutoControlador {
         return "redirect:/produtos/cadastro";
     }
 
-//    @GetMapping("/{id}/editar")
-//    public String editarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id) {
-//        breadcrumb
-//                .aproveitar(partesComunsDoBreadCrumb)
-//                .pagina("Editar Produto", "/produtos/editar-produto");
-//
-//
-//        ProdutoProdutor produtoProdutor = produtoProdutorServico.encontraUm(id);
-//
-//        modelo.addAttribute("produtoProdutor", produtoProdutor);
-//
-//        return "produto/editar";
-//    }
-//
-//    @PostMapping("/{id}/editar")
-//    public String salvarProduto(
-//            ProdutoProdutor produtoProdutor, Breadcrumb breadcrumb, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos
-//    ) {
-//
-//        try {
-//
-//            System.out.println(">>>>>>>>>>>> " + produtoProdutor.getTipoDeCultivo());
-//
-//            produtoProdutorServico.salvar(produtoProdutor);
-//
-//            String mensagem = "Seu produto foi cadastrado com sucesso!";
-//            modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
-//        } catch (ProdutoNaoSalvoExcecao e) {
-//            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
-//
-//            return "redirect:/produto/editar";
-//        }
-//
-//        return "redirect:/produto/editar";
-//    }
+    @GetMapping("/{id}/editar")
+    public String editarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Editar Produto", "/produtos/editar-produto");
+
+        modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
+        ProdutoProdutor produtoProdutor = produtoProdutorServico.encontraUm(id);
+        modelo.addAttribute("produtoProdutor", produtoProdutor);
+
+        return "produto/editar";
+    }
+
+    @PostMapping("/{id}/editar")
+    public String salvarProduto(ProdutoProdutor produtoProdutor, Produto produto, Breadcrumb breadcrumb, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos) {
+
+  try {
+            produtoProdutorServico.salvar(produtoProdutor);
+
+            String mensagem = "Seu produto foi cadastrado com sucesso!";
+            modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
+        } catch (ProdutoNaoSalvoExcecao e) {
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
+
+        return "redirect:/produtos/cadastro";
+        }
+
+        return "produto/editar";
+    }
 }
