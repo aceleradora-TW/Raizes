@@ -2,9 +2,11 @@ package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.Produto;
+import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.dominio.TipoDeCultivo;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
+import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,15 +26,18 @@ public class ProdutoControlador {
 
     private ProdutoServico produtoServico;
     private CategoriaServico categoriaServico;
+    private ProdutoProdutorServico produtoProdutorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Página inicial", "/");
 
     @Autowired
-    public ProdutoControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico) {
+    public ProdutoControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico, ProdutoProdutorServico produtoProdutorServico) {
         this.produtoServico = produtoServico;
         this.categoriaServico = categoriaServico;
+        this.produtoProdutorServico = produtoProdutorServico;
     }
+
 
     @GetMapping("/cadastro")
     public String cadastrarProduto(Model modelo, Breadcrumb breadcrumb) {
@@ -49,7 +54,7 @@ public class ProdutoControlador {
     }
 
     @PostMapping("/cadastro")
-    public String salvarProduto (Produto produto, Model modelo, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvarProduto(Produto produto, Model modelo, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Produtos", "/produtos")
@@ -60,7 +65,7 @@ public class ProdutoControlador {
 
             String mensagem = "Seu produto foi cadastrado com sucesso!";
             modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
-        } catch (ProdutoNaoSalvoExcecao e){
+        } catch (ProdutoNaoSalvoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
             return "redirect:/produtos/cadastro";
@@ -68,23 +73,34 @@ public class ProdutoControlador {
 
         return "redirect:/produtos/cadastro";
     }
+
     @GetMapping("/{id}/editar")
     public String editarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Editar Produto", "/produtos/editar-produto");
 
-        modelo.addAttribute("produto", produtoServico.encontraUm(id));
+        modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
+        ProdutoProdutor produtoProdutor = produtoProdutorServico.encontraUm(id);
+        modelo.addAttribute("produtoProdutor", produtoProdutor);
 
         return "produto/editar";
     }
-    @PostMapping("/{id}/editar")
-    public String salvarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id) {
-        breadcrumb
-                .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Editar Produto", "/produtos/editar-produto");
 
-        modelo.addAttribute("produto", produtoServico.encontraUm(id));
+    @PostMapping("/{id}/editar")
+    public String salvarProduto(ProdutoProdutor produtoProdutor, Produto produto, Breadcrumb breadcrumb, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos) {
+
+  try {
+            produtoProdutorServico.salvar(produtoProdutor);
+
+            String mensagem = "Seu produto foi cadastrado com sucesso!";
+            modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
+        } catch (ProdutoNaoSalvoExcecao e) {
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
+
+        return "redirect:/produtos/cadastro";
+        }
+
         return "produto/editar";
     }
 }

@@ -34,7 +34,7 @@ public class ProdutoProdutor{
     public ProdutoProdutor(double quantidadeEstoque, BigDecimal preco,
                            Produto produto, Produtor produtor,
                            TipoDeCultivo tipoDeCultivo) {
-        super();
+
         this.quantidadeEstoque = quantidadeEstoque;
         this.preco = preco;
         this.produto = produto;
@@ -89,4 +89,5 @@ public class ProdutoProdutor{
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
+
 }
