@@ -10,5 +10,5 @@ import java.util.List;
 public interface ProdutoRepositorio extends CrudRepository<Produto, Long> {
 
     List<Produto> findAll();
-    List<Produto> findAllByNome();
+//    List<Produto> findAllByNome();
 }

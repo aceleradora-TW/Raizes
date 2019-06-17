@@ -28,9 +28,4 @@ public class ProdutoServico {
         return repositorio.findById(id).get();
     }
 
-    public List<Produto> pegaNomeProduto (){
-        List<Produto> nomesProdutos = repositorio.findAllByNome();
-    }
-
-
 }
