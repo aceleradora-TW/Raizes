@@ -2,57 +2,57 @@
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Aceleradora Ágil - Esqueleto Ambulante</title>
+    <title>Raízes</title>
 </head>
 <body>
-<section class="section">
-    <section class="container">
-        <h1 class="title">Visualizar pedido</h1>
-        <div class="columns">
-            <div class="column is-6">
-                <div class="box">
-                    <form id="formVisualizarPedido" th:action="@{/pedidos/{id}(id=${lista.id})}" method="post">
-                        <div class="field">
-                            <h1 class="title centraliza-texto">Feijoada de domingo</h1>
-                        </div>
-                        <div class="columns">
-                            <div class="column is-12">
-                                <div class="box">
-                                    <div class="field">
-                                        <div class="control">
-                                            <h4><b>Aldo Produtor</b></h4>
-                                            <div class="flex equal-sizing flex-row">
-                                            <span>feijão</span>
-                                            <span>R$10,00</span>
-                                          </div>
-                                          <div class="flex equal-sizing flex-row">
-                                            <span>cebola</span>
-                                            <span>R$10,00</span>
-                                          </div>
+    <section class="section">
+        <section class="container">
+            <h1 class="title">Visualizar pedido</h1>
+            <div class="columns">
+                <div class="column is-6">
+                    <div class="box">
+                        <form id="formVisualizarPedido" th:action="@{/pedidos/{id}(id=${lista.id})}" method="post">
+                            <div class="field">
+                                <h1 class="title centraliza-texto">Feijoada de domingo</h1>
+                            </div>
+                            <div class="columns">
+                                <div class="column is-12">
+                                    <div class="box">
+                                        <div class="field">
                                             <div class="control">
-                                               <h1 class="title centraliza-texto">Contato:</h1>
-                                               <div class="flex equal-sizing flex-start flex-row">
-                                                <span><i class="fas fa-phone"></i></span>
-                                                <span>(00)0000-00000</span> 
-                                               </div>
-                                            <div class="flex equal-sizing flex-row">
-                                               <span><i class="fas fa-envelope"></i></span> 
-                                               <span>email@mail.com</span>                                                
-                                            </div>
+                                                <h4><b>Aldo Produtor</b></h4>
+                                                <div class="flex equal-sizing flex-row">
+                                                    <span>feijão</span>
+                                                    <span>R$10,00</span>
+                                                </div>
+                                                <div class="flex equal-sizing flex-row">
+                                                    <span>cebola</span>
+                                                    <span>R$10,00</span>
+                                                </div>
+                                                <div class="control">
+                                                    <h1 class="title centraliza-texto">Contato:</h1>
+                                                    <div class="flex equal-sizing flex-start flex-row">
+                                                        <span><i class="fas fa-phone"></i></span>
+                                                        <span>(00)0000-00000</span>
+                                                    </div>
+                                                    <div class="flex equal-sizing flex-row">
+                                                        <span><i class="fas fa-envelope"></i></span>
+                                                        <span>email@mail.com</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="flex space-between">
-                                    <a class="button is-primary" th:href="@{/pedidos}">Voltar</a>
+                                    <div class="flex space-between">
+                                        <a class="button is-primary" th:href="@{/pedidos}">Voltar</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </section>
-</section>
 </body>
 </html>

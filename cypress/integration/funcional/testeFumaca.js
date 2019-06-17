@@ -8,6 +8,6 @@ describe('Testa ambiente de homologação', function() {
 describe('Testa titulo', function() {
     it('Testa titulo da página', function() {
         cy.visit('https://raizes-homologacao.herokuapp.com/')
-        cy.title().should('eq', 'Aceleradora Ágil - Esqueleto Ambulante')
+        cy.title().should('eq', 'Raízes')
     })
 })

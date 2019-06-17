@@ -1,3 +1,12 @@
 export default {
-    exibeConfirmacaoDeExclusaoDaLista: () => confirm("Realmente deseja excluir a lista selecionada?")
+    exibeConfirmacaoDeExclusaoDaLista: (event) => {      
+        let form = event.target;
+
+        window.Modal
+        .success()
+        .okAction("Sim", () => { form.submit();})
+        .cancelAction("Não")
+        .show('Você tem certeza que deseja excluir esta lista?');
+        return false;
+    }
 }

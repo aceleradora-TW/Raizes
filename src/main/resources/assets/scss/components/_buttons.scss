@@ -1,7 +1,7 @@
 .rz-button.rz-button {
   font-family: "Roboto", sans-serif;
-  background-color: $btn-color;
-  color: $primary-color;
+  background-color: $third-color;
+  color: white;
   margin-bottom: 0;
 
   &.list-style {
@@ -17,4 +17,12 @@
     color: white;
     font-weight: bold;
   }
+}
+.sanduiche-button{
+  cursor:pointer;
+  border-color: transparent;
+  color: $third-color;
+  position: relative;
+  left: 15px;
+  top: 20px;
 }
