@@ -12,6 +12,7 @@ import com.thoughtworks.aceleradora.servicos.ProdutoServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -97,9 +98,12 @@ public class ProdutoControlador {
     }
 
     @PostMapping("/{id}/editar")
-    public String salvarProduto(ProdutoProdutor produtoProdutor, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
-
+    public String salvarProduto(ProdutoProdutor produtoProdutor, Model modelo, BindingResult resultadoValidacao, RedirectAttributes redirecionamentoDeAtributos) {
         try {
+            if(resultadoValidacao.hasErrors()) {
+                modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
+            }
+            produtoProdutor.setQuantidadeEstoque(produtoProdutor.getQuantidadeEstoque());
             produtoProdutorServico.salvar(produtoProdutor);
 
             String mensagem = "Seu produto foi alterado com sucesso!";
