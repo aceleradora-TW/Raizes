@@ -3,17 +3,18 @@ package com.thoughtworks.aceleradora.dominio;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "produtos_produtores")
 @Access(AccessType.FIELD)
-public class ProdutoProdutor{
+public class ProdutoProdutor {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private double quantidadeEstoque;
+    private int quantidadeEstoque;
     private BigDecimal preco;
 
     @ManyToOne
@@ -31,7 +32,7 @@ public class ProdutoProdutor{
     public ProdutoProdutor() {
     }
 
-    public ProdutoProdutor(double quantidadeEstoque, BigDecimal preco,
+    public ProdutoProdutor(int quantidadeEstoque, BigDecimal preco,
                            Produto produto, Produtor produtor,
                            TipoDeCultivo tipoDeCultivo) {
 
@@ -50,11 +51,11 @@ public class ProdutoProdutor{
         this.id = id;
     }
 
-    public double getQuantidadeEstoque() {
+    public int getQuantidadeEstoque() {
         return quantidadeEstoque;
     }
 
-    public void setQuantidadeEstoque(double quantidadeEstoque) {
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
@@ -83,7 +84,7 @@ public class ProdutoProdutor{
     }
 
     public BigDecimal getPreco() {
-        return preco;
+        return preco.setScale(2, RoundingMode.HALF_EVEN);
     }
 
     public void setPreco(BigDecimal preco) {
