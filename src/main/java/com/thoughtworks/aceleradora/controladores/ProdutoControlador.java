@@ -112,4 +112,13 @@ public class ProdutoControlador {
 
         return "produto/editar";
     }
+    @GetMapping("/adicionar")
+    public String adicionarProduto(Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Produtos", "/produtos")
+                .pagina("Adicionar", "/produtos/adicionar");
+
+        return "produto/adicionar";
+    }
 }
