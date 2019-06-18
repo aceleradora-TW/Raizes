@@ -12,9 +12,10 @@
         <section class="container">
             <div class="columns">
                 <div class="column is-12">
-                    <form class="rz-form" id="formRealizarPedido" th:action="@{/pedidos/{id}/realizar-pedido}"
+                    <form class="rz-form" id="formRealizarPedido" th:action="@{/pedidos/realizar-pedido}"
                         method="post">
                         <h1 class="title centraliza-texto" th:text="${listaNome}"></h1>
+                        <input th:type="hidden" name="nome" th:value="${listaNome}" class="title centraliza-texto" th:text="${listaNome}">
 
                         <div th:each="produto : ${produtoresDeProdutos.keySet()}">
                             <h3 th:text="${produto.nome}"></h3>
@@ -22,7 +23,7 @@
                                 <div class="box">
                                     <div class="flex equal-sizing flex-row">
                                         <label class="radio">
-                                            <input type="radio" name="answer">
+                                            <input type="checkbox" class="d-block" th:value="${produtoProdutor.id}" name="pedidosProdutosProdutores">
                                             <span th:text="${produtoProdutor.produtor.nome}"></span>
                                         </label>
                                         <span><i class="fas fa-map-marker-alt"></i>
@@ -30,7 +31,12 @@
                                             <span
                                                 th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
                                         </span>
-                                        <i class="fas fa-truck"></i>
+                                        <span class="span-transport" th:if="${produtoProdutor.produtor.possuiTransporte}">
+                                    <i class="fas fa-truck icon-transport-true"> </i>
+                                </span>
+                                        <span class="span-transport" th:unless="${produtoProdutor.produtor.possuiTransporte}">
+                                    <i class="fas fa-truck icon-transport-false"></i>
+                                </span>
                                     </div>
                                     <div>
                                         <div class="flex equal-sizing flex-row">
@@ -39,7 +45,7 @@
                                             </span>
                                             <span>Valor: R$ <span th:text="${produtoProdutor.preco}"></span></span>
                                             <span th:text="${produto.unidadeMedida}"></span></span>
-                                            <label class="label">Quantidade: <input size="5" type="number"
+                                            <label class="label">Quantidade: <input size="5" name="quantidadePedido" type="number"
                                                     placeholder="Ex: 4"></label>
                                         </div>
                                     </div>
@@ -52,8 +58,7 @@
                                 <div class="rz-box-footer flex space-between">
                                     <button class="button rz-button is-rounded"
                                         th:onclick="return RealizarPedido.exibeConfirmacaoDeCancelamento('/pedidos')">Cancelar</button>
-                                    <a th:href="@{/pedidos}" class="button rz-button is-rounded"
-                                        type="submit">Salvar</a>
+                                    <button class="button rz-button is-rounded" type="submit">Salvar</button>
                                 </div>
                             </div>
                         </div>

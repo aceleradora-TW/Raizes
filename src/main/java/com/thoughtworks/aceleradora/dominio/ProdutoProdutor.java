@@ -2,7 +2,6 @@ package com.thoughtworks.aceleradora.dominio;
 
 
 import javax.persistence.*;
-
 import java.math.BigDecimal;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -37,7 +36,7 @@ public class ProdutoProdutor{
     public ProdutoProdutor(double quantidadeEstoque, BigDecimal preco,
                            Produto produto, Produtor produtor,
                            TipoDeCultivo tipoDeCultivo) {
-        super();
+
         this.quantidadeEstoque = quantidadeEstoque;
         this.preco = preco;
         this.produto = produto;
@@ -57,29 +56,8 @@ public class ProdutoProdutor{
         return quantidadeEstoque;
     }
 
-    public double getProdutoQuantidadeEstoque(Produto produto) {
-
-        return quantidadeEstoque;
-    }
-
     public void setQuantidadeEstoque(double quantidadeEstoque) {
         this.quantidadeEstoque = quantidadeEstoque;
-    }
-
-    public TipoDeCultivo getTipoDeCultivo() {
-        return tipoDeCultivo;
-    }
-
-    public void setTipoDeCultivo(TipoDeCultivo tipoDeCultivo) {
-        this.tipoDeCultivo = tipoDeCultivo;
-    }
-
-    public BigDecimal getPreco() {
-        return preco;
-    }
-
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
     }
 
     public Produto getProduto() {
@@ -96,5 +74,21 @@ public class ProdutoProdutor{
 
     public void setProdutor(Produtor produtor) {
         this.produtor = produtor;
+    }
+
+    public TipoDeCultivo getTipoDeCultivo() {
+        return tipoDeCultivo;
+    }
+
+    public void setTipoDeCultivo(TipoDeCultivo tipoDeCultivo) {
+        this.tipoDeCultivo = tipoDeCultivo;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
     }
 }

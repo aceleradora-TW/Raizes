@@ -60,4 +60,3 @@ public class Produtor {
         this.endereco = endereco;
     }
 }
-

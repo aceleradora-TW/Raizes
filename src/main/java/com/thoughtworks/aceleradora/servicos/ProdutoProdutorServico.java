@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.servicos;
 
 import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.repositorios.MinhaListaRepositorio;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,17 @@ public class ProdutoProdutorServico {
             }
         }
         return new ArrayList<>(mapaDeProdutoresDeProdutos.values());
+    }
+
+    public ProdutoProdutor encontraUm(Long id) {
+        return produtoProdutorRepositorio
+                .findById(id)
+                .orElseThrow(ProdutoNaoEncontradoExcecao::new);
+
+    }
+
+    public ProdutoProdutor salvar(ProdutoProdutor produtoProdutor) {
+        return produtoProdutorRepositorio.save(produtoProdutor);
     }
 
 
