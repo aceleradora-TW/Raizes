@@ -14,6 +14,9 @@
         <div th:if="${mensagem}">
           <span th:text="${mensagem}"></span>
         </div>
+        <div th:if="${erros}">
+          <span th:text="${erros}"></span>
+        </div>
         <div class="column is-6 is-offset-3">
           <form id="formEditarProduto" th:action="@{/produtos/{id}/editar(id=${produtoProdutor.id})}"
             th:object="${produtoProdutor}" method="post">
@@ -46,8 +49,7 @@
               <div class="control flex end">
                 <button class="button is-primary" type="submit">Adicionar produto ao estoque</button>
               </div>
-              <button class="button is-primary"
-                onclick="return EditaProdutoEstoque.exibeConfirmacaoDeCancelamento('/')">Voltar</button>
+              <button class="button is-primary">Voltar</button>
             </div>
           </form>
         </div>
