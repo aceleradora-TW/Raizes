@@ -18,4 +18,12 @@ public class ClienteServico {
                 .findByNome("Neiva")
                 .orElseThrow(() -> new IllegalStateException("Neiva nao esta cadastrada"));
     }
+
+    public void salvaCliente(Cliente cliente) {
+        repositorio.save(cliente);
+    }
+
+    public Cliente buscaPorId(Long id) {
+        return repositorio.findById(id).orElse(null);
+    }
 }
