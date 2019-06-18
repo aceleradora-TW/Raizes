@@ -116,8 +116,8 @@ public class ProdutoControlador {
     public String adicionarProduto(Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Produtos", "/produtos")
-                .pagina("Adicionar", "/produtos/adicionar");
+                .pagina("Produtos", "/meus estoques")
+                .pagina("Adicionar", "/meus estoques/adicionar");
 
         return "produto/adicionar";
     }
