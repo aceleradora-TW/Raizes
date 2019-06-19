@@ -79,7 +79,7 @@ public class ProdutoControlador {
     public String editarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Editar Produto", "/produtos/editar-produto");
+                .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
         try {
             ProdutoProdutor produtoprodutor = produtoProdutorServico.encontraUm(id);
 
@@ -97,7 +97,10 @@ public class ProdutoControlador {
     }
 
     @PostMapping("/{id}/editar")
-    public String salvarProduto(ProdutoProdutor produtoProdutor, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvarProduto(Breadcrumb breadcrumb, ProdutoProdutor produtoProdutor, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
 
         try {
             produtoProdutorServico.salvar(produtoProdutor);

@@ -7,7 +7,7 @@
 <body>
 <section class="section">
     <section class="container">
-        <h1 class="title">Editar Produto</h1>
+        <h1 class="title">Atualizar Dados do Produto</h1>
         <div class="rz-box-body box">
             <div th:if="${mensagem}">
                 <span th:text="${mensagem}"></span>
@@ -41,10 +41,10 @@
                             <input type="number" th:field="*{quantidadeEstoque}" />
                         </div>
                         <div class="field">
-                            <div class="control flex end">
-                                <button class="button is-primary" type="submit">Adicionar produto ao estoque</button>
-                            </div>
-                            <button class="button is-primary">Voltar</button>
+                            <div class="rz-box-footer flex space-between p-3">
+                                <a href="/" class="button rz-button is-rounded">Cancelar</a>
+                                <button th:href="@{/produtos/{id}/editar(id=2)}" class="button rz-button is-rounded" type="submit">Salvar</button>
+                            </div>  
                         </div>
                     </form>
                 </div>
