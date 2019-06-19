@@ -7,9 +7,9 @@ delete from categorias;
 delete from listas;
 delete from clientes;
 delete from usuarios;
-delete from estados;
-delete from cidades;
 delete from enderecos;
+delete from cidades;
+delete from estados;
 
 --Reseta gerador de ids para 1
 alter SEQUENCE categorias_id_seq RESTART with 1;
@@ -553,6 +553,7 @@ insert
 insert
   into produtores (id, possui_transporte)
   values (1, true);
+
 
 insert
   into produtos_produtores (id_produtores, id_produtos, preco, quantidade_estoque)
