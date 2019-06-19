@@ -90,7 +90,8 @@ public class ProdutoControlador {
         } catch (ProdutoNaoEncontradoExcecao e){
             redirecionamentoDeAtributos.addAttribute("mensagem", e.getMessage());
 
-            return "redirect:/produtos/cadastro";
+            return "produto/editar";
+
 
         }
 
@@ -104,9 +105,6 @@ public class ProdutoControlador {
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
 
         try {
-            if(resultadoValidacao.hasErrors()) {
-                modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
-            }
             produtoProdutor.setQuantidadeEstoque(produtoProdutor.getQuantidadeEstoque());
             produtoProdutorServico.salvar(produtoProdutor);
 
@@ -115,7 +113,8 @@ public class ProdutoControlador {
         } catch (ProdutoNaoSalvoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
-            return "redirect:/produtos/cadastro";
+            return "produto/editar";
+
         }
 
         return "produto/editar";

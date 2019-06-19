@@ -12,9 +12,6 @@
             <div th:if="${mensagem}">
                 <span th:text="${mensagem}"></span>
             </div>
-            <div th:if="${erros}">
-                <span th:text="${erros}"></span>
-            </div>
             <div class="column is-6 is-offset-3">
                     <form id="formEditarProduto"
                           th:action="@{/produtos/{id}/editar(id=${produtoProdutor.id})}"
@@ -49,7 +46,7 @@
                         <div class="field">
                             <div class="rz-box-footer flex space-between p-3">
                                 <a href="/" class="button rz-button is-rounded">Cancelar</a>
-                                <button th:href="@{/produtos/{id}/editar(id=2)}" class="button rz-button is-rounded" type="submit">Salvar</button>
+                                <button class="button rz-button is-rounded" type="submit">Salvar</button>
                             </div>
                         </div>
                     </form>
