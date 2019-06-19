@@ -80,7 +80,7 @@ public class ProdutoProdutorControlador {
             produtoProdutorServico.salvar(produtoProdutor);
 
             String mensagem = "Seu produto foi cadastrado com sucesso!";
-            modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", mensagem);
         } catch (ProdutoNaoSalvoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
