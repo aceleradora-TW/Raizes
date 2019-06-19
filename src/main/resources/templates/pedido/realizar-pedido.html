@@ -14,31 +14,48 @@
             <div class="columns">
                 <div class="column is-12">
                     <form>
-                        <h3>Cebola</h3>
+                        <h2 class="flex start">Cebola</h2>
+
+
+
+
                         <div class="box">
-                            <div class="flex equal-sizing flex-row">
+                            <div class="w-75 flex equal-sizing flex-row">
                                 <label class="radio">
                                     <input type="radio" name="answer">
                                     <span>Aldo Produtor</span>
                                 </label>
-                                <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
-                                <span class="span-transport" th:if="${false}">
+
+                                <div class="flex center">
+                                    <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
+                                </div>
+                                <span class="flex center span-transport" th:if="${false}">
                                     <i class="fas fa-truck icon-transport-true"> </i>
                                 </span>
-                                <span class="span-transport" th:unless="${false}">
+
+                                <span class="flex center span-transport" th:unless="${false}">
                                     <i class="fas fa-truck icon-transport-false"></i>
                                 </span>
                             </div>
+
                             <div>
                                 <div class="flex equal-sizing flex-row">
                                     <span><i class="fas fa-spa"></i> Orgânico</span>
-                                    <span>Valor: R$ 5,00</span>
-                                    <label class="label">Quantidade: <input size="5" type="text"
+                                    <span class="flex center">Valor: R$ 5,00</span>
+                                    <label class="flex flex-row center">
+                                        <p>Quantidade </p>
+                                        <input size="5" type="text"
                                             placeholder="Ex: 4"></label>
-                                    <span>Total: R$ 0,00</span>
+                                    <span class="flex end"><b>Total: R$ 0,00</b></span>
                                 </div>
                             </div>
                         </div>
+
+
+
+
+
+
                         <div class="box">
                             <div class="flex equal-sizing flex-row">
                                 <label class="radio">
@@ -63,6 +80,97 @@
                                 </div>
                             </div>
                         </div>
+
+
+
+
+
+
+
+
+
+                        <h2 class="flex start">Tomate</h2>
+                        <div class="box">
+                            <div class="flex equal-sizing flex-row">
+                                <label class="radio">
+                                    <input type="radio" name="answer">
+                                    <span>Aldo Produtor</span>
+                                </label>
+                                <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
+                                <span class="span-transport" th:if="${false}">
+                                    <i class="fas fa-truck icon-transport-true"> </i>
+                                </span>
+                                <span class="span-transport" th:unless="${false}">
+                                    <i class="fas fa-truck icon-transport-false"></i>
+                                </span>
+                            </div>
+                            <div>
+                                <div class="flex equal-sizing flex-row">
+                                    <span><i class="fas fa-spa"></i> Orgânico</span>
+                                    <span>Valor: R$ 5,00</span>
+                                    <label class="label">Quantidade: <input size="5" type="text"
+                                                                            placeholder="Ex: 4"></label>
+                                    <span>Total: R$ 0,00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="flex equal-sizing flex-row">
+                                <label class="radio">
+                                    <input type="radio" name="answer">
+                                    <span>João Severo</span>
+                                </label>
+                                <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
+                                <span class="span-transport" th:if="${true}">
+                                    <i class="fas fa-truck icon-transport-true"> </i>
+                                </span>
+                                <span class="span-transport" th:unless="${true}">
+                                    <i class="fas fa-truck icon-transport-false"></i>
+                                </span>
+                            </div>
+                            <div>
+                                <div class="flex equal-sizing flex-row">
+                                    <span><i class="fas fa-tint"></i> Hidropônico</span>
+                                    <span>Valor: R$ 5,00</span>
+                                    <label class="label">Quantidade: <input size="5" type="text"
+                                                                            placeholder="Ex: 4"></label>
+                                    <span>Total: R$ 0,00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="flex equal-sizing flex-row">
+                                <label class="radio">
+                                    <input type="radio" name="answer">
+                                    <span>Maria Silva</span>
+                                </label>
+                                <span><i class="fas fa-map-marker-alt"></i> Porto Alegre, RS</span>
+                                <span class="span-transport" th:if="${true}">
+                                    <i class="fas fa-truck icon-transport-true"> </i>
+                                </span>
+                                <span class="span-transport" th:unless="${true}">
+                                    <i class="fas fa-truck icon-transport-false"></i>
+                                </span>
+                            </div>
+                            <div>
+                                <div class="flex equal-sizing flex-row">
+                                    <span><i class="fas fa-sun"></i> Convencional</span>
+                                    <span>Valor: R$ 5,00</span>
+                                    <label class="label">Quantidade: <input size="5" type="text"
+                                                                            placeholder="Ex: 4"></label>
+                                    <span>Total: R$ 0,00</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
                         <div class="box">
                             <div class="flex equal-sizing flex-row">
                                 <label class="radio">
@@ -87,8 +195,12 @@
                                 </div>
                             </div>
                         </div>
-                        <span>Total do Pedido: R$ 0,00</span>
-                        <div class="field">
+                        <div class="flex space-between fs-20">
+                            <span>Total do Pedido:</span>
+                            <span>R$ 0,00</span>
+                        </div>
+
+                        <div class="field border-top pt-4">
                             <div class="control">
                                 <div class="rz-box-footer flex space-between">
                                     <button class="button rz-button is-rounded"
