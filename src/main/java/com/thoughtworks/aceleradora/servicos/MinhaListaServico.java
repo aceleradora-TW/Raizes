@@ -20,7 +20,7 @@ public class MinhaListaServico {
     }
 
     public MinhaLista salvar(MinhaLista lista) {
-        lista.setCliente(clienteServico.encontraNeiva());
+        lista.setCliente(clienteServico.encontraCliente());
         return repositorio.save(lista);
     }
 
