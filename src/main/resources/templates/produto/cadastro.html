@@ -16,7 +16,7 @@
           <div class="box">
             <form id="formCadastraProduto" th:action="@{/produtos/cadastro}" method="post">
               <div class="field">
-                <label class="label">Produto:</label>
+                <label class="label">Produto*</label>
                 <div class="select">
                   <select form="formCadastraProduto" id="produtos" name="produto">
                   </select>
@@ -24,7 +24,7 @@
                 <div class="help-block"></div>
               </div>
               <div class="field">
-                <label class="label">Tipo de Cultivo:</label>
+                <label class="label">Tipo de Cultivo*</label>
                 <div class="select">
                   <select form="formCadastraProduto" id="cultivos" name="cultivo">
                     <option th:each="cultivo: ${cultivos}" th:text="${cultivo.codigo}"></option>
@@ -32,14 +32,14 @@
                 </div>
                 <div class="help-block"></div>
               </div>
-             <div class="rz-box-footer flex space-between w-95">
+             <div class="rz-box-footer flex space-between w-75">
               <div class="field">
-                <label class="label">Quantidade:</label>
-                <input class="input" type="number" name="nome" placeholder="Ex.:10, 5, 50">
+                <label class="label">Quantidade*</label>
+                <input class="input formInput" type="number" name="nome" placeholder="Ex.:10, 5, 50">
               </div>
               <div class="field">
-                <label class="label">Valor do produto:</label>
-                <input class="input" type="number" name="nome" placeholder="Ex.:10,50">
+                <label class="label">Valor do produto*</label>
+                <input class="input formInput" type="number" name="nome" placeholder="Ex.:10,50">
                 <label class="unidadeMedida">/Kg</label>
               </div>
             </div>
