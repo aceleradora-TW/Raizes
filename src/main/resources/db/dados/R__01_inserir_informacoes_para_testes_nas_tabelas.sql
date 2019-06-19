@@ -529,49 +529,31 @@ values('Aceguá', 1),
 ('Westfalia', 1),
 ('Xangri-lá', 1);
 
+insert
+    into enderecos(rua, numero, complemento, bairro, id_cidades)
+    values('Rua João da Silva Teste', 1, null, 'Centro', 326);
 
 insert
-  into usuarios (email, senha)
-  values ('email@produtor.com', 'senha'), ('email@cliente.com', 'senha');
+  into usuarios (email, senha, nome, contato, id_endereco, tipo_de_usuario)
+    values ('email@produtor.com', 'senha', 'Produtor', '5555', 1, 'PRODUTOR'),
+      ('email@cliente.com', 'senha', 'Cliente', '7777', 1, 'CLIENTE');
 
 insert
   into categorias (nome)
   values ('Fruta'), ('Verdura');
-
-
 
 insert
   into produtos (nome, id_categorias)
   values ('Banana', 1), ('Batata', 2), ('Abacate', 1), ('Beterraba', 2), ('Alface', 2);
 
 insert
-  into clientes (nome, id_usuarios)
-  values ('Neiva', 2);
+  into clientes (id)
+  values (2);
 
 insert
-  into listas (nome , id_clientes)
-  values ('Lista da Jurema', 1), ('Lista de Domingo', 1);
-
-insert
-  into listas_produtos (id_lista, id_produtos)
-  values (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 5), (2, 4), (2, 3), (2, 2), (2, 1);
-
-
-insert
-  into produtores (nome, possui_transporte, id_usuario)
-  values ('Aldo', true, 1);
+  into produtores (id, possui_transporte)
+  values (1, true);
 
 insert
   into produtos_produtores (id_produtores, id_produtos, preco, quantidade_estoque)
   values (1, 1, 3, 50), (1, 2, 4, 70), (1, 3, 3, 35);
-
-insert
-    into enderecos(rua, numero, complemento, bairro, id_cidades)
-    values('Rua João da Silva Teste', 1, null, 'Centro', 326);
-
-
-
-
-Update produtores
-    set id_enderecos = 1
-    where id = 1;
