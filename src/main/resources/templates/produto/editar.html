@@ -1,58 +1,59 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Raízes</title>
-</head>
-<body>
-<section class="section">
-    <section class="container">
-        <h1 class="title">Atualizar Dados do Produto</h1>
-        <div class="rz-box-body box">
-            <div th:if="${mensagem}">
-                <span th:text="${mensagem}"></span>
-            </div>
-            <div class="column is-6 is-offset-3">
-                    <form id="formEditarProduto"
-                          th:action="@{/produtos/{id}/editar(id=${produtoProdutor.id})}"
-                          th:object="${produtoProdutor}"
-                          method="post">
-                        <input th:type="hidden" th:field="*{produtor.id}"/>
-                        <input th:type="hidden" th:field="*{produto.id}" />
-                        <div class="field">
-                            <label>Produto:</label>
-                            <input disabled th:type="text" th:field="*{produto.nome}"/>
-                        </div>
-                        <div class="rz-box-body">
-                            <label>Tipo de Cultivo</label>
-                            <div class="select">
-                                <select th:field="*{tipoDeCultivo}">
-                                    <option th:each="cultivo : ${cultivos}" th:text="${cultivo.codigo}" th:value="${cultivo.name()}">
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label>Valor:</label>
-                            <input th:field="*{preco}" name="preco" />
-                            <div class="help-block"></div>
 
-                        </div>
-                        <div class="field">
-                            <label>Quantidade:</label>
-                            <input type="number" th:field="*{quantidadeEstoque}" name="quantidadeEstoque"/>
-                            <div class="help-block"></div>
-                        </div>
-                        <div class="field">
-                            <div class="rz-box-footer flex space-between p-3">
-                                <a href="/" class="button rz-button is-rounded">Cancelar</a>
-                                <button class="button rz-button is-rounded" type="submit">Salvar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<head>
+  <meta charset="UTF-8">
+  <title>Raízes</title>
+</head>
+
+<body>
+  <section class="section">
+    <section class="container">
+      <h1 class="title">Atualizar Dados do Produto</h1>
+      <div class="rz-box-body box">
+        <div th:if="${mensagem}">
+          <span th:text="${mensagem}"></span>
+        </div>
+        <div class="column is-6 is-offset-3">
+          <form id="formEditarProduto" th:action="@{/produtos/{id}/editar(id=${produtoProdutor.id})}"
+            th:object="${produtoProdutor}" method="post">
+            <input th:type="hidden" th:field="*{produtor.id}" />
+            <input th:type="hidden" th:field="*{produto.id}" />
+            <div class="field">
+              <label>Produto:</label>
+              <input disabled th:type="text" th:field="*{produto.nome}" />
             </div>
+            <div class="rz-box-body">
+              <label>Tipo de Cultivo</label>
+              <div class="select">
+                <select th:field="*{tipoDeCultivo}">
+                  <option th:each="cultivo : ${cultivos}" th:text="${cultivo.codigo}" th:value="${cultivo.name()}">
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label>Quantidade:</label>
+              <input type="number" th:field="*{quantidadeEstoque}" name="quantidadeEstoque" />
+              <div class="help-block"></div>
+              <div class="field">
+                <label>Valor:</label>
+                <input th:field="*{preco}" name="preco" /> 
+                <label th:text="*{produto.unidadeMedida}"></label>
+                <div class="help-block"></div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="rz-box-footer flex space-between p-3">
+                <a href="/" class="button rz-button is-rounded">Cancelar</a>
+                <button class="button rz-button is-rounded" type="submit">Salvar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </section>
-</section>
+  </section>
 </body>
+
 </html>
