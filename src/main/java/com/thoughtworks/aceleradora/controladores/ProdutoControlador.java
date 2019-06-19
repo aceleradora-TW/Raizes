@@ -115,12 +115,12 @@ public class ProdutoControlador {
 
         return "produto/editar";
     }
-    @GetMapping("/meu-estoque")
+
+    @GetMapping("/visualizar-estoque")
     public String estoque(Breadcrumb breadcrumb, Model modelo) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Estoque", "/minha-lista/listas-criadas");
-
+                .pagina("Estoque", "produto/visualizar-estoque");
 
         return "produto/visualizar-estoque";
     }
