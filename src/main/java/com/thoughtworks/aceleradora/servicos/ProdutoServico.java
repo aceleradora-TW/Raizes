@@ -18,7 +18,7 @@ public class ProdutoServico {
     }
 
     public List<Produto> pegarTodos() {
-            return repositorio.findAll();
+            return repositorio.findAllByOrderByNome();
     }
 
     public Produto salvar (Produto produto) {
