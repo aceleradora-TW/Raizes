@@ -3,12 +3,7 @@ package com.thoughtworks.aceleradora.dominio;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
-
-import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -24,6 +19,7 @@ abstract class Usuario {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+    private String email;
     private String senha;
     private String nome;
     private String contato;
