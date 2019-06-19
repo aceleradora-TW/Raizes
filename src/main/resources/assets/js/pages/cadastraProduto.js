@@ -1,5 +1,6 @@
 export default {
-  atualizaUnidadeMedida: () => {
+  atualizaUnidadeMedida: (e) => {
+    console.log(e);
     const seletorDeProdutos = $('#seletorDeProdutos');
     
     if(seletorDeProdutos.get().length < 1) {
@@ -7,8 +8,9 @@ export default {
     }
 
     const opcaoSelecionada = seletorDeProdutos.find('option:selected');
-    const unidadeMedida = $('#unidadeMedida');
+    const unidadeMedidaElement = $('#unidadeMedida');
+    const unidadeMedida = opcaoSelecionada.attr('data-unidade-medida'); 
 
-    unidadeMedida.text(opcaoSelecionada.data('unidade-medida'));
+    unidadeMedidaElement.text(unidadeMedida);
   }
 }

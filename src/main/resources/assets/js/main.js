@@ -32,5 +32,6 @@ $(function () {
     window.EditaPedido = EditarPedido;
     window.Burger = Burger;
     window.Produtos = Produtos;
+    window.CadastraProduto = CadastraProduto;
 
 });
