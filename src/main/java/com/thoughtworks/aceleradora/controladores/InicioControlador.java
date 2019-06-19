@@ -33,35 +33,35 @@ public class InicioControlador {
         return "inicio";
     }
 
-    @GetMapping("/cria-produtor")
-    public ResponseEntity criaProdutor(){
-        Produtor produtor = new Produtor("raizes@teste.com", "senha", "Raizes", "Contato", null, true);
-
-        produtorServico.salvaProdutor(produtor);
-
-        return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/cria-cliente")
-    public ResponseEntity criaCliente(){
-        Cliente cliente = new Cliente("raizes@teste.com", "senha", "Raizes", "Contato", null, Collections.emptyList());
-
-        clienteServico.salvaCliente(cliente);
-
-        return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/clientes/{id}")
-    @ResponseBody
-    public Cliente pegaClientePorId (@PathVariable Long id){
-        return clienteServico.buscaPorId(id);
-    }
-
-
-    @GetMapping("/produtores/{id}")
-    @ResponseBody
-    public Produtor pegaProdutorPorId (@PathVariable Long id){
-        return produtorServico.buscaPorId(id);
-    }
+//    @GetMapping("/cria-produtor")
+//    public ResponseEntity criaProdutor(){
+//        Produtor produtor = new Produtor("raizes@teste.com", "senha", "Raizes", "Contato", null, true);
+//
+//        produtorServico.salvaProdutor(produtor);
+//
+//        return ResponseEntity.noContent().build();
+//    }
+//
+//    @GetMapping("/cria-cliente")
+//    public ResponseEntity criaCliente(){
+//        Cliente cliente = new Cliente("raizes@teste.com", "senha", "Raizes", "Contato", null, Collections.emptyList());
+//
+//        clienteServico.salvaCliente(cliente);
+//
+//        return ResponseEntity.noContent().build();
+//    }
+//
+//    @GetMapping("/clientes/{id}")
+//    @ResponseBody
+//    public Cliente pegaClientePorId (@PathVariable Long id){
+//        return clienteServico.buscaPorId(id);
+//    }
+//
+//
+//    @GetMapping("/produtores/{id}")
+//    @ResponseBody
+//    public Produtor pegaProdutorPorId (@PathVariable Long id){
+//        return produtorServico.buscaPorId(id);
+//    }
 
 }

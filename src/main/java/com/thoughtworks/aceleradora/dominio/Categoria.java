@@ -20,7 +20,6 @@ public class Categoria {
 
     @OneToMany(mappedBy = "categoria")
     @OrderBy(value="nome")
-    @JsonIgnore()
     private List<Produto> produtos = new ArrayList<>();
 
     public Categoria() {
