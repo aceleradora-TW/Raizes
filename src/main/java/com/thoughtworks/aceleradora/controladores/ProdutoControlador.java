@@ -86,7 +86,7 @@ public class ProdutoControlador {
             modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
             modelo.addAttribute("produtoProdutor", produtoprodutor);
 
-        } catch (ProdutoNaoEncontradoExcecao e){
+        } catch (ProdutoNaoEncontradoExcecao e) {
             redirecionamentoDeAtributos.addAttribute("mensagem", e.getMessage());
 
             return "redirect:/produtos/cadastro";
@@ -124,11 +124,4 @@ public class ProdutoControlador {
 
         return "produto/visualizar-estoque";
     }
-
-
-
-
-
-
-
 }
