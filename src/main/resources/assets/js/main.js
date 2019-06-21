@@ -29,6 +29,6 @@ $(function () {
     window.Modal = new Modal();
     window.EditaPedido = EditarPedido;
     window.Burger = Burger;
-    window.EditaProdutoEstoque = EditaProdutoEstoque;
+    // window.EditaProdutoEstoque = EditaProdutoEstoque;
 
 });

@@ -92,7 +92,6 @@ public class ProdutoControlador {
 
             return "produto/editar";
 
-
         }
 
         return "produto/editar";
@@ -105,7 +104,9 @@ public class ProdutoControlador {
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
 
         try {
-            produtoProdutor.setQuantidadeEstoque(produtoProdutor.getQuantidadeEstoque());
+//            produtoProdutor.setQuantidadeEstoque(produtoProdutor.getQuantidadeEstoque());
+//            produtoProdutorServico.salvar(produtoProdutor);
+
             produtoProdutorServico.salvar(produtoProdutor);
 
             String mensagem = "Seu produto foi alterado com sucesso!";
@@ -113,7 +114,9 @@ public class ProdutoControlador {
         } catch (ProdutoNaoSalvoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
-            return "produto/editar";
+            return "redirect:/produtos/cadastro";
+
+//            return "produto/editar";
 
         }
 

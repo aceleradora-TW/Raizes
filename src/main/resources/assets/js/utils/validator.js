@@ -132,6 +132,7 @@ export default class Validator {
     if(!selector  || !rules) return;
     
     const element = this.$form.find(selector);
+    console.log(element);
     element.validator(rules);
   }
 }
