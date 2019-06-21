@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Raízes</title>
+</head>
+<body>
+<section class="section">
+    <section class="container">
+        <h1 class="title centraliza-texto">Meu Estoque</h1>
+        <div>
+            <p>Não há listas criadas.</p>
+        </div>
+        <div class="columns">
+            <div class="column is-12">
+                <div class="box rz-box">
+                    <div class="rz-box-body px-0 pb-0">
+                        <table class="rz-table striped">
+                            <thead class="table-header">
+                                <th>Produto</th>
+                                <th>Tipo</th>
+                                <th>Quantidade</th>
+                                <th>Valor</th>
+                            </thead>
+                            <tbody class="table-body">
+                            <tr>
+                                <td>
+                                    <span>Banana</span>
+                                </td>
+                                <td>
+                                    <span>Organico</span>
+                                </td>
+                                <td>
+                                    <span>100</span>
+                                </td>
+                                <td>
+                                    <span>R$ 10.00</span>
+                                    <span>/Kg</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Laranja</span>
+                                </td>
+                                <td>
+                                    <span>Hidroponico</span>
+                                </td>
+                                <td>
+                                    <span>50</span>
+                                </td>
+                                <td>
+                                    <span>R$ 5.00</span>
+                                    <span>/Kg</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Morango</span>
+                                </td>
+                                <td>
+                                    <span>Organico</span>
+                                </td>
+                                <td>
+                                    <span>25</span>
+                                </td>
+                                <td>
+                                    <span>R$ 2.50</span>
+                                    <span>/Kg</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="rz-box-footer flex space-between p-3">
+                        <a class="button rz-button is-rounded" th:href="@{/}">Voltar</a>
+                        <a class="button rz-button is-rounded" th:href="@{/}">Adicionar Produto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+</body>
+</html>
