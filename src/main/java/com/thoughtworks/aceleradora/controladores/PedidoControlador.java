@@ -83,15 +83,11 @@ public class PedidoControlador {
         modelo.addAttribute("listaNome", minhaListaServico.encontraUm(listaId).getNome());
         modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
 
+
         return "pedido/realizar-pedido";
     }
 
 
-    @ResponseBody
-    @GetMapping("/enderecos")
-    public List<Endereco> mostraEndereco() {
-        return enderecoServico.pegaTodos();
-    }
 
     @PostMapping("/{id}/excluir")
     public String removerPedido(@PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
@@ -105,7 +101,8 @@ public class PedidoControlador {
 
 
     @PostMapping("/realizar-pedido")
-    public String salvarPedido(@Valid Pedido pedido, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos, Breadcrumb breadcrumb) {
+    public String salvarPedido(@Valid Pedido pedido, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos,
+                               Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
@@ -122,17 +119,4 @@ public class PedidoControlador {
 
         return "redirect:/pedidos";
     }
-
-
-    @ResponseBody
-    @GetMapping("/teste")
-    public Map listaProdutosProdutores() {
-        Map<String, List> mapa = new HashMap<>();
-        List<Produto> produtos = produtoServico.pegarTodos();
-        List<Produtor> produtores = produtorServico.pegarTodosProdutores();
-        mapa.put("produtos", produtos);
-        mapa.put("produtores", produtores);
-        return mapa;
-    }
-
 }

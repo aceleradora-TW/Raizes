@@ -55,11 +55,11 @@ public class PedidoServico {
     }
 
     public Pedido salvarPedido(Pedido pedido) {
+
         pedido.setCliente(clienteServico.encontraNeiva());
+
         return pedidorepositorio.save(pedido);
     }
-
-
 
 }
 

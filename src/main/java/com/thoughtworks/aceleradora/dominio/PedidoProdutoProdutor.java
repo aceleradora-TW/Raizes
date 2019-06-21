@@ -24,6 +24,12 @@ public class PedidoProdutoProdutor {
     public PedidoProdutoProdutor() {
     }
 
+    public PedidoProdutoProdutor(int quantidadePedido, ProdutoProdutor produtoProdutor, Pedido pedido) {
+        this.quantidadePedido = quantidadePedido;
+        this.produtoProdutor = produtoProdutor;
+        this.pedido = pedido;
+    }
+
     public Long getId() {
         return id;
     }
