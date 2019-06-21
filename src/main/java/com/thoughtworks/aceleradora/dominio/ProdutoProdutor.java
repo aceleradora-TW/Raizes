@@ -27,7 +27,7 @@ public class ProdutoProdutor{
     @Enumerated(EnumType.STRING)
     @Column(name="tipo_de_cultivo")
     private TipoDeCultivo tipoDeCultivo;
-
+    
     public ProdutoProdutor() {
     }
 
