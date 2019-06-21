@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.servicos;
 
 import com.thoughtworks.aceleradora.dominio.Cliente;
+import com.thoughtworks.aceleradora.dominio.excecoes.ClienteNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.repositorios.ClienteRepositorio;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,9 @@ public class ClienteServico {
         this.repositorio = repositorio;
     }
 
-    public Cliente encontraNeiva() {
+    public Cliente encontraCliente() {
         return repositorio
-                .findByNome("Neiva")
-                .orElseThrow(() -> new IllegalStateException("Neiva nao esta cadastrada"));
+                .findByNome("Cliente")
+                .orElseThrow(ClienteNaoEncontradoExcecao::new);
     }
 }
