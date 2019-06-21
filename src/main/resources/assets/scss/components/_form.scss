@@ -52,7 +52,7 @@
   .checkbox {
     padding: 5px 1px 12px 22px;
   }
-  
+
 }
 .radio {
   padding: 5px 1px 12px 22px;
@@ -62,7 +62,7 @@ input[type="radio"] {
   display: none;
 }
 input[type="radio"] {
-  ~ label {    
+  ~ label {
     padding: 0;
     user-select: none;
   }

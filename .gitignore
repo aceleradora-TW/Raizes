@@ -41,3 +41,6 @@ bin/
 
 # Node
 node_modules
+
+# Lombok
+lombok.config
