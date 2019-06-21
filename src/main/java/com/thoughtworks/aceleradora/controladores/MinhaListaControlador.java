@@ -74,7 +74,7 @@ public class MinhaListaControlador {
 
         minhaListaServico.salvar(minhaLista);
 
-        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Lista criada com sucesso");
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Lista criada com sucesso!");
 
         return "redirect:/minhas-listas";
     }
