@@ -86,7 +86,7 @@ public class ProdutoControlador {
             modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
             modelo.addAttribute("produtoProdutor", produtoprodutor);
 
-        } catch (ProdutoNaoEncontradoExcecao e){
+        } catch (ProdutoNaoEncontradoExcecao e) {
             redirecionamentoDeAtributos.addAttribute("mensagem", e.getMessage());
 
             return "redirect:/produtos/cadastro";
@@ -114,5 +114,14 @@ public class ProdutoControlador {
         }
 
         return "produto/editar";
+    }
+
+    @GetMapping("/visualizar-estoque")
+    public String estoque(Breadcrumb breadcrumb, Model modelo) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Estoque", "produto/visualizar-estoque");
+
+        return "produto/visualizar-estoque";
     }
 }
