@@ -17,7 +17,7 @@ public class ProdutoServico {
         this.repositorio = repositorio;
     }
 
-    public List<Produto> pegarTodos() {
+    public List<Produto> pegarTodosPorOrdemAlfabetica() {
             return repositorio.findAllByOrderByNome();
     }
 
