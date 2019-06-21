@@ -3,16 +3,20 @@ import Validator from '../utils/validator'
 export default {
     validaFormulario: () => {
       const validador = new Validator('#formEditarProduto');
-      //validador.setRequiredValidatorToFieldGroup('preco', 'Campo não pode ser vazio e não pode ter números negativos');
-      //validador.setRequiredValidatorToFieldGroup('quantidadeEstoque','Campo não pode ser vazio e não pode ter números negativos');
-      
-      validador.setRulesForEachInputs({
+
+      validador.setFieldRule("#quantidadeEstoque",{
         rules: {
           required: true,
           number: true,
           min: 1
         }
       });
+
+      validador.setFieldRule("#preco",{
+        rules: {
+          required: true,
+          min: 0
+        }
+      });
     },
-    salvar: (Form) => true
 }
