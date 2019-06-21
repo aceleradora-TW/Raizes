@@ -23,10 +23,11 @@
                             <h3 th:text="${produto.nome}"></h3>
                             <div th:each="produtoProdutor: ${produtoresDeProdutos.get(produto)}">
 
-                                <div class="box">
+                                <div class="box" id="inputRadio">
                                     <div class="flex equal-sizing flex-row">
                                         <label class="radio">
-                                            <input type="checkbox" class="d-block" th:value="${produtoProdutor.id}" th:field="*{pedidosProdutosProdutores[__${index.index}__].produtoProdutor}">
+                                            <input type="radio" class="d-block" th:value="${produtoProdutor.id}" th:field="*{pedidosProdutosProdutores[__${index.index}__].produtoProdutor}"
+                                                   >
                                             <span th:text="${produtoProdutor.produtor.nome}"></span>
                                         </label>
                                         <span><i class="fas fa-map-marker-alt"></i>
@@ -49,7 +50,7 @@
                                             <span>Valor: R$ <span th:text="${produtoProdutor.preco}"></span></span>
                                             <span th:text="${produto.unidadeMedida}"></span></span>
                                             <label class="label">Quantidade: <input size="5" th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
-                                                    placeholder="Ex: 4"></label>
+                                                    placeholder="Ex: 4" disabled></label>
                                         </div>
                                     </div>
                                 </div>

@@ -16,19 +16,22 @@ import EditarPedido from './pages/editaPedido'
 
 
 $(function () {
-    CriarLista.validaFormulario();   
-    EditarLista.validaFormulario();
+    
 
-
-
+    window.Modal = new Modal();
+    window.Burger = Burger;
     window.MinhasListas = MinhasListas;
     window.EditarLista = EditarLista;
     window.RealizarPedido = RealizarPedido;
     window.Pedidos = Pedidos;
     window.Pedido = Pedido;
     window.CriarLista = CriarLista;
-    window.Modal = new Modal();
     window.EditaPedido = EditarPedido;
-    window.Burger = Burger;
+    
+    CriarLista.validaFormulario();   
+    EditarLista.validaFormulario();
+    RealizarPedido.habilitaInputsDeQuantidade($);
+    RealizarPedido.exibeConfirmacaoDeCancelamento();
+    
 
 });
