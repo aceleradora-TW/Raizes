@@ -5,10 +5,7 @@ import com.thoughtworks.aceleradora.dominio.Pedido;
 import com.thoughtworks.aceleradora.dominio.Endereco;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
-import com.thoughtworks.aceleradora.servicos.EnderecoServico;
-import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
-import com.thoughtworks.aceleradora.servicos.PedidoServico;
-import com.thoughtworks.aceleradora.servicos.ProdutorServico;
+import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +23,7 @@ public class PedidoControlador {
     private PedidoServico pedidoServico;
     private EnderecoServico enderecoServico;
     private ProdutorServico produtorServico;
+    private ProdutoProdutorServico produtoProdutorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
             "/");
@@ -46,7 +44,6 @@ public class PedidoControlador {
         .pagina("Pedidos", "/pedido/pedidos");
 
         modelo.addAttribute("pedidosCriados", pedidoServico.pegarPedidos());
-
         return "pedido/pedidos";
     }
 
@@ -56,6 +53,7 @@ public class PedidoControlador {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Visualizar Pedido", "/pedidos");
+        modelo.addAttribute("pedido", pedidoServico.encontraUm(id));
         return "pedido/visualizar-pedido";
     }
 

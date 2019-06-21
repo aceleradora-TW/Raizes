@@ -7,24 +7,24 @@
 <body>
     <section class="section">
         <section class="container">
-            <h1 class="title  centraliza-texto" th:text="${pedido.nome}"></h1>
+            <h1 class="title centraliza-texto" th:text="${pedido.nome}"></h1>
             <div class="columns">
                 <div class="column is-6">
                     <div class="box">
-                        <form id="formVisualizarPedido" th:action="@{/pedidos/{id}(id=${lista.id})}" method="post">
+                        <form id="formVisualizarPedido" th:action="@{/pedidos/{id}(id=${pedido.id})}" method="post">
                             <div class="field">
-                                <h1 class="title centraliza-texto">Feijoada de domingo</h1>
+                                <h1 class="title centraliza-texto" th:text="${pedido.pedidosProdutosProdutores}"></h1>
                             </div>
                             <div class="columns">
                                 <div class="column is-12">
                                     <div class="box">
                                         <div class="field">
                                             <div class="control">
-                                               <span th:each="pedidosProdutosProdutores : ${pedido.pedidosProdutosProdutores}">
-                                                <h4><b th:text="${pedidosProdutosProdutores.produtoProdutor.produtor.nome}"></b></h4>
+                                               <span th:each="pedido : ${pedido}">
+                                                <h4><b th:text="${pedido.pedidosProdutosProdutores}"></b></h4>
                                                 <div class="flex equal-sizing flex-row">
-													<span th:text="${pedidosProdutosProdutores.produtoProdutor.produto}"></span>
-													<span th:text="'R$ ' + ${pedidosProdutosProdutores.produtoProdutor.preco}"></span>
+													<span th:text="${pedido.nome}"></span>
+													<span th:text="'R$ ' + ${pedido}"></span>
 												</div>
                                                 <span>
                                                 <span th:if="${true}">
