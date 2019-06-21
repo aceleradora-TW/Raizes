@@ -1,55 +1,29 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import javax.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
 
-import static javax.persistence.GenerationType.IDENTITY;
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@Entity
 
-@Entity(name = "clientes")
-public class Cliente {
-
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long id;
-
-    private String nome;
-
-    @OneToOne
-    @JoinColumn(name = "id_usuarios")
-    private Usuario usuario;
+@DiscriminatorValue(TipoDeUsuario.Valores.CLIENTE)
+@Table(name = "clientes")
+public class Cliente extends Usuario{
 
     @OneToMany(mappedBy="cliente")
     private List<MinhaLista> minhasListas;
 
-    public Cliente() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", usuario=" + usuario +
-                '}';
+    public Cliente(String email, String senha, String nome, String contato, Endereco endereco, List<MinhaLista> minhasListas) {
+        super(email, senha, nome, contato, endereco);
+        this.minhasListas = minhasListas;
     }
 }
