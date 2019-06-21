@@ -59,7 +59,6 @@ public class ProdutoProdutorControlador {
         modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
         modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
         modelo.addAttribute("produtos", produtoServico.pegarTodos());
-        modelo.addAttribute("produtoProdutor",new ProdutoProdutor());
         modelo.addAttribute("medidas", Arrays.asList(UnidadeMedida.values()));
         modelo.addAttribute("produtoProdutor", produtoProdutorComProdutorHardocoded);
 
