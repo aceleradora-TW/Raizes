@@ -1,9 +1,6 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
-import com.thoughtworks.aceleradora.dominio.TipoDeCultivo;
-import com.thoughtworks.aceleradora.dominio.UnidadeMedida;
+import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
@@ -68,8 +65,7 @@ public class ProdutoProdutorControlador {
     @PostMapping("/cadastro")
     public String salvarProdutoProdutor(ProdutoProdutor produtoProdutor,
                                         Breadcrumb breadcrumb,
-                                        RedirectAttributes redirecionamentoDeAtributos,
-                                        Model modelo) {
+                                        RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Produtos", "/produtos")
@@ -100,7 +96,7 @@ public class ProdutoProdutorControlador {
             modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
             modelo.addAttribute("produtoProdutor", produtoprodutor);
 
-        } catch (ProdutoNaoEncontradoExcecao e){
+        } catch (ProdutoNaoEncontradoExcecao e) {
             redirecionamentoDeAtributos.addAttribute("mensagem", e.getMessage());
 
             return "redirect:/produtos/cadastro";
@@ -128,5 +124,14 @@ public class ProdutoProdutorControlador {
         }
 
         return "produto/editar";
+    }
+
+    @GetMapping("/visualizar-estoque")
+    public String estoque(Breadcrumb breadcrumb, Model modelo) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Estoque", "produto/visualizar-estoque");
+
+        return "produto/visualizar-estoque";
     }
 }
