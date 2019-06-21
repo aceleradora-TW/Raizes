@@ -1,62 +1,26 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import javax.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-@Entity(name = "produtores")
-@Access(AccessType.FIELD)
-public class Produtor {
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@Entity
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+@DiscriminatorValue(TipoDeUsuario.Valores.PRODUTOR)
+@Table(name = "produtores")
+public class Produtor extends Usuario{
 
-    private String nome;
     private boolean possuiTransporte;
 
-    @ManyToOne
-    @JoinColumn(name = "id_enderecos")
-    private Endereco endereco;
-
-    public Produtor() {
-    }
-
-    public Produtor(String nome, boolean possuiTransporte, Endereco endereco) {
-        this.nome = nome;
+    public Produtor(String email, String senha, String nome, String contato, Endereco endereco, boolean possuiTransporte) {
+        super(email, senha, nome, contato, endereco);
         this.possuiTransporte = possuiTransporte;
-        this.endereco = endereco;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public boolean isPossuiTransporte() {
-        return possuiTransporte;
-    }
-
-    public void setPossuiTransporte(boolean possuiTransporte) {
-        this.possuiTransporte = possuiTransporte;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
     }
 }

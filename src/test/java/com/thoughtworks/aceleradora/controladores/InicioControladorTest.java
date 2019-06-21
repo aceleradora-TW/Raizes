@@ -9,7 +9,7 @@ public class InicioControladorTest {
 
     @Test
     public void renderizaPaginaInicio() {
-        InicioControlador inicioControlador = new InicioControlador();
+        InicioControlador inicioControlador = new InicioControlador(null, null);
 
         assertEquals("inicio", inicioControlador.renderizaPaginaInicial(new Breadcrumb()));
     }
