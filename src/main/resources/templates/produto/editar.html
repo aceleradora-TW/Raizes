@@ -36,21 +36,23 @@
               <label>Quantidade:</label>
               <input type="number" th:field="*{quantidadeEstoque}" name="quantidadeEstoque" />
               <div class="help-block"></div>
-              <div class="field">
-                <label>Valor:</label>
-                <input th:field="*{preco}" name="preco" /> 
-                <label th:text="*{produto.unidadeMedida}"></label>
-                <div class="help-block"></div>
-              </div>
             </div>
             <div class="field">
-              <div class="rz-box-footer flex space-between p-3">
-                <a href="/" class="button rz-button is-rounded">Cancelar</a>
-                <button class="button rz-button is-rounded" type="submit">Salvar</button>
-              </div>
+              <label>Valor:</label>
+              <input th:field="*{preco}" name="preco" />
+              <label th:text="*{produto.unidadeMedida}"></label>
+              <div class="help-block"></div>
             </div>
-          </form>
+
         </div>
+        <div class="field">
+          <div class="rz-box-footer flex space-between p-3">
+            <a href="/" class="button rz-button is-rounded">Cancelar</a>
+            <button class="button rz-button is-rounded" type="submit">Salvar</button>
+          </div>
+        </div>
+        </form>
+      </div>
       </div>
     </section>
   </section>
