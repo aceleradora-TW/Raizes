@@ -1,6 +1,5 @@
 export default {
   atualizaUnidadeMedida: (e) => {
-    console.log(e);
     const seletorDeProdutos = $('#seletorDeProdutos');
     
     if(seletorDeProdutos.get().length < 1) {
