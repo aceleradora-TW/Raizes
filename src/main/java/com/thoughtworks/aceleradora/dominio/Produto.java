@@ -1,7 +1,5 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -17,7 +15,6 @@ public class Produto {
 
     @ManyToOne
     @JoinColumn(name = "id_categorias")
-    @JsonIgnoreProperties("produtos")
     private Categoria categoria;
 
     @Enumerated(EnumType.STRING)
@@ -73,4 +70,3 @@ public class Produto {
     }
 
 }
-

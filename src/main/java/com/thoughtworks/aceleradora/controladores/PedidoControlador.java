@@ -1,7 +1,9 @@
 package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
+import com.thoughtworks.aceleradora.dominio.Pedido;
 import com.thoughtworks.aceleradora.dominio.Endereco;
+import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
 import com.thoughtworks.aceleradora.servicos.EnderecoServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
@@ -25,9 +27,8 @@ public class PedidoControlador {
     private EnderecoServico enderecoServico;
     private ProdutorServico produtorServico;
 
-
-    private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
-            .pagina("Página Inicial", "/");
+    private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
+            "/");
 
     @Autowired
     public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico,
@@ -49,30 +50,20 @@ public class PedidoControlador {
         return "pedido/pedidos";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/visualizar-pedido")
     public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
-        breadcrumb
-                .aproveitar(partesComunsDoBreadCrumb)
+
+        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
-                .pagina("Visualizar pedido", "/pedidos");
-
-        try {
-
-            modelo.addAttribute("pedido", pedidoServico.encontraUm(id));
-
-//            modelo.addAttribute("produtor", produtorServico.encontraUm(id));
-            return "pedido/visualizar-pedido";
-        }
-        catch (ListaNaoEncontradaExcecao e) {
-            return "redirect:/pedidos";
-        }
-
+                .pagina("Visualizar Pedido", "/pedidos");
+        return "pedido/visualizar-pedido";
     }
 
-    @GetMapping("/realizar-pedido")
-    public String realizarPedidos(Breadcrumb breadcrumb) {
-        breadcrumb.aproveitar(partesComunsDoBreadCrumb).pagina("realizar pedido", "/pedido/pedidos");
-
+    @GetMapping("/{id}/realizar-pedido")
+    public String realizarPedidos(@PathVariable("id") Long id, Breadcrumb breadcrumb) {
+        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedidos")
+                .pagina("Realizar Pedido", "/pedido/pedidos");
         return "pedido/realizar-pedido";
     }
 
@@ -84,7 +75,6 @@ public class PedidoControlador {
 
     @PostMapping("/{id}/excluir")
     public String removerPedido(@PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
-
 
         pedidoServico.removerPedido(id);
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido excluído com sucesso!");

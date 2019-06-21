@@ -45,9 +45,9 @@
                 </td>
                 <td>Pendente</td>
                 <td class="flex center">
-                  <a class="button rz-button list-style" th:href="@{/pedidos/{id}(id=${pedido.id})}">
+                  <a class="button rz-button list-style" th:href="@{/pedidos/{id}/visualizar-pedido(id=${pedido.id})}">
                     <i class="fas fa-eye"></i></a>
-                  <a class="button rz-button list-style">
+                  <a class="button rz-button list-style" th:href="@{/pedidos/{id}/realizar-pedido(id=${pedido.id})}">
                     <i class="fas fa-edit"></i></a>
                   <form th:action="@{/pedidos/{id}/excluir(id=${pedido.id})}" method="post" name="meuform"
                         th:onsubmit="return Pedidos.exibeConfirmacaoDeExclusaoDoPedido()">
