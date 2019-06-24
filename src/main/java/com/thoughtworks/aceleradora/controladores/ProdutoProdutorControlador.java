@@ -110,18 +110,17 @@ public class ProdutoProdutorControlador {
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
 
+         String mensagem = "Salva com sucesso.";
         try {
             produtoProdutorServico.salvar(produtoProdutor);
-
-            String mensagem = "Seu produto foi alterado com sucesso!";
-            modelo.addAttribute("mensagem", mensagem);
         } catch (ProdutoNaoSalvoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
             return "redirect:/produtos/cadastro";
         }
 
-        return "produto/editar";
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", mensagem);
+        return "redirect:/produtos/visualizar-estoque";
     }
 
     @GetMapping("/visualizar-estoque")

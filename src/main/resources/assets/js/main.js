@@ -18,6 +18,7 @@ import CadastraProduto from './pages/cadastraProduto'
 
 
 $(function () {
+    window.Modal = new Modal();
     CriarLista.validaFormulario();   
     EditarLista.validaFormulario();
     CadastraProduto.atualizaUnidadeMedida();
@@ -28,10 +29,8 @@ $(function () {
     window.Pedidos = Pedidos;
     window.Pedido = Pedido;
     window.CriarLista = CriarLista;
-    window.Modal = new Modal();
     window.EditaPedido = EditarPedido;
     window.Burger = Burger;
     window.Produtos = Produtos;
     window.CadastraProduto = CadastraProduto;
-
 });

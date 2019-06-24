@@ -42,8 +42,9 @@
                         </div>
                         <div class="field">
                             <div class="rz-box-footer flex space-between p-3">
-                                <a href="/" class="button rz-button is-rounded">Cancelar</a>
-                                <button th:href="@{/produtos/{id}/editar(id=2)}" class="button rz-button is-rounded" type="submit">Salvar</button>
+                                <a th:onclick="return Produtos.exibeConfirmacaoDeCancelamento('/produtos/visualizar-estoque')" class="button rz-button is-rounded">Cancelar</a>
+                                <button class="button rz-button is-rounded" type="submit">Salvar</button>
+
                             </div>
                         </div>
                     </form>
