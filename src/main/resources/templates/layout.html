@@ -18,7 +18,7 @@
           Produtos</a>
         <a class="navbar-item is-primary is-inverted is-outlined" th:href="@{/minhas-listas}">Minhas Listas</a>
         <a class="navbar-item is-primary is-inverted is-outlined" th:href="@{/pedidos}">Pedidos</a>
-        <a class="navbar-item is-primary is-inverted is-outlined" th:href="@{/produtos/{id}/editar(id=2)}">Estoque</a>
+        <a class="navbar-item is-primary is-inverted is-outlined" th:href="@{/produtos/visualizar-estoque}">Estoque</a>
       </div>
       <a class="sanduiche-button" onclick="Burger.toggleSanduiche()">
         <i class="fas fa-bars fas fa-2x"></i>
@@ -46,24 +46,22 @@
     </div>
   </div>
   <footer class="rz-footer">
-    <span class="navbar-item siga">Siga a gente</span>
-    <div class="flex flex-row rz-footer texto ">
-      <a class="navbar-item" href="/">
-        <i class="fab fa-facebook"></i>
-      </a>
-      <a class="navbar-item" href="/">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a class="navbar-item" href="/">
-        <i class="fab fa-instagram"></i>
-      </a>
-    </div>
-    <div class="navbar-brand has-text-left">
+    <div class="navbar-brand has-text-left flex space-between">
       <a class="navbar-item" href="/">
         <i class="fab fa-pagelines"></i>
         <span class="m-2 primary">Raízes</span>
       </a>
-      <span class="m-2 navbar-item primary">Thoughtworks © 2019</span>
+      <div class="flex flex-row">
+        <a class="navbar-item" href="/">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a class="navbar-item" href="/">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a class="navbar-item" href="/">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
     </div>
   </footer>
   <div th:replace="fragmentos/modal"></div>
