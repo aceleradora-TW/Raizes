@@ -17,7 +17,7 @@
 
 						<h1 class="title centraliza-texto" th:text="${listaNome}"></h1>
 
-						<input th:type="hidden" th:field="*{nome}" th:value="${listaNome}" class="title centraliza-texto"
+						<input th:type="hidden" th:field="*{nome}" th:value="${listaNome}"
 							th:text="${listaNome}">
 
 						<div th:each="produto, index : ${produtoresDeProdutos.keySet()}">
@@ -49,7 +49,7 @@
 													<span th:text="${produtoProdutor.tipoDeCultivo}"></span>
 												</span>
 												<span>Valor: R$ <span th:text="${produtoProdutor.preco}"></span></span>
-												<span th:text="${produto.unidadeMedida}"></span></span>
+												<span th:text="${produto.unidadeMedida.getCodigo()}"></span></span>
 												<label class="label">Quantidade: <input size="5"
 														th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
 														placeholder="Ex: 4" disabled></label>
