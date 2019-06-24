@@ -22,7 +22,7 @@ public class ProdutoProdutorServico {
         this.minhaListaRepositorio = minhaListaRepositorio;
     }
 
-    public List<ProdutoProdutor> pegarTodosProdutosProdutores (){
+    public List<ProdutoProdutor> pegarProdutos(){
         return produtoProdutorRepositorio.findAll();
     }
 
@@ -40,7 +40,6 @@ public class ProdutoProdutorServico {
 
         return byProdProd;
     }
-
 
     public List<ProdutoresDeProdutos> organizarProdutoresDeProdutos(List<ProdutoProdutor> produtoProdutores) {
         Map<Produto, ProdutoresDeProdutos> mapaDeProdutoresDeProdutos = new HashMap<>();
@@ -70,6 +69,4 @@ public class ProdutoProdutorServico {
     public ProdutoProdutor salvar(ProdutoProdutor produtoProdutor) {
         return produtoProdutorRepositorio.save(produtoProdutor);
     }
-
-
 }
