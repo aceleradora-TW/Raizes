@@ -6,6 +6,7 @@ import com.thoughtworks.aceleradora.repositorios.ProdutoRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutoServico {
@@ -16,16 +17,12 @@ public class ProdutoServico {
         this.repositorio = repositorio;
     }
 
-    public List<Produto> pegarTodos() {
-            return repositorio.findAll();
+    public List<Produto> pegarTodosPorOrdemAlfabetica() {
+            return repositorio.findAllByOrderByNome();
     }
 
     public Produto salvar (Produto produto) {
         return repositorio.save(produto);
     }
-
-    public Produto encontraUm(Long id) {
-        return repositorio.findById(id).get();
-    }
-
+    
 }

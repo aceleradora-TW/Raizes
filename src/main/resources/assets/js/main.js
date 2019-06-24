@@ -12,14 +12,18 @@ import Pedido from './pages/pedido'
 import Modal from './components/modal'
 import Burger from './components/menu-burger'
 import EditarPedido from './pages/editaPedido'
+import Produtos from './pages/produtos'
+import CadastraProduto from './pages/cadastraProduto'
 
 
 
 $(function () {
-    
+
 
     window.Modal = new Modal();
     window.Burger = Burger;
+    window.Produtos = Produtos;
+    window.CadastraProduto = CadastraProduto;
     window.MinhasListas = MinhasListas;
     window.EditarLista = EditarLista;
     window.RealizarPedido = RealizarPedido;
@@ -28,10 +32,12 @@ $(function () {
     window.CriarLista = CriarLista;
     window.EditaPedido = EditarPedido;
     
-    CriarLista.validaFormulario();   
-    EditarLista.validaFormulario();
-    RealizarPedido.habilitaInputsDeQuantidade($);
-    RealizarPedido.exibeConfirmacaoDeCancelamento();
     
+    CriarLista.validaFormulario();
+    EditarLista.validaFormulario();
+    CadastraProduto.atualizaUnidadeMedida();
+    RealizarPedido.habilitaInputsDeQuantidade($);
+  
+
 
 });

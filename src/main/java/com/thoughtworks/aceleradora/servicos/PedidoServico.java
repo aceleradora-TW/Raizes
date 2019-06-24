@@ -57,7 +57,7 @@ public class PedidoServico {
 
     public Pedido salvarPedido(Pedido pedido) {
 
-        pedido.setCliente(clienteServico.encontraNeiva());
+        pedido.setCliente(clienteServico.encontraCliente());
         pedido.setPedidosProdutosProdutores(pedido
                 .getPedidosProdutosProdutores()
                 .stream()

@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.servicos;
 
 import com.thoughtworks.aceleradora.dominio.Produtor;
+import com.thoughtworks.aceleradora.dominio.excecoes.ProdutorNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.repositorios.ProdutorRepositorio;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +20,10 @@ public class ProdutorServico {
         return repositorio.findAll();
     }
 
+    public Produtor encontraUm(Long id){
+        return repositorio
+                .findById(id)
+                .orElseThrow(ProdutorNaoEncontradoExcecao::new);
+    }
 
 }
