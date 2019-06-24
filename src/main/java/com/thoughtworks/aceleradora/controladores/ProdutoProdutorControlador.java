@@ -2,6 +2,7 @@ package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
+import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoPodeSerNegativoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
@@ -124,6 +125,11 @@ public class ProdutoProdutorControlador {
             String mensagem = "Seu produto foi alterado com sucesso!";
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", mensagem);
         } catch (ProdutoNaoSalvoExcecao e) {
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
+
+            return "redirect:/produtos/{id}/editar";
+
+        } catch (ProdutoNaoPodeSerNegativoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
             return "redirect:/produtos/{id}/editar";
