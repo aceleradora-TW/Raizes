@@ -84,7 +84,8 @@ public class ProdutoProdutor {
     }
 
     public BigDecimal getPreco() {
-        return preco.setScale(2, RoundingMode.HALF_EVEN);
+//        return preco.setScale(2, RoundingMode.HALF_EVEN);
+        return preco;
     }
 
     public void setPreco(BigDecimal preco) {

@@ -116,21 +116,20 @@ public class ProdutoProdutorControlador {
         try {
 //            produtoProdutor.setQuantidadeEstoque(produtoProdutor.getQuantidadeEstoque());
 //            produtoProdutorServico.salvar(produtoProdutor);
-
             produtoProdutorServico.salvar(produtoProdutor);
 
             String mensagem = "Seu produto foi alterado com sucesso!";
             modelo.addAttribute("mensagem", mensagem);
-        } catch (ProdutoNaoSalvoExcecao e) {
+        } catch (Exception e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
-            return "redirect:/produtos/cadastro";
+            return "redirect:/produtos/{id}/editar";
 
 //            return "produto/editar";
 
         }
 
-        return "produto/editar";
+        return "produto/{id}/editar";
     }
 
     @GetMapping("/visualizar-estoque")
