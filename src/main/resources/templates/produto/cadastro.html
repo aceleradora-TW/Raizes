@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
-
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
-
 <body>
   <section class="section">
     <section class="container">
@@ -53,7 +51,7 @@
                     <label class="label">Valor do produto*</label>
                     <div class="control">
                       <input class="input" th:field="*{preco}" type="number" placeholder="Ex.: 4.00">
-                      <div class="field"> 
+                      <div class="field">
                       <span id="unidadeMedida"></span>
                       </div>
                     </div>
@@ -65,6 +63,7 @@
                   <button class="button rz-button is-rounded flex-end" type="submit">Salvar</button>
                 </div>
                 <div class="help-block"></div>
+              </div>
             </form>
           </div>
         </div>
@@ -72,5 +71,4 @@
     </section>
   </section>
 </body>
-
 </html>

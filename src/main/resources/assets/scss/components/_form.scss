@@ -6,16 +6,17 @@
     min-height: 50px;
     position: relative;
   }
-  input[type="checkbox"] {
+  input[type="checkbox"],
+  input[type="radio"] {
     vertical-align: baseline;
     display: none;
   }
-  input[type="checkbox"] {
+  input[type="checkbox"],
+  input[type="radio"] {
     ~ label {
       padding: 5px 23px 5px 28px;
       border: 1px solid #cfe2a9;
     }
-
     ~ span.check {
       position: absolute;
       visibility: hidden;
@@ -52,7 +53,6 @@
   .checkbox {
     padding: 5px 1px 12px 22px;
   }
-
 }
 .radio {
   padding: 5px 1px 12px 22px;
@@ -104,3 +104,6 @@ input[type="radio"] {
 .preco{
   padding-block-start: 25px !important;
   }
+.form-input{
+  width:350px;
+}
