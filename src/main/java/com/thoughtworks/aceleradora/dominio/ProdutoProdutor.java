@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import static java.math.BigDecimal.ZERO;
 import static java.math.RoundingMode.HALF_EVEN;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -20,7 +21,7 @@ public class ProdutoProdutor {
 
     private Integer quantidadeEstoque;
 
-    private BigDecimal preco;
+    private BigDecimal preco = ZERO;
 
     @ManyToOne
     @JoinColumn(name = "id_produtos")
@@ -35,17 +36,6 @@ public class ProdutoProdutor {
     private TipoDeCultivo tipoDeCultivo;
 
     public ProdutoProdutor() {
-    }
-
-    public ProdutoProdutor(Integer quantidadeEstoque, BigDecimal preco,
-                           Produto produto, Produtor produtor,
-                           TipoDeCultivo tipoDeCultivo) {
-
-        this.quantidadeEstoque = quantidadeEstoque;
-        this.preco = preco;
-        this.produto = produto;
-        this.produtor = produtor;
-        this.tipoDeCultivo = tipoDeCultivo;
     }
 
     public Long getId() {
@@ -89,7 +79,8 @@ public class ProdutoProdutor {
     }
 
     public BigDecimal getPreco() {
-       return preco.setScale(DUAS_CASAS_APOS_A_VIRGULA, HALF_EVEN);
+        //return preco.setScale(DUAS_CASAS_APOS_A_VIRGULA, HALF_EVEN);
+        return preco;
     }
 
     public void setPreco(BigDecimal preco) {

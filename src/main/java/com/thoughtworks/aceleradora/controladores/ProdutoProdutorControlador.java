@@ -114,9 +114,6 @@ public class ProdutoProdutorControlador {
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
 
         try {
-//            produtoProdutor.setQuantidadeEstoque(produtoProdutor.getQuantidadeEstoque());
-//            produtoProdutorServico.salvar(produtoProdutor);
-
             produtoProdutorServico.salvar(produtoProdutor);
 
             String mensagem = "Seu produto foi alterado com sucesso!";
@@ -126,11 +123,9 @@ public class ProdutoProdutorControlador {
 
             return "redirect:/produtos/{id}/editar";
 
-//            return "produto/editar";
-
         }
 
-        return "produto/{id}/editar";
+        return "produto/editar";
     }
 
     @GetMapping("/visualizar-estoque")
