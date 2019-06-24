@@ -1,9 +1,9 @@
 package com.thoughtworks.aceleradora.dominio;
 
 public enum TipoDeCultivo {
-    ORGANICO("Organico"),
+    ORGANICO("Orgânico"),
     CONVENCIONAL("Convencional"),
-    HIDROPONICO("Hidroponico");
+    HIDROPONICO("Hidropônico");
 
     private String codigo;
 
