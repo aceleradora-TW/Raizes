@@ -33,7 +33,6 @@ public class MinhaLista {
     private Cliente cliente;
 
     public MinhaLista() {
-
     }
 
     public void setId(Long id) {
