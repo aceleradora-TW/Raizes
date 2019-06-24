@@ -5,16 +5,21 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import static java.math.RoundingMode.HALF_EVEN;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "produtos_produtores")
 @Access(AccessType.FIELD)
 public class ProdutoProdutor {
 
+    private static final int DUAS_CASAS_APOS_A_VIRGULA = 2;
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private int quantidadeEstoque;
+
+    private Integer quantidadeEstoque;
+
     private BigDecimal preco;
 
     @ManyToOne
@@ -28,11 +33,11 @@ public class ProdutoProdutor {
     @Enumerated(EnumType.STRING)
     @Column(name="tipo_de_cultivo")
     private TipoDeCultivo tipoDeCultivo;
-    
+
     public ProdutoProdutor() {
     }
 
-    public ProdutoProdutor(int quantidadeEstoque, BigDecimal preco,
+    public ProdutoProdutor(Integer quantidadeEstoque, BigDecimal preco,
                            Produto produto, Produtor produtor,
                            TipoDeCultivo tipoDeCultivo) {
 
@@ -51,11 +56,11 @@ public class ProdutoProdutor {
         this.id = id;
     }
 
-    public int getQuantidadeEstoque() {
+    public Integer getQuantidadeEstoque() {
         return quantidadeEstoque;
     }
 
-    public void setQuantidadeEstoque(int quantidadeEstoque) {
+    public void setQuantidadeEstoque(Integer quantidadeEstoque) {
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
@@ -84,8 +89,7 @@ public class ProdutoProdutor {
     }
 
     public BigDecimal getPreco() {
-//        return preco.setScale(2, RoundingMode.HALF_EVEN);
-        return preco;
+       return preco.setScale(DUAS_CASAS_APOS_A_VIRGULA, HALF_EVEN);
     }
 
     public void setPreco(BigDecimal preco) {

@@ -116,11 +116,12 @@ public class ProdutoProdutorControlador {
         try {
 //            produtoProdutor.setQuantidadeEstoque(produtoProdutor.getQuantidadeEstoque());
 //            produtoProdutorServico.salvar(produtoProdutor);
+
             produtoProdutorServico.salvar(produtoProdutor);
 
             String mensagem = "Seu produto foi alterado com sucesso!";
             modelo.addAttribute("mensagem", mensagem);
-        } catch (Exception e) {
+        } catch (ProdutoNaoSalvoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
             return "redirect:/produtos/{id}/editar";
