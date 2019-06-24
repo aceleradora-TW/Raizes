@@ -129,6 +129,8 @@ public class ProdutoProdutorControlador {
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Estoque", "produto/visualizar-estoque");
 
+        modelo.addAttribute("produtosProdutor", produtoProdutorServico.pegarProdutos());
+
         return "produto/visualizar-estoque";
     }
 }
