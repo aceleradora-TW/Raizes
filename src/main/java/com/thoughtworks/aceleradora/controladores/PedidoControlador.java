@@ -74,13 +74,4 @@ public class PedidoControlador {
 
         return "redirect:/pedidos";
     }
-
-
-
-
-
-
-
-
-
 }

@@ -14,44 +14,44 @@
         <div class="column is-12">
           <div class="box rz-box">
             <div class="field">
-            <div class="rz-box-body px-0 pb-0">
+              <div class="rz-box-body px-0 pb-0">
                 <p class="centraliza-texto" th:if="${produtosProdutor.isEmpty()}">Não há produtos no seu estoque.</p>
-              <table class="rz-table striped" >
-                <thead class="table-header">
-                  <th>Produto</th>
-                  <th>Tipo</th>
-                  <th>Quantidade</th>
-                  <th>Valor</th>
-                </thead>
-                <tbody class="table-body" >
+                <table class="rz-table striped">
+                  <thead class="table-header">
+                    <th>Produto</th>
+                    <th>Tipo</th>
+                    <th>Quantidade</th>
+                    <th>Valor</th>
+                  </thead>
+                  <tbody class="table-body">
 
-                  <tr th:each="produto : ${produtosProdutor}">
-                    <td>
-                      <span th:text="${produto.produto.nome}"></span>
-                    </td>
-                    <td>
-                      <span th:text="${produto.tipoDeCultivo.codigo}"></span>
-                    </td>
-                    <td>
-                      <span th:text="${produto.quantidadeEstoque}"></span>
-                    </td>
-                    <td>
-                      <span>R$</span>
-                      <span th:text="${produto.preco}"></span>
-                      <span>/</span>
-                      <span th:text="${produto.produto.unidadeMedida.codigo}"></span>
-                    </td>
-                  </tr>
-                  
-                </tbody>
-              </table>
-            </div>
-            <div class="rz-box-footer flex space-between p-3">
-              <a class="button rz-button is-rounded" th:href="@{/}">Voltar</a>
-              <a class="button rz-button is-rounded" th:href="@{/produtos/cadastro}">Adicionar Produto</a>
+                    <tr th:each="produto : ${produtosProdutor}">
+                      <td>
+                        <span th:text="${produto.produto.nome}"></span>
+                      </td>
+                      <td>
+                        <span th:text="${produto.tipoDeCultivo.codigo}"></span>
+                      </td>
+                      <td>
+                        <span th:text="${produto.quantidadeEstoque}"></span>
+                      </td>
+                      <td>
+                        <span>R$</span>
+                        <span th:text="${produto.preco}"></span>
+                        <span>/</span>
+                        <span th:text="${produto.produto.unidadeMedida.codigo}"></span>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <div class="rz-box-footer flex space-between p-3">
+                <a class="button rz-button is-rounded" th:href="@{/}">Voltar</a>
+                <a class="button rz-button is-rounded" th:href="@{/produtos/cadastro}">Adicionar Produto</a>
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
     </section>
