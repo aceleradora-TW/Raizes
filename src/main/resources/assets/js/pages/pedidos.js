@@ -1,6 +1,6 @@
 export default {
     exibeConfirmacaoDeExclusaoDoPedido: (event) => {
-        let form = event.target;
+        const form = event.target;
 
         window.Modal
         .warning()
