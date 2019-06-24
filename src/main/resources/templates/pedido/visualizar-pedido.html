@@ -12,23 +12,19 @@
                 <div class="column is-6">
                     <div class="box">
                         <form id="formVisualizarPedido" th:action="@{/pedidos/{id}(id=${pedido.id})}" method="post">
-                            <div class="field">
-                                <h1 class="title centraliza-texto" th:text="${pedido.pedidosProdutosProdutores}"></h1>
-                            </div>
                             <div class="columns">
                                 <div class="column is-12">
                                     <div class="box">
                                         <div class="field">
                                             <div class="control">
-                                               <span th:each="pedido : ${pedido}">
-                                                <h4><b th:text="${pedido.pedidosProdutosProdutores}"></b></h4>
+                                               <span th:each="pedidos : ${pedido.pedidosProdutosProdutores}">
+                                                <h4><b th:text="${pedidos.produtoProdutor.produtor.nome}"></b></h4>
                                                 <div class="flex equal-sizing flex-row">
-													<span th:text="${pedido.nome}"></span>
-													<span th:text="'R$ ' + ${pedido}"></span>
+													<span th:text="${pedidos.produtoProdutor.produto.nome}"></span>
+													<span th:text="'R$ ' + ${pedidos.produtoProdutor.preco}"></span>
 												</div>
-                                                <span>
                                                 <span th:if="${true}">
-                                                    <i class="fas fa-truck icon-transport-true"> </i>
+                                                    <i class="fas fa-truck icon-transport-true"></i>
                                                     <p><b>Transporte</b></p>
                                                     <p>Disponível</p>
                                                 </span>
@@ -37,18 +33,18 @@
                                                     <p><b class="hero is-large">Transporte</b></p>
                                                     <p>Indisponível</p>
                                                 </span>
-                                            </span>
                                                 <div class="control">
                                                     <h1 class="title centraliza-texto">Contato:</h1>
-                                                    <div class="flex equal-sizing flex-start flex-row">
+                                                    <div class="flex equal-sizing flex-row">
                                                         <span><i class="fas fa-phone"></i></span>
-                                                        <span>(00)0000-00000</span>
+                                                        <span th:text="${pedidos.produtoProdutor.produtor.contato}"></span>
                                                     </div>
                                                     <div class="flex equal-sizing flex-row">
                                                         <span><i class="fas fa-envelope"></i></span>
                                                         <span>email@mail.com</span>
                                                     </div>
                                                 </div>
+                                                   <hr>
                                                </span>
                                             </div>
                                         </div>
