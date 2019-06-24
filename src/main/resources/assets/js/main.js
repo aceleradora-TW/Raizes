@@ -36,7 +36,7 @@ $(function () {
     CriarLista.validaFormulario();
     EditarLista.validaFormulario();
     CadastraProduto.atualizaUnidadeMedida();
-    RealizarPedido.habilitaInputsDeQuantidade($);
+    RealizarPedido.habilitaInputsDeQuantidade();
   
 
 
