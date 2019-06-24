@@ -10,14 +10,11 @@
   <section class="section">
     <section class="container">
       <h1 class="title centraliza-texto">Meu Estoque</h1>
-      <div>
-        <p>Não há listas criadas.</p>
-      </div>
       <div class="columns">
         <div class="column is-12">
           <div class="box rz-box">
             <div class="rz-box-body px-0 pb-0">
-              <table class="rz-table striped">
+              <table class="rz-table striped" th:each="produto : ${produtosProdutor}">
                 <thead class="table-header">
                   <th>Produto</th>
                   <th>Tipo</th>
@@ -25,51 +22,25 @@
                   <th>Valor</th>
                 </thead>
                 <tbody class="table-body">
+
                   <tr>
                     <td>
-                      <span>Banana</span>
+                      <span th:text="${produto.produto.nome}"></span>
                     </td>
                     <td>
-                      <span>Organico</span>
+                      <span th:text="${produto.tipoDeCultivo.codigo}"></span>
                     </td>
                     <td>
-                      <span>100</span>
+                      <span th:text="${produto.quantidadeEstoque}"></span>
                     </td>
                     <td>
-                      <span>R$ 10.00</span>
-                      <span>/Kg</span>
+                      <span>R$</span>
+                      <span th:text="${produto.preco}"></span>
+                      <span>/</span>
+                      <span th:text="${produto.produto.unidadeMedida.codigo}"></span>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <span>Laranja</span>
-                    </td>
-                    <td>
-                      <span>Hidroponico</span>
-                    </td>
-                    <td>
-                      <span>50</span>
-                    </td>
-                    <td>
-                      <span>R$ 5.00</span>
-                      <span>/Kg</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span>Morango</span>
-                    </td>
-                    <td>
-                      <span>Organico</span>
-                    </td>
-                    <td>
-                      <span>25</span>
-                    </td>
-                    <td>
-                      <span>R$ 2.50</span>
-                      <span>/Kg</span>
-                    </td>
-                  </tr>
+                  
                 </tbody>
               </table>
             </div>
