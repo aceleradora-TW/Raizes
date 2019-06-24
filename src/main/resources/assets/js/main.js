@@ -14,6 +14,7 @@ import Burger from './components/menu-burger'
 import EditarPedido from './pages/editaPedido'
 import Produtos from './pages/produtos'
 import CadastraProduto from './pages/cadastraProduto'
+import calculo from './pages/calculo'
 
 
 
@@ -33,5 +34,6 @@ $(function () {
     window.Burger = Burger;
     window.Produtos = Produtos;
     window.CadastraProduto = CadastraProduto;
+    window.calculo = calculo;
 
 });

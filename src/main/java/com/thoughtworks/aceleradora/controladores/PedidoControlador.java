@@ -74,4 +74,10 @@ public class PedidoControlador {
 
         return "redirect:/pedidos";
     }
+
+    @GetMapping("/calculo")
+    public String calculoTotal() {
+
+        return "pedido/teste-calculo";
+    }
 }
