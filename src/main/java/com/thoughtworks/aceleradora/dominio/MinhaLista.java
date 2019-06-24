@@ -1,13 +1,10 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.thoughtworks.aceleradora.validadores.anotacoes.ListaValida;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;
 

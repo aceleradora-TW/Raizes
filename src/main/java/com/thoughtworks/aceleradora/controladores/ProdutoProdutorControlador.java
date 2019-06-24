@@ -1,14 +1,12 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.Produto;
-import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
-import com.thoughtworks.aceleradora.dominio.TipoDeCultivo;
+import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
+import com.thoughtworks.aceleradora.servicos.ProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,20 +21,25 @@ import java.util.function.Consumer;
 
 @Controller
 @RequestMapping("/produtos")
-public class ProdutoControlador {
+public class ProdutoProdutorControlador {
 
     private ProdutoServico produtoServico;
     private CategoriaServico categoriaServico;
     private ProdutoProdutorServico produtoProdutorServico;
+    private ProdutorServico produtorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Página inicial", "/");
 
     @Autowired
-    public ProdutoControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico, ProdutoProdutorServico produtoProdutorServico) {
+    public ProdutoProdutorControlador(ProdutoServico produtoServico,
+                                      CategoriaServico categoriaServico,
+                                      ProdutoProdutorServico produtoProdutorServico,
+                                      ProdutorServico produtorServico) {
         this.produtoServico = produtoServico;
         this.categoriaServico = categoriaServico;
         this.produtoProdutorServico = produtoProdutorServico;
+        this.produtorServico = produtorServico;
     }
 
 
@@ -47,25 +50,32 @@ public class ProdutoControlador {
                 .pagina("Produtos", "/produtos")
                 .pagina("Cadastro", "/produtos/cadastro");
 
+        ProdutoProdutor produtoProdutorComProdutorHardocoded = new ProdutoProdutor();
+        produtoProdutorComProdutorHardocoded.setProdutor(produtorServico.encontraUm(1L));
+
         modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
         modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
-        modelo.addAttribute("produtos", produtoServico.pegarTodos());
+        modelo.addAttribute("produtos", produtoServico.pegarTodosPorOrdemAlfabetica());
+        modelo.addAttribute("medidas", Arrays.asList(UnidadeMedida.values()));
+        modelo.addAttribute("produtoProdutor", produtoProdutorComProdutorHardocoded);
 
         return "produto/cadastro";
     }
 
     @PostMapping("/cadastro")
-    public String salvarProduto(Produto produto, Model modelo, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvarProdutoProdutor(ProdutoProdutor produtoProdutor,
+                                        Breadcrumb breadcrumb,
+                                        RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Produtos", "/produtos")
                 .pagina("Cadastro", "/produtos/cadastro");
+
         try {
-            produto.setNome(produto.getNome().trim());
-            produtoServico.salvar(produto);
+            produtoProdutorServico.salvar(produtoProdutor);
 
             String mensagem = "Seu produto foi cadastrado com sucesso!";
-            modelo.addAttribute("mensagemSalvoComSucesso", mensagem);
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", mensagem);
         } catch (ProdutoNaoSalvoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
@@ -79,14 +89,14 @@ public class ProdutoControlador {
     public String editarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Editar Produto", "/produtos/editar-produto");
+                .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
         try {
             ProdutoProdutor produtoprodutor = produtoProdutorServico.encontraUm(id);
 
             modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
             modelo.addAttribute("produtoProdutor", produtoprodutor);
 
-        } catch (ProdutoNaoEncontradoExcecao e){
+        } catch (ProdutoNaoEncontradoExcecao e) {
             redirecionamentoDeAtributos.addAttribute("mensagem", e.getMessage());
 
             return "redirect:/produtos/cadastro";
@@ -97,7 +107,10 @@ public class ProdutoControlador {
     }
 
     @PostMapping("/{id}/editar")
-    public String salvarProduto(ProdutoProdutor produtoProdutor, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvarProduto(Breadcrumb breadcrumb, ProdutoProdutor produtoProdutor, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
 
         try {
             produtoProdutorServico.salvar(produtoProdutor);
@@ -112,13 +125,13 @@ public class ProdutoControlador {
 
         return "produto/editar";
     }
-    @GetMapping("/adicionar")
-    public String adicionarProduto(Breadcrumb breadcrumb) {
+
+    @GetMapping("/visualizar-estoque")
+    public String estoque(Breadcrumb breadcrumb, Model modelo) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Produtos", "/meus estoques")
-                .pagina("Adicionar", "/meus estoques/adicionar");
+                .pagina("Estoque", "produto/visualizar-estoque");
 
-        return "produto/adicionar";
+        return "produto/visualizar-estoque";
     }
 }

@@ -8,46 +8,61 @@
   <section class="section">
     <section class="container">
       <h1 class="title">Cadastrar Produto</h1>
+      <h3 class="subtitle">*Campos obrigatórios.</h3>
+      <div th:if="${mensagem} != null">
+        <span th:text="${mensagem}"></span>
+      </div>
       <div class="columns">
         <div class="column is-12">
-          <div th:if="${mensagemSalvoComSucesso} != null">
-            <span th:text="${mensagemSalvoComSucesso}"></span>
-          </div>
-          <div class="box">
-            <form id="formCadastraProduto" th:action="@{/produtos/cadastro}" method="post">
-              <div class="field">
-                <label class="label">Produto:</label>
-                <div class="select">
-                  <select form="formCadastraProduto" id="produtos" name="produto">
-                  </select>
+          <div class="rz-box box">
+            <form id="formCadastraProduto" th:object="${produtoProdutor}" th:action="@{/produtos/cadastro}"
+              method="post">
+              <div class="rz-box-body">
+                <input type="hidden" th:field="*{produtor}" th:value="${produtoProdutor.produtor.id}">
+                <div class="rz-box-body">
+                  <label class="label">Produto</label>
+                  <div class="select">
+                    <select id="seletorDeProdutos" th:onchange="CadastraProduto.atualizaUnidadeMedida(event)" name="produto">
+                      <option th:each="produto : ${produtos}" th:text="${produto.nome}" th:value="${produto.id}"
+                        th:attr="data-unidade-medida=${produto.unidadeMedida.codigo}">
+                      </option>
+                    </select>
+                  </div>
+                  <div class="help-block">
+                  </div>
+                </div>
+                <div class="rz-box-body">
+                  <label class="label">Tipo de Cultivo*</label>
+                  <div class="select">
+                    <select th:field="*{tipoDeCultivo}">
+                      <option th:each="cultivo : ${cultivos}" th:text="${cultivo.codigo}" th:value="${cultivo.name()}">
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="flex flex-row">
+                  <div class="rz-box-body">
+                    <label class="label">Quantidade disponível*</label>
+                    <div class="control">
+                      <input class="input" name="quantidadeEstoque" type="number" placeholder="Ex.: 15">
+                    </div>
+                  </div>
+                  <div class="rz-box-body">
+                    <label class="label">Valor do produto*</label>
+                    <div class="control">
+                      <input class="input" th:field="*{preco}" type="number" placeholder="Ex.: 4.00">
+                      <div class="field">
+                      <span id="unidadeMedida"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="rz-box-footer flex space-between">
+                  <button class="button rz-button is-rounded"
+                    th:onclick="return Produtos.exibeConfirmacaoDeCancelamento('/')">Cancelar</button>
+                  <button class="button rz-button is-rounded flex-end" type="submit">Salvar</button>
                 </div>
                 <div class="help-block"></div>
-              </div>
-              <div class="field">
-                <label class="label">Tipo de Cultivo:</label>
-                <div class="select">
-                  <select form="formCadastraProduto" id="cultivos" name="cultivo">
-                    <option th:each="cultivo: ${cultivos}" th:text="${cultivo.codigo}"></option>
-                  </select>
-                </div>
-                <div class="help-block"></div>
-              </div>
-             <div class="rz-box-footer flex space-between w-95">
-              <div class="field">
-                <label class="label">Quantidade:</label>
-                <input class="input" type="number" name="nome" placeholder="Ex.:10, 5, 50">
-              </div>
-              <div class="field">
-                <label class="label">Valor do produto:</label>
-                <input class="input" type="number" name="nome" placeholder="Ex.:10,50">
-                <label class="unidade-medida">/Kg</label>
-              </div>
-            </div>
-              <div class="field">
-                <div class="rz-box-footer flex space-between p-3">
-                  <a class="button rz-button is-rounded">Voltar</a>
-                  <a class="button rz-button is-rounded">Adicionar ao estoque</a>
-                </div>
               </div>
             </form>
           </div>
