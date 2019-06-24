@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
@@ -91,10 +92,14 @@ public class ProdutoProdutorControlador {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
+
+        final int DUAS_CASAS_APOS_A_VIRGULA = 2;
+
         try {
             ProdutoProdutor produtoprodutor = produtoProdutorServico.encontraUm(id);
 
             modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
+            produtoprodutor.setPreco(produtoprodutor.getPreco().setScale(DUAS_CASAS_APOS_A_VIRGULA, RoundingMode.HALF_EVEN));
             modelo.addAttribute("produtoProdutor", produtoprodutor);
 
         } catch (ProdutoNaoEncontradoExcecao e) {
@@ -117,7 +122,7 @@ public class ProdutoProdutorControlador {
             produtoProdutorServico.salvar(produtoProdutor);
 
             String mensagem = "Seu produto foi alterado com sucesso!";
-            modelo.addAttribute("mensagem", mensagem);
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", mensagem);
         } catch (ProdutoNaoSalvoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
@@ -125,7 +130,7 @@ public class ProdutoProdutorControlador {
 
         }
 
-        return "produto/editar";
+        return "redirect:/produtos/{id}/editar";
     }
 
     @GetMapping("/visualizar-estoque")

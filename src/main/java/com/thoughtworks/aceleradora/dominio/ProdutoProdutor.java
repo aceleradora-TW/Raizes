@@ -13,15 +13,13 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Access(AccessType.FIELD)
 public class ProdutoProdutor {
 
-    private static final int DUAS_CASAS_APOS_A_VIRGULA = 2;
-
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     private Integer quantidadeEstoque;
 
-    private BigDecimal preco = ZERO;
+    private BigDecimal preco;
 
     @ManyToOne
     @JoinColumn(name = "id_produtos")
@@ -79,7 +77,6 @@ public class ProdutoProdutor {
     }
 
     public BigDecimal getPreco() {
-        //return preco.setScale(DUAS_CASAS_APOS_A_VIRGULA, HALF_EVEN);
         return preco;
     }
 
