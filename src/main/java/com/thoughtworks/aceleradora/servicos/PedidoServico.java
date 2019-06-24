@@ -8,6 +8,7 @@ import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class PedidoServico {
@@ -55,11 +56,17 @@ public class PedidoServico {
     }
 
     public Pedido salvarPedido(Pedido pedido) {
+
         pedido.setCliente(clienteServico.encontraNeiva());
+        pedido.setPedidosProdutosProdutores(pedido
+                .getPedidosProdutosProdutores()
+                .stream()
+                .filter(pedidoProdutoProdutor -> pedidoProdutoProdutor.getProdutoProdutor() != null)
+                .collect(Collectors.toList())
+        );
+
         return pedidorepositorio.save(pedido);
     }
-
-
 
 }
 

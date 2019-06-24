@@ -12,18 +12,22 @@
         <section class="container">
             <div class="columns">
                 <div class="column is-12">
-                    <form class="rz-form" id="formRealizarPedido" th:action="@{/pedidos/realizar-pedido}"
+                    <form class="rz-form" id="formRealizarPedido" th:object="${pedido}" th:action="@{/pedidos/realizar-pedido}"
                         method="post">
-                        <h1 class="title centraliza-texto" th:text="${listaNome}"></h1>
-                        <input th:type="hidden" name="nome" th:value="${listaNome}" class="title centraliza-texto" th:text="${listaNome}">
 
-                        <div th:each="produto : ${produtoresDeProdutos.keySet()}">
+                        <h1 class="title centraliza-texto" th:text="${listaNome}"></h1>
+
+                        <input th:type="hidden" th:field="*{nome}" th:value="${listaNome}" class="title centraliza-texto" th:text="${listaNome}">
+
+                        <div th:each="produto, index : ${produtoresDeProdutos.keySet()}">
                             <h3 th:text="${produto.nome}"></h3>
-                            <div th:each="produtoProdutor : ${produtoresDeProdutos.get(produto)}">
-                                <div class="box">
+                            <div th:each="produtoProdutor: ${produtoresDeProdutos.get(produto)}">
+
+                                <div class="box" id="inputRadio">
                                     <div class="flex equal-sizing flex-row">
                                         <label class="radio">
-                                            <input type="checkbox" class="d-block" th:value="${produtoProdutor.id}" name="pedidosProdutosProdutores.id">
+                                            <input type="radio" class="d-block" th:value="${produtoProdutor.id}" th:field="*{pedidosProdutosProdutores[__${index.index}__].produtoProdutor}"
+                                                   >
                                             <span th:text="${produtoProdutor.produtor.nome}"></span>
                                         </label>
                                         <span><i class="fas fa-map-marker-alt"></i>
@@ -45,8 +49,8 @@
                                             </span>
                                             <span>Valor: R$ <span th:text="${produtoProdutor.preco}"></span></span>
                                             <span th:text="${produto.unidadeMedida}"></span></span>
-                                            <label class="label">Quantidade: <input size="5" name="quantidadePedido" type="number"
-                                                    placeholder="Ex: 4"></label>
+                                            <label class="label">Quantidade: <input size="5" th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
+                                                    placeholder="Ex: 4" disabled></label>
                                         </div>
                                     </div>
                                 </div>
