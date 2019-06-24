@@ -1,8 +1,8 @@
 const fn = () => {
-    var num1 = Number(document.getElementById("num1").value);
-    var num2 = Number(document.getElementById("num2").value);
-    var resultado = document.getElementById("resultado");
-    resultado.setAttribute('value',num1 * num2 );
+    var preco = parseFloat($('#preco').text()) ;
+    var quantidade = parseInt($('input[name=quantidade]').val()) || 0;
+    var resultado = preco * quantidade;
+    $('#resultado').text(resultado);   
 }
 export default fn;
 

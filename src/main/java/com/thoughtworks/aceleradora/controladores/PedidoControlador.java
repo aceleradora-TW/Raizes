@@ -5,6 +5,7 @@ import com.thoughtworks.aceleradora.dominio.Endereco;
 import com.thoughtworks.aceleradora.servicos.EnderecoServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.PedidoServico;
+import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,16 +22,18 @@ public class PedidoControlador {
     private MinhaListaServico minhaListaServico;
     private PedidoServico pedidoServico;
     private EnderecoServico enderecoServico;
+    private ProdutoProdutorServico produtoProdutorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
             "/");
 
     @Autowired
     public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico,
-            EnderecoServico enderecoServico) {
+                             EnderecoServico enderecoServico, ProdutoProdutorServico produtoProdutorServico) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
         this.enderecoServico = enderecoServico;
+        this.produtoProdutorServico = produtoProdutorServico;
     }
 
     @GetMapping
@@ -53,10 +56,11 @@ public class PedidoControlador {
     }
 
     @GetMapping("/{id}/realizar-pedido")
-    public String realizarPedidos(@PathVariable("id") Long id, Breadcrumb breadcrumb) {
+    public String realizarPedido(@PathVariable("id") Long id, Breadcrumb breadcrumb, Model modelo) {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Realizar Pedido", "/pedido/pedidos");
+        modelo.addAttribute("produtos", produtoProdutorServico.pegarProdutos());
         return "pedido/realizar-pedido";
     }
 
