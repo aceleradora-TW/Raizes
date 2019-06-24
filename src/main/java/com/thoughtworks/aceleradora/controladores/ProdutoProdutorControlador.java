@@ -69,18 +69,18 @@ public class ProdutoProdutorControlador {
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Produtos", "/produtos")
                 .pagina("Cadastro", "/produtos/cadastro");
+         
+         String mensagem = "Salvo com sucesso.";
         try {
             produtoProdutorServico.salvar(produtoProdutor);
-
-            String mensagem = "Seu produto foi cadastrado com sucesso!";
-            redirecionamentoDeAtributos.addFlashAttribute("mensagem", mensagem);
         } catch (ProdutoNaoSalvoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
             return "redirect:/produtos/cadastro";
         }
 
-        return "redirect:/produtos/cadastro";
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", mensagem);
+        return "redirect:/produtos/visualizar-estoque";
     }
 
     @GetMapping("/{id}/editar")
@@ -110,7 +110,7 @@ public class ProdutoProdutorControlador {
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
 
-         String mensagem = "Salva com sucesso.";
+         String mensagem = "Salvo com sucesso.";
         try {
             produtoProdutorServico.salvar(produtoProdutor);
         } catch (ProdutoNaoSalvoExcecao e) {
