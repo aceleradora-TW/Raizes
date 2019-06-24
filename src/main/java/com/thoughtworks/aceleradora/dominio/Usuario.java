@@ -1,44 +1,43 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Entity(name = "usuarios")
-public class Usuario {
+@Data
+@NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo_de_usuario")
+@Entity
+@Table(name = "usuarios")
+
+abstract class Usuario {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
-    @Column(unique = true)
     private String email;
-
     private String senha;
+    private String nome;
+    private String contato;
 
-    public Usuario() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_endereco")
+    private Endereco endereco;
 
-    public Long getId() {
-        return id;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_de_usuario", insertable = false, updatable = false)
+    private TipoDeUsuario tipoDeUsuario;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
+    public Usuario(String email, String senha, String nome, String contato, Endereco endereco) {
         this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
         this.senha = senha;
+        this.nome = nome;
+        this.contato = contato;
+        this.endereco = endereco;
     }
 }
+

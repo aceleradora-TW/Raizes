@@ -1,86 +1,26 @@
 package com.thoughtworks.aceleradora.dominio;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-import java.util.ArrayList;
-import java.util.List;
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@Entity
 
-import static javax.persistence.GenerationType.IDENTITY;
+@DiscriminatorValue(TipoDeUsuario.Valores.PRODUTOR)
+@Table(name = "produtores")
+public class Produtor extends Usuario{
 
-@Entity(name = "produtores")
-@Access(AccessType.FIELD)
-public class Produtor {
-
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long id;
-    private String nome;
     private boolean possuiTransporte;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "produtos_produtores",
-            joinColumns = {@JoinColumn(name = "id_produtores")},
-            inverseJoinColumns = {@JoinColumn(name = "id_produtos")}
-    )
-
-    @JsonIgnoreProperties("listas")
-    private List<Produto> produtos = new ArrayList<>();
-
-    @ManyToOne
-    @JoinColumn(name = "id_endereco")
-    private Endereco endereco;
-
-    public Produtor() {
-    }
-
-    public Produtor(String nome, List<Produto> produtos, boolean possuiTransporte) {
-        this.nome = nome;
-        this.produtos = produtos;
+    public Produtor(String email, String senha, String nome, String contato, Endereco endereco, boolean possuiTransporte) {
+        super(email, senha, nome, contato, endereco);
         this.possuiTransporte = possuiTransporte;
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
-    }
-
-    public boolean isPossuiTransporte() {
-        return possuiTransporte;
-    }
-
-    public void setPossuiTransporte(boolean possuiTransporte) {
-        this.possuiTransporte = possuiTransporte;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
     }
 }
-
