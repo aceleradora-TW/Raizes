@@ -5,6 +5,8 @@ import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProdutoProdutorServico {
     private ProdutoProdutorRepositorio repositorio;
@@ -23,6 +25,11 @@ public class ProdutoProdutorServico {
 
     public ProdutoProdutor salvar(ProdutoProdutor produtoProdutor) {
         return repositorio.save(produtoProdutor);
+    }
+
+    public List<ProdutoProdutor> pegarProdutos ()
+    {
+        return repositorio.findAll();
     }
 
 
