@@ -114,9 +114,6 @@ public class ProdutoProdutorControlador {
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
 
         try {
-//            produtoProdutor.setQuantidadeEstoque(produtoProdutor.getQuantidadeEstoque());
-//            produtoProdutorServico.salvar(produtoProdutor);
-
             produtoProdutorServico.salvar(produtoProdutor);
 
             String mensagem = "Seu produto foi alterado com sucesso!";
@@ -124,9 +121,7 @@ public class ProdutoProdutorControlador {
         } catch (ProdutoNaoSalvoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
-            return "redirect:/produtos/cadastro";
-
-//            return "produto/editar";
+            return "redirect:/produtos/{id}/editar";
 
         }
 
