@@ -3,10 +3,16 @@ function duasCasasAposVirgula(num){
 }
 const fn = (event) => {
     console.log(event);
-    var preco = parseFloat($('#preco').text());
+
+    const inputQuantidade = event.target;
+    const totalProduto = $(inputQuantidade).parents('#totalProduto');
+
+    console.log(totalProduto);
+
+    const preco = totalProduto.find('#preco').text();
     
-    var quantidade = parseInt($('input[name=quantidade]').val()) || 0;
-    var resultado = preco * quantidade;
+    const quantidade = event.target.value || 0;
+    const resultado = preco * quantidade;
     $('#resultado').text(duasCasasAposVirgula(resultado)); 
     
 }
@@ -18,8 +24,8 @@ export default fn;
     
 //     const inputQuantidade = event.target;
 //     const quantidade = inputQuantidade.value() || 0;
-//     const adao = $(inputQuantidade).parents('.adao');
-//     var preco = adao.find('#preco').text();
+//     const totalProduto = $(inputQuantidade).parents('.totalProduto');
+//     var preco = totalProduto.find('#preco').text();
     
 //     var resultado = preco * quantidade;
 //     $('.resultado').text(duasCasasAposVirgula(resultado,2)); 
