@@ -10,12 +10,16 @@
   <section class="section">
     <section class="container">
       <h1 class="title centraliza-texto">Meu Estoque</h1>
+      <div th:if="${mensagem} != null">
+        <span th:text="${mensagem}"></span>
+      </div>
+      <p class="centraliza-texto" th:if="${produtosProdutor.isEmpty()}">Não há produtos no seu estoque.</p>
       <div class="columns">
         <div class="column is-12">
           <div class="box rz-box">
             <div class="field">
               <div class="rz-box-body px-0 pb-0">
-                <p class="centraliza-texto" th:if="${produtosProdutor.isEmpty()}">Não há produtos no seu estoque.</p>
+
                 <table class="rz-table striped">
                   <thead class="table-header">
                     <th>Produto</th>
