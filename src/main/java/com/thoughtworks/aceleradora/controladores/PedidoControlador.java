@@ -2,6 +2,7 @@ package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.Endereco;
+import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.servicos.EnderecoServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.PedidoServico;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -60,6 +62,12 @@ public class PedidoControlador {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Realizar Pedido", "/pedido/pedidos");
+
+        final int DUAS_CASAS_APOS_A_VIRGULA = 2;
+
+        ProdutoProdutor produtoprodutor = produtoProdutorServico.encontraUm(id);
+
+        produtoprodutor.setPreco(produtoprodutor.getPreco().setScale(DUAS_CASAS_APOS_A_VIRGULA, RoundingMode.HALF_EVEN));
         modelo.addAttribute("produtos", produtoProdutorServico.pegarProdutos());
         return "pedido/realizar-pedido";
     }
