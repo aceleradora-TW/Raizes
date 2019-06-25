@@ -30,6 +30,7 @@ public class ProdutoProdutorControlador {
     private CategoriaServico categoriaServico;
     private ProdutoProdutorServico produtoProdutorServico;
     private ProdutorServico produtorServico;
+    private int DUAS_CASAS_APOS_A_VIRGULA = 2;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Página inicial", "/");
@@ -93,8 +94,6 @@ public class ProdutoProdutorControlador {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
-
-        final int DUAS_CASAS_APOS_A_VIRGULA = 2;
 
         try {
             ProdutoProdutor produtoprodutor = produtoProdutorServico.encontraUm(id);
