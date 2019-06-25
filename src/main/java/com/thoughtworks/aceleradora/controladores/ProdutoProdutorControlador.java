@@ -123,16 +123,10 @@ public class ProdutoProdutorControlador {
 
             String mensagem = "Seu produto foi alterado com sucesso!";
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", mensagem);
-        } catch (ProdutoNaoSalvoExcecao e) {
+        } catch (ProdutoNaoSalvoExcecao | ProdutoNaoPodeSerNegativoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
             return "redirect:/produtos/{id}/editar";
-
-        } catch (ProdutoNaoPodeSerNegativoExcecao e) {
-            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
-
-            return "redirect:/produtos/{id}/editar";
-
         }
 
         return "redirect:/produtos/{id}/editar";
