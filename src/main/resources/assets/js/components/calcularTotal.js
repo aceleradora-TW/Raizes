@@ -1,5 +1,5 @@
-function duasCasasAposVirgula(num,n){
-    return parseFloat(Math.round(num * Math.pow(10, n)) /Math.pow(10,n)).toFixed(n);
+function duasCasasAposVirgula(num){
+    return parseFloat(Math.round(num * Math.pow(10, 2)) /Math.pow(10,2)).toFixed(2);
 }
 const fn = () => {
     var preco = parseFloat($('#preco').text());
