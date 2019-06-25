@@ -126,7 +126,6 @@ public class ProdutoProdutorControlador {
         } catch (ProdutoNaoSalvoExcecao | ProdutoNaoPodeSerNegativoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
-            return "redirect:/produtos/{id}/editar";
         }
 
         return "redirect:/produtos/{id}/editar";
