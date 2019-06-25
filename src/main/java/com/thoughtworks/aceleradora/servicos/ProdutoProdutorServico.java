@@ -2,7 +2,8 @@ package com.thoughtworks.aceleradora.servicos;
 
 import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
-import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoPodeSerNegativoExcecao;
+import com.thoughtworks.aceleradora.dominio.excecoes.QuantidadeProdutoDeveSerNaturalExcecao;
+import com.thoughtworks.aceleradora.dominio.excecoes.ValorProdutoNaoPodeSerNegativoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,12 @@ public class ProdutoProdutorServico {
             throw new ProdutoNaoSalvoExcecao();
         }
 
-        if (produtoProdutor.getQuantidadeEstoque() < 1 || produtoProdutor.getPreco().doubleValue() < 0) {
-            throw new ProdutoNaoPodeSerNegativoExcecao();
+        if (produtoProdutor.getPreco().doubleValue() < 0) {
+            throw new ValorProdutoNaoPodeSerNegativoExcecao();
+        }
+
+        if(produtoProdutor.getQuantidadeEstoque() < 1 ){
+            throw new QuantidadeProdutoDeveSerNaturalExcecao();
         }
 
         return repositorio.save(produtoProdutor);

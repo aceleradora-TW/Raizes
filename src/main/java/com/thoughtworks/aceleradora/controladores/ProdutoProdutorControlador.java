@@ -2,7 +2,8 @@ package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
-import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoPodeSerNegativoExcecao;
+import com.thoughtworks.aceleradora.dominio.excecoes.QuantidadeProdutoDeveSerNaturalExcecao;
+import com.thoughtworks.aceleradora.dominio.excecoes.ValorProdutoNaoPodeSerNegativoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
@@ -11,7 +12,6 @@ import com.thoughtworks.aceleradora.servicos.ProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -123,9 +123,10 @@ public class ProdutoProdutorControlador {
 
             String mensagem = "Seu produto foi alterado com sucesso!";
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", mensagem);
-        } catch (ProdutoNaoSalvoExcecao | ProdutoNaoPodeSerNegativoExcecao e) {
+        } catch (ValorProdutoNaoPodeSerNegativoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
-
+        } catch (QuantidadeProdutoDeveSerNaturalExcecao e){
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
         }
 
         return "redirect:/produtos/{id}/editar";
