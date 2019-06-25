@@ -27,8 +27,10 @@ public class ProdutoProdutorServico {
         return repositorio.save(produtoProdutor);
     }
 
-    public List<ProdutoProdutor> pegarProdutos (){
+    public List<ProdutoProdutor> pegarProdutos ()
+    {
         return repositorio.findAll();
     }
+
 
 }

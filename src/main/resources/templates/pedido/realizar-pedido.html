@@ -28,19 +28,21 @@
                 <span class="span-transport" th:unless="${false}">
                   <i class="fas fa-truck icon-transport-false"></i>
                 </span>
-              </div>
-              <div>
-                <div class="flex equal-sizing flex-row">
-                  <span th:text="${produto.tipoDeCultivo}"><i class="fas fa-spa"></i></span>
-                  <label class="label">Valor: R$
-                    <span th:value="${produto.preco}" th:text="${produto.preco}" id="preco" onfocus="calculo()" type="number" disabled></span>
-                  </label>
 
+              </div>
+              <span th:text="${produto.tipoDeCultivo}"><i class="fas fa-spa"></i></span>
+              <div class="adao">
+                <div class="flex equal-sizing flex-row">
+
+                  <label class="label">Valor: R$
+                    <span  type="number" th:value="${produto.preco}" th:text="${produto.preco}"
+                     id="preco" class="preco" onfocus="Calcular()"></span>
+                  </label>
                   <label class="label">Quantidade:
-                    <input type="number" name="quantidade" onkeyup="calculo()" onclick="calculo()" min="0">
+                    <input type="number" name="quantidade" onkeyup="Calcular(event)" onclick="Calcular(event)" min="0"/>
                   </label>
                   <label class="label">Total: R$
-                      <span id="resultado" class="amount"></span>
+                    <span class="resultado" id="resultado"></span>
                   </label>
 
                 </div>
