@@ -47,8 +47,10 @@
 												<span><i class="fas fa-spa"></i>
 													<span th:text="${produtoProdutor.tipoDeCultivo}"></span>
 												</span>
-												<span>Valor: R$ <span th:text="${produtoProdutor.preco}"></span></span>
+												<input type="number" name="valor" th:value="${produtoProdutor.preco}" th:text="${produtoProdutor.preco}">
+
 												<span th:text="${produto.unidadeMedida.getCodigo()}"></span></span>
+
 												<label class="label">Quantidade: <input size="5"
 														th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
 														placeholder="Ex: 4" disabled></label>

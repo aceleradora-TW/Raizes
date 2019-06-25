@@ -14,7 +14,7 @@ export default {
       
       const box = $(this).parents('.box');
       const input  = box.find('input[type=number]');
-      input.attr('disabled',false);
+      input.attr('disabled',false);0
     });
     
   }
