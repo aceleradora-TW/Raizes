@@ -115,37 +115,17 @@ public class ProdutoProdutorControlador {
         return "produto/editar";
     }
 
-//    @PostMapping("/{id}/editar")
-//    public String salvarProduto(Breadcrumb breadcrumb, ProdutoProdutor produtoProdutor, RedirectAttributes redirecionamentoDeAtributos) {
-//        breadcrumb
-//                .aproveitar(partesComunsDoBreadCrumb)
-//                .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
-//
-//        try {
-//            produtoProdutorServico.salvar(produtoProdutor);
-//
-//            String mensagem = "Seu produto foi alterado com sucesso!";
-//            redirecionamentoDeAtributos.addFlashAttribute("mensagem", mensagem);
-//        } catch (ValorProdutoNaoPodeSerNegativoExcecao e) {
-//            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
-//        } catch (QuantidadeProdutoDeveSerNaturalExcecao e){
-//            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
-//        }
-//
-//        return "redirect:/produtos/{id}/editar";
-//    }
-
     @PostMapping("/{id}/editar")
     public String salvarProduto(@Valid ProdutoProdutor produtoProdutor,
                                 BindingResult resultadoValidacao,
                                 Breadcrumb breadcrumb,
                                 Model modelo,
-                                RedirectAttributes redirecionamentoDeAtributos){
+                                RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
 
-        if(resultadoValidacao.hasErrors()) {
+        if (resultadoValidacao.hasErrors()) {
             modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
             modelo.addAttribute("Quantidade", produtoProdutorServico.pegarProdutos());
 
@@ -157,33 +137,6 @@ public class ProdutoProdutorControlador {
 
         return "redirect:/produtos/{id}/editar";
     }
-
-
-      /*
-    * @PostMapping("/criar")
-    public String salvarLista(@Valid MinhaLista minhaLista, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos, Breadcrumb breadcrumb) {
-        breadcrumb
-                .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Minhas Listas", "/minhas-listas")
-                .pagina("Cadastro", "/minhas-listas/cadastro");
-
-        if(resultadoValidacao.hasErrors()) {
-            modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
-            modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
-
-            return "minha-lista/cadastro";
-        }
-
-        minhaListaServico.salvar(minhaLista);
-
-        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Lista criada com sucesso!");
-
-        return "redirect:/minhas-listas";
-    }
-
-    * */
-
-
 
     @GetMapping("/visualizar-estoque")
     public String estoque(Breadcrumb breadcrumb, Model modelo) {
