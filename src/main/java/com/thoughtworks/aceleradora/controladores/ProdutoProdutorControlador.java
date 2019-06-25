@@ -113,7 +113,7 @@ public class ProdutoProdutorControlador {
     }
 
     @PostMapping("/{id}/editar")
-    public String salvarProduto(Breadcrumb breadcrumb, ProdutoProdutor produtoProdutor, Model modelo, RedirectAttributes redirecionamentoDeAtributos, BindingResult resultadoValidacao) {
+    public String salvarProduto(Breadcrumb breadcrumb, ProdutoProdutor produtoProdutor, RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
