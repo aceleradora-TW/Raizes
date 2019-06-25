@@ -17,6 +17,10 @@
     color: white;
     font-weight: bold;
   }
+
+  @include mobile() {
+    padding: 5px 5px 5px 5px;
+  }
 }
 .sanduiche-button{
   cursor:pointer;
