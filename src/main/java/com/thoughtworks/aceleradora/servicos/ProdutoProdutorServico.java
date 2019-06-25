@@ -26,22 +26,27 @@ public class ProdutoProdutorServico {
 
     }
 
+//    public ProdutoProdutor salvar(ProdutoProdutor produtoProdutor) {
+//
+//        if (produtoProdutor.getQuantidadeEstoque() == null || produtoProdutor.getPreco() == null) {
+//            throw new ProdutoNaoSalvoExcecao();
+//        }
+//
+//        if (produtoProdutor.getPreco().doubleValue() < 0) {
+//            throw new ValorProdutoNaoPodeSerNegativoExcecao();
+//        }
+//
+//        if(produtoProdutor.getQuantidadeEstoque() < 1 ){
+//            throw new QuantidadeProdutoDeveSerNaturalExcecao();
+//        }
+//
+//        return repositorio.save(produtoProdutor);
+//    }
+
     public ProdutoProdutor salvar(ProdutoProdutor produtoProdutor) {
-
-        if (produtoProdutor.getQuantidadeEstoque() == null || produtoProdutor.getPreco() == null) {
-            throw new ProdutoNaoSalvoExcecao();
-        }
-
-        if (produtoProdutor.getPreco().doubleValue() < 0) {
-            throw new ValorProdutoNaoPodeSerNegativoExcecao();
-        }
-
-        if(produtoProdutor.getQuantidadeEstoque() < 1 ){
-            throw new QuantidadeProdutoDeveSerNaturalExcecao();
-        }
-
         return repositorio.save(produtoProdutor);
     }
+
 
     public List<ProdutoProdutor> pegarProdutos ()
     {

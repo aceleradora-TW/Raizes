@@ -11,9 +11,12 @@
     <section class="container">
       <h1 class="title">Atualizar Dados do Produto</h1>
       <div class="rz-box-body box">
-        <div th:if="${mensagem}">
+        <div th:if="${mensagem} != null">
           <span th:text="${mensagem}"></span>
-        </div>
+      </div>
+      <div th:if="${erros}">
+          <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
+      </div>
         <div class="column is-6 is-offset-3">
           <form id="formEditarProduto" th:action="@{/produtos/{id}/editar(id=${produtoProdutor.id})}"
             th:object="${produtoProdutor}" method="post">

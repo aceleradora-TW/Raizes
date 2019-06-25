@@ -1,16 +1,16 @@
 package com.thoughtworks.aceleradora.dominio;
 
 
+import com.thoughtworks.aceleradora.validadores.anotacoes.AtualizacaoProdutoValida;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
-import static java.math.BigDecimal.ZERO;
-import static java.math.RoundingMode.HALF_EVEN;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "produtos_produtores")
 @Access(AccessType.FIELD)
+@AtualizacaoProdutoValida
 public class ProdutoProdutor {
 
     @Id
