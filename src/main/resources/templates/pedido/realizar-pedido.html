@@ -31,25 +31,27 @@
 
               </div>
               <span th:text="${produto.tipoDeCultivo}"><i class="fas fa-spa"></i></span>
-            
-                <div id="totalProduto" class="flex equal-sizing flex-row">
 
-                  <label class="label">Valor: R$
-                    <span  type="number" th:value="${produto.preco}" th:text="${produto.preco}"
-                     id="preco" class="preco" onfocus="Calcular()"></span>
-                  </label>
-                  <label class="label">Quantidade:
-                    <input type="number" class="quantidade" onkeyup="Calcular(event)" onclick="Calcular(event)" min="0"/>
-                  </label>
-                  <label class="label">Total: R$
-                    <span class="resultado" id="resultado"></span>
-                  </label>
+              <div id="totalProduto" class="flex equal-sizing flex-row">
 
-                </div>
-              
+                <label class="label">Valor: R$
+                  <span type="number" th:value="${produto.preco}" th:text="${produto.preco}" id="preco"
+                    onfocus="Calcular()"></span>
+                </label>
+                <label class="label">Quantidade:
+                  <input type="number" onkeyup="Calcular(event)" onclick="Calcular(event)" min="0" />
+                </label>
+                <label class="label">Total: R$
+                  <span id="resultado"></span>
+                </label>
+
+              </div>
             </div>
 
-            <span>Total do Pedido: R$ 0,00</span>
+            <label class="label flex flex-row">Total do Pedido: R$
+              <span id="valorTotal"></span>
+            </label>
+
             <div class="field">
               <div class="control">
                 <div class="rz-box-footer flex space-between">

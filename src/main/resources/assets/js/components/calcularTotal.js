@@ -11,6 +11,12 @@ const fn = (event) => {
     const quantidade = event.target.value || 0;
     const resultado = preco * quantidade;
     totalProduto.find('#resultado').text(duasCasasAposVirgula(resultado)); 
+
+    const totalPedido = totalPedido + resultado;
+    console.log(totalPedido);
+        
+
+    $('#valorTotal').text(duasCasasAposVirgula(totalPedido))
     
 }
 export default fn; 
