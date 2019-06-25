@@ -78,7 +78,9 @@ public class PedidoControlador {
                 produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(listaId);
 
         modelo.addAttribute("pedido", new Pedido());
+
         modelo.addAttribute("listaNome", minhaListaServico.encontraUm(listaId).getNome());
+
         modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
 
 

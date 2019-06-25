@@ -8,8 +8,8 @@ export default {
   habilitaInputsDeQuantidade: () => {
     $('input[type=radio]').on('change', function () {
 
-      const boxon  = $(this).parents('.boxon');
-      const inputs  = boxon.find('input[type=number]');
+      const bigbox  = $(this).parents('.bigbox');
+      const inputs  = bigbox.find('input[type=number]');
       inputs.attr('disabled',true);    
       
       const box = $(this).parents('.box');

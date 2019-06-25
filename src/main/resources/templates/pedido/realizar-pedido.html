@@ -17,12 +17,11 @@
 
 						<h1 class="title centraliza-texto" th:text="${listaNome}"></h1>
 
-						<input th:type="hidden" th:field="*{nome}" th:value="${listaNome}"
-							th:text="${listaNome}">
+						<input th:type="hidden" name="nome" th:value="${listaNome}">
 
 						<div th:each="produto, index : ${produtoresDeProdutos.keySet()}">
 							<h3 th:text="${produto.nome}"></h3>
-							<div class="boxon">
+							<div class="bigbox">
 								<div th:each="produtoProdutor: ${produtoresDeProdutos.get(produto)}">
 									<div class="box" id="inputRadio">
 										<div class="flex equal-sizing flex-row">
@@ -33,7 +32,7 @@
 											</label>
 											<span><i class="fas fa-map-marker-alt"></i>
 												<span th:text="${produtoProdutor.produtor.endereco.cidade.nome}"></span>
-												-
+
 												<span th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
 											</span>
 											<span class="span-transport" th:if="${produtoProdutor.produtor.possuiTransporte}">
