@@ -53,7 +53,7 @@ public class ProdutoProdutorControlador {
     public String cadastrarProduto(Model modelo, Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Produtos", "/produtos")
+                .pagina("Estoque", "/produtos/visualizar-estoque")
                 .pagina("Cadastro", "/produtos/cadastro");
 
         ProdutoProdutor produtoProdutorComProdutorHardocoded = new ProdutoProdutor();
@@ -88,7 +88,7 @@ public class ProdutoProdutorControlador {
             return "redirect:/produtos/cadastro";
         }
 
-        return "redirect:/produtos/cadastro";
+        return "redirect:/produtos/visualizar-estoque";
     }
 
 
