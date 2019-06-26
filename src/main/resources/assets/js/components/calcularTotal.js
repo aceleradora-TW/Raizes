@@ -18,8 +18,6 @@ const fn = (event) => {
     let totalPedido = 0;
     resultados.each( (i, e) => {
         let v = $(e).text() || 0;
-        console.log(v);
-        debugger;
         totalPedido += +v;
     });
     //.reduce( ( prevVal, elem ) => prevVal + elem.text() || 0, 0 );     
