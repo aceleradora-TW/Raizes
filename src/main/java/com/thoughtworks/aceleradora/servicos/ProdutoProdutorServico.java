@@ -13,13 +13,13 @@ import java.util.stream.Collectors;
 public class ProdutoProdutorServico {
     private ProdutoProdutorRepositorio produtoProdutorRepositorio;
     private PedidoServico pedidoServico;
-    private MinhaListaRepositorio minhaListaRepositorio;
+    private MinhaListaServico minhaListaServico;
 
 
-    public ProdutoProdutorServico(ProdutoProdutorRepositorio produtoProdutorRepositorio, PedidoServico pedidoServico, MinhaListaRepositorio minhaListaRepositorio) {
+    public ProdutoProdutorServico(ProdutoProdutorRepositorio produtoProdutorRepositorio, PedidoServico pedidoServico, MinhaListaServico minhalistaServico) {
         this.produtoProdutorRepositorio = produtoProdutorRepositorio;
         this.pedidoServico = pedidoServico;
-        this.minhaListaRepositorio = minhaListaRepositorio;
+        this.minhaListaServico = minhalistaServico;
     }
 
     public List<ProdutoProdutor> pegarProdutos(){
@@ -29,8 +29,8 @@ public class ProdutoProdutorServico {
 
     public Map<Produto, List<ProdutoProdutor>> organizarProdutosProdutoresDaListadoCliente (Long idLista){
 
-        Optional<MinhaLista> lista = minhaListaRepositorio.findById(idLista);
-        List<Produto> produtos = lista.get().getProdutos();
+        MinhaLista lista = minhaListaServico.encontraUm(idLista);
+        List<Produto> produtos = lista.getProdutos();
 
         List<ProdutoProdutor> produtosProdutoresDaLista = produtoProdutorRepositorio.findByProdutoIn(produtos);
 
