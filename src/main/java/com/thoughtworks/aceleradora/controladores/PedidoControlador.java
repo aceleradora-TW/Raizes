@@ -53,6 +53,8 @@ public class PedidoControlador {
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Visualizar Pedido", "/pedidos");
         modelo.addAttribute("pedido", pedidoServico.encontraUm(id));
+        modelo.addAttribute("produtores", pedidoServico.organizaVisualizarPedido(id));
+
         return "pedido/visualizar-pedido";
     }
 
