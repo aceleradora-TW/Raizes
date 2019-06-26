@@ -2,7 +2,7 @@ body {
   font-family: "Roboto", sans-serif;
   color: black;
   background-color: white;
-  
+
   @include mobile() {
     font-size: 0.9em;
   }
