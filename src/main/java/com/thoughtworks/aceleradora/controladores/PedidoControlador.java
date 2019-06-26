@@ -1,9 +1,6 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.Pedido;
-import com.thoughtworks.aceleradora.dominio.Endereco;
-import com.thoughtworks.aceleradora.dominio.MinhaLista;
+import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
 import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 @Controller
@@ -79,4 +78,12 @@ public class PedidoControlador {
 
         return "redirect:/pedidos";
     }
+
+    @ResponseBody
+    @GetMapping("/teste2")
+    public Map<Produtor, List<ProdutoProdutor>> hahah() {
+        return pedidoServico.organizaVisualizarPedido(2L);
+    }
+
+
 }

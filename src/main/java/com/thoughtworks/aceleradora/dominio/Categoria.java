@@ -12,6 +12,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "categorias")
 @Access(AccessType.FIELD)
+@JsonIgnoreProperties(value = { "produtos" })
 public class Categoria {
     @Id
     @GeneratedValue(strategy = IDENTITY)
