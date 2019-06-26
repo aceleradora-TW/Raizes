@@ -41,23 +41,6 @@ public class ProdutoProdutorServico {
         return byProdProd;
     }
 
-    public List<ProdutoresDeProdutos> organizarProdutoresDeProdutos(List<ProdutoProdutor> produtoProdutores) {
-        Map<Produto, ProdutoresDeProdutos> mapaDeProdutoresDeProdutos = new HashMap<>();
-        for (ProdutoProdutor produtoProdutor : produtoProdutores) {
-            Produto produto = produtoProdutor.getProduto();
-            Produtor produtor = produtoProdutor.getProdutor();
-            if(mapaDeProdutoresDeProdutos.containsKey(produto)) {
-                ProdutoresDeProdutos produtoresDeProdutos = mapaDeProdutoresDeProdutos.get(produto);
-                produtoresDeProdutos.adicionaProdutor(produtor);
-            } else {
-                ProdutoresDeProdutos produtorDeProduto =
-                        new ProdutoresDeProdutos(produto, produtor);
-
-                mapaDeProdutoresDeProdutos.put(produto, produtorDeProduto);
-            }
-        }
-        return new ArrayList<>(mapaDeProdutoresDeProdutos.values());
-    }
 
     public ProdutoProdutor encontraUm(Long id) {
         return produtoProdutorRepositorio
