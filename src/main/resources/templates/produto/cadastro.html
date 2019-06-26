@@ -12,6 +12,9 @@
       <div th:if="${mensagem} != null">
         <span th:text="${mensagem}"></span>
       </div>
+      <div th:if="${erros}">
+        <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
+      </div>
       <div class="columns">
         <div class="column is-12">
           <div class="rz-box box">
