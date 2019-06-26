@@ -123,19 +123,20 @@ public class ProdutoProdutorControlador {
                                 RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Atualizar Dados do Produto", "/produtos/{id}/editar");
+                .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
 
         if (resultadoValidacao.hasErrors()) {
             modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
             modelo.addAttribute("Quantidade", produtoProdutorServico.pegarProdutos());
 
-            return "produto/editar";
+            redirecionamentoDeAtributos.addFlashAttribute("erros", resultadoValidacao.getAllErrors());
+            return "redirect:/produtos/{id}/editar";
         }
         produtoProdutorServico.salvar(produtoProdutor);
 
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Produto atualizado com sucesso!");
 
-        return "redirect:/produtos/visualizar-estoque";
+        return "redirect:/produtos/{id}/editar";
     }
 
     @GetMapping("/visualizar-estoque")

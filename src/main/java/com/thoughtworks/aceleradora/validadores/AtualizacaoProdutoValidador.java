@@ -23,36 +23,23 @@ public class AtualizacaoProdutoValidador implements ConstraintValidator<Atualiza
 
         return campoQuantidadeNaoEstaVazio(produtoProdutor, context)
                 && campoValorNaoEstaNegativo(produtoProdutor, context)
-                && campoValorNaoEstaVazio(produtoProdutor, context)
                 && campoQuantidadeEstaNatural(produtoProdutor, context);
 
     }
 
     private boolean campoQuantidadeNaoEstaVazio(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
-        if (produtoProdutor.getQuantidadeEstoque() == null) {
-            context.buildConstraintViolationWithTemplate("*Campo Quantidade não pode estar vazio.")
+        if (produtoProdutor.getQuantidadeEstoque() == null || produtoProdutor.getPreco() == null) {
+            context.buildConstraintViolationWithTemplate("*Campo Valor ou Quantidade não podem estar vazios.")
                     .addConstraintViolation();
 
             return false;
         }
         return true;
     }
-
-
-    private boolean campoValorNaoEstaVazio(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
-        if (produtoProdutor.getQuantidadeEstoque() == null) {
-            context.buildConstraintViolationWithTemplate("*Campo Valor não pode estar vazio.")
-                    .addConstraintViolation();
-
-            return false;
-        }
-        return true;
-    }
-
 
     private boolean campoQuantidadeEstaNatural(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
         if (produtoProdutor.getQuantidadeEstoque() <= 1) {
-            context.buildConstraintViolationWithTemplate("*No campo Quantidade, são aceitos somente valores NATURAIS.")
+            context.buildConstraintViolationWithTemplate("*No campo Quantidade, não aceita números negativos ou quebrados.")
                     .addConstraintViolation();
 
             return false;
