@@ -15,9 +15,9 @@
 					<form class="rz-form" id="formRealizarPedido" th:object="${pedido}" th:action="@{/pedidos/realizar-pedido}"
 						method="post">
 
-						<h1 class="title centraliza-texto" th:text="${listaNome}"></h1>
+						<h1 class="title centraliza-texto" th:text="${nomeLista}"></h1>
 
-						<input th:type="hidden" name="nome" th:value="${listaNome}">
+						<input th:type="hidden" name="nome" th:value="${nomeLista}">
 
 						<div th:each="produto, index : ${produtoresDeProdutos.keySet()}">
 							<h3 th:text="${produto.nome}"></h3>

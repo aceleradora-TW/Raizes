@@ -79,7 +79,7 @@ public class PedidoControlador {
 
         modelo.addAttribute("pedido", new Pedido());
 
-        modelo.addAttribute("listaNome", minhaListaServico.encontraUm(listaId).getNome());
+        modelo.addAttribute("nomeLista", minhaListaServico.encontraUm(listaId).getNome());
 
         modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
 
