@@ -1,0 +1,1 @@
+ALTER TABLE pedidos_produtos_produtores ALTER COLUMN valor TYPE NUMERIC;
