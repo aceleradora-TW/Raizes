@@ -14,8 +14,7 @@ const fn = (event) => {
     
     totalProduto.find('#resultado').text(duasCasasAposVirgula(resultado)); 
     const resultados = $('.resultado')
-    
-    console.log("resultados",resultados);
+
     let totalPedido = 0;
     resultados.each( (i, e) => {
         let v = $(e).text() || 0;
@@ -23,13 +22,7 @@ const fn = (event) => {
         debugger;
         totalPedido += +v;
     });
-    //.reduce( ( prevVal, elem ) => prevVal + elem.text() || 0, 0 ); 
-    
-    console.log("totalPedido",totalPedido);
-    
-    $('#valorTotal').text(duasCasasAposVirgula(totalPedido));    
-   
-    
+    //.reduce( ( prevVal, elem ) => prevVal + elem.text() || 0, 0 );     
+    $('#valorTotal').text(duasCasasAposVirgula(totalPedido)); 
 }
-
 export default fn; 
