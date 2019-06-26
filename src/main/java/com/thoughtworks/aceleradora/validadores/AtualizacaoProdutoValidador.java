@@ -21,15 +21,16 @@ public class AtualizacaoProdutoValidador implements ConstraintValidator<Atualiza
     public boolean isValid(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
         context.disableDefaultConstraintViolation();
 
-        return camposNaoEstaoVazios(produtoProdutor, context)
-                && camposNaoEstaoVazios(produtoProdutor, context)
-                && camposComValoresPositivos(produtoProdutor, context)
-                && quantidadeEmEstoqueMaiorQueZero(produtoProdutor, context);
+        return campoQuantidadeNaoEstaVazio(produtoProdutor, context)
+                && campoValorNaoEstaNegativo(produtoProdutor, context)
+                && campoValorNaoEstaVazio(produtoProdutor, context)
+                && campoQuantidadeEstaNatural(produtoProdutor, context);
+
     }
 
-    private boolean camposNaoEstaoVazios(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
-        if (produtoProdutor.getQuantidadeEstoque() == null || produtoProdutor.getPreco() == null) {
-            context.buildConstraintViolationWithTemplate("Quantidade ou Valor não deve estar vazio.")
+    private boolean campoQuantidadeNaoEstaVazio(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
+        if (produtoProdutor.getQuantidadeEstoque() == null) {
+            context.buildConstraintViolationWithTemplate("*Campo Quantidade não pode estar vazio.")
                     .addConstraintViolation();
 
             return false;
@@ -37,27 +38,35 @@ public class AtualizacaoProdutoValidador implements ConstraintValidator<Atualiza
         return true;
     }
 
-    private boolean camposComValoresPositivos(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
-        if (produtoProdutor.getQuantidadeEstoque() < 0 || produtoProdutor.getPreco().doubleValue() < 0) {
-            context.buildConstraintViolationWithTemplate("Quantidade ou Valor não devem ser negativos.")
+
+    private boolean campoValorNaoEstaVazio(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
+        if (produtoProdutor.getQuantidadeEstoque() == null) {
+            context.buildConstraintViolationWithTemplate("*Campo Valor não pode estar vazio.")
                     .addConstraintViolation();
 
             return false;
         }
-
         return true;
     }
 
-    private boolean quantidadeEmEstoqueMaiorQueZero(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
-        if (produtoProdutor.getQuantidadeEstoque() < 1) {
-            context.buildConstraintViolationWithTemplate("Quantidade em estoque deve ser maior que zero.")
+
+    private boolean campoQuantidadeEstaNatural(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
+        if (produtoProdutor.getQuantidadeEstoque() <= 1) {
+            context.buildConstraintViolationWithTemplate("*No campo Quantidade, são aceitos somente valores NATURAIS.")
                     .addConstraintViolation();
 
             return false;
         }
-
         return true;
     }
 
+    private boolean campoValorNaoEstaNegativo(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
+        if (produtoProdutor.getPreco().doubleValue() <= 0) {
+            context.buildConstraintViolationWithTemplate("*No campo Valor, são aceitos somente valores iguais ou maiores que ZERO.")
+                    .addConstraintViolation();
 
+            return false;
+        }
+        return true;
+    }
 }

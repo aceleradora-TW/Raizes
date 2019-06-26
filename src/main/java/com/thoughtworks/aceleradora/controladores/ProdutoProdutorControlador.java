@@ -123,7 +123,7 @@ public class ProdutoProdutorControlador {
                                 RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
+                .pagina("Atualizar Dados do Produto", "/produtos/{id}/editar");
 
         if (resultadoValidacao.hasErrors()) {
             modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
@@ -135,7 +135,7 @@ public class ProdutoProdutorControlador {
 
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Produto atualizado com sucesso!");
 
-        return "redirect:/produtos/{id}/editar";
+        return "redirect:/produtos/visualizar-estoque";
     }
 
     @GetMapping("/visualizar-estoque")
