@@ -29,7 +29,7 @@ public class CadastroValidador implements ConstraintValidator<CadastroValida, Pr
 
     private boolean campoQuantidadeNaoEstaVazio(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
         if (produtoProdutor.getQuantidadeEstoque() == null || produtoProdutor.getPreco() == null) {
-            context.buildConstraintViolationWithTemplate("*Campo Valor ou Quantidade não podem estar vazios.")
+            context.buildConstraintViolationWithTemplate("Campo Valor ou Quantidade não podem estar vazios.")
                     .addConstraintViolation();
 
             return false;
@@ -39,7 +39,7 @@ public class CadastroValidador implements ConstraintValidator<CadastroValida, Pr
 
     private boolean campoQuantidadeEstaNatural(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
         if (produtoProdutor.getQuantidadeEstoque() <= 1) {
-            context.buildConstraintViolationWithTemplate("*No campo Quantidade, não aceita números negativos ou quebrados.")
+            context.buildConstraintViolationWithTemplate("No campo Quantidade, não aceita números negativos ou quebrados.")
                     .addConstraintViolation();
 
             return false;
@@ -49,7 +49,7 @@ public class CadastroValidador implements ConstraintValidator<CadastroValida, Pr
 
     private boolean campoValorNaoEstaNegativo(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
         if (produtoProdutor.getPreco().doubleValue() <= 0) {
-            context.buildConstraintViolationWithTemplate("*No campo Valor, são aceitos somente valores iguais ou maiores que ZERO.")
+            context.buildConstraintViolationWithTemplate("No campo Valor, são aceitos somente valores iguais ou maiores que ZERO.")
                     .addConstraintViolation();
 
             return false;
