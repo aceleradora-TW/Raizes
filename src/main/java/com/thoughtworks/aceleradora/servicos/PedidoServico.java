@@ -7,6 +7,7 @@ import com.thoughtworks.aceleradora.repositorios.PedidoRepositorio;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -62,6 +63,8 @@ public class PedidoServico {
                 .getPedidosProdutosProdutores()
                 .stream()
                 .filter(pedidoProdutoProdutor -> pedidoProdutoProdutor.getProdutoProdutor() != null)
+                .peek(pedidoProdutoProdutor -> pedidoProdutoProdutor.setValor(pedidoProdutoProdutor
+                        .getProdutoProdutor().getPreco()))
                 .collect(Collectors.toList())
         );
 
