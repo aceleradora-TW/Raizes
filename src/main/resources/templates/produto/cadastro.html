@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
+
 <body>
   <section class="section">
     <section class="container">
@@ -25,7 +27,8 @@
                 <div class="rz-box-body">
                   <label class="label">Produto</label>
                   <div class="select">
-                    <select id="seletorDeProdutos" th:onchange="CadastraProduto.atualizaUnidadeMedida(event)" name="produto">
+                    <select id="seletorDeProdutos" th:onchange="CadastraProduto.atualizaUnidadeMedida(event)"
+                      name="produto">
                       <option th:each="produto : ${produtos}" th:text="${produto.nome}" th:value="${produto.id}"
                         th:attr="data-unidade-medida=${produto.unidadeMedida.codigo}">
                       </option>
@@ -49,8 +52,9 @@
                     <div class="control">
                       <input class="input" name="quantidadeEstoque" type="number" placeholder="Ex.: 15">
                       <div class="field">
-                      <span id="unidadeMedida2"></span>
-                    </div>
+                        <div class="help-block"></div>
+                        <span id="unidadeMedida2"></span>
+                      </div>
                     </div>
                   </div>
                   <div class="rz-box-body">
@@ -58,7 +62,8 @@
                     <div class="control">
                       <input class="input" th:field="*{preco}" placeholder="Ex.: 4.00">
                       <div class="field">
-                      <span id="unidadeMedida"></span>
+                        <div class="help-block"></div>
+                        <span id="unidadeMedida"></span>
                       </div>
                     </div>
                   </div>
@@ -77,4 +82,5 @@
     </section>
   </section>
 </body>
+
 </html>

@@ -14,6 +14,7 @@ import Burger from './components/menu-burger'
 import EditarPedido from './pages/editaPedido'
 import Produtos from './pages/produtos'
 import CadastraProduto from './pages/cadastraProduto'
+import validaCadastraProduto from './pages/validaCadastraProduto'
 
 
 
@@ -21,6 +22,8 @@ $(function () {
     CriarLista.validaFormulario();   
     EditarLista.validaFormulario();
     CadastraProduto.atualizaUnidadeMedida();
+    validaCadastraProduto.validaFormulario();
+
 
     window.MinhasListas = MinhasListas;
     window.EditarLista = EditarLista;
