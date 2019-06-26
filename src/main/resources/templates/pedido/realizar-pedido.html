@@ -35,14 +35,15 @@
               <div id="totalProduto" class="flex equal-sizing flex-row">
 
                 <label class="label">Valor: R$
-                  <span type="number" th:value="${produto.preco}" th:text="${produto.preco}" id="preco"
+
+                   <span type="number" th:value="${produto.preco}" th:text="${produto.preco}" id="preco"
                     onfocus="Calcular()"></span>
                 </label>
                 <label class="label">Quantidade:
                   <input type="number" onkeyup="Calcular(event)" onclick="Calcular(event)" min="0" />
                 </label>
                 <label class="label">Total: R$
-                  <span id="resultado"></span>
+                  <span class="resultado" id="resultado"></span>
                 </label>
 
               </div>

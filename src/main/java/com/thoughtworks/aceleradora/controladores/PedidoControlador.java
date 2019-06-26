@@ -69,6 +69,9 @@ public class PedidoControlador {
 
         produtoprodutor.setPreco(produtoprodutor.getPreco().setScale(DUAS_CASAS_APOS_A_VIRGULA, RoundingMode.HALF_EVEN));
         modelo.addAttribute("produtos", produtoProdutorServico.pegarProdutos());
+
+        modelo.addAttribute("pedidos", pedidoServico.pegarPedidos());
+        
         return "pedido/realizar-pedido";
     }
 
