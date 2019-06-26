@@ -68,7 +68,6 @@ public class PedidoControlador {
         return "pedido/visualizar-pedido";
     }
 
-
     @GetMapping("/{listaId}/realizar-pedido")
     public String listaProdutoresDeProdutos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo) {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
@@ -83,22 +82,17 @@ public class PedidoControlador {
 
         modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
 
-
         return "pedido/realizar-pedido";
     }
 
-
-
     @PostMapping("/{id}/excluir")
     public String removerPedido(@PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
-
 
         pedidoServico.removerPedido(id);
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido excluído com sucesso!");
 
         return "redirect:/pedidos";
     }
-
 
     @PostMapping("/realizar-pedido")
     public String salvarPedido(@Valid Pedido pedido, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos,
