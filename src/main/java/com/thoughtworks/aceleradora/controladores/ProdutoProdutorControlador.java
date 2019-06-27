@@ -30,7 +30,6 @@ public class ProdutoProdutorControlador {
     private CategoriaServico categoriaServico;
     private ProdutoProdutorServico produtoProdutorServico;
     private ProdutorServico produtorServico;
-    private int DUAS_CASAS_APOS_A_VIRGULA = 2;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Página inicial", "/");
@@ -100,7 +99,7 @@ public class ProdutoProdutorControlador {
             ProdutoProdutor produtoprodutor = produtoProdutorServico.encontraUm(id);
 
             modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
-            produtoprodutor.setPreco(produtoprodutor.getPreco().setScale(DUAS_CASAS_APOS_A_VIRGULA, RoundingMode.HALF_EVEN));
+            produtoprodutor.setPreco(produtoprodutor.getPreco());
             modelo.addAttribute("produtoProdutor", produtoprodutor);
 
         } catch (ProdutoNaoEncontradoExcecao e) {

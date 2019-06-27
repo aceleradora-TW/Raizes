@@ -5,6 +5,7 @@ import com.thoughtworks.aceleradora.validadores.anotacoes.ProdutoProdutorValido;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -32,6 +33,8 @@ public class ProdutoProdutor {
     @Enumerated(EnumType.STRING)
     @Column(name="tipo_de_cultivo")
     private TipoDeCultivo tipoDeCultivo;
+
+    private static final int DUAS_CASAS_APOS_A_VIRGULA = 2;
 
     public ProdutoProdutor() {
     }
@@ -83,7 +86,7 @@ public class ProdutoProdutor {
     }
 
     public void setPreco(BigDecimal preco) {
-        this.preco = preco;
+        this.preco = preco.setScale(DUAS_CASAS_APOS_A_VIRGULA, RoundingMode.HALF_EVEN);
     }
 
 }
