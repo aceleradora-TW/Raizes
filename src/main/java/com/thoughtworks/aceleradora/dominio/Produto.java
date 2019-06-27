@@ -17,7 +17,6 @@ public class Produto {
     @JoinColumn(name = "id_categorias")
     private Categoria categoria;
 
-
     @Enumerated(EnumType.STRING)
     @Column(name = "unidade_medida")
     private UnidadeMedida unidadeMedida;

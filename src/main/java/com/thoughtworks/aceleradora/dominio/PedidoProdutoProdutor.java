@@ -20,6 +20,10 @@ public class PedidoProdutoProdutor {
     @JoinColumn(name = "id_produtos_produtores")
     ProdutoProdutor produtoProdutor;
 
+    @ManyToOne
+    @JoinColumn(name = "id_pedidos")
+    Pedido pedido;
+
     private BigDecimal valor;
 
     public PedidoProdutoProdutor() {
@@ -61,5 +65,13 @@ public class PedidoProdutoProdutor {
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 }

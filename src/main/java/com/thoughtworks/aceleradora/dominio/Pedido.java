@@ -1,6 +1,9 @@
 package com.thoughtworks.aceleradora.dominio;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -18,9 +21,11 @@ public class Pedido {
     @JoinColumn(name = "id_clientes")
     Cliente cliente;
 
+    @JsonIgnoreProperties("pedido")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_pedidos")
     private List<PedidoProdutoProdutor> pedidosProdutosProdutores;
+
 
     public Pedido() {
     }
