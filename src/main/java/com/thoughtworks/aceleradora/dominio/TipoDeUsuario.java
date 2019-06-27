@@ -11,10 +11,15 @@ public enum TipoDeUsuario {
         this.valor = valor;
     }
 
-    public static class Valores {
-        static final String CLIENTE = "CLIENTE";
-        static final String PRODUTOR = "PRODUTOR";
+    public String getValor() {
+        return valor;
     }
+
+    public static class Valores {
+        static final String CLIENTE = "Cliente";
+        static final String PRODUTOR = "Produtor";
+    }
+
 }
 
 

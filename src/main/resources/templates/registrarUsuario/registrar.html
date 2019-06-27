@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Raízes</title>
+</head>
+<body>
+<main>
+
+    <!--<div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).CLIENTE.getValor())">-->
+        <!--Você não tem autorização para acessar essa página-->
+    <!--</div>-->
+    <!--<div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor()">-->
+
+
+    <div>
+        <div class="container card-content valign center has-text-centered">
+
+            <h1 class="title titulo-h1">Formulário de Registro do Raízes</h1>
+            <form th:action="@{/registrar}" th:object="${formUsuario}" method="post" onsubmit="return validaRegistrar(event)" id="registraAss">
+
+                <!--<div class="columns has-text-left">-->
+                    <!--<div class = "column is-half">-->
+                        <!--<div class = "control input-radio margin-invisible" id="labelCargo">-->
+                            <!--<label th:field="*{tipoDeUsuario}">Tipo de Usuário:</label>-->
+                            <!--&lt;!&ndash;<span th:text="${usuario.tipoDeUsuario.valor}"></span>&ndash;&gt;-->
+                            <!--<input class="input-radio" th:id="${tipo}" th:each="tipo : ${tipos}" type="radio" name="tipo" th:value="${tipo}" th:text="${tipo.valor}">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+                <div class="display-none div-escondida">
+                    <div class="columns has-text-left">
+                        <div class="column is-half">
+                            <div class="control">
+                                <label for="nomeAssistente">*Nome Completo:</label>
+                                <input class="input input-fancy borda-arredondada" type="text" id="nomeAssistente">
+                                <input class="input input-fancy borda-arredondada" th:field="*{nome}" type="text">
+                            </div>
+                </div>
+                <!--</div>-->
+                    <div class="columns has-text-left">
+                        <div class="column is-half">
+                            <div class="control">
+                                <label for="emailDaAssistente" id="emailAssistente">*E-mail:</label>
+                                <input class="input input-fancy borda-arredondada" th:field="*{email}" type="text" id="emailDaAssistente">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="columns has-text-left">
+                        <div class="column is-half">
+                            <div class="control">
+                                <label for="telefoneAssistente" id="telefoneAss">*Telefone:</label>
+                                <input class="input input-fancy borda-arredondada" type="text" id="telefoneAssistente">
+                                <input class="input input-fancy borda-arredondada" th:field="*{contato}" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="columns has-text-left">
+                    <div class="column is-half">
+                        <label for="password">*Senha:</label>
+                        <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password" type="password" name="senha">
+                    </div>
+                </div>
+
+
+                <input class="button is-medium verde-viavida borda-arredondada" type="submit" value="Enviar">
+
+            </form>
+        </div>
+    </div>
+    <!--</div>-->
+</main>
+</body>
+</html>

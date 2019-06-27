@@ -9,11 +9,12 @@ import static javax.persistence.GenerationType.IDENTITY;
 @DiscriminatorColumn(name = "tipo_de_usuario")
 @Entity
 @Table(name = "usuarios")
-abstract class Usuario {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String email;
     private String senha;
     private String nome;
