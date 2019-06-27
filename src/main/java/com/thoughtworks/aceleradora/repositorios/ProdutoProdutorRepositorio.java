@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.repositorios;
 
 import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
+import com.thoughtworks.aceleradora.dominio.Produtor;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +14,6 @@ public interface ProdutoProdutorRepositorio extends CrudRepository<ProdutoProdut
     Optional<ProdutoProdutor> findById(Long id);
 
     List<ProdutoProdutor> findAll();
+
+    List<ProdutoProdutor> findByProdutorIn(List<Produtor> produtores);
 }
