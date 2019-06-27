@@ -51,7 +51,7 @@ public class PedidoControlador {
 
         String nomePedido = pedidoServico.encontraUm(id).get().getNome();
         modelo.addAttribute("pedido", nomePedido);
-        modelo.addAttribute("produtores", pedidoServico.organizaProdutosPorProdutor(id));
+        modelo.addAttribute("produtores", pedidoServico.agrupaProdutosPorProdutor(id));
 
         return "pedido/visualizar-pedido";
     }

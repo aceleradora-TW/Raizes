@@ -35,7 +35,7 @@ public class PedidoServico {
     }
 
 
-    public Map<Produtor, List<ProdutoProdutor>> organizaProdutosPorProdutor(Long idPedido){
+    public Map<Produtor, List<ProdutoProdutor>> agrupaProdutosPorProdutor(Long idPedido){
         Optional<Pedido> pedido = encontraUm(idPedido);
 
         List<PedidoProdutoProdutor> pedidosProdutosProdutoresDoPedido = pedido.get().getPedidosProdutosProdutores();
