@@ -81,12 +81,6 @@ public class PedidoControlador {
 
         return "redirect:/pedidos";
     }
-
-    @ResponseBody
-    @GetMapping("/teste2")
-    public Map<Produtor, List<ProdutoProdutor>> hahah() {
-        return pedidoServico.organizaVisualizarPedido(2L);
-    }
-
+    
 
 }
