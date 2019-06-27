@@ -1,7 +1,6 @@
 package com.thoughtworks.aceleradora.servicos;
 
 import com.thoughtworks.aceleradora.dominio.*;
-import com.thoughtworks.aceleradora.repositorios.ClienteRepositorio;
 import com.thoughtworks.aceleradora.repositorios.MinhaListaRepositorio;
 import com.thoughtworks.aceleradora.repositorios.PedidoRepositorio;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
@@ -62,14 +61,11 @@ public class PedidoServico {
                 .getPedidosProdutosProdutores()
                 .stream()
                 .filter(pedidoProdutoProdutor -> pedidoProdutoProdutor.getProdutoProdutor() != null)
+                .peek(pedidoProdutoProdutor -> pedidoProdutoProdutor.setValor(pedidoProdutoProdutor
+                        .getProdutoProdutor().getPreco()))
                 .collect(Collectors.toList())
         );
 
         return pedidorepositorio.save(pedido);
     }
-
 }
-
-
-
-

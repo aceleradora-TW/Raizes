@@ -13,13 +13,13 @@ import java.util.stream.Collectors;
 public class ProdutoProdutorServico {
     private ProdutoProdutorRepositorio produtoProdutorRepositorio;
     private PedidoServico pedidoServico;
-    private MinhaListaRepositorio minhaListaRepositorio;
+    private MinhaListaServico minhaListaServico;
 
 
-    public ProdutoProdutorServico(ProdutoProdutorRepositorio produtoProdutorRepositorio, PedidoServico pedidoServico, MinhaListaRepositorio minhaListaRepositorio) {
+    public ProdutoProdutorServico(ProdutoProdutorRepositorio produtoProdutorRepositorio, PedidoServico pedidoServico, MinhaListaServico minhalistaServico) {
         this.produtoProdutorRepositorio = produtoProdutorRepositorio;
         this.pedidoServico = pedidoServico;
-        this.minhaListaRepositorio = minhaListaRepositorio;
+        this.minhaListaServico = minhalistaServico;
     }
 
     public List<ProdutoProdutor> pegarProdutos(){
@@ -27,10 +27,9 @@ public class ProdutoProdutorServico {
     }
 
 
-    public Map<Produto, List<ProdutoProdutor>> organizarProdutosProdutoresDaListadoCliente (Long idLista){
+    public Map<Produto, List<ProdutoProdutor>> organizarProdutosProdutoresDaListadoCliente (MinhaLista lista){
 
-        Optional<MinhaLista> lista = minhaListaRepositorio.findById(idLista);
-        List<Produto> produtos = lista.get().getProdutos();
+        List<Produto> produtos = lista.getProdutos();
 
         List<ProdutoProdutor> produtosProdutoresDaLista = produtoProdutorRepositorio.findByProdutoIn(produtos);
 
@@ -41,23 +40,6 @@ public class ProdutoProdutorServico {
         return byProdProd;
     }
 
-    public List<ProdutoresDeProdutos> organizarProdutoresDeProdutos(List<ProdutoProdutor> produtoProdutores) {
-        Map<Produto, ProdutoresDeProdutos> mapaDeProdutoresDeProdutos = new HashMap<>();
-        for (ProdutoProdutor produtoProdutor : produtoProdutores) {
-            Produto produto = produtoProdutor.getProduto();
-            Produtor produtor = produtoProdutor.getProdutor();
-            if(mapaDeProdutoresDeProdutos.containsKey(produto)) {
-                ProdutoresDeProdutos produtoresDeProdutos = mapaDeProdutoresDeProdutos.get(produto);
-                produtoresDeProdutos.adicionaProdutor(produtor);
-            } else {
-                ProdutoresDeProdutos produtorDeProduto =
-                        new ProdutoresDeProdutos(produto, produtor);
-
-                mapaDeProdutoresDeProdutos.put(produto, produtorDeProduto);
-            }
-        }
-        return new ArrayList<>(mapaDeProdutoresDeProdutos.values());
-    }
 
     public ProdutoProdutor encontraUm(Long id) {
         return produtoProdutorRepositorio

@@ -1,9 +1,7 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.Pedido;
-import com.thoughtworks.aceleradora.dominio.Produto;
-import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
+import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
 import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -68,37 +66,39 @@ public class PedidoControlador {
         return "pedido/visualizar-pedido";
     }
 
-
     @GetMapping("/{listaId}/realizar-pedido")
-    public String listaProdutoresDeProdutos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo) {
+    public String listaProdutoresDeProdutos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo,RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("realizar pedido", "/pedido/pedidos");
 
-        Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
-                produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(listaId);
+        try{
+            MinhaLista lista = minhaListaServico.encontraUm(listaId);
+            Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
+                    produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(lista);
 
-        modelo.addAttribute("pedido", new Pedido());
+            modelo.addAttribute("pedido", new Pedido());
 
-        modelo.addAttribute("listaNome", minhaListaServico.encontraUm(listaId).getNome());
+            modelo.addAttribute("nomeLista", lista.getNome());
 
-        modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
+            modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
 
+            return "pedido/realizar-pedido";
+        }catch (ListaNaoEncontradaExcecao e){
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem",e.getMessage());
 
-        return "pedido/realizar-pedido";
+            return "redirect:/minhas-listas/";
+        }
+
     }
-
-
 
     @PostMapping("/{id}/excluir")
     public String removerPedido(@PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
-
 
         pedidoServico.removerPedido(id);
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido excluído com sucesso!");
 
         return "redirect:/pedidos";
     }
-
 
     @PostMapping("/realizar-pedido")
     public String salvarPedido(@Valid Pedido pedido, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos,
