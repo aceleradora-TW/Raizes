@@ -9,7 +9,7 @@
   <section class="section">
     <section class="container">
       <h1 class="title centraliza-texto">Minhas listas</h1>
-      <div th:if="${mensagem}">
+      <div th:if="${mensagem} != null">
         <script th:inline="javascript">
           /*<![CDATA[*/
           window.onload = function () {
@@ -20,6 +20,7 @@
           };
           /*]]>*/
         </script>
+        <span th:text="${mensagem}"></span>
       </div>
       <div class="columns">
         <div class="column is-12">
@@ -33,7 +34,7 @@
                     <a class="button rz-button" th:href="@{/minhas-listas/{id}/editar/(id=${lista.id})}">
                       <i class="fas fa-edit"></i>
                     </a>
-                    <a class="button rz-button list-style">
+                    <a class="button rz-button list-style" th:href="@{/pedidos/{listaId}/realizar-pedido/(listaId=${lista.id})}">
                       <i class="fas fa-shopping-basket"></i>
                     </a>
                     <form name="deleteItemForm" th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post"

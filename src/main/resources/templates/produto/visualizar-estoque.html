@@ -41,6 +41,11 @@
                         <span>/</span>
                         <span th:text="${produto.produto.unidadeMedida.codigo}"></span>
                       </td>
+                      <td>
+                          <a class="button rz-button" th:href="@{/produtos/{id}/editar/(id=${produto.id})}">
+                            <i class="fas fa-edit"></i>
+                          </a>
+                      </td>
                     </tr>
                   </tbody>
                 </table>

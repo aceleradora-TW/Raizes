@@ -1,5 +1,10 @@
 package com.thoughtworks.aceleradora.controladores;
 
+import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
+import com.thoughtworks.aceleradora.servicos.*;
+import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.servicos.*;
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.Endereco;
 import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
@@ -10,11 +15,14 @@ import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 @Controller
@@ -24,25 +32,33 @@ public class PedidoControlador {
     private MinhaListaServico minhaListaServico;
     private PedidoServico pedidoServico;
     private EnderecoServico enderecoServico;
+    private ProdutorServico produtorServico;
+    private ProdutoServico produtoServico;
     private ProdutoProdutorServico produtoProdutorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
             "/");
 
     @Autowired
-    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico,
-            EnderecoServico enderecoServico, ProdutoProdutorServico produtoProdutorServico) {
+    public PedidoControlador(MinhaListaServico minhaListaServico,
+                             PedidoServico pedidoServico,
+                             EnderecoServico enderecoServico,
+                             ProdutoServico produtoServico,
+                             ProdutorServico produtorServico,
+                             ProdutoProdutorServico produtoProdutorServico) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
         this.enderecoServico = enderecoServico;
+        this.produtoServico = produtoServico;
+        this.produtorServico = produtorServico;
         this.produtoProdutorServico = produtoProdutorServico;
     }
 
     @GetMapping
     public String pedidoCriados(Breadcrumb breadcrumb, Model modelo) {
         breadcrumb
-        .aproveitar(partesComunsDoBreadCrumb)
-        .pagina("Pedidos", "/pedido/pedidos");
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedido/pedidos");
 
         modelo.addAttribute("pedidosCriados", pedidoServico.pegarPedidos());
         return "pedido/pedidos";
@@ -54,31 +70,38 @@ public class PedidoControlador {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Visualizar Pedido", "/pedidos");
+
+        String nomePedido = pedidoServico.encontraUm(id).get().getNome();
+        modelo.addAttribute("pedido", nomePedido);
+        modelo.addAttribute("produtores", pedidoServico.agrupaProdutosPorProdutor(id));
+
         return "pedido/visualizar-pedido";
     }
 
-    @GetMapping("/{id}/realizar-pedido")
-    public String realizarPedido(@PathVariable("id") Long id, Breadcrumb breadcrumb, Model modelo) {
+    @GetMapping("/{listaId}/realizar-pedido")
+    public String listaProdutoresDeProdutos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo,RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Pedidos", "/pedidos")
-                .pagina("Realizar Pedido", "/pedido/pedidos");
+                .pagina("realizar pedido", "/pedido/pedidos");
 
-        final int DUAS_CASAS_APOS_A_VIRGULA = 2;
+        try{
+            MinhaLista lista = minhaListaServico.encontraUm(listaId);
 
-        ProdutoProdutor produtoprodutor = produtoProdutorServico.encontraUm(id);
+            Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
+                    produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(lista);
 
-        produtoprodutor.setPreco(produtoprodutor.getPreco().setScale(DUAS_CASAS_APOS_A_VIRGULA, RoundingMode.HALF_EVEN));
-        modelo.addAttribute("produtos", produtoProdutorServico.pegarProdutos());
+            modelo.addAttribute("pedido", new Pedido());
 
-        modelo.addAttribute("pedidos", pedidoServico.pegarPedidos());
-        
-        return "pedido/realizar-pedido";
-    }
+            modelo.addAttribute("nomeLista", lista.getNome());
 
-    @ResponseBody
-    @GetMapping("/enderecos")
-    public List<Endereco> mostraEndereco() {
-        return enderecoServico.pegaTodos();
+            modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
+
+            return "pedido/realizar-pedido";
+        }catch (ListaNaoEncontradaExcecao e){
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem",e.getMessage());
+
+            return "redirect:/minhas-listas/";
+        }
+
     }
 
     @PostMapping("/{id}/excluir")
@@ -86,6 +109,26 @@ public class PedidoControlador {
 
         pedidoServico.removerPedido(id);
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido excluído com sucesso!");
+
+        return "redirect:/pedidos";
+    }
+
+    @PostMapping("/realizar-pedido")
+    public String salvarPedido(@Valid Pedido pedido, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos,
+                               Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedidos")
+                .pagina("Realizar pedido", "/pedidos");
+
+        if(resultadoValidacao.hasErrors()) {
+            modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
+            return "pedido/realizar-pedido";
+        }
+
+        pedidoServico.salvarPedido(pedido);
+
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
 
         return "redirect:/pedidos";
     }

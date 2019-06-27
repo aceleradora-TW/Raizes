@@ -13,23 +13,18 @@ public class Produto {
     private Long id;
     private String nome;
 
-
     @ManyToOne
     @JoinColumn(name = "id_categorias")
     private Categoria categoria;
-
 
     @Enumerated(EnumType.STRING)
     @Column(name = "unidade_medida")
     private UnidadeMedida unidadeMedida;
 
-    public Produto(String nome) {
-    }
 
     public Produto() {}
 
-    public Produto(Long id, String nome, Categoria categoria, UnidadeMedida unidadeMedida) {
-        this.id = id;
+    public Produto(String nome, Categoria categoria, UnidadeMedida unidadeMedida) {
         this.nome = nome;
         this.categoria = categoria;
         this.unidadeMedida = unidadeMedida;
