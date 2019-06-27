@@ -2,8 +2,6 @@ package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
-import com.thoughtworks.aceleradora.dominio.excecoes.QuantidadeProdutoDeveSerNaturalExcecao;
-import com.thoughtworks.aceleradora.dominio.excecoes.ValorProdutoNaoPodeSerNegativoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
