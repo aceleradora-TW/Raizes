@@ -127,7 +127,6 @@ public class ProdutoProdutorControlador {
 
         if (resultadoValidacao.hasErrors()) {
             modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
-            modelo.addAttribute("quantidade", produtoProdutorServico.pegarProdutos());
 
             redirecionamentoDeAtributos.addFlashAttribute("erros", resultadoValidacao.getAllErrors());
             return "redirect:/produtos/{id}/editar";
