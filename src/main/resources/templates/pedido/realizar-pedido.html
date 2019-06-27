@@ -2,77 +2,72 @@
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Raízes</title>
+  <meta charset="UTF-8">
+  <title>Raízes</title>
 </head>
 <body>
-	<section class="section">
-		<section class="container">
-			<div class="columns">
-				<div class="column is-12">
-					<form class="rz-form" id="formRealizarPedido" th:object="${pedido}" th:action="@{/pedidos/realizar-pedido}"
-						method="post">
-
-						<h1 class="title centraliza-texto" th:text="${nomeLista}"></h1>
-
-						<input th:type="hidden" name="nome" th:value="${nomeLista}">
-
-						<div th:each="produto, index : ${produtoresDeProdutos.keySet()}">
-							<h3 th:text="${produto.nome}"></h3>
-							<div class="bigbox">
-								<div th:each="produtoProdutor: ${produtoresDeProdutos.get(produto)}">
-									<div class="box" id="inputRadio">
-										<div class="flex equal-sizing flex-row">
-											<label class="radio" th:onchange="RealizarPedido.habilitaInputsDeQuantidade()">
-												<input type="radio" class="d-block" th:value="${produtoProdutor.id}"
-													th:field="*{pedidosProdutosProdutores[__${index.index}__].produtoProdutor}">
-												<span th:text="${produtoProdutor.produtor.nome}"></span>
-											</label>
-											<span><i class="fas fa-map-marker-alt"></i>
-												<span th:text="${produtoProdutor.produtor.endereco.cidade.nome}"></span>
-
-												<span th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
-											</span>
-											<span class="span-transport" th:if="${produtoProdutor.produtor.possuiTransporte}">
-												<i class="fas fa-truck icon-transport-true"> </i>
-											</span>
-											<span class="span-transport" th:unless="${produtoProdutor.produtor.possuiTransporte}">
-												<i class="fas fa-truck icon-transport-false"></i>
-											</span>
-										</div>
-										<div>
-											<div class="flex equal-sizing flex-row">
-												<span><i class="fas fa-spa"></i>
-													<span th:text="${produtoProdutor.tipoDeCultivo}"></span>
-												</span>
-												<span th:field="*{pedidosProdutosProdutores[__${index.index}__].valor}"
-													th:value="${produtoProdutor.preco}" th:text="${produtoProdutor.preco}"></span>
-
-												<span th:text="${produto.unidadeMedida.codigo}"></span></span>
-
-												<label class="label">Quantidade: <input size="5"
-														th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
-														placeholder="Ex: 4" disabled></label>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<span>Total do Pedido: R$ 0,00</span>
-						<div class="field">
-							<div class="control">
-								<div class="rz-box-footer flex space-between">
-									<button class="button rz-button is-rounded"
-										th:onclick="return RealizarPedido.exibeConfirmacaoDeCancelamento('/pedidos')">Cancelar</button>
-									<button class="button rz-button is-rounded" type="submit">Salvar</button>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</section>
-	</section>
+  <section class="section">
+    <section class="container">
+      <div class="columns">
+        <div class="column is-12">
+          <form class="rz-form" id="formRealizarPedido" th:object="${pedido}" th:action="@{/pedidos/realizar-pedido}"
+            method="post">
+            <h1 class="title centraliza-texto" th:text="${nomeLista}"></h1>
+            <input th:type="hidden" name="nome" th:value="${nomeLista}">
+            <div th:each="produto, index : ${produtoresDeProdutos.keySet()}">
+              <h3 th:text="${produto.nome}"></h3>
+              <div class="bigbox">
+                <div th:each="produtoProdutor: ${produtoresDeProdutos.get(produto)}">
+                  <div class="box" id="inputRadio">
+                    <div class="flex equal-sizing flex-row">
+                      <label class="radio" th:onchange="RealizarPedido.habilitaInputsDeQuantidade()">
+                        <input type="radio" class="d-block" th:value="${produtoProdutor.id}"
+                          th:field="*{pedidosProdutosProdutores[__${index.index}__].produtoProdutor}">
+                        <span th:text="${produtoProdutor.produtor.nome}"></span>
+                      </label>
+                      <span><i class="fas fa-map-marker-alt"></i>
+                        <span th:text="${produtoProdutor.produtor.endereco.cidade.nome}"></span>
+                        <span th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
+                      </span>
+                      <span class="span-transport" th:if="${produtoProdutor.produtor.possuiTransporte}">
+                        <i class="fas fa-truck icon-transport-true"> </i>
+                      </span>
+                      <span class="span-transport" th:unless="${produtoProdutor.produtor.possuiTransporte}">
+                        <i class="fas fa-truck icon-transport-false"></i>
+                      </span>
+                    </div>
+                    <div>
+                      <div class="flex equal-sizing flex-row">
+                        <span><i class="fas fa-spa"></i>
+                          <span th:text="${produtoProdutor.tipoDeCultivo}"></span>
+                        </span>
+                        <span th:field="*{pedidosProdutosProdutores[__${index.index}__].valor}"
+                          th:value="${produtoProdutor.preco}" th:text="${produtoProdutor.preco}"></span>
+                        <span th:text="${produto.unidadeMedida.codigo}"></span>
+                        </span>
+                        <label class="label">Quantidade: <input size="5"
+                            th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
+                            placeholder="Ex: 4" disabled></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span>Total do Pedido: R$ 0,00</span>
+            <div class="field">
+              <div class="control">
+                <div class="rz-box-footer flex space-between">
+                  <button class="button rz-button is-rounded"
+                    th:onclick="return RealizarPedido.exibeConfirmacaoDeCancelamento('/pedidos')">Cancelar</button>
+                  <button class="button rz-button is-rounded" type="submit">Salvar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </section>
 </body>
 </html>
