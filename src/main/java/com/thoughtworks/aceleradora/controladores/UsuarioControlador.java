@@ -1,5 +1,6 @@
 package com.thoughtworks.aceleradora.controladores;
 
+import com.thoughtworks.aceleradora.dominio.TipoDeUsuario;
 import com.thoughtworks.aceleradora.dominio.Usuario;
 import com.thoughtworks.aceleradora.repositorios.UsuarioRepositorio;
 import com.thoughtworks.aceleradora.servicos.UsuarioServico;
@@ -17,15 +18,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UsuarioControlador {
     private UsuarioServico usuarioServico;
     private UsuarioValidador usuarioValidador;
+    private UsuarioRepositorio repositorio;
 
-    public UsuarioControlador(UsuarioServico usuarioServico, UsuarioValidador usuarioValidador) {
+    public UsuarioControlador(UsuarioServico usuarioServico, UsuarioValidador usuarioValidador, UsuarioRepositorio repositorio) {
         this.usuarioServico = usuarioServico;
         this.usuarioValidador = usuarioValidador;
+        this.repositorio = repositorio;
     }
 
     @GetMapping(value = "/registrar")
     public String registrar(Model model) {
         model.addAttribute("formUsuario", new Usuario());
+        model.addAttribute("tipoUsuario", TipoDeUsuario.values());
 
         return "registrarUsuario/registrar";
     }
