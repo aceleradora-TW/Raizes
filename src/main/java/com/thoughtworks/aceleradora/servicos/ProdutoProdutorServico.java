@@ -1,36 +1,51 @@
 package com.thoughtworks.aceleradora.servicos;
 
-import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
+import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
+import com.thoughtworks.aceleradora.repositorios.MinhaListaRepositorio;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ProdutoProdutorServico {
-    private ProdutoProdutorRepositorio repositorio;
+    private ProdutoProdutorRepositorio produtoProdutorRepositorio;
 
-    public ProdutoProdutorServico(ProdutoProdutorRepositorio repositorio) {
-        this.repositorio = repositorio;
+
+
+    public ProdutoProdutorServico(ProdutoProdutorRepositorio produtoProdutorRepositorio) {
+        this.produtoProdutorRepositorio = produtoProdutorRepositorio;
+    }
+
+    public List<ProdutoProdutor> pegarProdutos(){
+        return produtoProdutorRepositorio.findAll();
+    }
+
+
+    public Map<Produto, List<ProdutoProdutor>> organizarProdutosProdutoresDaListadoCliente (MinhaLista lista){
+
+        List<Produto> produtos = lista.getProdutos();
+
+        List<ProdutoProdutor> produtosProdutoresDaLista = produtoProdutorRepositorio.findByProdutoIn(produtos);
+
+        Map<Produto, List<ProdutoProdutor>> byProdProd
+                = produtosProdutoresDaLista.stream()
+                .collect(Collectors.groupingBy(ProdutoProdutor::getProduto));
+
+        return byProdProd;
     }
 
 
     public ProdutoProdutor encontraUm(Long id) {
-        return repositorio
+        return produtoProdutorRepositorio
                 .findById(id)
                 .orElseThrow(ProdutoNaoEncontradoExcecao::new);
 
     }
 
     public ProdutoProdutor salvar(ProdutoProdutor produtoProdutor) {
-        return repositorio.save(produtoProdutor);
+        return produtoProdutorRepositorio.save(produtoProdutor);
     }
-
-    public List<ProdutoProdutor> pegarProdutos ()
-    {
-        return repositorio.findAll();
-    }
-
-
 }

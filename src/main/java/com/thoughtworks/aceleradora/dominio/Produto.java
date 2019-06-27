@@ -21,13 +21,10 @@ public class Produto {
     @Column(name = "unidade_medida")
     private UnidadeMedida unidadeMedida;
 
-    public Produto(String nome) {
-    }
 
     public Produto() {}
 
-    public Produto(Long id, String nome, Categoria categoria, UnidadeMedida unidadeMedida) {
-        this.id = id;
+    public Produto(String nome, Categoria categoria, UnidadeMedida unidadeMedida) {
         this.nome = nome;
         this.categoria = categoria;
         this.unidadeMedida = unidadeMedida;
