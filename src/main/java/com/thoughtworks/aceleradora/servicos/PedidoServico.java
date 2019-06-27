@@ -29,7 +29,6 @@ public class PedidoServico {
 
     public Optional<Pedido> encontraUm(Long id) {
         Optional<Pedido> pedidos = repositorio.findById(id);
-
         return pedidos;
     }
 
