@@ -12,8 +12,9 @@ body {
 }
 .main {
   min-height: calc(
-    100vh - 217px
+    100vh - 204px
   ); //mudar de acordo com o cabecalho+rodape,de acordo na pagina com o menor conteudo do site
+  overflow: auto;
 }
 
 .title {
@@ -46,6 +47,9 @@ h3 {
 }
 .logo {
   margin: auto;
+}
+.d-block {
+  display: block !important;
 }
 .unidade-medida{
   font-size: 23px;

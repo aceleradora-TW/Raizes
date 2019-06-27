@@ -22,7 +22,8 @@ public class Pedido {
     Cliente cliente;
 
     @JsonIgnoreProperties("pedido")
-    @OneToMany(mappedBy="pedido")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_pedidos")
     private List<PedidoProdutoProdutor> pedidosProdutosProdutores;
 
 

@@ -5,7 +5,6 @@ import com.thoughtworks.aceleradora.validadores.anotacoes.ProdutoProdutorValido;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -25,11 +24,11 @@ public class ProdutoProdutor {
 
     @ManyToOne
     @JoinColumn(name = "id_produtos")
-    Produto produto;
+    private Produto produto;
 
     @ManyToOne
     @JoinColumn(name = "id_produtores")
-    Produtor produtor;
+    private Produtor produtor;
 
     @Enumerated(EnumType.STRING)
     @Column(name="tipo_de_cultivo")
