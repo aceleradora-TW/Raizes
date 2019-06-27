@@ -1,10 +1,7 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.Endereco;
-import com.thoughtworks.aceleradora.servicos.EnderecoServico;
-import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
-import com.thoughtworks.aceleradora.servicos.PedidoServico;
+import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,16 +18,18 @@ public class PedidoControlador {
     private MinhaListaServico minhaListaServico;
     private PedidoServico pedidoServico;
     private EnderecoServico enderecoServico;
+    private ProdutorServico produtorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
             "/");
 
     @Autowired
     public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico,
-            EnderecoServico enderecoServico) {
+            EnderecoServico enderecoServico, ProdutorServico produtorServico) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
         this.enderecoServico = enderecoServico;
+        this.produtorServico = produtorServico;
     }
 
     @GetMapping
@@ -49,6 +48,11 @@ public class PedidoControlador {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Visualizar Pedido", "/pedidos");
+
+        String nomePedido = pedidoServico.encontraUm(id).get().getNome();
+        modelo.addAttribute("pedido", nomePedido);
+        modelo.addAttribute("produtores", pedidoServico.agrupaProdutosPorProdutor(id));
+
         return "pedido/visualizar-pedido";
     }
 
@@ -74,4 +78,6 @@ public class PedidoControlador {
 
         return "redirect:/pedidos";
     }
+
+
 }
