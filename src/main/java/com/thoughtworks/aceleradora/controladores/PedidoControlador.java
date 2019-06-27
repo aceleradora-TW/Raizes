@@ -73,6 +73,7 @@ public class PedidoControlador {
 
         try{
             MinhaLista lista = minhaListaServico.encontraUm(listaId);
+
             Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
                     produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(lista);
 
