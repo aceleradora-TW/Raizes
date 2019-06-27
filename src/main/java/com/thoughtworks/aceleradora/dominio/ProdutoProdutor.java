@@ -1,7 +1,7 @@
 package com.thoughtworks.aceleradora.dominio;
 
 
-import com.thoughtworks.aceleradora.validadores.anotacoes.AtualizacaoProdutoValida;
+import com.thoughtworks.aceleradora.validadores.anotacoes.ProdutoProdutorValido;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "produtos_produtores")
 @Access(AccessType.FIELD)
-@AtualizacaoProdutoValida
+@ProdutoProdutorValido
 public class ProdutoProdutor {
 
     @Id
@@ -35,6 +35,8 @@ public class ProdutoProdutor {
 
     public ProdutoProdutor() {
     }
+
+
 
     public Long getId() {
         return id;
