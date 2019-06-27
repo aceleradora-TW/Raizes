@@ -1,7 +1,6 @@
 package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.*;
-import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
 import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.function.Consumer;
 
 @Controller
@@ -54,7 +51,7 @@ public class PedidoControlador {
 
         String nomePedido = pedidoServico.encontraUm(id).get().getNome();
         modelo.addAttribute("pedido", nomePedido);
-        modelo.addAttribute("produtores", pedidoServico.organizaVisualizarPedido(id));
+        modelo.addAttribute("produtores", pedidoServico.organizaProdutosPorProdutor(id));
 
         return "pedido/visualizar-pedido";
     }
