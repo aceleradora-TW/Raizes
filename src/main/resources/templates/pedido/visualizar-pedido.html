@@ -1,72 +1,64 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Raízes</title>
+  <meta charset="UTF-8">
+  <title>Raízes</title>
 </head>
-
 <body>
-    <section class="section">
-        <section class="container">
-            <h1 class="title">Visualizar pedido</h1>
+  <section class="section">
+    <section class="container">
+      <h1 class="title centraliza-texto" th:text="${pedido}"></h1>
+      <div class="columns">
+        <div class="column is-6">
+          <div class="box">
             <div class="columns">
-                <div class="column is-12">
-                    <div class="box">
-                        <div class="field">
-                            <h1 class="title centraliza-texto">Feijoada de domingo</h1>
+              <div class="column is-12">
+                <div class="box">
+                  <div class="field">
+                    <div class="control">
+                      <span th:each="produtor: ${produtores.keySet()}">
+                        <h4><b th:text="${produtor.nome}"></b></h4>
+                        <div class="flex equal-sizing flex-row">
+                          <span th:each="produtor: ${produtores.get(produtor)}">
+                            <span th:text="${produtor.produto.nome}"></span>
+                            <span th:text="'R$ ' + ${produtor.preco}"></span>
+                          </span>
                         </div>
-                        <div class="columns">
-                            <div class="column is-12">
-                                <div class="box">
-                                    <div class="field">
-                                        <div class="control">
-                                            <h4><b>Aldo Produtor</b></h4>
-                                            <div class="flex equal-sizing flex-row">
-                                                <span>feijão</span>
-                                                <span>R$10,00</span>
-                                            </div>
-                                            <div class="flex equal-sizing flex-row">
-                                                <span>cebola</span>
-                                                <span>R$10,00</span>
-                                            </div>
-                                            <span>
-                                                <span th:if="${true}">
-                                                    <i class="fas fa-truck icon-transport-true"> </i>
-                                                    <p><b>Transporte</b></p>
-                                                    <p>Disponível</p>
-                                                </span>
-                                                <span th:unless="${true}">
-                                                    <i class="fas fa-truck icon-transport-false"></i>
-                                                    <p><b class="hero is-large">Transporte</b></p>
-                                                    <p>Indisponível</p>
-                                                </span>
-                                            </span>
-
-                                            <div class="control">
-                                                <h1 class="title centraliza-texto">Contato:</h1>
-                                                <div class="flex equal-sizing flex-start flex-row">
-                                                    <span><i class="fas fa-phone"></i></span>
-                                                    <span>(00)0000-00000</span>
-                                                </div>
-                                                <div class="flex equal-sizing flex-row">
-                                                    <span><i class="fas fa-envelope"></i></span>
-                                                    <span>email@mail.com</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex space-between">
-                                    <a class="button rz-button is-rounded" th:href="@{/pedidos}">Voltar</a>
-                                </div>
-                            </div>
+                        <span th:if="${true}">
+                          <i class="fas fa-truck icon-transport-true"></i>
+                          <p><b>Transporte</b></p>
+                          <p>Disponível</p>
+                        </span>
+                        <span th:unless="${true}">
+                          <i class="fas fa-truck icon-transport-false"></i>
+                          <p><b class="hero is-large">Transporte</b></p>
+                          <p>Indisponível</p>
+                        </span>
+                        <div class="control">
+                          <h1 class="title centraliza-texto">Contato:</h1>
+                          <div class="flex equal-sizing flex-row">
+                            <span><i class="fas fa-phone"></i></span>
+                            <span th:text="${produtor.contato}"></span>
+                          </div>
+                          <div class="flex equal-sizing flex-row">
+                            <span><i class="fas fa-envelope"></i></span>
+                            <span th:text="${produtor.email}"></span>
+                          </div>
                         </div>
+                        <hr>
+                      </span>
                     </div>
+                  </div>
                 </div>
+                <div class="flex space-between">
+                  <a class="button is-primary" th:href="@{/pedidos}">Voltar</a>
+                </div>
+              </div>
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
     </section>
+  </section>
 </body>
-
 </html>
