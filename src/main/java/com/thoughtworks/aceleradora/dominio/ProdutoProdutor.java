@@ -20,6 +20,7 @@ public class ProdutoProdutor {
 
     private Integer quantidadeEstoque;
 
+    @Column(precision = 4, scale = 2)
     private BigDecimal preco;
 
     @ManyToOne
@@ -34,12 +35,8 @@ public class ProdutoProdutor {
     @Column(name="tipo_de_cultivo")
     private TipoDeCultivo tipoDeCultivo;
 
-    private static final int DUAS_CASAS_APOS_A_VIRGULA = 2;
-
     public ProdutoProdutor() {
     }
-
-
 
     public Long getId() {
         return id;
@@ -82,11 +79,11 @@ public class ProdutoProdutor {
     }
 
     public BigDecimal getPreco() {
-        return preco.setScale(DUAS_CASAS_APOS_A_VIRGULA, RoundingMode.HALF_EVEN);
+        return preco;
     }
 
     public void setPreco(BigDecimal preco) {
-        this.preco = preco.setScale(DUAS_CASAS_APOS_A_VIRGULA, RoundingMode.HALF_EVEN);
+        this.preco = preco;
     }
 
 }
