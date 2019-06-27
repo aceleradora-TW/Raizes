@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
-
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
-
 <body>
   <section class="section">
     <section class="container">
       <h1 class="title centraliza-texto">Meu Estoque</h1>
+      <div th:if="${mensagem} != null">
+        <span th:text="${mensagem}"></span>
+      </div>
+      <p class="centraliza-texto" th:if="${produtosProdutor.isEmpty()}">Não há produtos no seu estoque.</p>
       <div class="columns">
         <div class="column is-12">
           <div class="box rz-box">
             <div class="field">
               <div class="rz-box-body px-0 pb-0">
-                <p class="centraliza-texto" th:if="${produtosProdutor.isEmpty()}">Não há produtos no seu estoque.</p>
                 <table class="rz-table striped">
                   <thead class="table-header">
                     <th>Produto</th>
@@ -24,7 +25,6 @@
                     <th>Valor</th>
                   </thead>
                   <tbody class="table-body">
-
                     <tr th:each="produto : ${produtosProdutor}">
                       <td>
                         <span th:text="${produto.produto.nome}"></span>
@@ -41,8 +41,12 @@
                         <span>/</span>
                         <span th:text="${produto.produto.unidadeMedida.codigo}"></span>
                       </td>
+                      <td>
+                          <a class="button rz-button" th:href="@{/produtos/{id}/editar/(id=${produto.id})}">
+                            <i class="fas fa-edit"></i>
+                          </a>
+                      </td>
                     </tr>
-
                   </tbody>
                 </table>
               </div>
@@ -57,5 +61,4 @@
     </section>
   </section>
 </body>
-
 </html>
