@@ -3,7 +3,7 @@ export default {
         let form = event.target;
 
         window.Modal
-        .success()
+        .warning()
         .okAction("Sim", () => { form.submit();})
         .cancelAction("Não")
         .show('Você tem certeza que deseja excluir esta lista?');
