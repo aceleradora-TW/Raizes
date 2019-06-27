@@ -1,9 +1,6 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.Pedido;
-import com.thoughtworks.aceleradora.dominio.Produto;
-import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
+import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,12 +70,13 @@ public class PedidoControlador {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("realizar pedido", "/pedido/pedidos");
 
+        MinhaLista lista = minhaListaServico.encontraUm(listaId);
         Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
-                produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(listaId);
+                produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(lista);
 
         modelo.addAttribute("pedido", new Pedido());
 
-        modelo.addAttribute("nomeLista", minhaListaServico.encontraUm(listaId).getNome());
+        modelo.addAttribute("nomeLista", lista.getNome());
 
         modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
 
