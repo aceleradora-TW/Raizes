@@ -35,17 +35,13 @@ public class PedidoServico {
     }
 
 
-
     public Map<Produtor, List<ProdutoProdutor>> organizaVisualizarPedido (Long idPedido){
-        //PEGA PEDIDO
         Optional<Pedido> pedido = encontraUm(idPedido);
 
-        //PEGA PEDIDOPRODUTOPRODUTOR
         List<PedidoProdutoProdutor> pedidosProdutosProdutoresDoPedido = pedido.get().getPedidosProdutosProdutores();
 
         List<ProdutoProdutor> produtoProdutor = new ArrayList<>();
 
-        //PEGA PRODPROD
         for (int i = 0; i< pedidosProdutosProdutoresDoPedido.size(); i++) {
             produtoProdutor.add(pedidosProdutosProdutoresDoPedido.get(i).getProdutoProdutor());
         }

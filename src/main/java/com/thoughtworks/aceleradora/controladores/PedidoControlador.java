@@ -22,7 +22,6 @@ public class PedidoControlador {
     private PedidoServico pedidoServico;
     private EnderecoServico enderecoServico;
     private ProdutorServico produtorServico;
-    private ProdutoProdutorServico produtoProdutorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
             "/");
@@ -52,7 +51,9 @@ public class PedidoControlador {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Visualizar Pedido", "/pedidos");
-        modelo.addAttribute("pedido", pedidoServico.encontraUm(id));
+
+        String nomePedido = pedidoServico.encontraUm(id).get().getNome();
+        modelo.addAttribute("pedido", nomePedido);
         modelo.addAttribute("produtores", pedidoServico.organizaVisualizarPedido(id));
 
         return "pedido/visualizar-pedido";
