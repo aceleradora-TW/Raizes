@@ -2,6 +2,8 @@ package com.thoughtworks.aceleradora.dominio;
 
 import javax.persistence.*;
 
+import java.math.BigDecimal;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "pedidos_produtos_produtores")
@@ -11,6 +13,7 @@ public class PedidoProdutoProdutor {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
     private int quantidadePedido;
 
     @ManyToOne
@@ -21,7 +24,15 @@ public class PedidoProdutoProdutor {
     @JoinColumn(name = "id_pedidos")
     Pedido pedido;
 
+    private BigDecimal valor;
+
     public PedidoProdutoProdutor() {
+    }
+
+    public PedidoProdutoProdutor(int quantidadePedido, ProdutoProdutor produtoProdutor, BigDecimal valor) {
+        this.quantidadePedido = quantidadePedido;
+        this.produtoProdutor = produtoProdutor;
+        this.valor = valor;
     }
 
     public Long getId() {
@@ -46,6 +57,14 @@ public class PedidoProdutoProdutor {
 
     public void setProdutoProdutor(ProdutoProdutor produtoProdutor) {
         this.produtoProdutor = produtoProdutor;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
     }
 
     public Pedido getPedido() {
