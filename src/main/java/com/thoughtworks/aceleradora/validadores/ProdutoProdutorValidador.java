@@ -2,19 +2,19 @@ package com.thoughtworks.aceleradora.validadores;
 
 import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
-import com.thoughtworks.aceleradora.validadores.anotacoes.CadastroValida;
+import com.thoughtworks.aceleradora.validadores.anotacoes.ProdutoProdutorValido;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class CadastroValidador implements ConstraintValidator<CadastroValida, ProdutoProdutor> {
+public class ProdutoProdutorValidador implements ConstraintValidator<ProdutoProdutorValido, ProdutoProdutor> {
 
     @Autowired
     ProdutoProdutorRepositorio repositorio;
 
     @Override
-    public void initialize(CadastroValida constraintAnnotation) {
+    public void initialize(ProdutoProdutorValido constraintAnnotation) {
     }
 
     @Override
