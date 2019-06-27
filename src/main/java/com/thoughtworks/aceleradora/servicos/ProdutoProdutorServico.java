@@ -12,14 +12,11 @@ import java.util.stream.Collectors;
 @Service
 public class ProdutoProdutorServico {
     private ProdutoProdutorRepositorio produtoProdutorRepositorio;
-    private PedidoServico pedidoServico;
-    private MinhaListaServico minhaListaServico;
 
 
-    public ProdutoProdutorServico(ProdutoProdutorRepositorio produtoProdutorRepositorio, PedidoServico pedidoServico, MinhaListaServico minhalistaServico) {
+
+    public ProdutoProdutorServico(ProdutoProdutorRepositorio produtoProdutorRepositorio) {
         this.produtoProdutorRepositorio = produtoProdutorRepositorio;
-        this.pedidoServico = pedidoServico;
-        this.minhaListaServico = minhalistaServico;
     }
 
     public List<ProdutoProdutor> pegarProdutos(){

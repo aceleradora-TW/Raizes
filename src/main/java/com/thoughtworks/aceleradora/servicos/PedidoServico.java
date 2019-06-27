@@ -16,24 +16,15 @@ import java.util.stream.Collectors;
 public class PedidoServico {
 
     private PedidoRepositorio repositorio;
-    private ProdutoProdutorRepositorio produtoProdutorRepositorio;
-    private MinhaListaRepositorio minhaListaRepositorio;
+
     private ClienteServico clienteServico;
-    private ProdutoServico produtoServico;
-    private ProdutorServico produtorServico;
+
 
     public PedidoServico(PedidoRepositorio repositorio,
-                         MinhaListaRepositorio minhaListaRepositorio,
-                         ProdutoProdutorRepositorio produtoProdutorRepositorio,
-                         ClienteServico clienteServico,
-                         ProdutoServico produtoServico,
-                         ProdutorServico produtorServico) {
+                         ClienteServico clienteServico) {
         this.repositorio = repositorio;
-        this.minhaListaRepositorio = minhaListaRepositorio;
-        this.produtoProdutorRepositorio = produtoProdutorRepositorio;
         this.clienteServico = clienteServico;
-        this.produtoServico = produtoServico;
-        this.produtorServico = produtorServico;
+
     }
 
     public Optional<Pedido> encontraUm(Long id) {
@@ -42,21 +33,8 @@ public class PedidoServico {
         return pedidos;
     }
 
-    public Pedido encontraUmPedido(Long id) {
-        Pedido pedidos = repositorio.findById(id).get();
-
-        return pedidos;
-    }
-
     public List<Pedido> pegarPedidos() {
         return repositorio.findAll();
-    }
-
-    public List<ProdutoProdutor> pegaListaDeProdutosPorProdutores(Long listaId) {
-        Optional<MinhaLista> lista = minhaListaRepositorio.findById(listaId);
-        List<Produto> produtos = lista.get().getProdutos();
-
-        return produtoProdutorRepositorio.findByProdutoIn(produtos);
     }
 
     public void removerPedido(Long idCompra) {
@@ -92,8 +70,6 @@ public class PedidoServico {
         Map<Produtor, List<ProdutoProdutor>> byProdutor
                 = produtoProdutor.stream()
                 .collect(Collectors.groupingBy(ProdutoProdutor::getProdutor));
-
-
         return byProdutor;
     }
 }
