@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class AtualizacaoProdutoValidador implements ConstraintValidator<ProdutoProdutorValido, ProdutoProdutor> {
+public class ProdutoProdutorValidador implements ConstraintValidator<ProdutoProdutorValido, ProdutoProdutor> {
 
     @Autowired
     ProdutoProdutorRepositorio repositorio;

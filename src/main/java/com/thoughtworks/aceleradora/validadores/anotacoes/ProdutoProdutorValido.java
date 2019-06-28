@@ -1,7 +1,7 @@
 package com.thoughtworks.aceleradora.validadores.anotacoes;
 
 
-import com.thoughtworks.aceleradora.validadores.AtualizacaoProdutoValidador;
+import com.thoughtworks.aceleradora.validadores.ProdutoProdutorValidador;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -10,7 +10,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = AtualizacaoProdutoValidador.class)
+@Constraint(validatedBy = ProdutoProdutorValidador.class)
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ProdutoProdutorValido {
