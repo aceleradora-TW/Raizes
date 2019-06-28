@@ -13,7 +13,6 @@ import Modal from './components/modal'
 import Burger from './components/menu-burger'
 import EditarPedido from './pages/editaPedido'
 import Produtos from './pages/produtos'
-import CadastraProduto from './pages/cadastraProduto'
 
 
 
@@ -35,8 +34,6 @@ $(function () {
     EditarLista.validaFormulario();
     Produtos.atualizaUnidadeMedida();
     RealizarPedido.habilitaInputsDeQuantidade();
-
     EditaProdutoEstoque.validaFormulario();
-    CadastraProduto.atualizaUnidadeMedida();
 
 });
