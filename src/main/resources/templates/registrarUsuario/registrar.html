@@ -6,13 +6,8 @@
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
-
 <body>
   <main>
-    <!--<div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).CLIENTE.getValor())">-->
-    <!--Você não tem autorização para acessar essa página-->
-    <!--</div>-->
-    <!--<div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor()">-->
     <div>
       <div class="container card-content valign center">
         <h1 class="title titulo-h1">Formulário de Registro do Raízes</h1>
@@ -74,7 +69,6 @@
                     </div>
                   </div>
                 </div>
-
                 <div>
                   <div class="box">
                     <div class="columns">
@@ -83,24 +77,19 @@
                         <input class="input input-fancy borda-arredondada" th:field="*{email}" type="text"
                           id="emailDaAssistente">
 
-                      <label for="password">*Senha:</label>
-                      <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password"
-                        type="password" name="senha">
+                        <label for="password">*Senha:</label>
+                        <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password"
+                          type="password" name="senha">
                       </div>
                       <div class="column is-half">
                         <label for="telefoneAssistente" id="telefoneAss">*Telefone:</label>
                         <input class="input input-fancy borda-arredondada" type="text" id="telefoneAssistente"
                           th:field="*{contato}">
-                          <label for="password">*Repetir senha:</label>
-                          <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="passwords"
-                            type="password" name="senha">
+                        <label for="password">*Repetir senha:</label>
+                        <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="passwords"
+                          type="password" name="senha">
                       </div>
                     </div>
-
-
-
-
-                   
                     <div>
                       <span th:text="${formUsuario.email}"></span>
                       <input class="button is-medium verde-viavida borda-arredondada" type="submit" value="Enviar">
@@ -115,5 +104,4 @@
     </div>
   </main>
 </body>
-
 </html>
