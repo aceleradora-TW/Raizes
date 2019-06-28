@@ -141,5 +141,20 @@ public class PedidoControlador {
         modelo.addAttribute("pedido", new Pedido());
         modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
         return "pedido/editar";
-        }
     }
+    @PostMapping("/{id}/editar")
+    public String SalvarProdutoNoPedido(Breadcrumb breadcrumb, @PathVariable Long id, Model modelo){
+        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedido/pedidos")
+                .pagina("Editar Pedido", "/pedidos/editar" + id);
+
+        MinhaLista lista = minhaListaServico.encontraUm(id);
+        Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
+                produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(lista);
+        modelo.addAttribute("pedido", new Pedido());
+        modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
+
+        return "pedido/pedidos";
+
+    }
+}
