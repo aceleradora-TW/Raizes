@@ -8,11 +8,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioServico {
-    @Autowired
+
     private UsuarioRepositorio usuarioRepositorio;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public UsuarioServico(UsuarioRepositorio usuarioRepositorio, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.usuarioRepositorio = usuarioRepositorio;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     public void salvar(Usuario usuario) {
         usuario.setSenha(bCryptPasswordEncoder.encode(usuario.getSenha()));
