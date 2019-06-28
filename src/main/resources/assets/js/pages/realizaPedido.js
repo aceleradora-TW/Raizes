@@ -10,7 +10,12 @@ export default {
 
       const bigbox  = $(this).parents('.bigbox');
       const inputs  = bigbox.find('input[type=number]');
-      inputs.attr('disabled',true);    
+      inputs.each((e)=> {
+
+        $(e).attr('value', 0);
+      })
+      inputs.attr('disabled',true);
+
       
       const box = $(this).parents('.box');
       const input  = box.find('input[type=number]');
