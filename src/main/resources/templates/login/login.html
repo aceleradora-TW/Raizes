@@ -13,11 +13,11 @@
         <div class="column is-12">
             <div class="rz-box box">
                 <div class="container card-content valign center has-text-centered">
-                    <form th:action="@{/login}" method="POST" onsubmit="return validaLogin(event)">
+                    <form th:action="@{/login}" method="POST">
                         <h1 class="title is-1">Raízes</h1>
                         <p class="control has-icons-left has-icons-right margin-left-10">
                             <i class="fas fa-user"></i>
-                            <label for="email">Email</label>
+                            <label for="email" >Email</label>
                         </p>
                         <input class="validate input input-fancy borda-arredondada" id="email" type="text" name="email">
                         <div class="columns">

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-//@RequestMapping("/usuario")
+// @RequestMapping("/usuario")
 public class UsuarioControlador {
     private UsuarioServico usuarioServico;
     private UsuarioValidador usuarioValidador;
@@ -62,8 +62,8 @@ public class UsuarioControlador {
         return "login/login";
     }
 
-//    @PostMapping(value = "/login")
-//    public String login(@ModelAttribute("formLogin") Usuario usuario) {
-//        return "/inicio";
-//    }
+    @PostMapping(value = "/login")
+    public String login(@ModelAttribute("formLogin") Usuario usuario) {
+        return "/login/login";
+    }
 }

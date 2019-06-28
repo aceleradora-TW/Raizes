@@ -20,7 +20,7 @@ public class Usuario {
     private String nome;
     private String contato;
 
-    @ManyToOne
+    @ManyToOne (cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
