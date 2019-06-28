@@ -17,6 +17,7 @@ public class ProdutoProdutor{
     private double quantidadeEstoque;
 
     private BigDecimal preco;
+    
 
     @ManyToOne
     @JoinColumn(name = "id_produtos")
