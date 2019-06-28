@@ -19,7 +19,6 @@
         <form th:action="@{/registrar}" th:object="${formUsuario}" method="post"
           onsubmit="return validaRegistrar(event)" id="registraAss">
           <div class="columns is-text-left">
-            <!-- <div class="display-none div-escondida"> -->
             <div class="columns is-12">
               <div>
                 <div class="box">
@@ -33,17 +32,75 @@
                       th:field="*{nome}">
                   </div>
                 </div>
+                <div class="box">
+                  <div class="columns">
+                    <div class="column is-half"> <label for="nomeAssistente">*Endereço:</label>
+                      <input class="input input-fancy borda-arredondada" type="text" id="endereco"
+                        th:field="*{endereco}" placeholder="Ex: Rua João da Silva, 10">
+                    </div>
+                    <div class="column is-half">
+                      <label for="nomeAssistente">*Complemento:</label>
+                      <input class="input input-fancy borda-arredondada" type="text" id="complemento"
+                        th:field="*{endereco.complemento}" placeholder="Ex: Apartamento 101">
+                    </div>
+                  </div>
+                  <div class="columns">
+                    <div class="column is-half">
+                      <label for="nomeAssistente">*Bairro:</label>
+                      <input class="input input-fancy borda-arredondada" type="text" id="bairro"
+                        th:field="*{endereco.bairro}" placeholder="Ex: Centro">
+                    </div>
+                    <div class="column">
+                      <label for="cidade">*Cidade:</label>
+                      <div class="control">
+                        <div class="select">
+                          <select>
+                            <option th:each="cidades : ${cidade}" th:text="${cidades.nome}" th:value="${cidades.nome}">
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <label for="estado">*Estado:</label>
+                      <div class="control">
+                        <div class="select">
+                          <select>
+                            <option th:each="estados : ${estado}" th:text="${estados.uf}" th:value="${estados.uf}">
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div>
                   <div class="box">
-                    <label for="emailDaAssistente" id="emailAssistente">*E-mail:</label>
-                    <input class="input input-fancy borda-arredondada" th:field="*{email}" type="text"
-                      id="emailDaAssistente">
-                    <label for="telefoneAssistente" id="telefoneAss">*Telefone:</label>
-                    <input class="input input-fancy borda-arredondada" type="text" id="telefoneAssistente"
-                      th:field="*{contato}">
-                    <label for="password">*Senha:</label>
-                    <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password" type="password"
-                      name="senha">
+                    <div class="columns">
+                      <div class="column is-half">
+                        <label for="emailDaAssistente" id="emailAssistente">*E-mail:</label>
+                        <input class="input input-fancy borda-arredondada" th:field="*{email}" type="text"
+                          id="emailDaAssistente">
+
+                      <label for="password">*Senha:</label>
+                      <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password"
+                        type="password" name="senha">
+                      </div>
+                      <div class="column is-half">
+                        <label for="telefoneAssistente" id="telefoneAss">*Telefone:</label>
+                        <input class="input input-fancy borda-arredondada" type="text" id="telefoneAssistente"
+                          th:field="*{contato}">
+                          <label for="password">*Repetir senha:</label>
+                          <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="passwords"
+                            type="password" name="senha">
+                      </div>
+                    </div>
+
+
+
+
+                   
                     <div>
                       <span th:text="${formUsuario.email}"></span>
                       <input class="button is-medium verde-viavida borda-arredondada" type="submit" value="Enviar">
