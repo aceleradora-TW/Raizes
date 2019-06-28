@@ -1,14 +1,23 @@
 package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
+import com.thoughtworks.aceleradora.servicos.*;
+import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 @Controller
@@ -19,24 +28,32 @@ public class PedidoControlador {
     private PedidoServico pedidoServico;
     private EnderecoServico enderecoServico;
     private ProdutorServico produtorServico;
+    private ProdutoServico produtoServico;
+    private ProdutoProdutorServico produtoProdutorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
             "/");
 
     @Autowired
-    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico,
-            EnderecoServico enderecoServico, ProdutorServico produtorServico) {
+    public PedidoControlador(MinhaListaServico minhaListaServico,
+                             PedidoServico pedidoServico,
+                             EnderecoServico enderecoServico,
+                             ProdutoServico produtoServico,
+                             ProdutorServico produtorServico,
+                             ProdutoProdutorServico produtoProdutorServico) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
         this.enderecoServico = enderecoServico;
+        this.produtoServico = produtoServico;
         this.produtorServico = produtorServico;
+        this.produtoProdutorServico = produtoProdutorServico;
     }
 
     @GetMapping
     public String pedidoCriados(Breadcrumb breadcrumb, Model modelo) {
         breadcrumb
-        .aproveitar(partesComunsDoBreadCrumb)
-        .pagina("Pedidos", "/pedido/pedidos");
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedido/pedidos");
 
         modelo.addAttribute("pedidosCriados", pedidoServico.pegarPedidos());
         return "pedido/pedidos";
@@ -56,18 +73,30 @@ public class PedidoControlador {
         return "pedido/visualizar-pedido";
     }
 
-    @GetMapping("/{id}/realizar-pedido")
-    public String realizarPedidos(@PathVariable("id") Long id, Breadcrumb breadcrumb) {
+    @GetMapping("/{listaId}/realizar-pedido")
+    public String listaProdutoresDeProdutos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo,RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Pedidos", "/pedidos")
-                .pagina("Realizar Pedido", "/pedido/pedidos");
-        return "pedido/realizar-pedido";
-    }
+                .pagina("realizar pedido", "/pedido/pedidos");
 
-    @ResponseBody
-    @GetMapping("/enderecos")
-    public List<Endereco> mostraEndereco() {
-        return enderecoServico.pegaTodos();
+        try{
+            MinhaLista lista = minhaListaServico.encontraUm(listaId);
+
+            Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
+                    produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(lista);
+
+            modelo.addAttribute("pedido", new Pedido());
+
+            modelo.addAttribute("nomeLista", lista.getNome());
+
+            modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
+
+            return "pedido/realizar-pedido";
+        }catch (ListaNaoEncontradaExcecao e){
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem",e.getMessage());
+
+            return "redirect:/minhas-listas/";
+        }
+
     }
 
     @PostMapping("/{id}/excluir")
@@ -79,5 +108,23 @@ public class PedidoControlador {
         return "redirect:/pedidos";
     }
 
+    @PostMapping("/realizar-pedido")
+    public String salvarPedido(@Valid Pedido pedido, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos,
+                               Breadcrumb breadcrumb) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedidos")
+                .pagina("Realizar pedido", "/pedidos");
 
+        if(resultadoValidacao.hasErrors()) {
+            modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
+            return "pedido/realizar-pedido";
+        }
+
+        pedidoServico.salvarPedido(pedido);
+
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
+
+        return "redirect:/pedidos";
+    }
 }

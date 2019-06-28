@@ -23,16 +23,16 @@ public class ProdutoProdutor {
 
     @ManyToOne
     @JoinColumn(name = "id_produtos")
-    Produto produto;
+    private Produto produto;
 
     @ManyToOne
     @JoinColumn(name = "id_produtores")
-    Produtor produtor;
+    private Produtor produtor;
 
     @Enumerated(EnumType.STRING)
     @Column(name="tipo_de_cultivo")
     private TipoDeCultivo tipoDeCultivo;
-
+    
     public ProdutoProdutor() {
     }
 

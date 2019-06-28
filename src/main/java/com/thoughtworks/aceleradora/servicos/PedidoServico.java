@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.servicos;
 
 import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.repositorios.MinhaListaRepositorio;
 import com.thoughtworks.aceleradora.repositorios.PedidoRepositorio;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import org.springframework.stereotype.Service;
@@ -15,25 +16,44 @@ import java.util.stream.Collectors;
 public class PedidoServico {
 
     private PedidoRepositorio repositorio;
-    private ProdutoProdutorRepositorio produtoProdutorRepositorio;
+
+    private ClienteServico clienteServico;
 
 
     public PedidoServico(PedidoRepositorio repositorio,
-                         ProdutoProdutorRepositorio produtoProdutorRepositorio) {
+                         ClienteServico clienteServico) {
         this.repositorio = repositorio;
-        this.produtoProdutorRepositorio = produtoProdutorRepositorio;
+        this.clienteServico = clienteServico;
+
+    }
+
+    public Optional<Pedido> encontraUm(Long id) {
+        Optional<Pedido> pedidos = repositorio.findById(id);
+        return pedidos;
     }
 
     public List<Pedido> pegarPedidos() {
         return repositorio.findAll();
     }
 
-    public Optional<Pedido> encontraUm(Long id) {
-        Optional<Pedido> pedidos = repositorio.findById(id);
-
-        return pedidos;
+    public void removerPedido(Long idCompra) {
+        repositorio.deleteById(idCompra);
     }
 
+    public Pedido salvarPedido(Pedido pedido) {
+
+        pedido.setCliente(clienteServico.encontraCliente());
+        pedido.setPedidosProdutosProdutores(pedido
+                .getPedidosProdutosProdutores()
+                .stream()
+                .filter(pedidoProdutoProdutor -> pedidoProdutoProdutor.getProdutoProdutor() != null)
+                .peek(pedidoProdutoProdutor -> pedidoProdutoProdutor.setValor(pedidoProdutoProdutor
+                        .getProdutoProdutor().getPreco()))
+                .collect(Collectors.toList())
+        );
+
+        return repositorio.save(pedido);
+    }
 
     public Map<Produtor, List<ProdutoProdutor>> agrupaProdutosPorProdutor(Long idPedido){
         Optional<Pedido> pedido = encontraUm(idPedido);
@@ -49,13 +69,6 @@ public class PedidoServico {
         Map<Produtor, List<ProdutoProdutor>> byProdutor
                 = produtoProdutor.stream()
                 .collect(Collectors.groupingBy(ProdutoProdutor::getProdutor));
-
-
         return byProdutor;
     }
-
-    public void removerPedido(Long idCompra) {
-        repositorio.deleteById(idCompra);
-    }
-
 }

@@ -12,16 +12,16 @@
   box-shadow: 0 0 1.5px  #4a4a4a;
 
   a {
-    padding: 8px 8px 8px 32px;
+    padding: 8px 8px 8px 20px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 19px;
     color: white;
     display: block;
     transition: 0.3s;
 
     &:hover {
       color: #4a4a4a;
-      
+
     }
   }
   &.open {
@@ -34,4 +34,11 @@
     right: 5px;
     font-size: 30px;
   }
+}
+
+.sanduiche-button{
+  cursor:pointer;
+  border-color: transparent;
+  color: $third-color;
+  position: relative;
 }
