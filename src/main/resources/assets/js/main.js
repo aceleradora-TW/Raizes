@@ -35,5 +35,5 @@ $(function () {
     Produtos.atualizaUnidadeMedida();
     RealizarPedido.habilitaInputsDeQuantidade();
     EditaProdutoEstoque.validaFormulario();
-
+    precision
 });
