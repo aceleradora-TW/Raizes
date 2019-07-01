@@ -26,7 +26,6 @@
                         <input type="radio" th:id="${produtoProdutor.produtor.nome } +''+ ${produtoProdutor.produtor.id } +''+ ${produto.nome}"
                           th:value="${produtoProdutor.id}"
                           th:field="*{pedidosProdutosProdutores[__${index.index}__].produtoProdutor}">
-
                         <label class="radio" th:for="${produtoProdutor.produtor.nome } +''+ ${produtoProdutor.produtor.id } +''+ ${produto.nome}">
                           <span class="check"><i class="far fa-check-circle"></i></span>
                           <span class="radio-check"><i class="fas fa-plus"></i></span>
