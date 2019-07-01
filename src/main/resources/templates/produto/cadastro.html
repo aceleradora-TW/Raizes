@@ -12,6 +12,9 @@
       <div th:if="${mensagem} != null">
         <span th:text="${mensagem}"></span>
       </div>
+      <div th:if="${erros}">
+        <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
+      </div>
       <div class="columns">
         <div class="column is-12">
           <div class="rz-box box">
@@ -22,13 +25,13 @@
                 <div class="rz-box-body">
                   <label class="label">Produto</label>
                   <div class="select">
-                    <select id="seletorDeProdutos" th:onchange="Produtos.atualizaUnidadeMedida(event)" name="produto">
+                    <select id="seletorDeProdutos" th:onchange="Produtos.atualizaUnidadeMedida(event)"
+                      name="produto">
                       <option th:each="produto : ${produtos}" th:text="${produto.nome}" th:value="${produto.id}"
                         th:attr="data-unidade-medida=${produto.unidadeMedida.codigo}">
                       </option>
                     </select>
-                  </div>
-                  <div class="help-block">
+                    <div class="help-block"></div>
                   </div>
                 </div>
                 <div class="rz-box-body">
@@ -41,20 +44,24 @@
                   </div>
                 </div>
                 <div class="flex flex-row">
-                  <div class="rz-box-body">
+                  <div class="field rz-box-body">
                     <label class="label">Quantidade disponível*</label>
-                    <div class="control">
-                      <input class="input" name="quantidadeEstoque" type="number" placeholder="Ex.: 15">
+                    <div class="flex flex-row">
+                      <input class="input" id="quantidadeEstoque" name="quantidadeEstoque" type="number"
+                        placeholder="Ex.: 15">
+                      <span class="my-2">/</span>
+                      <span class="my-2 unidadeMedida" id="unidadeMedida2"></span>
                     </div>
+                    <div class="help-block"></div>
                   </div>
-                  <div class="rz-box-body">
+                  <div class="rz-box-body field">
                     <label class="label">Valor do produto*</label>
-                    <div class="control">
-                      <input class="input" th:field="*{preco}" type="number" placeholder="Ex.: 4.00">
-                      <div class="field">
-                      <span id="unidadeMedida"></span>
-                      </div>
+                    <div class="flex flex-row">
+                      <input class="input" id="preco" th:field="*{preco}" placeholder="Ex.: 4.00">
+                      <span class="my-2">/</span>
+                      <span class="my-2 unidadeMedida" id="unidadeMedida"></span>
                     </div>
+                    <div class="help-block"></div>
                   </div>
                 </div>
                 <div class="rz-box-footer flex space-between">
