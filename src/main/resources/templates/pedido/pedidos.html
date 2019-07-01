@@ -39,6 +39,10 @@
                     <td>
                       <span class="flex start" th:text="${pedido.nome}"></span>
                     </td>
+                    <td>
+                      <span type="date"
+                               class="form-control" th:value="${{pedido.data}}" th:text="${{pedido.data}}"><span>
+                    </td>
                     <td class="flex end">
                       <a class="button rz-button list-style"
                         th:href="@{/pedidos/{id}/visualizar-pedido(id=${pedido.id})}">

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -16,6 +17,7 @@ public class Pedido {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String nome;
+    private LocalDate data;
 
     @ManyToOne
     @JoinColumn(name = "id_clientes")
@@ -52,6 +54,14 @@ public class Pedido {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 
     public List<PedidoProdutoProdutor> getPedidosProdutosProdutores() {
