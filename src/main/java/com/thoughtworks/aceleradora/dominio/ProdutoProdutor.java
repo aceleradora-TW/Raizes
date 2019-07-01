@@ -1,6 +1,8 @@
 package com.thoughtworks.aceleradora.dominio;
 
 
+import com.thoughtworks.aceleradora.validadores.anotacoes.ProdutoProdutorValido;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -8,14 +10,16 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "produtos_produtores")
 @Access(AccessType.FIELD)
-public class ProdutoProdutor{
+@ProdutoProdutorValido
+public class ProdutoProdutor {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    private double quantidadeEstoque;
+    private Integer quantidadeEstoque;
 
+    @Column(precision = 10, scale = 2)
     private BigDecimal preco;
 
     @ManyToOne
@@ -29,19 +33,8 @@ public class ProdutoProdutor{
     @Enumerated(EnumType.STRING)
     @Column(name="tipo_de_cultivo")
     private TipoDeCultivo tipoDeCultivo;
-    
+
     public ProdutoProdutor() {
-    }
-
-    public ProdutoProdutor(double quantidadeEstoque, BigDecimal preco,
-                           Produto produto, Produtor produtor,
-                           TipoDeCultivo tipoDeCultivo) {
-
-        this.quantidadeEstoque = quantidadeEstoque;
-        this.preco = preco;
-        this.produto = produto;
-        this.produtor = produtor;
-        this.tipoDeCultivo = tipoDeCultivo;
     }
 
     public Long getId() {
@@ -52,11 +45,11 @@ public class ProdutoProdutor{
         this.id = id;
     }
 
-    public double getQuantidadeEstoque() {
+    public Integer getQuantidadeEstoque() {
         return quantidadeEstoque;
     }
 
-    public void setQuantidadeEstoque(double quantidadeEstoque) {
+    public void setQuantidadeEstoque(Integer quantidadeEstoque) {
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
@@ -91,4 +84,5 @@ public class ProdutoProdutor{
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
+
 }

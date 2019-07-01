@@ -154,7 +154,7 @@ public class PedidoControlador {
         modelo.addAttribute("pedido", new Pedido());
         modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
 
-        return "pedido/pedidos";
+        return "redirect:/pedido/pedidos";
 
     }
 }
