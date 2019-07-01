@@ -9,7 +9,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @DiscriminatorColumn(name = "tipo_de_usuario")
 @Entity
 @Table(name = "usuarios")
-public class Usuario {
+public abstract class Usuario {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -123,7 +123,7 @@ public class Usuario {
                 ", nome='" + nome + '\'' +
                 ", contato='" + contato + '\'' +
                 ", endereco=" + endereco +
-                ", tipoDeUsuario=" + tipoDeUsuario +
+                ", selecionaUsuario.html=" + tipoDeUsuario +
                 '}';
     }
 }
