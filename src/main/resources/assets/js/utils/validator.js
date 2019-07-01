@@ -24,7 +24,7 @@ export default class Validator {
       min: 'Tamanho mínimo permitido: [0].',
       maxlength: 'Tamanho máximo permitido: [0].',
       minlength: 'Tamanho minimo permitido: [0].',
-      pattern: '请输入匹配的值。.',
+      pattern: 'Por favor, insira um valor correspondente.',
       range: 'Permitido entre [0] e [1] tamanho??',
       rangelength: 'Permitido entre [0] e [1] string tamanho??',
       equalto: 'Deve dser igual'

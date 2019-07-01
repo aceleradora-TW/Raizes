@@ -13,12 +13,11 @@ import Modal from './components/modal'
 import Burger from './components/menu-burger'
 import EditarPedido from './pages/editaPedido'
 import Produtos from './pages/produtos'
-
+import EditaProdutoEstoque from './pages/editaProdutoEstoque'
 
 
 
 $(function () {
-
 
     window.Modal = new Modal();
     window.Burger = Burger;
@@ -31,12 +30,11 @@ $(function () {
     window.CriarLista = CriarLista;
     window.EditaPedido = EditarPedido;
     
-    
+
+
     CriarLista.validaFormulario();
     EditarLista.validaFormulario();
     Produtos.atualizaUnidadeMedida();
     RealizarPedido.habilitaInputsDeQuantidade();
-  
-
-
+    EditaProdutoEstoque.validaFormulario();
 });
