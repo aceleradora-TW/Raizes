@@ -34,9 +34,6 @@ public class PedidoServico {
         return pedidos;
     }
 
-//    public String nomePedido(Long id){
-//        return repositorio.findById(id).get().getNome();
-//    }
 
     public List<Pedido> pegarPedidos() {
         return repositorio.findAll();
@@ -77,28 +74,4 @@ public class PedidoServico {
                 .collect(Collectors.groupingBy(ProdutoProdutor::getProdutor));
         return byProdutor;
     }
-//
-//    public Map<Produto, List<ProdutoProdutor>> agrupaProdutoresPorProdutosDePedido(Long idPedido){
-//        Optional<Pedido> pedido = encontraUm(idPedido);
-//
-//        List<PedidoProdutoProdutor> pedidosProdutoresDosProdutos = pedido.get().getPedidosProdutosProdutores();
-//
-//        List<PedidoProdutoProdutor> produtoProdutor = new ArrayList<>();
-//
-//                for (int i = 0; i< pedidosProdutoresDosProdutos.size(); i++) {
-//            produtoProdutor.add(pedidosProdutoresDosProdutos.get(i).getProdutoProdutor());
-//        }
-
-//        List<PedidoProdutoProdutor> pedidosProdutosProdutoresDoPedido = pedido.get().getPedidosProdutosProdutores();
-//
-//        List<ProdutoProdutor> produtoProdutor = new ArrayList<>();
-//
-//        for (int i = 0; i< pedidosProdutosProdutoresDoPedido.size(); i++) {
-//            produtoProdutor.add(pedidosProdutosProdutoresDoPedido.get(i).getProdutoProdutor());
-//        }
-//
-//        Map<Produto, List<ProdutoProdutor>> byProdutos
-//                = produtoProdutor.stream()
-//                .collect(Collectors.groupingBy(ProdutoProdutor::getProdutor));
-//        return byProdutor;
     }
