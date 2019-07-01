@@ -15,6 +15,7 @@ import EditarPedido from './pages/editaPedido'
 import Produtos from './pages/produtos'
 import EditaProdutoEstoque from './pages/editaProdutoEstoque'
 import Calcular from './components/calcularTotal'
+import validaCadastraProduto from './pages/validaCadastraProduto'
 
 $(function () {
 
@@ -35,4 +36,6 @@ $(function () {
     Produtos.atualizaUnidadeMedida();
     RealizarPedido.habilitaInputsDeQuantidade();
     EditaProdutoEstoque.validaFormulario();
+    validaCadastraProduto.validaFormulario();
+    Produtos.atualizaUnidadeMedida();
 });
