@@ -1,5 +1,6 @@
 package com.thoughtworks.aceleradora.validadores.anotacoes;
 
+
 import com.thoughtworks.aceleradora.validadores.ProdutoProdutorValidador;
 
 import javax.validation.Constraint;

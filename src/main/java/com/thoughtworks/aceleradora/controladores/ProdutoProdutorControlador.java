@@ -94,16 +94,18 @@ public class ProdutoProdutorControlador {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
+
         try {
             ProdutoProdutor produtoprodutor = produtoProdutorServico.encontraUm(id);
 
             modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
+            produtoprodutor.setPreco(produtoprodutor.getPreco());
             modelo.addAttribute("produtoProdutor", produtoprodutor);
 
         } catch (ProdutoNaoEncontradoExcecao e) {
             redirecionamentoDeAtributos.addAttribute("mensagem", e.getMessage());
 
-            return "redirect:/produtos/cadastro";
+            return "produto/editar";
 
         }
 
@@ -111,23 +113,26 @@ public class ProdutoProdutorControlador {
     }
 
     @PostMapping("/{id}/editar")
-    public String salvarProduto(Breadcrumb breadcrumb, ProdutoProdutor produtoProdutor, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvarProduto(@Valid ProdutoProdutor produtoProdutor,
+                                BindingResult resultadoValidacao,
+                                Breadcrumb breadcrumb,
+                                Model modelo,
+                                RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
 
-        try {
-            produtoProdutorServico.salvar(produtoProdutor);
+        if (resultadoValidacao.hasErrors()) {
+            modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
 
-            String mensagem = "Seu produto foi alterado com sucesso!";
-            modelo.addAttribute("mensagem", mensagem);
-        } catch (ProdutoNaoSalvoExcecao e) {
-            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
-
-            return "redirect:/produtos/cadastro";
+            redirecionamentoDeAtributos.addFlashAttribute("erros", resultadoValidacao.getAllErrors());
+            return "redirect:/produtos/{id}/editar";
         }
+        produtoProdutorServico.salvar(produtoProdutor);
 
-        return "produto/editar";
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Produto atualizado com sucesso!");
+
+        return "redirect:/produtos/{id}/editar";
     }
 
     @GetMapping("/visualizar-estoque")

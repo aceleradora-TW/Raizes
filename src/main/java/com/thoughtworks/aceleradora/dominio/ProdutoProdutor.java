@@ -19,6 +19,7 @@ public class ProdutoProdutor {
 
     private Integer quantidadeEstoque;
 
+    @Column(precision = 10, scale = 2)
     private BigDecimal preco;
 
     @ManyToOne
@@ -32,7 +33,7 @@ public class ProdutoProdutor {
     @Enumerated(EnumType.STRING)
     @Column(name="tipo_de_cultivo")
     private TipoDeCultivo tipoDeCultivo;
-    
+
     public ProdutoProdutor() {
     }
 
@@ -83,5 +84,4 @@ public class ProdutoProdutor {
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
-
 }

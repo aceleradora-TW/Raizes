@@ -13,26 +13,34 @@ import Modal from './components/modal'
 import Burger from './components/menu-burger'
 import EditarPedido from './pages/editaPedido'
 import Produtos from './pages/produtos'
+import EditaProdutoEstoque from './pages/editaProdutoEstoque'
 import validaCadastraProduto from './pages/validaCadastraProduto'
 
 
 
 $(function () {
-    CriarLista.validaFormulario();   
-    EditarLista.validaFormulario();
-    validaCadastraProduto.validaFormulario();
-    Produtos.atualizaUnidadeMedida();
 
 
+    window.Modal = new Modal();
+    window.Burger = Burger;
+    window.Produtos = Produtos;
     window.MinhasListas = MinhasListas;
     window.EditarLista = EditarLista;
     window.RealizarPedido = RealizarPedido;
     window.Pedidos = Pedidos;
     window.Pedido = Pedido;
     window.CriarLista = CriarLista;
-    window.Modal = new Modal();
     window.EditaPedido = EditarPedido;
-    window.Burger = Burger;
-    window.Produtos = Produtos;
+    
+    
+    CriarLista.validaFormulario();
+    EditarLista.validaFormulario();
+    Produtos.atualizaUnidadeMedida();
+    RealizarPedido.habilitaInputsDeQuantidade();
+    EditaProdutoEstoque.validaFormulario();
+    validaCadastraProduto.validaFormulario();
+    Produtos.atualizaUnidadeMedida();
+  
+
 
 });
