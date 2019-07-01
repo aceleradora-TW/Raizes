@@ -23,10 +23,10 @@
                   <div class="box" id="inputRadio">
                     <div class="w-75 flex equal-sizing flex-row">
                       <span class="bigcheck" th:onchange="RealizarPedido.habilitaInputsDeQuantidade()">
-                        <input type="radio" th:id="${produtoProdutor.produtor.nome } +''+ ${produtoProdutor.produtor.id } +''+ ${produto.nome}"
+                        <input type="radio" th:id="ProdutoProdutor + ${produtoProdutor.id}"
                           th:value="${produtoProdutor.id}"
                           th:field="*{pedidosProdutosProdutores[__${index.index}__].produtoProdutor}">
-                        <label class="radio" th:for="${produtoProdutor.produtor.nome } +''+ ${produtoProdutor.produtor.id } +''+ ${produto.nome}">
+                        <label class="radio" th:for="ProdutoProdutor + ${produtoProdutor.id}">
                           <span class="check"><i class="far fa-check-circle"></i></span>
                           <span class="radio-check"><i class="fas fa-plus"></i></span>
                           <span th:text="${produtoProdutor.produtor.nome}"></span>
