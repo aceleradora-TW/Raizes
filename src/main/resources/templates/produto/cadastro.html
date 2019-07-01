@@ -25,7 +25,7 @@
                 <div class="rz-box-body">
                   <label class="label">Produto</label>
                   <div class="select">
-                    <select id="seletorDeProdutos" th:onchange="CadastraProduto.atualizaUnidadeMedida(event)"
+                    <select id="seletorDeProdutos" th:onchange="Produtos.atualizaUnidadeMedida(event)"
                       name="produto">
                       <option th:each="produto : ${produtos}" th:text="${produto.nome}" th:value="${produto.id}"
                         th:attr="data-unidade-medida=${produto.unidadeMedida.codigo}">

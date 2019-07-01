@@ -13,7 +13,6 @@ import Modal from './components/modal'
 import Burger from './components/menu-burger'
 import EditarPedido from './pages/editaPedido'
 import Produtos from './pages/produtos'
-import CadastraProduto from './pages/cadastraProduto'
 import validaCadastraProduto from './pages/validaCadastraProduto'
 
 
@@ -21,8 +20,8 @@ import validaCadastraProduto from './pages/validaCadastraProduto'
 $(function () {
     CriarLista.validaFormulario();   
     EditarLista.validaFormulario();
-    CadastraProduto.atualizaUnidadeMedida();
     validaCadastraProduto.validaFormulario();
+    Produtos.atualizaUnidadeMedida();
 
 
     window.MinhasListas = MinhasListas;
@@ -35,6 +34,5 @@ $(function () {
     window.EditaPedido = EditarPedido;
     window.Burger = Burger;
     window.Produtos = Produtos;
-    window.CadastraProduto = CadastraProduto;
 
 });
