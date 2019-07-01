@@ -13,13 +13,13 @@ import Modal from './components/modal'
 import Burger from './components/menu-burger'
 import EditarPedido from './pages/editaPedido'
 import Produtos from './pages/produtos'
+import EditaProdutoEstoque from './pages/editaProdutoEstoque'
 import Calcular from './components/calcularTotal'
 
 
 
 
 $(function () {
-
 
     window.Modal = new Modal();
     window.Burger = Burger;
@@ -37,7 +37,5 @@ $(function () {
     EditarLista.validaFormulario();
     Produtos.atualizaUnidadeMedida();
     RealizarPedido.habilitaInputsDeQuantidade();
-
-
-
+    EditaProdutoEstoque.validaFormulario();
 });
