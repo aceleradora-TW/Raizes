@@ -16,7 +16,7 @@ export default {
       const unidadeMedidaElement = $('.unidadeMedida');
       const unidadeMedida = opcaoSelecionada.attr('data-unidade-medida'); 
 
-      unidadeMedidaElement.text(unidadeMedida);
+      unidadeMedidaElement.text(unidadeMedida)
 
       const textoUnidadeMedida = seletorDeProdutos.find('option:selected');
     

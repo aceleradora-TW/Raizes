@@ -16,10 +16,7 @@ import Produtos from './pages/produtos'
 import EditaProdutoEstoque from './pages/editaProdutoEstoque'
 import validaCadastraProduto from './pages/validaCadastraProduto'
 
-
-
 $(function () {
-
 
     window.Modal = new Modal();
     window.Burger = Burger;
@@ -30,8 +27,7 @@ $(function () {
     window.Pedidos = Pedidos;
     window.Pedido = Pedido;
     window.CriarLista = CriarLista;
-    window.EditaPedido = EditarPedido;
-    
+    window.EditaPedido = EditarPedido;    
     
     CriarLista.validaFormulario();
     EditarLista.validaFormulario();
@@ -39,8 +35,5 @@ $(function () {
     RealizarPedido.habilitaInputsDeQuantidade();
     EditaProdutoEstoque.validaFormulario();
     validaCadastraProduto.validaFormulario();
-    Produtos.atualizaUnidadeMedida();
-  
-
-
+    Produtos.atualizaUnidadeMedida();  
 });
