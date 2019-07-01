@@ -14,7 +14,6 @@ import Burger from './components/menu-burger'
 import EditarPedido from './pages/editaPedido'
 import Produtos from './pages/produtos'
 import EditaProdutoEstoque from './pages/editaProdutoEstoque'
-import EditaProdutoEstoque from './pages/editaProdutoEstoque'
 import Calcular from './components/calcularTotal'
 
 $(function () {
