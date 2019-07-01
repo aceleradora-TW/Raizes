@@ -11,5 +11,6 @@ import java.util.Optional;
 public interface ProdutorRepositorio extends CrudRepository<Produtor, Long> {
     List<Produtor> findAll();
     Optional<Produtor> findById(Long id);
+    Produtor findByEmail(String email);
 }
 
