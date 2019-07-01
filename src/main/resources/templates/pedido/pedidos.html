@@ -33,6 +33,7 @@
               <table class="rz-table striped">
                 <thead class="table-header">
                   <th class="flex start pl-3">Pedidos</th>
+                  <th class="flex flex-row center pl-3">Data de Emissão</th>
                 </thead>
                 <tbody class="table-body">
                   <tr th:each="pedido: ${pedidosCriados}">
@@ -41,7 +42,7 @@
                     </td>
                     <td>
                       <span type="date"
-                               class="form-control" th:value="${{pedido.data}}" th:text="${{pedido.data}}"><span>
+                               class="form-control" th:value="${{pedido.data}}" th:text="${{pedido.data}}"></span>
                     </td>
                     <td class="flex end">
                       <a class="button rz-button list-style"
