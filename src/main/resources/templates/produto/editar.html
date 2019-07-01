@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-  <meta charset="UTF-8">
-  <title>Raízes</title>
+    <meta charset="UTF-8">
+    <title>Raízes</title>
 </head>
-
 <body>
-  <section class="section">
+<section class="section">
     <section class="container">
       <h1 class="title">Atualizar Dados do Produto</h1>
       <div class="rz-box-body box">
@@ -42,13 +40,13 @@
             </div>
             <div class="field">
               <label>Valor:</label>
-              <input th:field="*{preco}" name="preco" />npm
+              <input th:field="*{preco}" name="preco" />
               <div class="help-block"></div>
               <label th:text="*{produto.unidadeMedida}"></label>
             </div>
         <div class="field">
           <div class="rz-box-footer flex space-between p-3">
-            <a href="/" class="button rz-button is-rounded">Cancelar</a>
+            <a href="/produtos/visualizar-estoque" class="button rz-button is-rounded">Cancelar</a>
             <button class="button rz-button is-rounded" type="submit">Salvar</button>
           </div>
         </div>
@@ -56,7 +54,6 @@
       </div>
       </div>
     </section>
-  </section>
+</section>
 </body>
-
 </html>
