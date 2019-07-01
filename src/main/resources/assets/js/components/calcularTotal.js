@@ -20,7 +20,7 @@ const fn = (event) => {
         let v = $(e).text() || 0;
         totalPedido += +v;
     });
-    //.reduce( ( prevVal, elem ) => prevVal + elem.text() || 0, 0 );
+
     $('#valorTotal').text(duasCasasAposVirgula(totalPedido));
 }
 export default fn;

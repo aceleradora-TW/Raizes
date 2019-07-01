@@ -50,10 +50,10 @@
                             onfocus="Calcular()"></span>
                           <span th:text="${produto.unidadeMedida.codigo}"></span>
                           </label>
-                          <label class="label">Quantidade: <input size="5"
-                              th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
-                              onekeyup="Calcular(event)" onclick="Calcular(event)" min=0 placeholder="Ex: 4" disabled>
-                            </label>
+                          <label class="label">Quantidade:</label>
+                          <input size="5"
+                                  th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
+                                  onekeyup="Calcular(event)" onclick="Calcular(event)" min=0 placeholder="Ex: 4" disabled>
                             <label class="label">Total:R$
                               <span class="resultado" id="resultado"></span>
                             </label>

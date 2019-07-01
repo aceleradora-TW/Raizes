@@ -8,17 +8,18 @@ export default {
   habilitaInputsDeQuantidade: () => {
     $('input[type=radio]').on('change', function () {
 
-      const bigbox  = $(this).parents('.bigbox');
-      const inputs  = bigbox.find('input[type=number]');
+      const bigbox = $(this).parents('.bigbox');
+      const inputs = bigbox.find('input[type=number]');
+      
       const box = $(this).parents('.box');
-      const input  = box.find('input[type=number]');
-      input.each((e)=> {
-        $(e).attr('value', 0);
-      })
-      inputs.attr('disabled',true);
-
-        input.attr('disabled',false);0
+      
+      const input = box.find('input[type=number]');
+      
+      inputs.val(0);
+      inputs.trigger('click');
+      inputs.attr('disabled', true);
+      input.attr('disabled', false);
     });
-    
+
   }
 }
