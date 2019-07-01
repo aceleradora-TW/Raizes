@@ -130,31 +130,16 @@ public class PedidoControlador {
     @GetMapping("/{id}/editar")
     public String editarProdutoNoPedido(Breadcrumb breadcrumb, @PathVariable Long id, Model modelo) {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Pedidos", "/pedido/pedidos")
+                .pagina("Pedidos", "/pedidos")
                 .pagina("Editar Pedido", "/pedidos/editar" + id);
 
-        MinhaLista lista = minhaListaServico.encontraUm(id);
-        Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
-                produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(lista);
-
-        modelo.addAttribute("nomeLista", lista.getNome());
-        modelo.addAttribute("pedido", new Pedido());
-        modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
+        modelo.addAttribute("pedido", pedidoServico.encontraUm(id).get());
+//        ProdutoProdutor pedidoProdutoProdutor = produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente() ;
+//        Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
+//                produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(id);
+//
+//        modelo.addAttribute("pedido", pedidoServico.encontraUm(id).get());
+//        modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
         return "pedido/editar";
-    }
-    @PostMapping("/{id}/editar")
-    public String SalvarProdutoNoPedido(Breadcrumb breadcrumb, @PathVariable Long id, Model modelo){
-        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Pedidos", "/pedido/pedidos")
-                .pagina("Editar Pedido", "/pedidos/editar" + id);
-
-        MinhaLista lista = minhaListaServico.encontraUm(id);
-        Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
-                produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(lista);
-        modelo.addAttribute("pedido", new Pedido());
-        modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
-
-        return "redirect:/pedido/pedidos";
-
     }
 }
