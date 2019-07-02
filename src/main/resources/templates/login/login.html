@@ -11,16 +11,20 @@
     <!--</div>-->
     <div class="columns">
         <div class="column is-12">
-            <div class="rz-box box">
-                <div class="container card-content valign center has-text-centered">
+            <div class="box">
+                <div class="container has-text-centered">
                     <form th:action="@{/login}" method="POST">
                         <h1 class="title is-1">Raízes</h1>
-                        <p class="control has-icons-left has-icons-right margin-left-10">
-                            <i class="fas fa-user"></i>
-                            <label for="email" >Email</label>
-                        </p>
-                        <input class="validate input input-fancy borda-arredondada" id="email" type="text" name="email">
-                        <div class="columns">
+                        <div class="columns is-centered">
+                            <div class = "column is-half">
+                                <p class="control has-icons-left has-icons-right margin-left-10">
+                                    <i class="fas fa-user"></i>
+                                    <label for="email">Email</label>
+                                </p>
+                                <input class="validate input input-fancy" id="email" type="text" name="email">
+                            </div>
+                        </div>
+                        <div class="columns is-centered">
                             <div class = "column is-half">
                                 <p class="control has-icons-left has-icons-right margin-left-10">
                                     <i class="fas fa-lock"></i>
@@ -29,7 +33,8 @@
                                 <input class="validate input input-fancy borda-arredondada" id="password" type="password" name="senha">
                             </div>
                         </div>
-                        <button class="button verde-viavida is-medium borda-arredondada" type="submit" name="action">Entrar</button>
+                        <a class="button rz-button" href="/selecionaUsuario">Registrar</a>
+                        <button class="button rz-button" type="submit" name="action">Entrar</button>
                     </form>
                 </div>
             </div>

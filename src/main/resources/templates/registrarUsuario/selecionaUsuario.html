@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.w3.org/1999/xhtml">
-
+      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Raízes</title>
 </head>
-
 <body>
-    <main>
-        <div>
-            <div class="container card-content valign center">
-                <h1 class="title titulo-h1">Formulário de Registro do Raízes</h1>
-                <form th:action="@{/selecionaUsuario}" th:object="${formUsuario}" method="post"
-                    onsubmit="return validaRegistrar(event)" id="registraAss">
-                    <div class="columns is-text-left">
-                        <div class="columns is-12">
-                            <h1>Você é?</h1>
-                                <a class="button rz-button is-rounded" href="/registrar/cliente">Cliente</a>
-                                 <a class="button rz-button is-rounded" href="/registrar/produtor">Produtor</a>
-                        </div>
+<main>
+    <div>
+        <div class="container card-content align center">
+            <form th:action="@{/selecionaUsuario}" th:object="${formUsuario}" method="post"
+                  onsubmit="return validaRegistrar(event)" id="registraAss">
+            <h1 class="title is-centered">Selecione o tipo de usuário</h1>
+<!--            <div class="box">-->
+                <div class="columns is-centered">
+                    <div class="column is-one-fifth">
+                        <a class="button rz-button is-rounded" href="/registrar/cliente">Cliente</a>
                     </div>
-                </form>
-            </div>
+                    <div class="column is-one-fifth">
+                        <a class="button rz-button is-rounded" href="/registrar/produtor">Produtor</a>
+                    </div>
+                </div>
+<!--            </div>-->
+            </form>
         </div>
-    </main>
+    </div>
+</main>
 </body>
-
 </html>

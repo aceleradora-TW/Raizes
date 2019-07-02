@@ -10,38 +10,41 @@
   <main>
     <div>
       <div class="container card-content valign center">
-        <h1 class="title titulo-h1">Formulário de Registro do Raízes - CLIENTE</h1>
+        <h1 class="title titulo-h1">Formulário de Registro do Raízes</h1>
         <form th:action="@{/registrar/cliente}" th:object="${formUsuario}" method="post"
            id="registraAss">
           <div class="columns is-text-left">
             <div class="columns is-12">
               <div>
                 <div class="box">
-                  <select th:field="*{tipoDeUsuario}">
-                    <option th:each="tipoDeUsuario : ${tipoUsuario}" th:text="${tipoDeUsuario.valor}" th:value="${tipoDeUsuario.name()}">
-                    </option>
-                  </select>
                   <div>
-                    <label for="nomeAssistente">*Nome Completo:</label>
-                    <input class="input input-fancy borda-arredondada" type="text" id="nomeAssistente"
+                    <label for="nome">*Nome Completo:</label>
+                    <input class="input input-fancy borda-arredondada" type="text" id="nome"
                       th:field="*{nome}">
                   </div>
                 </div>
                 <div class="box">
                   <div class="columns">
-                    <div class="column is-half"> <label for="nomeAssistente">*Rua:</label>
+                    <div class="column is-half"> <label for="rua">*Rua:</label>
                       <input class="input input-fancy borda-arredondada" type="text" id="endereco"
                         th:field="*{endereco.rua}" placeholder="Ex: Rua João da Silva, 10" th:name="rua">
                     </div>
-                    <div class="column is-half">
-                      <label for="nomeAssistente">*Complemento:</label>
+
+                    <div class="column"> <label for="numero">*Numero:</label>
+                      <input class="input input-fancy borda-arredondada" type="text" id="numero"
+                             th:field="*{endereco.numero}" th:name="numero">
+                    </div>
+
+                    <div class="column">
+                      <label for="complemento">*Complemento:</label>
                       <input class="input input-fancy borda-arredondada" type="text" id="complemento"
                         th:field="*{endereco.complemento}" placeholder="Ex: Apartamento 101" th:name="complemento">
                     </div>
+
                   </div>
                   <div class="columns">
                     <div class="column is-half">
-                      <label for="nomeAssistente">*Bairro:</label>
+                      <label for="bairro">*Bairro:</label>
                       <input class="input input-fancy borda-arredondada" type="text" id="bairro"
                         th:field="*{endereco.bairro}" placeholder="Ex: Centro" th:name="bairro">
                     </div>
@@ -73,36 +76,36 @@
                   <div class="box">
                     <div class="columns">
                       <div class="column is-half">
-                        <label for="emailDaAssistente" id="emailAssistente">*E-mail:</label>
+                        <label for="email" id="emailAssistente">*E-mail:</label>
                         <input class="input input-fancy borda-arredondada" th:field="*{email}" type="text"
-                          id="emailDaAssistente">
-
-                        <label for="password">*Senha:</label>
-                        <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password"
-                          type="password" name="senha">
+                               id="email">
                       </div>
                       <div class="column is-half">
-                        <label for="telefoneAssistente" id="telefoneAss">*Telefone:</label>
-                        <input class="input input-fancy borda-arredondada" type="text" id="telefoneAssistente"
-                          th:field="*{contato}" th:name="contato">
-<!--                        <label for="password">*Repetir senha:</label>-->
-<!--                        <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="passwords"-->
-<!--                          type="password" name="senha">-->
-
-                        <div class="column"> <label for="numero">*Rua:</label>
-                          <input class="input input-fancy borda-arredondada" type="text" id="numero"
-                                 th:field="*{endereco.numero}" th:name="numero">
-                        </div>
+                        <label for="telefone">*Telefone:</label>
+                        <input class="input input-fancy borda-arredondada" type="text" id="telefone"
+                               th:field="*{contato}" th:name="contato">
+                      </div>
+                    </div>
+                    <div class="columns">
+                      <div class="column is-half">
+                        <label for="password">*Senha:</label>
+                        <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password"
+                               type="password" name="senha">
+                      </div>
+                      <div class="column is-half">
+                        <label for="password">*Repetir senha:</label>
+                        <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password"
+                               type="password" name="senha">
                       </div>
                     </div>
                     <div>
-                      <input class="button is-medium verde-viavida borda-arredondada" type="submit" value="Enviar">
+                      <input class="button rz-button" type="submit" value="Enviar">
                     </div>
                   </div>
                 </div>
               </div>
+              </div>
             </div>
-          </div>
         </form>
       </div>
     </div>
