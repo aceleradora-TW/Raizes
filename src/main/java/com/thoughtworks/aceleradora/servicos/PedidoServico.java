@@ -51,8 +51,6 @@ public class PedidoServico {
                 .collect(Collectors.toList())
         );
 
-        pedido.setData(LocalDate.now());
-
         return repositorio.save(pedido);
     }
 

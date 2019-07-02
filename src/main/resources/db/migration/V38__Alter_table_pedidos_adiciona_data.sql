@@ -1,2 +1,2 @@
 alter table pedidos
-add column data date;
+add column created_at timestamp;
