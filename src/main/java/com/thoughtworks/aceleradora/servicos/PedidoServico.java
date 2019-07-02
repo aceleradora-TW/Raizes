@@ -19,8 +19,6 @@ public class PedidoServico {
 
     private ClienteServico clienteServico;
 
-    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-
     public PedidoServico(PedidoRepositorio repositorio,
                          ClienteServico clienteServico) {
         this.repositorio = repositorio;
