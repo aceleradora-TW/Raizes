@@ -22,9 +22,10 @@ public class UserDetailsImpl implements UserDetailsService {
 
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepositorio.findByEmail(email);
+    public UserDetails loadUserByUsername(String nome) throws UsernameNotFoundException {
 
-        return new User(usuario.getEmail(), usuario.getSenha(), new HashSet<>());
+        Usuario usuario = usuarioRepositorio.findByNome(nome);
+
+        return new User(usuario.getNome(), usuario.getSenha(), new HashSet<>());
     }
 }
