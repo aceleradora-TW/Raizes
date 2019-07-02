@@ -19,4 +19,10 @@ export default {
       }
     });
   },
+  validaPreco: () =>{
+    $(function() {
+      $('#preco').mask("99,99",{placeholder:"Ex.: 4,50"});  
+      //"#.##0,00"
+    })      
+  }
 }

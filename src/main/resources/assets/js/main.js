@@ -1,8 +1,10 @@
 window.$ = window.jQuery = require('jquery')
+import '../../../../../node_modules/jquery.maskedinput/src/jquery.maskedinput';
 import '@fortawesome/fontawesome-free/js/all';
 import 'animate.css'
 import '../scss/styles.scss'
 import '@fengyuanchen/validator';
+
 import CriarLista from './pages/criaLista'
 import EditarLista from './pages/editaLista'
 import MinhasListas from './pages/minhaLista'
