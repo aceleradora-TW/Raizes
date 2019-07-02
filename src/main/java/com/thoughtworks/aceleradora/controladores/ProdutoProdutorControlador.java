@@ -10,12 +10,15 @@ import com.thoughtworks.aceleradora.servicos.ProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
@@ -28,14 +31,12 @@ public class ProdutoProdutorControlador {
     private ProdutoProdutorServico produtoProdutorServico;
     private ProdutorServico produtorServico;
 
+
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Página inicial", "/");
 
     @Autowired
-    public ProdutoProdutorControlador(ProdutoServico produtoServico,
-                                      CategoriaServico categoriaServico,
-                                      ProdutoProdutorServico produtoProdutorServico,
-                                      ProdutorServico produtorServico) {
+    public ProdutoProdutorControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico, ProdutoProdutorServico produtoProdutorServico, ProdutorServico produtorServico) {
         this.produtoServico = produtoServico;
         this.categoriaServico = categoriaServico;
         this.produtoProdutorServico = produtoProdutorServico;
@@ -44,11 +45,12 @@ public class ProdutoProdutorControlador {
 
 
     @GetMapping("/cadastro")
-    public String cadastrarProduto(Model modelo, Breadcrumb breadcrumb) {
+    public String cadastrarProduto(Model modelo, Breadcrumb breadcrumb, ProdutoProdutor produtoProdutor) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Estoque", "/produtos/visualizar-estoque")
                 .pagina("Cadastro", "/produtos/cadastro");
+
 
         ProdutoProdutor produtoProdutorComProdutorHardocoded = new ProdutoProdutor();
         produtoProdutorComProdutorHardocoded.setProdutor(produtorServico.encontraUm(1L));
@@ -63,43 +65,47 @@ public class ProdutoProdutorControlador {
     }
 
     @PostMapping("/cadastro")
-    public String salvarProdutoProdutor(ProdutoProdutor produtoProdutor,
+    public String salvarProdutoProdutor(@Valid ProdutoProdutor produtoProdutor,
+                                        BindingResult resultadoValidacao,
                                         Breadcrumb breadcrumb,
-                                        RedirectAttributes redirecionamentoDeAtributos) {
+                                        RedirectAttributes redirecionamentoDeAtributos,
+                                        Model modelo) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Produtos", "/produtos")
                 .pagina("Cadastro", "/produtos/cadastro");
 
-        try {
-            produtoProdutorServico.salvar(produtoProdutor);
-
-            String mensagem = "Seu produto foi cadastrado com sucesso!";
-            redirecionamentoDeAtributos.addFlashAttribute("mensagem", mensagem);
-        } catch (ProdutoNaoSalvoExcecao e) {
-            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
+        if (resultadoValidacao.hasErrors()) {
+            modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
+            redirecionamentoDeAtributos.addFlashAttribute("erros", resultadoValidacao.getAllErrors());
 
             return "redirect:/produtos/cadastro";
         }
+        produtoProdutorServico.salvar(produtoProdutor);
+
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Produto cadastrado com sucesso!");
 
         return "redirect:/produtos/visualizar-estoque";
     }
+
 
     @GetMapping("/{id}/editar")
     public String editarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
+
         try {
             ProdutoProdutor produtoprodutor = produtoProdutorServico.encontraUm(id);
 
             modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
+            produtoprodutor.setPreco(produtoprodutor.getPreco());
             modelo.addAttribute("produtoProdutor", produtoprodutor);
 
         } catch (ProdutoNaoEncontradoExcecao e) {
             redirecionamentoDeAtributos.addAttribute("mensagem", e.getMessage());
 
-            return "redirect:/produtos/cadastro";
+            return "produto/editar";
 
         }
 
@@ -107,23 +113,26 @@ public class ProdutoProdutorControlador {
     }
 
     @PostMapping("/{id}/editar")
-    public String salvarProduto(Breadcrumb breadcrumb, ProdutoProdutor produtoProdutor, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
+    public String salvarProduto(@Valid ProdutoProdutor produtoProdutor,
+                                BindingResult resultadoValidacao,
+                                Breadcrumb breadcrumb,
+                                Model modelo,
+                                RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
 
-        try {
-            produtoProdutorServico.salvar(produtoProdutor);
+        if (resultadoValidacao.hasErrors()) {
+            modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
 
-            String mensagem = "Seu produto foi alterado com sucesso!";
-            modelo.addAttribute("mensagem", mensagem);
-        } catch (ProdutoNaoSalvoExcecao e) {
-            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
-
-            return "redirect:/produtos/cadastro";
+            redirecionamentoDeAtributos.addFlashAttribute("erros", resultadoValidacao.getAllErrors());
+            return "redirect:/produtos/{id}/editar";
         }
+        produtoProdutorServico.salvar(produtoProdutor);
 
-        return "produto/editar";
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Produto atualizado com sucesso!");
+
+        return "redirect:/produtos/{id}/editar";
     }
 
     @GetMapping("/visualizar-estoque")
