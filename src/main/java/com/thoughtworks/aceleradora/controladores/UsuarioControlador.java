@@ -42,7 +42,7 @@ public class UsuarioControlador {
 
     @GetMapping(value = "/registrar/produtor")
     public String registrarProdutor(Model model) {
-        model.addAttribute("formUsuario", new Cliente());
+        model.addAttribute("formUsuario", new Produtor());
         model.addAttribute("tipoUsuario", TipoDeUsuario.values());
         model.addAttribute("cidade", cidadeRepositorio.findAll());
         model.addAttribute("estado", estadoRepositorio.findAll());
