@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
-
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
-
 <body>
   <section class="section">
     <section class="container">
       <h1 class="title centraliza-texto" th:text="${pedido}"></h1>
-
       <div class="columns">
           <div class="column is-12">
 
@@ -26,18 +23,17 @@
                     </span>
                   </div>
                   <div class="rz-box-footer flex center">
-                    <span th:if="${true}">
-                      <i class="fas fa-truck icon-transport-true"></i>
-                
+                       <span>
+                          <i class="fas fa-truck" th:classappend="${produtor.isPossuiTransporte()} ?
+                          icon-transport-true : icon-transport-false"></i>
+                        </span>
+                    <span>
                       <p><b>Transporte</b></p>
-                      <p>Disponível</p>
                     </span>
-                    <span th:unless="${true}">
-                      <i class="fas fa-truck icon-transport-false"></i>
-                      <p><b class="hero is-large">Transporte</b></p>
-                      <p>Indisponível</p>
+                    <span>
+                     <p th:text="${produtor.isPossuiTransporte()} ? Disponível : Indisponível"></p>
                     </span>
-                  </div> 
+                  </div>
                   <div class="rz-box-footer">
                     <h2 class="flex start fs-28 flex center pb-2">Contato</h2>
                     <div class="flex flex-row space-between">
@@ -51,7 +47,7 @@
                     </div>
                   </div>
                   </div>
-                
+
                 </div>
               </div>
             </div>
@@ -67,5 +63,4 @@
     </section>
   </section>
 </body>
-
 </html>
