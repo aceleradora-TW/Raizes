@@ -4,25 +4,18 @@ function duasCasasAposVirgula(num){
 const fn = (event) => {
     
     const inputQuantidade = event.target;
-    console.log("inputQuantidade", inputQuantidade);
     const totalProduto = $(inputQuantidade).parents('#inputRadio').find('#totalProduto');
-    console.log("totalProduto", totalProduto);
     const preco = totalProduto.find('#preco').text();
-    console.log("preco", preco);
-
     const quantidade = event.target.value || 0;
-    console.log("quantidade", quantidade);
-    
     const resultado = preco * quantidade;
-    console.log("resultado", resultado);
-    
+   
     totalProduto.parents('#inputRadio').find('#resultado').text(duasCasasAposVirgula(resultado));
     const resultados = $('.resultado')
 
     let totalPedido = 0;
-    resultados.each( (i, e) => {
-        let v = $(e).text() || 0;
-        totalPedido += +v;
+    resultados.each( (indice, campoResultado) => {
+        let valor = $(campoResultado).text() || 0;
+        totalPedido += parseInt(valor);
     });
 
     $('#valorTotal').text(duasCasasAposVirgula(totalPedido));
