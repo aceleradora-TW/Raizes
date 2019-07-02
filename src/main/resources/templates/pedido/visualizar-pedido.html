@@ -1,66 +1,64 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
+
 <body>
   <section class="section">
     <section class="container">
       <h1 class="title centraliza-texto" th:text="${pedido}"></h1>
       <div class="columns">
-          <div class="column is-12">
-
-        <span th:each="produtor: ${produtores.keySet()}">
+        <div class="column is-12">
+          <span th:each="produtor: ${produtores.keySet()}">
             <div class="flex center box rz-box mb-4">
               <div class="w-50 field">
                 <div class="control">
-                  <h4 class="pt-3 pb-2"><b th:text="${produtor.nome}"></b></h4>
+                  <h4 class="pt-3 pb-2 fs-18"><b th:text="${produtor.nome}"></b></h4>
                   <div class="flex flex-column">
                     <span class="flex space-between" th:each="produtor: ${produtores.get(produtor)}">
                       <span class="pl-5 w-25" th:text="${produtor.produto.nome}"></span>
                       <span class="flex start w-25" th:text="'R$ ' + ${produtor.preco}"></span>
                     </span>
                   </div>
-                  <div class="rz-box-footer flex center">
-                       <span>
-                          <i class="fas fa-truck" th:classappend="${produtor.isPossuiTransporte()} ?
-                          icon-transport-true : icon-transport-false"></i>
-                        </span>
-                    <span>
+                  <div class="rz-box-footer">
+                    <span class="flex center">
+                      <i class="fas fa-truck" th:classappend="${produtor.isPossuiTransporte()} ?
+                      icon-transport-true : icon-transport-false"></i>
+                    </span>
+                    <span class="flex center">
                       <p><b>Transporte</b></p>
                     </span>
-                    <span>
-                     <p th:text="${produtor.isPossuiTransporte()} ? Disponível : Indisponível"></p>
+                    <span class="flex center">
+                      <p th:text="${produtor.isPossuiTransporte()} ? Disponível : Indisponível"></p>
                     </span>
                   </div>
                   <div class="rz-box-footer">
                     <h2 class="flex start fs-28 flex center pb-2">Contato</h2>
                     <div class="flex flex-row space-between">
-                    <div class="flex flex-row">
-                      <span><i class="fas fa-phone"></i></span>
-                      <span class="pl-1" th:text="${produtor.contato}"></span>
-                    </div>
-                    <div class="flex flex-row">
-                      <span><i class="fas fa-envelope"></i></span>
-                      <span class="pl-1" th:text="${produtor.email}"></span>
+                      <div class="flex flex-row">
+                        <span><i class="fas fa-phone"></i></span>
+                        <span class="pl-1" th:text="${produtor.contato}"></span>
+                      </div>
+                      <div class="flex flex-row">
+                        <span><i class="fas fa-envelope"></i></span>
+                        <span class="pl-1" th:text="${produtor.email}"></span>
+                      </div>
                     </div>
                   </div>
-                  </div>
-
                 </div>
               </div>
             </div>
-        </span>
-      </div>
-
+          </span>
+        </div>
       </div>
       <div class="flex space-between">
         <a class="button rz-button is-rounded" th:href="@{/pedidos}">Voltar</a>
       </div>
-      </div>
-      </div>
     </section>
   </section>
 </body>
+
 </html>
