@@ -2,17 +2,21 @@ function duasCasasAposVirgula(num){
     return parseFloat(Math.round(num * Math.pow(10, 2)) /Math.pow(10,2)).toFixed(2);
 }
 const fn = (event) => {
-
+    
     const inputQuantidade = event.target;
-    const totalProduto = $(inputQuantidade).parents('#totalProduto');
-
+    console.log("inputQuantidade", inputQuantidade);
+    const totalProduto = $(inputQuantidade).parents('#inputRadio').find('#totalProduto');
+    console.log("totalProduto", totalProduto);
     const preco = totalProduto.find('#preco').text();
-    
-    const quantidade = event.target.value || 0;
+    console.log("preco", preco);
 
-    const resultado = preco * quantidade;
+    const quantidade = event.target.value || 0;
+    console.log("quantidade", quantidade);
     
-    totalProduto.find('#resultado').text(duasCasasAposVirgula(resultado));
+    const resultado = preco * quantidade;
+    console.log("resultado", resultado);
+    
+    totalProduto.parents('#inputRadio').find('#resultado').text(duasCasasAposVirgula(resultado));
     const resultados = $('.resultado')
 
     let totalPedido = 0;
@@ -23,4 +27,5 @@ const fn = (event) => {
 
     $('#valorTotal').text(duasCasasAposVirgula(totalPedido));
 }
+
 export default fn;
