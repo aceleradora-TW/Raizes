@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 @Controller
@@ -56,19 +57,19 @@ public class PedidoControlador {
         return "pedido/pedidos";
     }
 
-    @GetMapping("/{id}/visualizar-pedido")
-    public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
-
-        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Pedidos", "/pedidos")
-                .pagina("Visualizar Pedido", "/pedidos");
-
-        String nomePedido = pedidoServico.encontraUm(id).get().getNome();
-        modelo.addAttribute("pedido", nomePedido);
-        modelo.addAttribute("produtores", pedidoServico.agrupaProdutosPorProdutor(id));
-
-        return "pedido/visualizar-pedido";
-    }
+//    @GetMapping("/{id}/visualizar-pedido")
+//    public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
+//
+//        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
+//                .pagina("Pedidos", "/pedidos")
+//                .pagina("Visualizar Pedido", "/pedidos");
+//
+//        String nomePedido = pedidoServico.encontraUm(id).get().getNome();
+//        modelo.addAttribute("pedido", nomePedido);
+//        modelo.addAttribute("produtores", pedidoServico.agrupaProdutosPorProdutor(id));
+//
+//        return "pedido/visualizar-pedido";
+//    }
 
     @GetMapping("/{listaId}/realizar-pedido")
     public String listaProdutoresDeProdutos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo,RedirectAttributes redirecionamentoDeAtributos) {
@@ -125,21 +126,31 @@ public class PedidoControlador {
         return "redirect:/pedidos";
     }
 
-
-
-    @GetMapping("/{id}/editar")
-    public String editarProdutoNoPedido(Breadcrumb breadcrumb, @PathVariable Long id, Model modelo) {
-        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Pedidos", "/pedidos")
-                .pagina("Editar Pedido", "/pedidos/editar" + id);
-
-        modelo.addAttribute("pedido", pedidoServico.encontraUm(id).get());
+//    @GetMapping("/{id}/editar")
+//    public String editarProdutoNoPedido(Breadcrumb breadcrumb, @PathVariable Long id, Model modelo) {
+//        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
+//                .pagina("Pedidos", "/pedidos")
+//                .pagina("Editar Pedido", "/pedidos/editar" + id);
+//        Optional<Pedido> pedido = pedidoServico.encontraUm(id);
+//
+//        Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
+//                produtoProdutorServico.organizarProdutosProdutoresDoPedidoDoCliente(pedido);
+//
+//        modelo.addAttribute("pedido", pedidoServico.encontraUm(id).get());
+//        modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
 //        ProdutoProdutor pedidoProdutoProdutor = produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente() ;
 //        Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
 //                produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(id);
 //
 //        modelo.addAttribute("pedido", pedidoServico.encontraUm(id).get());
 //        modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
-        return "pedido/editar";
+//        return "pedido/editar";
+//    }
+
+    @ResponseBody
+    @GetMapping("/teste")
+    public Map<Produto, List<ProdutoProdutor>> testePedido(){
+        return pedidoServico.produtosDoPedido(1L);
     }
+
 }

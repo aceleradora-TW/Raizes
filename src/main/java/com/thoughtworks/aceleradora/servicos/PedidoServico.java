@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 public class PedidoServico {
 
     private PedidoRepositorio repositorio;
+    private ProdutoProdutorRepositorio produtoProdutorRepositorio;
 
     private ClienteServico clienteServico;
 
@@ -58,20 +59,70 @@ public class PedidoServico {
         return repositorio.save(pedido);
     }
 
-    public Map<Produtor, List<ProdutoProdutor>> agrupaProdutosPorProdutor(Long idPedido){
+//    public Map<Produtor, List<ProdutoProdutor>> agrupaProdutosPorProdutor(Long idPedido){
+//        Optional<Pedido> pedido = encontraUm(idPedido);
+//
+//        List<PedidoProdutoProdutor> pedidosProdutosProdutoresDoPedido = pedido.get().getPedidosProdutosProdutores();
+//
+//        List<ProdutoProdutor> produtoProdutor = new ArrayList<>();
+//
+//        for (int i = 0; i< pedidosProdutosProdutoresDoPedido.size(); i++) {
+//            produtoProdutor.add(pedidosProdutosProdutoresDoPedido.get(i).getProdutoProdutor());
+//        }
+//
+//        Map<Produtor, List<ProdutoProdutor>> byProdutor
+//                = produtoProdutor.stream()
+//                .collect(Collectors.groupingBy(ProdutoProdutor::getProdutor));
+//        return byProdutor;
+//    }
+
+
+
+
+    public Map<Produto, List<ProdutoProdutor>> produtosDoPedido (Long idPedido){
         Optional<Pedido> pedido = encontraUm(idPedido);
+
+//        List<Produto> produtos = lista.getProdutos();
+//
+//        List<ProdutoProdutor> produtosProdutoresDaLista = produtoProdutorRepositorio.findByProdutoIn(produtos);
+//
+
+        List<Produto> produtos = produtoProdutor.get(i).getProduto();
 
         List<PedidoProdutoProdutor> pedidosProdutosProdutoresDoPedido = pedido.get().getPedidosProdutosProdutores();
 
         List<ProdutoProdutor> produtoProdutor = new ArrayList<>();
 
-        for (int i = 0; i< pedidosProdutosProdutoresDoPedido.size(); i++) {
-            produtoProdutor.add(pedidosProdutosProdutoresDoPedido.get(i).getProdutoProdutor());
+        int i = 0;
+        for (i = 0; i< pedidosProdutosProdutoresDoPedido.size(); i++) {
+            //produtoProdutor.add(pedidosProdutosProdutoresDoPedido.get(i).getProdutoProdutor());
+            produtoProdutor.get(i).getProduto();
         }
 
-        Map<Produtor, List<ProdutoProdutor>> byProdutor
+        List<ProdutoProdutor> pp = produtoProdutorRepositorio.findByProdutoIn(produtoProdutor.get(i).getProduto());
+
+
+        Map<Produto, List<ProdutoProdutor>> byProduto
                 = produtoProdutor.stream()
-                .collect(Collectors.groupingBy(ProdutoProdutor::getProdutor));
-        return byProdutor;
+                .collect(Collectors.groupingBy(ProdutoProdutor::getProduto));
+        return byProduto;
     }
+
+
+//    public Map<Produtor, List<ProdutoProdutor>> agrupaProdutoresPorProdutos(Long idPedido) {
+//        Optional<Pedido> pedido = encontraUm(idPedido);
+//
+//        List<PedidoProdutoProdutor> pedidoProdutoProdutoresDoPedido = pedido.get().getPedidosProdutosProdutores();
+//
+//        List<ProdutoProdutor> produtoProdutores = new ArrayList<>();
+//
+//        for (int i = 0; i < pedidoProdutoProdutoresDoPedido.size(); i++) {
+//            produtoProdutores.add(pedidoProdutoProdutoresDoPedido.get(i).getProdutoProdutor());
+//        }
+//        Map<Produto, List<ProdutoProdutor>> byProduto
+//                = produtoProdutores
+//                .stream()
+//                .collect(Collectors.groupingBy(ProdutoProdutor::getProduto));
+//        return byProduto;
+//    }
     }
