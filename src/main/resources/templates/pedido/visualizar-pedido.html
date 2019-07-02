@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
+
 <body>
   <section class="section">
     <section class="container">
@@ -24,15 +26,15 @@
                             <span th:text="'R$ ' + ${produtor.preco}"></span>
                           </span>
                         </div>
-                        <span th:if="${true}">
-                          <i class="fas fa-truck icon-transport-true"></i>
-                          <p><b>Transporte</b></p>
-                          <p>Disponível</p>
+                        <span>
+                          <i class="fas fa-truck" th:classappend="${produtor.isPossuiTransporte()} ?
+                          icon-transport-true : icon-transport-false"></i>
                         </span>
-                        <span th:unless="${true}">
-                          <i class="fas fa-truck icon-transport-false"></i>
-                          <p><b class="hero is-large">Transporte</b></p>
-                          <p>Indisponível</p>
+                        <span>
+                          <p>Transporte</p>
+                        </span>
+                        <span>
+                          <p th:text="${produtor.isPossuiTransporte()} ? Disponível : Indisponível"></p>
                         </span>
                         <div class="control">
                           <h1 class="title centraliza-texto">Contato:</h1>
@@ -61,4 +63,5 @@
     </section>
   </section>
 </body>
+
 </html>
