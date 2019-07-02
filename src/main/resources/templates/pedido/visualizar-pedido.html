@@ -1,64 +1,66 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
+
 <body>
   <section class="section">
     <section class="container">
       <h1 class="title centraliza-texto" th:text="${pedido}"></h1>
+
       <div class="columns">
-        <div class="column is-6">
-          <div class="box">
-            <div class="columns">
-              <div class="column is-12">
-                <div class="box">
-                  <div class="field">
-                    <div class="control">
-                      <span th:each="produtor: ${produtores.keySet()}">
-                        <h4><b th:text="${produtor.nome}"></b></h4>
-                        <div class="flex equal-sizing flex-row">
-                          <span th:each="produtor: ${produtores.get(produtor)}">
-                            <span th:text="${produtor.produto.nome}"></span>
-                            <span th:text="'R$ ' + ${produtor.preco}"></span>
-                          </span>
-                        </div>
-                        <span th:if="${true}">
-                          <i class="fas fa-truck icon-transport-true"></i>
-                          <p><b>Transporte</b></p>
-                          <p>Disponível</p>
-                        </span>
-                        <span th:unless="${true}">
-                          <i class="fas fa-truck icon-transport-false"></i>
-                          <p><b class="hero is-large">Transporte</b></p>
-                          <p>Indisponível</p>
-                        </span>
-                        <div class="control">
-                          <h1 class="title centraliza-texto">Contato:</h1>
-                          <div class="flex equal-sizing flex-row">
-                            <span><i class="fas fa-phone"></i></span>
-                            <span th:text="${produtor.contato}"></span>
-                          </div>
-                          <div class="flex equal-sizing flex-row">
-                            <span><i class="fas fa-envelope"></i></span>
-                            <span th:text="${produtor.email}"></span>
-                          </div>
-                        </div>
-                        <hr>
-                      </span>
+          <div class="column is-12">
+
+        <span th:each="produtor: ${produtores.keySet()}">
+            <div class="box rz-box mb-4">
+              <div class="field">
+                <div class="control">
+                  <h4><b th:text="${produtor.nome}"></b></h4>
+                  <div class="flex flex-column">
+                    <span class="flex space-between" th:each="produtor: ${produtores.get(produtor)}">
+                      <span class="pl-3" th:text="${produtor.produto.nome}"></span>
+                      <span class="pr-3" th:text="'R$ ' + ${produtor.preco}"></span>
+                    </span>
+                  </div>
+                  <span th:if="${true}">
+                    <i class="fas fa-truck icon-transport-true"></i>
+                    <p><b>Transporte</b></p>
+                    <p>Disponível</p>
+                  </span>
+                  <span th:unless="${true}">
+                    <i class="fas fa-truck icon-transport-false"></i>
+                    <p><b class="hero is-large">Transporte</b></p>
+                    <p>Indisponível</p>
+                  </span>
+                  <div class="control rz-box-footer">
+                    <h2 class="flex start fs-28 flex center">Contato</h2>
+                    <div class="flex equal-sizing flex-row">
+                      <span><i class="fas fa-phone"></i></span>
+                      <span th:text="${produtor.contato}"></span>
+                    </div>
+                    <div class="flex equal-sizing flex-row">
+                      <span><i class="fas fa-envelope"></i></span>
+                      <span th:text="${produtor.email}"></span>
                     </div>
                   </div>
-                </div>
-                <div class="flex space-between">
-                  <a class="button is-primary" th:href="@{/pedidos}">Voltar</a>
+                
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+        </span>
+      </div>
+
+      </div>
+      <div class="flex space-between">
+        <a class="button rz-button is-rounded" th:href="@{/pedidos}">Voltar</a>
+      </div>
+      </div>
       </div>
     </section>
   </section>
 </body>
+
 </html>
