@@ -41,7 +41,7 @@
                   <span class="flex start" th:text="${pedido.nome}"></span>
                 </td>
                 <td>
-                      <span type="date" class="form-control" th:value="${{pedido.created_at}}" th:text="${#dates.format(pedido.created_at, 'dd-MMM-yyyy')}">
+                      <span type="date" class="form-control" th:value="${{pedido.criadoEm}}" th:text="${#dates.format(pedido.criadoEm, 'dd-MMM-yyyy')}">
                       </span>
                 </td>
                 <td class="flex end">

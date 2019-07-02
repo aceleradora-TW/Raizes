@@ -1,13 +1,10 @@
 package com.thoughtworks.aceleradora.dominio;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jdk.jfr.Timespan;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -22,7 +19,8 @@ public class Pedido {
     private String nome;
 
     @CreationTimestamp
-    private Timestamp created_at;
+    @Column(name = "created_at")
+    private Timestamp criadoEm;
 
     @ManyToOne
     @JoinColumn(name = "id_clientes")
@@ -61,12 +59,12 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public Timestamp getCreated_at() {
-        return created_at;
+    public Timestamp getCriadoEm() {
+        return criadoEm;
     }
 
-    public void setCreated_at(Timestamp created_at) {
-        this.created_at = created_at;
+    public void setCriadoEm(Timestamp criadoEm) {
+        this.criadoEm = criadoEm;
     }
 
     public List<PedidoProdutoProdutor> getPedidosProdutosProdutores() {
