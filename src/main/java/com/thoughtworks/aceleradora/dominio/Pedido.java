@@ -19,7 +19,7 @@ public class Pedido {
     private String nome;
 
     @CreationTimestamp
-    @Column(name = "created_at")
+    @Column(name = "criado_em")
     private Timestamp criadoEm;
 
     @ManyToOne
