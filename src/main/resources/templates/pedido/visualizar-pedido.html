@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
+
 <body>
   <section class="section">
     <section class="container">
@@ -29,8 +31,11 @@
                           icon-transport-true : icon-transport-false"></i>
                         </span>
                         <span>
-                            <p th:text="${produtor.isPossuiTransporte()} ? Disponível : Indisponível"></p>
-                        </span>git 
+                          <p>Transporte</p>
+                        </span>
+                        <span>
+                          <p th:text="${produtor.isPossuiTransporte()} ? Disponível : Indisponível"></p>
+                        </span>
                         <div class="control">
                           <h1 class="title centraliza-texto">Contato:</h1>
                           <div class="flex equal-sizing flex-row">
@@ -58,4 +63,5 @@
     </section>
   </section>
 </body>
+
 </html>
