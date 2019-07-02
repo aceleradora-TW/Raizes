@@ -24,12 +24,12 @@
                             <span th:text="'R$ ' + ${produtor.preco}"></span>
                           </span>
                         </div>
-                        <span th:if="${true}">
+                        <span th:if="${produtor.isPossuiTransporte()}">
                           <i class="fas fa-truck icon-transport-true"></i>
                           <p><b>Transporte</b></p>
                           <p>Disponível</p>
                         </span>
-                        <span th:unless="${true}">
+                        <span th:unless="${produtor.isPossuiTransporte()}">
                           <i class="fas fa-truck icon-transport-false"></i>
                           <p><b class="hero is-large">Transporte</b></p>
                           <p>Indisponível</p>
