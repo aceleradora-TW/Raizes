@@ -35,12 +35,17 @@
               <table class="rz-table striped">
                 <thead class="table-header">
                   <th class="flex start pl-3">Pedidos</th>
+                  <th>Data de Emissão</th>
                 </thead>
                 <tbody class="table-body">
                   <tr th:each="pedido: ${pedidosCriados}">
                     <td>
                       <span class="flex start" th:text="${pedido.nome}"></span>
                     </td>
+                      <td>
+                      <span type="date" class="form-control" th:value="${{pedido.criadoEm}}" th:text="${#dates.format(pedido.criadoEm, 'dd-MMM-yyyy')}">
+                      </span>
+                      </td>
                     <td class="flex end">
                       <a class="button rz-button list-style"
                         th:href="@{/pedidos/{id}/visualizar-pedido(id=${pedido.id})}">

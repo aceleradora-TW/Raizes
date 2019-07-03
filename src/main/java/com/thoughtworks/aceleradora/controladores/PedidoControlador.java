@@ -3,8 +3,6 @@ package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
 import com.thoughtworks.aceleradora.servicos.*;
-import com.thoughtworks.aceleradora.dominio.*;
-import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,11 +70,11 @@ public class PedidoControlador {
 //    }
 
     @GetMapping("/{listaId}/realizar-pedido")
-    public String listaProdutoresDeProdutos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo,RedirectAttributes redirecionamentoDeAtributos) {
+    public String listaProdutoresDeProdutos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("realizar pedido", "/pedido/pedidos");
 
-        try{
+        try {
             MinhaLista lista = minhaListaServico.encontraUm(listaId);
 
             Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
@@ -89,8 +87,8 @@ public class PedidoControlador {
             modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
 
             return "pedido/realizar-pedido";
-        }catch (ListaNaoEncontradaExcecao e){
-            redirecionamentoDeAtributos.addFlashAttribute("mensagem",e.getMessage());
+        } catch (ListaNaoEncontradaExcecao e) {
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
             return "redirect:/minhas-listas/";
         }
@@ -105,7 +103,7 @@ public class PedidoControlador {
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Realizar pedido", "/pedidos");
 
-        if(resultadoValidacao.hasErrors()) {
+        if (resultadoValidacao.hasErrors()) {
             modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
             return "pedido/realizar-pedido";
         }
@@ -125,32 +123,18 @@ public class PedidoControlador {
 
         return "redirect:/pedidos";
     }
-
-//    @GetMapping("/{id}/editar")
-//    public String editarProdutoNoPedido(Breadcrumb breadcrumb, @PathVariable Long id, Model modelo) {
-//        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
-//                .pagina("Pedidos", "/pedidos")
-//                .pagina("Editar Pedido", "/pedidos/editar" + id);
-//        Optional<Pedido> pedido = pedidoServico.encontraUm(id);
 //
-//        Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
-//                produtoProdutorServico.organizarProdutosProdutoresDoPedidoDoCliente(pedido);
-//
-//        modelo.addAttribute("pedido", pedidoServico.encontraUm(id).get());
-//        modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
-//        ProdutoProdutor pedidoProdutoProdutor = produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente() ;
-//        Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
-//                produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(id);
-//
-//        modelo.addAttribute("pedido", pedidoServico.encontraUm(id).get());
-//        modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
-//        return "pedido/editar";
+//    @ResponseBody
+//    @GetMapping("/editar")
+//    public Map<Produto, List<ProdutoProdutor>> editarProdutoNoPedido() {
+//        return pedidoServico.agrupaProdutoresPorProdutos(1L);
 //    }
 
-    @ResponseBody
-    @GetMapping("/teste")
-    public Map<Produto, List<ProdutoProdutor>> testePedido(){
-        return pedidoServico.produtosDoPedido(1L);
-    }
+//    @ResponseBody
+//    @GetMapping("/teste")
+//    public Map<Produto, List<ProdutoProdutor>> testePedido(){
+//        return pedidoServico.agrupaProdutoresPorProdutos(1L);
+//    }
+
 
 }
