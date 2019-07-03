@@ -125,4 +125,15 @@ public class PedidoControlador {
 
         return "redirect:/pedidos";
     }
+
+    @GetMapping("/editar-pedido")
+    public String editarProdutoPedido(Breadcrumb breadcrumb) {
+
+        breadcrumb.aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedidos")
+                .pagina("Editar pedido", "/editarPedido");
+
+        return "pedido/editar-pedido";
+
+    }
 }
