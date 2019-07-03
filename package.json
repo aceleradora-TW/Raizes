@@ -13,6 +13,7 @@
     "font-awesome": "^4.7.0",
     "inputmask": "^4.0.8",
     "jquery": "^3.4.0",
+    "jquery-maskmoney": "^3.0.2",
     "jquery.maskedinput": "^1.4.1",
     "mini-css-extract-plugin": "^0.6.0",
     "popper.js": "^1.15.0",

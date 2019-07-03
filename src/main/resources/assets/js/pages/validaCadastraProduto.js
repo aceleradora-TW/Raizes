@@ -21,8 +21,24 @@ export default {
   },
   validaPreco: () =>{
     $(document).ready(function() {
-      $('#preco').inputmask("99,99",{placeholder:"Ex.: 4,50"});  
+      // $('#preco').maskMoney();
+      $('#preco').inputmask("99.99");
+      
+        })
+      }
+    }
+  
+      // $("#preco").maskMoney({
+      //                       prefix:'R$ ', 
+      //                       allowNegative: true, 
+      //                       thousands:'.', 
+      //                       decimal:',', 
+      //                       affixesStay: false
+      //                     })
+      // $('#preco').maskMoney({
+      //             allowZero:false, 
+      //             allowNegative:true, 
+      //             defaultZero:false
+      //           });                    
+  
       //"#.##0,00"
-    })      
-  }
-}

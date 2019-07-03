@@ -1,11 +1,10 @@
 window.$ = window.jQuery = require('jquery')
-import '../../../../../node_modules/jquery.maskedinput/src/jquery.maskedinput';
 import '../../../../../node_modules/inputmask/dist/inputmask/jquery.inputmask';
+// import '../../../../../node_modules/jquery-maskmoney/dist/jquery.maskMoney';
 import '@fortawesome/fontawesome-free/js/all';
 import 'animate.css'
 import '../scss/styles.scss'
 import '@fengyuanchen/validator';
-
 import CriarLista from './pages/criaLista'
 import EditarLista from './pages/editaLista'
 import MinhasListas from './pages/minhaLista'
@@ -17,6 +16,7 @@ import Burger from './components/menu-burger'
 import EditarPedido from './pages/editaPedido'
 import Produtos from './pages/produtos'
 import EditaProdutoEstoque from './pages/editaProdutoEstoque'
+import Calcular from './components/calcularTotal'
 import validaCadastraProduto from './pages/validaCadastraProduto'
 
 $(function () {
@@ -30,8 +30,9 @@ $(function () {
     window.Pedidos = Pedidos;
     window.Pedido = Pedido;
     window.CriarLista = CriarLista;
-    window.EditaPedido = EditarPedido;    
-    
+    window.EditaPedido = EditarPedido;
+    window.Calcular = Calcular;
+
     CriarLista.validaFormulario();
     EditarLista.validaFormulario();
     Produtos.atualizaUnidadeMedida();
@@ -39,5 +40,5 @@ $(function () {
     EditaProdutoEstoque.validaFormulario();
     validaCadastraProduto.validaFormulario();
     validaCadastraProduto.validaPreco();
-    Produtos.atualizaUnidadeMedida();  
+    Produtos.atualizaUnidadeMedida();
 });
