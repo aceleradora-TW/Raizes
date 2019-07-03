@@ -18,6 +18,7 @@
               <div>
                 <div class="box">
                   <div>
+                    <label><input th:value="${tipoUsuario.CLIENTE}" th:field="*{tipoDeUsuario}" hidden></label>
                     <label for="nome">*Nome Completo:</label>
                     <input class="input input-fancy borda-arredondada" type="text" id="nome"
                       th:field="*{nome}">
@@ -89,11 +90,6 @@
                     <div class="columns">
                       <div class="column is-half">
                         <label for="password">*Senha:</label>
-                        <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password"
-                               type="password" name="senha">
-                      </div>
-                      <div class="column is-half">
-                        <label for="password">*Repetir senha:</label>
                         <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password"
                                type="password" name="senha">
                       </div>

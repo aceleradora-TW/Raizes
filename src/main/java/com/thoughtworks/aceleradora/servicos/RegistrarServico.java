@@ -24,9 +24,7 @@ public class RegistrarServico {
 
     public void salvarCliente(Cliente cliente) {
         cliente.setSenha(bCryptPasswordEncoder.encode(cliente.getSenha()));
-        Cliente lixo = clienteRepositorio.save(cliente);
-
-        System.out.println(">>>>>>>>>>> RESULTADO SAVE " + lixo);
+        clienteRepositorio.save(cliente);
     }
 
     public void salvarProdutor(Produtor produtor) {

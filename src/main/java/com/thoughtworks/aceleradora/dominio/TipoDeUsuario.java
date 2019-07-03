@@ -16,8 +16,8 @@ public enum TipoDeUsuario {
     }
 
     public static class Valores {
-        static final String CLIENTE = "Cliente";
-        static final String PRODUTOR = "Produtor";
+        static final String CLIENTE = "CLIENTE";
+        static final String PRODUTOR = "PRODUTOR";
     }
 
 }
