@@ -131,7 +131,7 @@ public class PedidoControlador {
 
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
-                .pagina("Editar pedido", "/editarPedido");
+                .pagina("Editar pedido", "/editar-pedido");
 
         return "pedido/editar-pedido";
 
