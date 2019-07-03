@@ -20,8 +20,8 @@ export default {
     });
   },
   validaPreco: () =>{
-    $(function() {
-      $('#preco').mask("99,99",{placeholder:"Ex.: 4,50"});  
+    $(document).ready(function() {
+      $('#preco').inputmask("99,99",{placeholder:"Ex.: 4,50"});  
       //"#.##0,00"
     })      
   }
