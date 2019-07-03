@@ -21,6 +21,7 @@ public class ProdutoProdutor {
 
     @Column(precision = 10, scale = 2)
     private BigDecimal preco;
+    
 
     @ManyToOne
     @JoinColumn(name = "id_produtos")
