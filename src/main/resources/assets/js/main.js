@@ -14,6 +14,7 @@ import Burger from './components/menu-burger'
 import EditarPedido from './pages/editaPedido'
 import Produtos from './pages/produtos'
 import EditaProdutoEstoque from './pages/editaProdutoEstoque'
+import Calcular from './components/calcularTotal'
 import validaCadastraProduto from './pages/validaCadastraProduto'
 
 $(function () {
@@ -27,13 +28,14 @@ $(function () {
     window.Pedidos = Pedidos;
     window.Pedido = Pedido;
     window.CriarLista = CriarLista;
-    window.EditaPedido = EditarPedido;    
-    
+    window.EditaPedido = EditarPedido;
+    window.Calcular = Calcular;
+
     CriarLista.validaFormulario();
     EditarLista.validaFormulario();
     Produtos.atualizaUnidadeMedida();
     RealizarPedido.habilitaInputsDeQuantidade();
     EditaProdutoEstoque.validaFormulario();
     validaCadastraProduto.validaFormulario();
-    Produtos.atualizaUnidadeMedida();  
+    Produtos.atualizaUnidadeMedida();
 });
