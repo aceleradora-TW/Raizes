@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
+
 <body>
   <section class="section">
     <section class="container">
@@ -21,53 +23,49 @@
             <form id="formCadastraProduto" th:object="${produtoProdutor}" th:action="@{/produtos/cadastro}"
               method="post">
               <div class="flex center mb-4">
-                <div class="w-50">
+                <div class="rz-box-body">
                   <input type="hidden" th:field="*{produtor}" th:value="${produtoProdutor.produtor.id}">
 
-
-
-                  <div class="pt-5 flex flex-row vertical-center">
-                    <label class="pr-2">Produto</label>
-                    <div class="select">
-                      <select id="seletorDeProdutos" th:onchange="Produtos.atualizaUnidadeMedida(event)"
-                        name="produto">
-                        <option th:each="produto : ${produtos}" th:text="${produto.nome}" th:value="${produto.id}"
-                          th:attr="data-unidade-medida=${produto.unidadeMedida.codigo}">
-                        </option>
-                      </select>
-                      <div class="help-block"></div>
+                  <div class="pt-5 flex flex-row equal-sizing">
+                    <div class="flex flex-row vertical-center">
+                      <label class="pr-2"><strong>Produto</strong></label>
+                      <div class="select">
+                        <select id="seletorDeProdutos" th:onchange="Produtos.atualizaUnidadeMedida(event)"
+                          name="produto">
+                          <option th:each="produto : ${produtos}" th:text="${produto.nome}" th:value="${produto.id}"
+                            th:attr="data-unidade-medida=${produto.unidadeMedida.codigo}">
+                          </option>
+                        </select>
+                        <div class="help-block"></div>
+                      </div>
+                    </div>
+                    <div class="flex flex-row vertical-center">
+                      <label class="pr-2"> <strong>Tipo de Cultivo</strong></label>
+                      <div class="select">
+                        <select th:field="*{tipoDeCultivo}">
+                          <option th:each="cultivo : ${cultivos}" th:text="${cultivo.codigo}"
+                            th:value="${cultivo.name()}">
+                          </option>
+                        </select>
+                      </div>
                     </div>
                   </div>
-
-
-
-                  <div class="rz-box-body">
-                    <label class="label">Tipo de Cultivo*</label>
-                    <div class="select">
-                      <select th:field="*{tipoDeCultivo}">
-                        <option th:each="cultivo : ${cultivos}" th:text="${cultivo.codigo}" th:value="${cultivo.name()}">
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-
-
-
-                  <div class="flex flex-row">
-                    <div class="field rz-box-body">
-                      <label class="label">Quantidade disponível*</label>
-                      <div class="flex flex-row">
-                        <input class="input" id="quantidadeEstoque" name="quantidadeEstoque" type="number"
+                  
+                  <div class="pt-5 flex flex-row equal-sizing">
+                    <div class="field vertical-center">
+                      <div class="flex flex-row vertical-center">
+                        <label class="pr-2"><strong>Quantidade</strong></label>
+                        <input class="input w-50" id="quantidadeEstoque" name="quantidadeEstoque" type="number"
                           placeholder="Ex.: 15">
                         <span class="my-2">/</span>
                         <span class="my-2 unidadeMedida" id="unidadeMedida2"></span>
                       </div>
                       <div class="help-block"></div>
                     </div>
-                    <div class="rz-box-body field">
-                      <label class="label">Valor do produto*</label>
-                      <div class="flex flex-row">
-                        <input class="input" id="preco" th:field="*{preco}" placeholder="Ex.: 4.00">
+                    <div class="field vertical-center">
+                      <div class="flex flex-row vertical-center">
+                        <label class="pr-2"><strong>Valor</strong></label>
+                        <input class="input w-50" id="preco" th:field="*{preco}" placeholder="Ex.: 4.00">
                         <span class="my-2">/</span>
                         <span class="my-2 unidadeMedida" id="unidadeMedida"></span>
                       </div>
@@ -80,7 +78,7 @@
               </div>
               <div class="rz-box-footer flex space-between">
                 <button class="button rz-button is-rounded"
-                        th:onclick="return Produtos.exibeConfirmacaoDeCancelamento('/produtos/visualizar-estoque')">Cancelar</button>
+                  th:onclick="return Produtos.exibeConfirmacaoDeCancelamento('/produtos/visualizar-estoque')">Cancelar</button>
                 <button class="button rz-button is-rounded flex-end" type="submit">Salvar</button>
               </div>
             </form>
@@ -91,4 +89,5 @@
     </section>
   </section>
 </body>
+
 </html>
