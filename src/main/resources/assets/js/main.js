@@ -38,5 +38,4 @@ $(function () {
     EditaProdutoEstoque.validaFormulario();
     validaCadastraProduto.validaFormulario();
     Produtos.atualizaUnidadeMedida();
-    Calcular.calculaTotal();
 });
