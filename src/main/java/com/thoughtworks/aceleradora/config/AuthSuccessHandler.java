@@ -14,28 +14,30 @@ import java.io.IOException;
 
 public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 
-        private RedirectStrategy redirectStrategy;
+    private RedirectStrategy redirectStrategy;
 
     public AuthSuccessHandler(RedirectStrategy redirectStrategy) {
-            this.redirectStrategy = redirectStrategy;
-        }
+        this.redirectStrategy = redirectStrategy;
+    }
 
     public AuthSuccessHandler() {
-            this.redirectStrategy = new DefaultRedirectStrategy();
+        this.redirectStrategy = new DefaultRedirectStrategy();
+    }
+
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request,
+                                        HttpServletResponse response,
+                                        Authentication authentication) throws IOException, ServletException {
+        SimpleGrantedAuthority tipoDeUsuario = (SimpleGrantedAuthority) authentication.getAuthorities().stream().findFirst().get();
+
+        if (tipoDeUsuario.getAuthority().equals(TipoDeUsuario.PRODUTOR.getValor())) {
+            this.redirectStrategy.sendRedirect(request, response, "/");
+
+        } else if (tipoDeUsuario.getAuthority().equals(TipoDeUsuario.CLIENTE.getValor())) {
+            this.redirectStrategy.sendRedirect(request, response, "/registrar");
+
+        } else {
+            this.redirectStrategy.sendRedirect(request, response, "/registrar");
         }
-
-        @Override
-        public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-            SimpleGrantedAuthority tipoDeUsuario = (SimpleGrantedAuthority) authentication.getAuthorities().stream().findFirst().get();
-
-            if(tipoDeUsuario.getAuthority().equals(TipoDeUsuario.PRODUTOR.getValor())) {
-                this.redirectStrategy.sendRedirect(request, response, "/");
-
-            } else if(tipoDeUsuario.getAuthority().equals(TipoDeUsuario.CLIENTE.getValor())) {
-                this.redirectStrategy.sendRedirect(request, response, "/registrar");
-
-            } else {
-                this.redirectStrategy.sendRedirect(request, response, "/registrar");
-            }
-        }
+    }
 }
