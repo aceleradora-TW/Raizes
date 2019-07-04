@@ -33,7 +33,7 @@ public class ProdutoProdutorControlador {
 
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
-            .pagina("Página inicial", "/");
+            .pagina("Página Inicial", "/");
 
     @Autowired
     public ProdutoProdutorControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico, ProdutoProdutorServico produtoProdutorServico, ProdutorServico produtorServico) {
@@ -132,7 +132,7 @@ public class ProdutoProdutorControlador {
 
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Produto atualizado com sucesso!");
 
-        return "redirect:/produtos/{id}/editar";
+        return "redirect:/produtos/visualizar-estoque";
     }
 
     @GetMapping("/visualizar-estoque")
