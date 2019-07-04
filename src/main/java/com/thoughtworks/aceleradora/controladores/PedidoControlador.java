@@ -74,7 +74,7 @@ public class PedidoControlador {
     @GetMapping("/{listaId}/realizar-pedido")
     public String listaProdutoresDeProdutos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo,RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
-                .pagina("realizar pedido", "/pedido/pedidos");
+                .pagina("Realizar Pedido", "/pedido/pedidos");
 
         try{
             MinhaLista lista = minhaListaServico.encontraUm(listaId);
@@ -113,7 +113,7 @@ public class PedidoControlador {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
-                .pagina("Realizar pedido", "/pedidos");
+                .pagina("Realizar Pedido", "/pedidos");
 
         if(resultadoValidacao.hasErrors()) {
             modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
@@ -132,7 +132,7 @@ public class PedidoControlador {
 
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
-                .pagina("Editar pedido", "/editar-pedido");
+                .pagina("Editar Pedido", "/editar-pedido");
 
         return "pedido/editar-pedido";
 
