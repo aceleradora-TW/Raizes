@@ -123,7 +123,7 @@ public abstract class Usuario {
                 ", nome='" + nome + '\'' +
                 ", contato='" + contato + '\'' +
                 ", endereco=" + endereco +
-                ", selecionaUsuario.html=" + tipoDeUsuario +
+                ", tipoDeUsuario =" + tipoDeUsuario +
                 '}';
     }
 }
