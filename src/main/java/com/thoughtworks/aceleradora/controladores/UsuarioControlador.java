@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-// @RequestMapping("/selecionaUsuario.html")
 public class UsuarioControlador {
     private RegistrarServico registrarServico;
     private CidadeRepositorio cidadeRepositorio;
@@ -88,18 +87,9 @@ public class UsuarioControlador {
         return "redirect:/login";
     }
 
-
-
     @GetMapping(value = "/login")
     public String login(Model modelo) {
         return "login/login";
-    }
-
-    @ResponseBody
-    @GetMapping(value = "/teste")
-    public Usuario PegaUser(){
-        String nome = "Barbara Anger";
-        return usuarioRepositorio.findByNome(nome);
     }
 
 }
