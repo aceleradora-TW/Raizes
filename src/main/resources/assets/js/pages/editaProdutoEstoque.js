@@ -1,6 +1,7 @@
 import Validator from '../utils/validator'
 
 export default {
+    
   exibeConfirmacaoDeCancelamento: (href) => Modal
     .warning()
     .okAction("Sim", () => { window.location.href = href })
@@ -25,8 +26,6 @@ export default {
       }
     });
   },
-
-
 
   atualizaUnidadeMedida: (e) => {
     const seletorDeProdutos = $('#seletorDeProdutos');
