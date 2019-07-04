@@ -28,10 +28,11 @@
                     <div class="w-75 flex equal-sizing flex-row">
                       <span class="bigcheck">
                         <input type="radio" th:id="ProdutoProdutor + ${produtoProdutor.id}"
-                          th:value="${produtoProdutor.id}">
+                               th:value="${produtoProdutor.id}"
+                               th:field="*{pedidosProdutosProdutores[__${index.index}__].produtoProdutor}">
                         <label class="radio" th:for="ProdutoProdutor + ${produtoProdutor.id}">
                           <span class="check"><i class="far fa-check-circle"></i></span>
-                          <span class="radio-check"><i class="fas fa-plus"></i></span>
+                          <span class="radio-check"><i class="fas fa-plus"></i></span >
                           <span th:text="${produtoProdutor.produtor.nome}"></span>
                         </label>
                       </span>
@@ -65,7 +66,7 @@
                         <span class="pr-1">Quantidade:</span>
                         <input class="w-25 pl-1" size="5"
                           th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
-                          onekeyup="Calcular(event)" onclick="Calcular(event)" min=0 placeholder="Ex: 4" disabled>
+                          onekeyup="Calcular(event)" onclick="Calcular(event)" min=0 placeholder="Ex: 4">
                         <label class="label">Total:R$
                           <span class="resultado" id="resultado"></span>
                         </label>
