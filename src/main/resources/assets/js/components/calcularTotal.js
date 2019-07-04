@@ -1,7 +1,8 @@
 function duasCasasAposVirgula(num){
     return parseFloat(Math.round(num * Math.pow(10, 2)) /Math.pow(10,2)).toFixed(2);
 }
-const fn = (event) => {
+export default {
+calculaTotal: (event) => {
     
     const inputQuantidade = event.target;
     const totalProduto = $(inputQuantidade).parents('#inputRadio').find('#totalProduto');
@@ -20,5 +21,4 @@ const fn = (event) => {
 
     $('#valorTotal').text(duasCasasAposVirgula(totalPedido));
 }
-
-export default fn;
+}
