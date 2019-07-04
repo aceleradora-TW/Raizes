@@ -41,7 +41,7 @@ public class UsuarioControlador {
         model.addAttribute("cidade", cidadeRepositorio.findAll());
         model.addAttribute("estado", estadoRepositorio.findAll());
 
-        return "registrarUsuario/registrarCliente";
+        return "registro/registrarCliente";
     }
 
     @GetMapping(value = "/registrar/produtor")
@@ -51,13 +51,13 @@ public class UsuarioControlador {
         model.addAttribute("cidade", cidadeRepositorio.findAll());
         model.addAttribute("estado", estadoRepositorio.findAll());
 
-        return "registrarUsuario/registrarProdutor";
+        return "registro/registrarProdutor";
     }
 
 
-    @GetMapping(value = "/selecionaUsuario")
+    @GetMapping(value = "/seleciona-tipo-usuario")
     public String selecionaUsuario(Model modelo){
-        return "registrarUsuario/selecionaUsuario";
+        return "registro/selecionaUsuario";
     }
 
 
@@ -66,7 +66,7 @@ public class UsuarioControlador {
 
         if(bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(System.out::println);
-            return "registrarUsuario/registrar/cliente";
+            return "registro/registrar/cliente";
         }
 
         registrarServico.salvarCliente(cliente);
@@ -79,7 +79,7 @@ public class UsuarioControlador {
 
 
         if(bindingResult.hasErrors()) {
-            return "registrarUsuario/registrar/produtor";
+            return "registro/registrar/produtor";
         }
 
         registrarServico.salvarProdutor(produtor);
