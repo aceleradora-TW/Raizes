@@ -132,7 +132,7 @@ public class ProdutoProdutorControlador {
 
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Produto atualizado com sucesso!");
 
-        return "redirect:/produtos/{id}/editar";
+        return "redirect:/produtos/visualizar-estoque";
     }
 
     @GetMapping("/visualizar-estoque")
