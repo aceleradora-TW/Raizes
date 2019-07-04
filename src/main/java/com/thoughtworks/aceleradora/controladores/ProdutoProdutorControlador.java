@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -33,7 +35,7 @@ public class ProdutoProdutorControlador {
 
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
-            .pagina("Página inicial", "/");
+            .pagina("Página Inicial", "/");
 
     @Autowired
     public ProdutoProdutorControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico, ProdutoProdutorServico produtoProdutorServico, ProdutorServico produtorServico) {
@@ -81,6 +83,22 @@ public class ProdutoProdutorControlador {
 
             return "redirect:/produtos/cadastro";
         }
+
+        String teste = produtoProdutor.getPreco().toString();
+        teste.replaceAll(",", ".");
+
+//        BigDecimal numeroTeste =
+
+//        produtoProdutor.setPreco(BigDecimal.valueOf(Long.parseLong(teste)));
+
+//        produtoProdutor.setPreco(
+//                BigDecimal.valueOf(Long.parseLong(
+//                        produtoProdutor.getPreco().
+//                                toString().
+//                                replace(",", "."))
+//                )
+//        );
+
         produtoProdutorServico.salvar(produtoProdutor);
 
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Produto cadastrado com sucesso!");
@@ -132,7 +150,7 @@ public class ProdutoProdutorControlador {
 
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Produto atualizado com sucesso!");
 
-        return "redirect:/produtos/{id}/editar";
+        return "redirect:/produtos/visualizar-estoque";
     }
 
     @GetMapping("/visualizar-estoque")

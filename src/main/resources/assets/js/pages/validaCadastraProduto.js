@@ -21,24 +21,16 @@ export default {
   },
   validaPreco: () =>{
     $(document).ready(function() {
-      // $('#preco').maskMoney();
-      $('#preco').inputmask("99.99");
+      // $('#preco').inputmask("99.99");
+//       $("#money").inputmask({
+//         'groupSeparator': ',',
+//         'autoGroup': true,
+//         'digits': 10,
+//         'radixPoint': ".",
+//         'digitsOptional': false,
+//         'allowMinus': false
+// });
       
         })
       }
     }
-  
-      // $("#preco").maskMoney({
-      //                       prefix:'R$ ', 
-      //                       allowNegative: true, 
-      //                       thousands:'.', 
-      //                       decimal:',', 
-      //                       affixesStay: false
-      //                     })
-      // $('#preco').maskMoney({
-      //             allowZero:false, 
-      //             allowNegative:true, 
-      //             defaultZero:false
-      //           });                    
-  
-      //"#.##0,00"

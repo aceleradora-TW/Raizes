@@ -90,7 +90,7 @@ public class MinhaListaControlador {
     public String pegaLista(@PathVariable("id") Long id, Breadcrumb breadcrumb, RedirectAttributes redirecionamentoDeAtributos, Model modelo) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
-                .pagina("Editar lista", "/minha-lista/editar-lista/" + id);
+                .pagina("Editar Lista", "/minha-lista/editar-lista/" + id);
 
         try {
             modelo.addAttribute("minhaLista", minhaListaServico.encontraUm(id));

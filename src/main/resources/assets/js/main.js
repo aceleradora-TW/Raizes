@@ -1,6 +1,5 @@
 window.$ = window.jQuery = require('jquery')
 import '../../../../../node_modules/inputmask/dist/inputmask/jquery.inputmask';
-// import '../../../../../node_modules/jquery-maskmoney/dist/jquery.maskMoney';
 import '@fortawesome/fontawesome-free/js/all';
 import 'animate.css'
 import '../scss/styles.scss'
@@ -39,7 +38,7 @@ $(function () {
     RealizarPedido.habilitaInputsDeQuantidade();
     EditaProdutoEstoque.validaFormulario();
     validaCadastraProduto.validaFormulario();
-    Produtos.atualizaUnidadeMedida();
+    EditaProdutoEstoque.atualizaUnidadeMedida();
     validaCadastraProduto.validaPreco();
-    Produtos.atualizaUnidadeMedida();
+
 });
