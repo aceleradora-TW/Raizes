@@ -20,5 +20,4 @@ const fn = (event) => {
 
     $('#valorTotal').text(duasCasasAposVirgula(totalPedido));
 }
-
 export default fn;
