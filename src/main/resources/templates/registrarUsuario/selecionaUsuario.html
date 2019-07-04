@@ -10,10 +10,9 @@
     <div>
         <div class="container card-content align center">
             <form th:action="@{/selecionaUsuario}" th:object="${formUsuario}" method="post"
-                  onsubmit="return validaRegistrar(event)" id="registraAss">
+                  onsubmit="return validaRegistrar(event)" id="registra">
             <h1 class="title is-centered">Selecione o tipo de usuário</h1>
-<!--            <div class="box">-->
-                <div class="columns is-centered">
+                <div class="columns is-centered">-
                     <div class="column is-one-fifth">
                         <a class="button rz-button is-rounded" href="/registrar/cliente">Cliente</a>
                     </div>
@@ -21,7 +20,6 @@
                         <a class="button rz-button is-rounded" href="/registrar/produtor">Produtor</a>
                     </div>
                 </div>
-<!--            </div>-->
             </form>
         </div>
     </div>
