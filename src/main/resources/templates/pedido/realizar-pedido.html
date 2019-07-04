@@ -16,6 +16,7 @@
             method="post">
             <h1 class="title centraliza-texto" th:text="${nomeLista}"></h1>
             <input th:type="hidden" name="nome" th:value="${nomeLista}">
+            <p class="centraliza-texto" th:if="${produtos != produtoresDeProdutos}">Não há produtores para os produtos.</p>
             <div th:each="produtoss: ${produtos}">
               <h3 class="flex start fs-22 pt-3 pl-2" th:text="${produtoss.nome}"></h3>
             </div>
