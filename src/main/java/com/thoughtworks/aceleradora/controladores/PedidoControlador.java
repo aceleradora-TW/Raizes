@@ -138,5 +138,27 @@ public class PedidoControlador {
 
     }
 
+    @PostMapping("/editar-pedido")
+    public String editarProdutoPedido(Pedido pedido,
+                                      Breadcrumb breadcrumb,
+                                      Model modelo,
+                                      BindingResult resultadoValidacao,
+                                      RedirectAttributes redirecionamentoDeAtributos) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedidos")
+                .pagina("Realizar pedido", "/pedidos");
+
+        if(resultadoValidacao.hasErrors()) {
+            modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
+            return "/pedidos/editar-pedido";
+        }
+        pedidoServico.salvarPedido(pedido);
+
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
+
+        return "redirect:/pedidos";
+    }
+
 
 }
