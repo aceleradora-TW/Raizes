@@ -39,6 +39,7 @@ $(function () {
     RealizarPedido.habilitaInputsDeQuantidade();
     EditaProdutoEstoque.validaFormulario();
     validaCadastraProduto.validaFormulario();
+    Produtos.atualizaUnidadeMedida();
     validaCadastraProduto.validaPreco();
     Produtos.atualizaUnidadeMedida();
 });
