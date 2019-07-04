@@ -71,47 +71,29 @@ public class PedidoServico {
         return byProdutor;
     }
 
-    public Map<Produto, List<ProdutoProdutor>> produtoresDoPedido(Long idPedido) {
-        Optional<Pedido> pedido = encontraUm(idPedido);
-
-        List<PedidoProdutoProdutor> pedidosProdutosProdutoresDoPedido = pedido.get().getPedidosProdutosProdutores();
-
-        List<ProdutoProdutor> produtoProdutor = new ArrayList<>();
-
-        List<Produto> produtos = new ArrayList<>();
-
-        for (int i = 0; i < pedidosProdutosProdutoresDoPedido.size(); i++) {
-            produtoProdutor.add(pedidosProdutosProdutoresDoPedido.get(i).getProdutoProdutor());
-        }
-        for (int i = 0; i < produtoProdutor.size(); i++) {
-            produtos.add(produtoProdutor.get(i).getProduto());
-        }
-
-        Map<Produto, List<ProdutoProdutor>> byProduto
-                = produtoProdutor.stream()
-                .collect(Collectors.groupingBy(ProdutoProdutor::getProduto));
-        return byProduto;
-    }
-
 
     public Map<Produto, List<ProdutoProdutor>> agrupaProdutoresPorProdutos(Long idPedido) {
+
         Optional<Pedido> pedido = encontraUm(idPedido);
 
         List<PedidoProdutoProdutor> pedidoProdutoProdutoresDoPedido = pedido.get().getPedidosProdutosProdutores();
 
         List<ProdutoProdutor> produtoProdutores = new ArrayList<>();
+
         List<Produto> produtos = new ArrayList<>();
 
         for (int i = 0; i < pedidoProdutoProdutoresDoPedido.size(); i++) {
             produtos.add(pedidoProdutoProdutoresDoPedido.get(i).getProdutoProdutor().getProduto());
         }
-        for (int i = 0; i <= produtoProdutorRepositorio.findAll().size(); i++) {
-            for(int j = 0; j < produtos.size(); j++) {
-                if(produtos.contains(produtoProdutorRepositorio.findByProdutoIn(produtos))) {
-                    produtoProdutores.add(produtoProdutores.get(i));
-                }
+
+        List<ProdutoProdutor> TodosProdProd = produtoProdutorRepositorio.findAll();
+
+        for (int i =0; i< TodosProdProd.size(); i++){
+            if(produtos.contains(TodosProdProd.get(i).getProduto())){
+                produtoProdutores.add(TodosProdProd.get(i));
             }
         }
+
         Map<Produto, List<ProdutoProdutor>> byProduto
                 = produtoProdutores
                 .stream()

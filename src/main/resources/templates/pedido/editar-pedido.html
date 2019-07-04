@@ -1,129 +1,81 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
+
 <body>
   <section class="section">
     <section class="container">
       <div class="columns">
         <div class="column is-12">
-          <form class="rz-form" id="formRealizarPedido" method="post">
-            <h1 class="title centraliza-texto">Nome da lista</h1>
-            <h3 class="flex start fs-22 pt-3 pl-2">Nome do produto</h3>
-            <div class="bigbox">
-              <span class="flex end mb-2">
-                <i class="fas fa-times"></i>
-              </span>
-              <div class="box" id="inputRadio">
-                <div class="w-75 flex equal-sizing flex-row">
-                  <span class="bigcheck">
-                    <input type="radio">
-                    <label class="radio">
-                      <span class="radio-check">
-                        <i class="fas fa-plus"></i>
-                      </span>
-                      <span>Produtor</span>
-                    </label>
-                  </span>
-                  <span class="flex column center">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span class="pl-1">Cidade,</span>
-                    <span class="pl-1">UF</span>
-                  </span>
-                  <span class="flex column center span-transport">
-                    <i class="fas fa-truck icon-transport-true"></i>
-                  </span>
-                </div>
-                <div class="w-100 pl-2 flex equal-sizing flex-row">
-                  <span><i class="fas fa-spa"></i>
-                    <span class="pl-1">Tipo de cultivo</span>
-                  </span>
-                  <div class="flex center">
-                    <span>0,00</span>
-                    <span>/kg</span>
-                  </div>
-                  <label class="flex center">
-                    <span class="pr-1">Quantidade </span>
-                    <input class="w-25 pl-1" size="5" type="number" placeholder="4" disabled>
-                  </label>
-                  <span>Total do produto: 0,00</span>
-                </div>
-              </div>
+          <form class="rz-form" id="formEditarPedido" th:object="${pedidos}" th:action="@{/pedidos/editar-pedido}"
+            method="post">
+            <h1 class="title centraliza-texto" th:text="${pedidos.get().nome}"></h1>
+            <input th:type="hidden" name="nome" th:value="${pedido}">
+            <div th:each="produto, index : ${produtoresDeProdutos.keySet()}">
+              <h3 class="flex start fs-22 pt-3 pl-2" th:text="${produto.nome}"></h3>
               <div class="bigbox">
-                <div class="box" id="inputRadio">
-                  <div class="w-75 flex equal-sizing flex-row">
-                    <span class="bigcheck">
-                      <input type="radio">
-                      <label class="radio">
-                        <span class="radio-check"><i class="fas fa-plus"></i></span>
-                        <span>Produtor</span>
-                      </label>
-                    </span>
-                    <span class="flex column center">
-                      <i class="fas fa-map-marker-alt"></i>
-                      <span class="pl-1">Cidade,</span>
-                      <span class="pl-1">UF</span>
-                    </span>
-                    <span class="flex column center span-transport">
-                      <i class="fas fa-truck icon-transport-false"></i>
-                    </span>
-                  </div>
-                  <div class="w-75 pl-2 flex equal-sizing flex-row">
-                    <span><i class="fas fa-spa"></i>
-                      <span class="pl-1">Tipo de cultivo</span>
-                    </span>
-                    <div class="flex center">
-                      <span>0,00</span>
-                      <span>/kg</span>
-                    </div>
-                    <label class="flex center">
-                      <span class="pr-1">Quantidade </span>
-                      <input class="w-25 pl-1" size="5" type="number" placeholder="Ex: 4" disabled>
-                    </label>
-                  </div>
-                </div>
-                <h3 class="flex start fs-22 pt-3 pl-2">Nome do produto</h3>
-                <div class="bigbox">
+                <div th:each="produtoProdutor: ${produtoresDeProdutos.get(produto)}">
                   <span class="flex end mb-2">
                     <i class="fas fa-times"></i>
                   </span>
                   <div class="box" id="inputRadio">
                     <div class="w-75 flex equal-sizing flex-row">
                       <span class="bigcheck">
-                        <input type="radio">
-                        <label class="radio">
+                        <input type="radio" th:id="ProdutoProdutor + ${produtoProdutor.id}"
+                          th:value="${produtoProdutor.id}"
+                          th:field="*{pedidosProdutosProdutores[__${index.index}__].produtoProdutor}">
+                        <label class="radio" th:for="ProdutoProdutor + ${produtoProdutor.id}">
+                          <span class="check"><i class="far fa-check-circle"></i></span>
                           <span class="radio-check"><i class="fas fa-plus"></i></span>
-                          <span>Produtor</span>
+                          <span th:text="${produtoProdutor.produtor.nome}"></span>
                         </label>
                       </span>
-                      <span class="flex column center">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span class="pl-1">Cidade,</span>
-                        <span class="pl-1">UF</span>
+                      <span class="flex column center"><i class="fas fa-map-marker-alt"></i>
+                        <span class="pl-1" th:text="${produtoProdutor.produtor.endereco.cidade.nome} + ' - '"></span>
+                        <span class="pl-1" th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
                       </span>
-                      <span class="flex column center span-transport">
+                      <span class="flex column center span-transport"
+                        th:if="${produtoProdutor.produtor.possuiTransporte}">
+                        <i class="fas fa-truck icon-transport-true"> </i>
+                      </span>
+                      <span class="flex column center span-transport"
+                        th:unless="${produtoProdutor.produtor.possuiTransporte}">
                         <i class="fas fa-truck icon-transport-false"></i>
                       </span>
                     </div>
-                    <div class="w-100 pl-2 flex equal-sizing flex-row">
-                      <span><i class="fas fa-spa"></i>
-                        <span class="pl-1">Tipo de cultivo</span>
-                      </span>
-                      <div class="flex center">
-                        <span>0,00</span>
-                        <span>/kg</span>
-                      </div>
-                      <label class="flex center">
-                        <span class="pr-1">Quantidade </span>
-                        <input class="w-25 pl-1" size="5" type="number" placeholder="4" disabled>
+
+                  <div class="w-75 pl-2 flex equal-sizing flex-row">
+                    <span><i class="fas fa-spa"></i>
+                      <span class="pl-1" th:text="${produtoProdutor.tipoDeCultivo}"></span>
+                    </span>
+                    <div class="flex center" id="totalProduto">
+                      <label class="label">
+                        Valor:R$
+                        <span th:text="${produtoProdutor.preco}" id="preco" onfocus="Calcular()">
+                        </span>
+                        <span th:text="${produto.unidadeMedida.codigo}">
+                        </span>
                       </label>
-                      <span>Total do produto: 0,00</span>
                     </div>
+                    <label class="flex center">
+                      <span class="pr-1">Quantidade:</span>
+                      <input class="w-25 pl-1" size="5"
+                        th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
+                        onekeyup="Calcular(event)" onclick="Calcular(event)" min=0 placeholder="Ex: 4">
+                      <label class="label">Total:R$
+                        <span class="resultado" id="resultado"></span>
+                      </label>
+                    </label>
+                  </div>
                   </div>
                 </div>
+              </div>
+            </div>
                 <div class="bb-1 pt-3 flex space-between fs-18">
                   <span>Total do Pedido:</span>
                   <span>R$ 0,00</span>
@@ -143,4 +95,5 @@
     </section>
   </section>
 </body>
+
 </html>

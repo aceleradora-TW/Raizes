@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 @Controller
@@ -123,19 +124,19 @@ public class PedidoControlador {
         return "redirect:/pedidos";
     }
 
-    @GetMapping("/editar-pedido")
-    public String editarProdutoPedido(Breadcrumb breadcrumb) {
+    @GetMapping("/{id}/editar-pedido")
+    public String editarProdutoPedido(@PathVariable("id") Long id, Breadcrumb breadcrumb, Model modelo) {
 
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Editar pedido", "/editar-pedido");
 
+        Optional<Pedido> pedido = pedidoServico.encontraUm(id);
+        modelo.addAttribute("produtoresDeProdutos", pedidoServico.agrupaProdutoresPorProdutos(pedido.get().getId()));
+        modelo.addAttribute("pedidos", pedidoServico.encontraUm(pedido.get().getId()));
         return "pedido/editar-pedido";
 
     }
-    @ResponseBody
-    @GetMapping("/teste")
-    public Map<Produto, List<ProdutoProdutor>> testePedido(){
-        return pedidoServico.agrupaProdutoresPorProdutos(1L);
-    }
+
+
 }
