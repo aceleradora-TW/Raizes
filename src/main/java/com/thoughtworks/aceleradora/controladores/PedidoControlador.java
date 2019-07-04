@@ -82,6 +82,7 @@ public class PedidoControlador {
             Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
                     produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(lista);
 
+            modelo.addAttribute("produtos", produtoServico.organizarProdutosSemProdutores(lista));
             modelo.addAttribute("pedido", new Pedido());
 
             modelo.addAttribute("nomeLista", lista.getNome());
