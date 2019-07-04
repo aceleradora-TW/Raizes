@@ -15,7 +15,7 @@ const fn = (event) => {
     let totalPedido = 0;
     resultados.each( (indice, campoResultado) => {
         let valor = $(campoResultado).text() || 0;
-        totalPedido += parseInt(valor);
+        totalPedido += parseFloat(valor);
     });
 
     $('#valorTotal').text(duasCasasAposVirgula(totalPedido));
