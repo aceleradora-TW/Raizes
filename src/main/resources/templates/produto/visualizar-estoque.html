@@ -9,7 +9,16 @@
     <section class="container">
       <h1 class="title centraliza-texto">Meu Estoque</h1>
       <div th:if="${mensagem} != null">
-        <span th:text="${mensagem}"></span>
+        <script th:inline="javascript">
+          /*<![CDATA[*/
+          window.onload = function () {
+            window.Modal
+              .success()
+              .okAction("Ok")
+              .show(/*[[${mensagem}]]*/)
+          };
+          /*]]>*/
+        </script>
       </div>
       <p class="centraliza-texto" th:if="${produtosProdutor.isEmpty()}">Não há produtos no seu estoque.</p>
       <div class="columns">
