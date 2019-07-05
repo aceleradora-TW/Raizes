@@ -1,5 +1,5 @@
 window.$ = window.jQuery = require('jquery')
-import '../../../../../node_modules/jquery-mask-plugin/dist/jquery.mask';
+import 'jquery-mask-plugin/dist/jquery.mask';
 import '@fortawesome/fontawesome-free/js/all';
 import 'animate.css'
 import '../scss/styles.scss'
