@@ -52,13 +52,6 @@ public class ProdutoProdutorServico {
 
     public ProdutoProdutor removerVirgulaValor(ProdutoProdutor produtoProdutor){
         String preco;
-        
-
-//        try {
-//
-//        }catch (NumberFormatException e){
-//            produtoProdutor.pre
-//        }
 
         return null;
 
