@@ -50,10 +50,4 @@ public class ProdutoProdutorServico {
         return produtoProdutorRepositorio.save(produtoProdutor);
     }
 
-    public ProdutoProdutor removerVirgulaValor(ProdutoProdutor produtoProdutor){
-        String preco;
-
-        return null;
-
-    }
 }
