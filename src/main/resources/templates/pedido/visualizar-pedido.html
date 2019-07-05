@@ -23,7 +23,10 @@
                       <span class="flex start w-25" th:text="'R$ ' + ${produtor.preco}"></span>
                     </span>
                   </div>
-                  <div class="rz-box-footer">
+                  <label class="pl-5 pt-3 label">Total: R$
+                    <span class="resultado" id="resultado"></span>
+                  </label>
+                  <div class="rz-box-footer">                    
                     <span class="flex center">
                       <i class="fas fa-truck" th:classappend="${produtor.isPossuiTransporte()} ?
                       icon-transport-true : icon-transport-false"></i>
@@ -52,6 +55,10 @@
               </div>
             </div>
           </span>
+          <div class="bb-1 pt-3 flex flex-row start fs-18">
+            <span>Total do Pedido: R$</span>
+            <span id="valorTotal"></span>
+          </div>
         </div>
       </div>
       <div class="flex space-between">
