@@ -13,19 +13,20 @@
       <div class="columns">
         <div class="column is-12">
           <span th:each="produtor: ${produtores.keySet()}">
-            <div class="flex center box rz-box mb-4">
+            <div class="flex center box rz-box mb-4" id="visualizar">
               <div class="w-50 field">
                 <div class="control">
                   <h4 class="pt-3 pb-2 fs-18"><b th:text="${produtor.nome}"></b></h4>
-                  <div class="flex flex-column">
-                    <span class="flex space-between" th:each="produtor: ${produtores.get(produtor)}">
-                      <span class="pl-5 w-25" th:text="${produtor.produto.nome}"></span>
-                      <span class="flex start w-25" th:text="'R$ ' + ${produtor.preco}"></span>
+                  <div id="calculo">
+                    <span class="flex space-between" th:each="pedido: ${pedidoProdutoProdutores}">
+                      <span class="pl-5 w-25" th:text="${pedido.produtoProdutor.produto.nome}"></span>
+                      <input hidden th:value="pedido.quantidadePedido" class="quantidadePedido"/>
+                      <span class="flex start w-25" id="valor" th:text="'R$ ' + ${pedido.valor}"></span>                      
                     </span>
-                  </div>
-                  <label class="pl-5 pt-3 label">Total: R$
-                    <span class="resultado" id="resultado"></span>
-                  </label>
+                    <label class="pl-5 pt-3 pb-2 label">Total: R$
+                      <span class="totalProdutor" id="totalProdutor"></span>
+                    </label>
+                  </div>                  
                   <div class="rz-box-footer">                    
                     <span class="flex center">
                       <i class="fas fa-truck" th:classappend="${produtor.isPossuiTransporte()} ?
@@ -57,7 +58,7 @@
           </span>
           <div class="bb-1 pt-3 flex flex-row start fs-18">
             <span>Total do Pedido: R$</span>
-            <span id="valorTotal"></span>
+            <span id="valorTotalPedido"></span>
           </div>
         </div>
       </div>

@@ -18,6 +18,26 @@ const fn = (event) => {
         totalPedido += parseFloat(valor);
     });
 
-    $('#valorTotal').text(duasCasasAposVirgula(totalPedido));
+    $('#valorTotal').text(duasCasasAposVirgula(totalPedido)),
+
+    function () {
+        calculo = $('#calculo');
+        const quantidadePedido = $('.quantidadePedido') || 0;
+        const preco = calculo.find('#valor').text();
+        const totalProdutor = preco * quantidadePedido;
+
+        calculo.parents('#visualizar').find('#totalProdutor')
+        .text(duasCasasAposVirgula(totalProdutor));
+
+        const resultados = $('.totalProdutor')
+
+        let valorTotalPedido = 0;
+        resultados.each( (indice, campoResultado) => {
+            let valor = $(campoResultado).text() || 0;
+            valorTotalPedido += parseFloat(valor);
+        });
+
+        $('#valorTotalPedido').text(duasCasasAposVirgula(valorTotalPedido))        
+    }
 }
 export default fn;
