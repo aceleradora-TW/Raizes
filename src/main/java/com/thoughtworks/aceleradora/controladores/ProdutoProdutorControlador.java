@@ -1,8 +1,10 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.Breadcrumb;
+import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
+import com.thoughtworks.aceleradora.dominio.TipoDeCultivo;
+import com.thoughtworks.aceleradora.dominio.UnidadeMedida;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
-import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
@@ -18,9 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
