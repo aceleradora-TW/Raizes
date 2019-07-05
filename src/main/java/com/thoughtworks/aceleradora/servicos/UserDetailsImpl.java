@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
+import static java.util.Collections.emptySet;
 
 @Service
 public class UserDetailsImpl implements UserDetailsService {
@@ -26,6 +26,6 @@ public class UserDetailsImpl implements UserDetailsService {
 
         Usuario usuario = usuarioRepositorio.findByEmail(email);
 
-        return new User(usuario.getEmail(), usuario.getSenha(), new HashSet<>());
+        return new User(usuario.getEmail(), usuario.getSenha(), emptySet());
     }
 }
