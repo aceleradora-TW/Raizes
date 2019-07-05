@@ -84,8 +84,8 @@ public class ProdutoProdutorControlador {
             return "redirect:/produtos/cadastro";
         }
 
-        String teste = produtoProdutor.getPreco().toString();
-        teste.replaceAll(",", ".");
+//        String teste = produtoProdutor.getPreco().toString();
+//        teste.replaceAll(",", ".");
 
 //        BigDecimal numeroTeste =
 

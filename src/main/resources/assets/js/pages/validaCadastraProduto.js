@@ -19,18 +19,7 @@ export default {
       }
     });
   },
-  validaPreco: () =>{
-    $(document).ready(function() {
-      // $('#preco').inputmask("99.99");
-//       $("#money").inputmask({
-//         'groupSeparator': ',',
-//         'autoGroup': true,
-//         'digits': 10,
-//         'radixPoint': ".",
-//         'digitsOptional': false,
-//         'allowMinus': false
-// });
-      
-        })
-      }
-    }
+  validaPreco: () => {
+      $('#preco').mask('000.000.000.000.000,00', {reverse: true});
+  }
+}
