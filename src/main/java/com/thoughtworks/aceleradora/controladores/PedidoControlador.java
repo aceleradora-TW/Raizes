@@ -156,7 +156,7 @@ public class PedidoControlador {
             modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
             return "/pedidos/editar-pedido";
         }
-        pedidoServico.salvarPedido(pedido);
+        pedidoServico.editaPedido(pedido);
 
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
 

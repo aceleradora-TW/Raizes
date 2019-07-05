@@ -49,7 +49,21 @@ public class PedidoServico {
                         .getProdutoProdutor().getPreco()))
                 .collect(Collectors.toList())
         );
+        return repositorio.save(pedido);
+    }
 
+    public Pedido editaPedido(Pedido pedido) {
+
+        pedido.setCliente(clienteServico.encontraCliente());
+        pedido.setPedidosProdutosProdutores(pedido
+                .getPedidosProdutosProdutores()
+                .stream()
+                .filter(pedidoProdutoProdutor -> pedidoProdutoProdutor.getProdutoProdutor() != null)
+                .peek(pedidoProdutoProdutor -> pedidoProdutoProdutor.setValor(pedidoProdutoProdutor
+                        .getProdutoProdutor().getPreco()))
+                .collect(Collectors.toList())
+        );
+        pedido.setCriadoEm(encontraUm(pedido.getId()).get().getCriadoEm());
         return repositorio.save(pedido);
     }
 
