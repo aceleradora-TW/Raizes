@@ -84,21 +84,6 @@ public class ProdutoProdutorControlador {
             return "redirect:/produtos/cadastro";
         }
 
-//        String teste = produtoProdutor.getPreco().toString();
-//        teste.replaceAll(",", ".");
-
-//        BigDecimal numeroTeste =
-
-//        produtoProdutor.setPreco(BigDecimal.valueOf(Long.parseLong(teste)));
-
-//        produtoProdutor.setPreco(
-//                BigDecimal.valueOf(Long.parseLong(
-//                        produtoProdutor.getPreco().
-//                                toString().
-//                                replace(",", "."))
-//                )
-//        );
-
         produtoProdutorServico.salvar(produtoProdutor);
 
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Produto cadastrado com sucesso!");

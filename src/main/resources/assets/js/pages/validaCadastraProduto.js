@@ -20,6 +20,6 @@ export default {
     });
   },
   validaPreco: () => {
-      $('#preco').mask('000.000.000.000.000,00', {reverse: true});
+      $('#preco').mask('000.000.000.000.000.00', {reverse: true});
   }
 }
