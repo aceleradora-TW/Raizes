@@ -38,7 +38,7 @@ public class ProdutoProdutorValidador implements ConstraintValidator<ProdutoProd
     }
 
     private boolean campoQuantidadeEstaNatural(ProdutoProdutor produtoProdutor, ConstraintValidatorContext context) {
-        if (produtoProdutor.getQuantidadeEstoque() <= 1) {
+        if (produtoProdutor.getQuantidadeEstoque() < 1) {
             context.buildConstraintViolationWithTemplate("*No campo Quantidade, não aceita números negativos ou quebrados.")
                     .addConstraintViolation();
 
