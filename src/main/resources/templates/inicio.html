@@ -1,7 +1,13 @@
 <!DOCTYPE HTML>
-<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <title>Raízes</title>
+  <div sec:authorize="isAuthenticated()">
+    <div>
+      Logado como: <span sec:authentication="name"></span>
+    </div>
+  </div>
 </head>
 <body>
   <section class="is-fullheight-with-navbar">
