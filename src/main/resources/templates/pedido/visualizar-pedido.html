@@ -18,7 +18,7 @@
                 <div class="control">
                   <h4 class="pt-3 pb-2 fs-18"><b th:text="${pedido.produtoProdutor.produtor.nome}"></b></h4>
                   <div id="calculo">
-                    <span class="flex space-between">
+                    <span class="flex space-between" id="spanCalcula">
                       <span class="pl-5 w-25" th:text="${pedido.produtoProdutor.produto.nome}"></span>
                       <span th:text="${pedido.quantidadePedido}" class="quantidadePedido"></span>
                       <span class="flex start w-25" id="valor" th:text="'R$ ' + ${pedido.valor}"></span>                      
