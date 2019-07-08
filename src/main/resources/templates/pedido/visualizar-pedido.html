@@ -12,15 +12,15 @@
       <h1 class="title centraliza-texto" th:text="${pedido}"></h1>
       <div class="columns">
         <div class="column is-12">
-          <span th:each="produtor: ${produtores.keySet()}">
+          <span th:each="pedido: ${pedidoProdutoProdutores}">
             <div class="flex center box rz-box mb-4" id="visualizar">
               <div class="w-50 field">
                 <div class="control">
-                  <h4 class="pt-3 pb-2 fs-18"><b th:text="${produtor.nome}"></b></h4>
+                  <h4 class="pt-3 pb-2 fs-18"><b th:text="${pedido.produtoProdutor.produtor.nome}"></b></h4>
                   <div id="calculo">
-                    <span class="flex space-between" th:each="pedido: ${pedidoProdutoProdutores}">
+                    <span class="flex space-between">
                       <span class="pl-5 w-25" th:text="${pedido.produtoProdutor.produto.nome}"></span>
-                      <input hidden th:value="pedido.quantidadePedido" class="quantidadePedido"/>
+                      <span th:text="${pedido.quantidadePedido}" class="quantidadePedido"></span>
                       <span class="flex start w-25" id="valor" th:text="'R$ ' + ${pedido.valor}"></span>                      
                     </span>
                     <label class="pl-5 pt-3 pb-2 label">Total: R$
@@ -29,14 +29,14 @@
                   </div>                  
                   <div class="rz-box-footer">                    
                     <span class="flex center">
-                      <i class="fas fa-truck" th:classappend="${produtor.isPossuiTransporte()} ?
+                      <i class="fas fa-truck" th:classappend="${pedido.produtoProdutor.produtor.isPossuiTransporte()} ?
                       icon-transport-true : icon-transport-false"></i>
                     </span>
                     <span class="flex center">
                       <p><b>Transporte</b></p>
                     </span>
                     <span class="flex center">
-                      <p th:text="${produtor.isPossuiTransporte()} ? Disponível : Indisponível"></p>
+                      <p th:text="${pedido.produtoProdutor.produtor.isPossuiTransporte()} ? Disponível : Indisponível"></p>
                     </span>
                   </div>
                   <div class="rz-box-footer">
@@ -44,11 +44,11 @@
                     <div class="flex flex-row space-between">
                       <div class="flex flex-row">
                         <span><i class="fas fa-phone"></i></span>
-                        <span class="pl-1" th:text="${produtor.contato}"></span>
+                        <span class="pl-1" th:text="${pedido.produtoProdutor.produtor.contato}"></span>
                       </div>
                       <div class="flex flex-row">
                         <span><i class="fas fa-envelope"></i></span>
-                        <span class="pl-1" th:text="${produtor.email}"></span>
+                        <span class="pl-1" th:text="${pedido.produtoProdutor.produtor.email}"></span>
                       </div>
                     </div>
                   </div>

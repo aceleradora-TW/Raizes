@@ -22,10 +22,14 @@ const fn = (event) => {
 
     function () {
         calculo = $('#calculo');
+        console.log(calculo);
         const quantidadePedido = $('.quantidadePedido') || 0;
+        console.log(quantidadePedido);
         const preco = calculo.find('#valor').text();
+        console.log(preco);
         const totalProdutor = preco * quantidadePedido;
-
+        console.log(totalProdutor);
+        
         calculo.parents('#visualizar').find('#totalProdutor')
         .text(duasCasasAposVirgula(totalProdutor));
 
@@ -37,7 +41,8 @@ const fn = (event) => {
             valorTotalPedido += parseFloat(valor);
         });
 
-        $('#valorTotalPedido').text(duasCasasAposVirgula(valorTotalPedido))        
+        $('#valorTotalPedido').text(duasCasasAposVirgula(valorTotalPedido))
+        console.log(valorTotalPedido);
     }
 }
 export default fn;
