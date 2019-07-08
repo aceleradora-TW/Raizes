@@ -24,18 +24,25 @@ export default {
   },
 
   totalVisualizar: () => {
-    calculo = $('#calculo');
-    const quantidadePedido = $('.quantidadePedido') || 0;
-    console.log(quantidadePedido);
-    const preco = calculo.find('#valor').text();
-    console.log(preco);
-    const totalProdutor = preco * quantidadePedido;
+    
 
-    console.log(totalProdutor);
+    const preco = $('#visualizar').find('#valor').val();
+    console.log("Preco",preco);
+    const quantidadePedido = $('#visualizar').find('.quantidadePedido').text();
+    console.log("Quantidade",quantidadePedido);
 
-    calculo.parents('#visualizar').find('#totalProdutor')
-      .text(duasCasasAposVirgula(totalProdutor));
+    const precoCadaProduto = preco * quantidadePedido;
+    console.log("precoCadaProduto",precoCadaProduto);
+    $('#visualizar').find('.precoCadaProduto').text(parseFloat(precoCadaProduto));
+    // const totalProdutor = preco * quantidadePedido;
 
-    const total = $('#valorTotalPedido');
+
+    // console.log(totalProdutor);
+
+    // calculo.parents('#visualizar').find('#totalProdutor').text(duasCasasAposVirgula(totalProdutor));
+
+    const total = $('#valorTotalPedido').text("100");
+    console.log("Total",total);
+
   }
 }

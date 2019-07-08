@@ -19,7 +19,8 @@
                     <span class="flex space-between" id="spanCalcula">
                       <span class="pl-5 w-25" th:text="${pedido.produtoProdutor.produto.nome}"></span>
                       <span th:text="${pedido.quantidadePedido}" class="quantidadePedido"></span>
-                      <span class="flex start w-25" id="valor" th:text="'R$ ' + ${pedido.valor}"></span>                      
+                      <input type="hidden" class="flex start w-25" id="valor" th:value="${pedido.valor}"/> 
+                      <span class="precoCadaProduto" id="precoCadaProduto"></span>                     
                     </span>
                     <label class="pl-5 pt-3 pb-2 label">Total: R$
                       <span class="totalProdutor" id="totalProdutor"></span>
