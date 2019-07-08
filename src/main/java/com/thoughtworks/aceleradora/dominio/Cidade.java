@@ -13,7 +13,7 @@ public class Cidade {
     private Long id;
     private String nome;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_estados" )
     private Estado estado;
 

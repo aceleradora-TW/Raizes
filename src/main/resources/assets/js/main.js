@@ -1,4 +1,5 @@
 window.$ = window.jQuery = require('jquery')
+import 'jquery-mask-plugin/dist/jquery.mask';
 import '@fortawesome/fontawesome-free/js/all';
 import 'animate.css'
 import '../scss/styles.scss'
@@ -38,6 +39,6 @@ $(function () {
     EditaProdutoEstoque.validaFormulario();
     validaCadastraProduto.validaFormulario();
     EditaProdutoEstoque.atualizaUnidadeMedida();
-
+    validaCadastraProduto.validaPreco();
 
 });
