@@ -29,13 +29,13 @@
                   <div class="columns">
                     <div class="column is-half field"> <label for="rua">*Rua:</label>
                       <input class="input input-fancy borda-arredondada" type="text" id="endereco"
-                        th:field="*{endereco.rua}" placeholder="Ex: Rua João da Silva, 10" th:name="rua">
+                        th:field="*{endereco.rua}" placeholder="Ex: Rua João da Silva" th:name="rua">
                       <div class="help-block"></div>
                     </div>
 
                     <div class="column field"> <label for="numero">*Numero:</label>
-                      <input class="input input-fancy borda-arredondada" type="text" id="numero"
-                        th:field="*{endereco.numero}" th:name="numero">
+                      <input class="input input-fancy borda-arredondada" placeholder="Ex: 156" type="text" 
+                      id="numero" th:field="*{endereco.numero}" th:name="numero">
                         <div class="help-block"></div>
                     </div>
 
