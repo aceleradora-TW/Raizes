@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Raízes</title>
+</head>
+<body>
+<main>
+    <div>
+        <div class="container card-content align center">
+            <h1 class="title is-centered">Selecione o tipo de usuário</h1>
+                <div class="columns is-centered">
+                    <div class="column is-one-fifth">
+                        <a class="button rz-button is-rounded" href="/registrar/cliente">Cliente</a>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <a class="button rz-button is-rounded" href="/registrar/produtor">Produtor</a>
+                    </div>
+                </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

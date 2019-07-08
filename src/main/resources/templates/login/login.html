@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Raízes</title>
+</head>
+<body>
+<main>
+    <div class="columns">
+        <div class="column is-12">
+            <div class="box">
+                <div class="container has-text-centered">
+                    <form th:action="@{/login}" method="post">
+                        <h1 class="title is-1">Raízes</h1>
+                        <div class="columns is-centered">
+                            <div class = "column is-half">
+                                <p class="control has-icons-left has-icons-right margin-left-10">
+                                    <i class="fas fa-user"></i>
+                                    <label for="email">Email</label>
+                                </p>
+                                <input class="validate input input-fancy" id="email" type="text" name="email">
+                            </div>
+                        </div>
+                        <div class="columns is-centered">
+                            <div class = "column is-half">
+                                <p class="control has-icons-left has-icons-right margin-left-10">
+                                    <i class="fas fa-lock"></i>
+                                    <label for="password">Senha</label>
+                                </p>
+                                <input class="validate input input-fancy borda-arredondada" id="password" type="password" name="senha">
+                            </div>
+                        </div>
+                        <a class="button rz-button" href="/seleciona-tipo-usuario">Registrar</a>
+                        <button class="button rz-button" type="submit" name="action">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
