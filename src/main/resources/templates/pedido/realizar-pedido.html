@@ -19,7 +19,7 @@
           <div th:each="produto, index : ${produtos}">
             <h3 class="flex start fs-22 pt-3 pl-2" th:text="${produto.nome}"></h3>
             <span th:if="${produtoresDeProdutos.containsKey(produto) == false}">
-                    <p class="centraliza-texto">*Os produtos que estiverem vazios ainda não possuem produtores!</p>
+                    <p class="centraliza-texto">*Esse produto não possui produtores!</p>
                   </span>
             <div class="bigbox">
               <div th:each="produtoProdutor: ${produtoresDeProdutos.get(produto)}">
@@ -61,18 +61,18 @@
                                 id="preco"
                                 onfocus="Calcular()">
                           </span>
-                        <span
-                                th:text="${produto.unidadeMedida.codigo}">
-                          </span>
-                      </label>
-                    </div>
-                    <label class="flex center">
-                      <span class="pr-1">Quantidade:</span>
-                      <input class="w-25 pl-1" size="5"
-                             th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
-                             onekeyup="Calcular(event)" onclick="Calcular(event)" min=0 placeholder="Ex: 4" disabled>
-                      /<span
+                          <span 
                             th:text="${produto.unidadeMedida.codigo}">
+                          </span>
+                        </label>
+                      </div>
+                      <label class="flex center">
+                        <span class="pr-1">Quantidade:</span>
+                        <input class="w-25 pl-1" size="5"
+                          th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
+                          th:oninput="Calcular(event)" min=0 placeholder="Ex: 4" disabled>
+                          /<span
+                          th:text="${produto.unidadeMedida.codigo}">
                         </span>
                     </label>
                     <label class="label">Total:R$
@@ -102,4 +102,5 @@
   </section>
 </section>
 </body>
+
 </html>
