@@ -9,17 +9,18 @@ import static javax.persistence.GenerationType.IDENTITY;
 @DiscriminatorColumn(name = "tipo_de_usuario")
 @Entity
 @Table(name = "usuarios")
-abstract class Usuario {
+public abstract class Usuario {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String email;
     private String senha;
     private String nome;
     private String contato;
 
-    @ManyToOne
+    @ManyToOne (cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
@@ -122,7 +123,7 @@ abstract class Usuario {
                 ", nome='" + nome + '\'' +
                 ", contato='" + contato + '\'' +
                 ", endereco=" + endereco +
-                ", tipoDeUsuario=" + tipoDeUsuario +
+                ", tipoDeUsuario =" + tipoDeUsuario +
                 '}';
     }
 }
