@@ -48,4 +48,5 @@ public class ProdutoProdutorServico {
     public ProdutoProdutor salvar(ProdutoProdutor produtoProdutor) {
         return produtoProdutorRepositorio.save(produtoProdutor);
     }
+
 }
