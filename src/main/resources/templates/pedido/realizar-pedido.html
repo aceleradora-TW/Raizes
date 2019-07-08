@@ -67,7 +67,7 @@
                         <span class="pr-1">Quantidade:</span>
                         <input class="w-25 pl-1" size="5"
                           th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
-                          onekeyup="Calcular.totalRealizar(event)" onclick="Calcular.totalRealizar(event)" min=0 placeholder="Ex: 4" disabled>
+                          th:oninput="Calcular.totalRealizar(event)" min=0 placeholder="Ex: 4" disabled>
                           /<span
                           th:text="${produto.unidadeMedida.codigo}">
                         </span>
