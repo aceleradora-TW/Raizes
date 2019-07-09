@@ -33,7 +33,6 @@ $(function () {
     window.CriarLista = CriarLista;
     window.EditaPedido = EditarPedido;
     window.Calcular = Calcular;
-    window.history.pushState("", "", "/login");
     window.ValidaRegistraCliente = ValidaRegistraCliente;
     window.ValidaRegistraProdutor = ValidaRegistraProdutor;
 
