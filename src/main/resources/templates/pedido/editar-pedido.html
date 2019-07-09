@@ -1,64 +1,37 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
+
 <body>
-  <section class="section">
-    <section class="container">
-      <div class="columns">
-        <div class="column is-12">
-          <form class="rz-form" id="formRealizarPedido" method="post">
-            <h1 class="title centraliza-texto">Nome da lista</h1>
-            <h3 class="flex start fs-22 pt-3 pl-2">Nome do produto</h3>
-            <div class="bigbox">
-              <span class="flex end mb-2">
-                <i class="fas fa-times"></i>
-              </span>
-              <div class="box" id="inputRadio">
-                <div class="w-75 flex equal-sizing flex-row">
-                  <span class="bigcheck">
-                    <input type="radio">
-                    <label class="radio">
-                      <span class="radio-check">
-                        <i class="fas fa-plus"></i>
-                      </span>
-                      <span>Produtor</span>
-                    </label>
-                  </span>
-                  <span class="flex column center">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span class="pl-1">Cidade,</span>
-                    <span class="pl-1">UF</span>
-                  </span>
-                  <span class="flex column center span-transport">
-                    <i class="fas fa-truck icon-transport-true"></i>
-                  </span>
-                </div>
-                <div class="w-100 pl-2 flex equal-sizing flex-row">
-                  <span><i class="fas fa-spa"></i>
-                    <span class="pl-1">Tipo de cultivo</span>
-                  </span>
-                  <div class="flex center">
-                    <span>0,00</span>
-                    <span>/kg</span>
-                  </div>
-                  <label class="flex center">
-                    <span class="pr-1">Quantidade </span>
-                    <input class="w-25 pl-1" size="5" type="number" placeholder="4" disabled>
-                  </label>
-                  <span>Total do produto: 0,00</span>
-                </div>
-              </div>
+  <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor())">
+    Você não tem autorização para acessar essa página
+  </div>
+  <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).CLIENTE.getValor())">
+    <section class="section">
+      <section class="container">
+        <div class="columns">
+          <div class="column is-12">
+            <form class="rz-form" id="formRealizarPedido" method="post">
+              <h1 class="title centraliza-texto">Nome da lista</h1>
+              <h3 class="flex start fs-22 pt-3 pl-2">Nome do produto</h3>
               <div class="bigbox">
+                <span class="flex end mb-2">
+                  <i class="fas fa-times"></i>
+                </span>
                 <div class="box" id="inputRadio">
                   <div class="w-75 flex equal-sizing flex-row">
                     <span class="bigcheck">
                       <input type="radio">
                       <label class="radio">
-                        <span class="radio-check"><i class="fas fa-plus"></i></span>
+                        <span class="radio-check">
+                          <i class="fas fa-plus"></i>
+                        </span>
                         <span>Produtor</span>
                       </label>
                     </span>
@@ -68,10 +41,10 @@
                       <span class="pl-1">UF</span>
                     </span>
                     <span class="flex column center span-transport">
-                      <i class="fas fa-truck icon-transport-false"></i>
+                      <i class="fas fa-truck icon-transport-true"></i>
                     </span>
                   </div>
-                  <div class="w-75 pl-2 flex equal-sizing flex-row">
+                  <div class="w-100 pl-2 flex equal-sizing flex-row">
                     <span><i class="fas fa-spa"></i>
                       <span class="pl-1">Tipo de cultivo</span>
                     </span>
@@ -81,15 +54,12 @@
                     </div>
                     <label class="flex center">
                       <span class="pr-1">Quantidade </span>
-                      <input class="w-25 pl-1" size="5" type="number" placeholder="Ex: 4" disabled>
+                      <input class="w-25 pl-1" size="5" type="number" placeholder="4" disabled>
                     </label>
+                    <span>Total do produto: 0,00</span>
                   </div>
                 </div>
-                <h3 class="flex start fs-22 pt-3 pl-2">Nome do produto</h3>
                 <div class="bigbox">
-                  <span class="flex end mb-2">
-                    <i class="fas fa-times"></i>
-                  </span>
                   <div class="box" id="inputRadio">
                     <div class="w-75 flex equal-sizing flex-row">
                       <span class="bigcheck">
@@ -108,7 +78,7 @@
                         <i class="fas fa-truck icon-transport-false"></i>
                       </span>
                     </div>
-                    <div class="w-100 pl-2 flex equal-sizing flex-row">
+                    <div class="w-75 pl-2 flex equal-sizing flex-row">
                       <span><i class="fas fa-spa"></i>
                         <span class="pl-1">Tipo de cultivo</span>
                       </span>
@@ -118,29 +88,68 @@
                       </div>
                       <label class="flex center">
                         <span class="pr-1">Quantidade </span>
-                        <input class="w-25 pl-1" size="5" type="number" placeholder="4" disabled>
+                        <input class="w-25 pl-1" size="5" type="number" placeholder="Ex: 4" disabled>
                       </label>
-                      <span>Total do produto: 0,00</span>
                     </div>
                   </div>
-                </div>
-                <div class="bb-1 pt-3 flex space-between fs-18">
-                  <span>Total do Pedido:</span>
-                  <span>R$ 0,00</span>
-                </div>
-                <div class="field border-top pt-4">
-                  <div class="control">
-                    <div class="rz-box-footer flex space-between">
-                      <button class="button rz-button is-rounded"
-                        th:onclick="return RealizarPedido.exibeConfirmacaoDeCancelamento('/minhas-listas')">Cancelar</button>
-                      <button class="button rz-button is-rounded" type="submit">Salvar</button>
+                  <h3 class="flex start fs-22 pt-3 pl-2">Nome do produto</h3>
+                  <div class="bigbox">
+                    <span class="flex end mb-2">
+                      <i class="fas fa-times"></i>
+                    </span>
+                    <div class="box" id="inputRadio">
+                      <div class="w-75 flex equal-sizing flex-row">
+                        <span class="bigcheck">
+                          <input type="radio">
+                          <label class="radio">
+                            <span class="radio-check"><i class="fas fa-plus"></i></span>
+                            <span>Produtor</span>
+                          </label>
+                        </span>
+                        <span class="flex column center">
+                          <i class="fas fa-map-marker-alt"></i>
+                          <span class="pl-1">Cidade,</span>
+                          <span class="pl-1">UF</span>
+                        </span>
+                        <span class="flex column center span-transport">
+                          <i class="fas fa-truck icon-transport-false"></i>
+                        </span>
+                      </div>
+                      <div class="w-100 pl-2 flex equal-sizing flex-row">
+                        <span><i class="fas fa-spa"></i>
+                          <span class="pl-1">Tipo de cultivo</span>
+                        </span>
+                        <div class="flex center">
+                          <span>0,00</span>
+                          <span>/kg</span>
+                        </div>
+                        <label class="flex center">
+                          <span class="pr-1">Quantidade </span>
+                          <input class="w-25 pl-1" size="5" type="number" placeholder="4" disabled>
+                        </label>
+                        <span>Total do produto: 0,00</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-          </form>
+                  <div class="bb-1 pt-3 flex space-between fs-18">
+                    <span>Total do Pedido:</span>
+                    <span>R$ 0,00</span>
+                  </div>
+                  <div class="field border-top pt-4">
+                    <div class="control">
+                      <div class="rz-box-footer flex space-between">
+                        <button class="button rz-button is-rounded"
+                          th:onclick="return RealizarPedido.exibeConfirmacaoDeCancelamento('/minhas-listas')">Cancelar</button>
+                        <button class="button rz-button is-rounded" type="submit">Salvar</button>
+                      </div>
+                    </div>
+                  </div>
+            </form>
+          </div>
         </div>
-      </div>
+      </section>
     </section>
-  </section>
+  </div>
 </body>
+
 </html>

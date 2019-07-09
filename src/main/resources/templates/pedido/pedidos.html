@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
 
 <head>
@@ -8,40 +9,44 @@
 </head>
 
 <body>
-<section class="section">
-  <section class="container">
-    <h1 class="title centraliza-texto">Meus Pedidos</h1>
-    <div th:if="${mensagem}">
-      <script th:inline="javascript">
-        /*<![CDATA[*/
-        window.onload = function () {
-          window.Modal
-                  .success()
-                  .okAction("Ok")
-                  .show(/*[[${mensagem}]]*/)
-        };
+  <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor())">
+    Você não tem autorização para acessar essa página
+  </div>
+  <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).CLIENTE.getValor())">
+    <section class="section">
+      <section class="container">
+        <h1 class="title centraliza-texto">Meus Pedidos</h1>
+        <div th:if="${mensagem}">
+          <script th:inline="javascript">
+            /*<![CDATA[*/
+            window.onload = function () {
+              window.Modal
+                .success()
+                .okAction("Ok")
+                .show(/*[[${mensagem}]]*/)
+            };
         /*]]>*/
-      </script>
-    </div>
-    <div>
-      <p th:if="${pedidosCriados.isEmpty()}">Não há listas criadas.</p>
-    </div>
-    <div class="columns">
-      <div class="column is-12">
-        <div class="box rz-box">
-          <div class="rz-box-body px-0 pb-0">
-            <table class="rz-table striped">
-              <thead class="table-header">
-              <th>Pedidos</th>
-              <th>Data de Emissão</th>
-              </thead>
-              <tbody class="table-body">
-              <tr th:each="pedido: ${pedidosCriados}">
-                <td>
-                  <span class="flex start" th:text="${pedido.nome}"></span>
-                </td>
-                <td>
-                      <span type="date" class="form-control" th:value="${{pedido.criadoEm}}" th:text="${#dates.format(pedido.criadoEm, 'dd-MMM-yyyy')}">
+          </script>
+        </div>
+        <div>
+          <p th:if="${pedidosCriados.isEmpty()}">Não há listas criadas.</p>
+        </div>
+        <div class="columns">
+          <div class="column is-12">
+            <div class="box rz-box">
+              <div class="rz-box-body px-0 pb-0">
+                <table class="rz-table striped">
+                  <thead class="table-header">
+                    <th>Pedidos</th>
+                    <th>Data de Emissão</th>
+                  </thead>
+                  <tbody class="table-body">
+                    <tr th:each="pedido: ${pedidosCriados}">
+                      <td>
+                        <span class="flex start" th:text="${pedido.nome}"></span>
+                      </td>
+                      <td>
+                        <span type="date" class="form-control" th:value="${{pedido.criadoEm}}" th:text="${#dates.format(pedido.criadoEm, 'dd-MMM-yyyy')}">
                       </span>
                 </td>
                 <td class="flex end">
@@ -68,6 +73,7 @@
     </div>
   </section>
 </section>
+  </div>
 </body>
 
 </html>

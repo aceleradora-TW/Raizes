@@ -1,89 +1,98 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
-<body>
-  <section class="section">
-    <section class="container">
-      <h1 class="title">Cadastrar Produto</h1>
-      <h3 class="subtitle-color flex start">*Campos obrigatórios.</h3>
-      <div th:if="${mensagem} != null">
-        <span th:text="${mensagem}"></span>
-      </div>
-      <div th:if="${erros}">
-        <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
-      </div>
-      <div class="columns">
-        <div class="column is-12">
-          <div class="rz-box box">
-            <form id="formCadastraProduto" th:object="${produtoProdutor}" th:action="@{/produtos/cadastro}"
-              method="post">
-              <div class="flex center mb-4">
-                <div class="rz-box-body">
-                  <input type="hidden" th:field="*{produtor}" th:value="${produtoProdutor.produtor.id}">
 
-                  <div class="pt-5 flex flex-row equal-sizing">
-                    <div class="flex flex-row vertical-center">
-                      <label class="pr-2"><strong>Produto</strong></label>
-                      <div class="select">
-                        <select id="seletorDeProdutos" th:onchange="Produtos.atualizaUnidadeMedida(event)"
-                          name="produto">
-                          <option th:each="produto : ${produtos}" th:text="${produto.nome}" th:value="${produto.id}"
-                            th:attr="data-unidade-medida=${produto.unidadeMedida.codigo}">
-                          </option>
-                        </select>
+<body>
+  <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).CLIENTE.getValor())">
+    Você não tem autorização para acessar essa página
+  </div>
+  <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor())">
+    <section class="section">
+      <section class="container">
+        <h1 class="title">Cadastrar Produto</h1>
+        <h3 class="subtitle-color flex start">*Campos obrigatórios.</h3>
+        <div th:if="${mensagem} != null">
+          <span th:text="${mensagem}"></span>
+        </div>
+        <div th:if="${erros}">
+          <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
+        </div>
+        <div class="columns">
+          <div class="column is-12">
+            <div class="rz-box box">
+              <form id="formCadastraProduto" th:object="${produtoProdutor}" th:action="@{/produtos/cadastro}"
+                method="post">
+                <div class="flex center mb-4">
+                  <div class="rz-box-body">
+                    <input type="hidden" th:field="*{produtor}" th:value="${produtoProdutor.produtor.id}">
+
+                    <div class="pt-5 flex flex-row equal-sizing">
+                      <div class="flex flex-row vertical-center">
+                        <label class="pr-2"><strong>Produto</strong></label>
+                        <div class="select">
+                          <select id="seletorDeProdutos" th:onchange="Produtos.atualizaUnidadeMedida(event)"
+                            name="produto">
+                            <option th:each="produto : ${produtos}" th:text="${produto.nome}" th:value="${produto.id}"
+                              th:attr="data-unidade-medida=${produto.unidadeMedida.codigo}">
+                            </option>
+                          </select>
+                          <div class="help-block"></div>
+                        </div>
+                      </div>
+                      <div class="flex flex-row vertical-center">
+                        <label class="pr-2"> <strong>Tipo de Cultivo</strong></label>
+                        <div class="select">
+                          <select th:field="*{tipoDeCultivo}">
+                            <option th:each="cultivo : ${cultivos}" th:text="${cultivo.codigo}"
+                              th:value="${cultivo.name()}">
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="pt-5 flex flex-row equal-sizing">
+                      <div class="field vertical-center">
+                        <div class="flex flex-row vertical-center">
+                          <label class="pr-2"><strong>Quantidade</strong></label>
+                          <input class="input w-50" id="quantidadeEstoque" name="quantidadeEstoque" type="number"
+                            placeholder="Ex.: 15">
+                          <span class="my-2">/</span>
+                          <span class="my-2 unidadeMedida" id="unidadeMedida2"></span>
+                        </div>
+                        <div class="help-block"></div>
+                      </div>
+                      <div class="field vertical-center">
+                        <div class="flex flex-row vertical-center">
+                          <label class="pr-2"><strong>Valor</strong></label>
+                          <input class="input w-50" id="preco" th:field="*{preco}" placeholder="Ex.: 4.00">
+                          <span class="my-2">/</span>
+                          <span class="my-2 unidadeMedida" id="unidadeMedida"></span>
+                        </div>
                         <div class="help-block"></div>
                       </div>
                     </div>
-                    <div class="flex flex-row vertical-center">
-                      <label class="pr-2"> <strong>Tipo de Cultivo</strong></label>
-                      <div class="select">
-                        <select th:field="*{tipoDeCultivo}">
-                          <option th:each="cultivo : ${cultivos}" th:text="${cultivo.codigo}"
-                            th:value="${cultivo.name()}">
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class="pt-5 flex flex-row equal-sizing">
-                    <div class="field vertical-center">
-                      <div class="flex flex-row vertical-center">
-                        <label class="pr-2"><strong>Quantidade</strong></label>
-                        <input class="input w-50" id="quantidadeEstoque" name="quantidadeEstoque" type="number"
-                          placeholder="Ex.: 15">
-                        <span class="my-2">/</span>
-                        <span class="my-2 unidadeMedida" id="unidadeMedida2"></span>
-                      </div>
-                      <div class="help-block"></div>
-                    </div>
-                    <div class="field vertical-center">
-                      <div class="flex flex-row vertical-center">
-                        <label class="pr-2"><strong>Valor</strong></label>
-                        <input class="input w-50" id="preco" th:field="*{preco}"  placeholder="Ex.: 4.00">
-                        <span class="my-2">/</span>
-                        <span class="my-2 unidadeMedida" id="unidadeMedida"></span>
-                      </div>
-                      <div class="help-block"></div>
-                    </div>
+                    <div class="help-block"></div>
                   </div>
-
-                  <div class="help-block"></div>
                 </div>
-              </div>
-              <div class="rz-box-footer flex space-between">
-                <button class="button rz-button is-rounded"
-                  th:onclick="return Produtos.exibeConfirmacaoDeCancelamento('/produtos/visualizar-estoque')">Cancelar</button>
-                <button class="button rz-button is-rounded flex-end" type="submit">Salvar</button>
-              </div>
-            </form>
+                <div class="rz-box-footer flex space-between">
+                  <button class="button rz-button is-rounded"
+                    th:onclick="return Produtos.exibeConfirmacaoDeCancelamento('/produtos/visualizar-estoque')">Cancelar</button>
+                  <button class="button rz-button is-rounded flex-end" type="submit">Salvar</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </section>
-  </section>
+  </div>
 </body>
+
 </html>

@@ -1,61 +1,70 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
+
 <body>
-  <section class="section">
-    <section class="container">
-      <h1 class="title centraliza-texto">Minhas listas</h1>
-      <div th:if="${mensagem} != null">
-        <script th:inline="javascript">
-          /*<![CDATA[*/
-          window.onload = function () {
-            window.Modal
-              .success()
-              .okAction("Ok")
-              .show(/*[[${mensagem}]]*/)
-          };
+  <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor())">
+    Você não tem autorização para acessar essa página
+  </div>
+  <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).CLIENTE.getValor())">
+    <section class="section">
+      <section class="container">
+        <h1 class="title centraliza-texto">Minhas listas</h1>
+        <div th:if="${mensagem} != null">
+          <script th:inline="javascript">
+            /*<![CDATA[*/
+            window.onload = function () {
+              window.Modal
+                .success()
+                .okAction("Ok")
+                .show(/*[[${mensagem}]]*/)
+            };
           /*]]>*/
-        </script>
-        <span th:text="${mensagem}"></span>
-      </div>
-      <div class="columns">
-        <div class="column is-12">
-          <div class="box rz-box">
-            <div class="rz-box-body p-0">
-              <p class="centraliza-texto" th:if="${listasCriadas.isEmpty()}">Não há listas criadas.</p>
-              <ul class="rz-list striped">
-                <li class="rz-list-item row rx-0" th:each="lista: ${listasCriadas}">
-                  <span th:text="${lista.nome}"></span>
-                  <div class="mb-0 flex end buttons has-addons">
-                    <a class="button rz-button" th:href="@{/minhas-listas/{id}/editar/(id=${lista.id})}">
-                      <i class="fas fa-edit"></i>
-                    </a>
-                    <a class="button rz-button list-style" th:href="@{/pedidos/{listaId}/realizar-pedido/(listaId=${lista.id})}">
-                      <i class="fas fa-shopping-basket"></i>
-                    </a>
-                    <form name="deleteItemForm" th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}" method="post"
-                      th:onsubmit="return MinhasListas.exibeConfirmacaoDeExclusaoDaLista(event)">
-                      <button type="submit" class="button rz-button list-style">
-                        <i class="fas fa-trash-alt"></i>
-                      </button>
-                    </form>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="rz-box-footer flex space-between p-3">
-              <a href="/" class="button rz-button is-rounded">Voltar</a>
-              <a href="/minhas-listas/criar" class="button rz-button is-rounded">Nova Lista</a>
+          </script>
+          <span th:text="${mensagem}"></span>
+        </div>
+        <div class="columns">
+          <div class="column is-12">
+            <div class="box rz-box">
+              <div class="rz-box-body p-0">
+                <p class="centraliza-texto" th:if="${listasCriadas.isEmpty()}">Não há listas criadas.</p>
+                <ul class="rz-list striped">
+                  <li class="rz-list-item row rx-0" th:each="lista: ${listasCriadas}">
+                    <span th:text="${lista.nome}"></span>
+                    <div class="mb-0 flex end buttons has-addons">
+                      <a class="button rz-button" th:href="@{/minhas-listas/{id}/editar/(id=${lista.id})}">
+                        <i class="fas fa-edit"></i>
+                      </a>
+                      <a class="button rz-button list-style"
+                        th:href="@{/pedidos/{listaId}/realizar-pedido/(listaId=${lista.id})}">
+                        <i class="fas fa-shopping-basket"></i>
+                      </a>
+                      <form name="deleteItemForm" th:action="@{/minhas-listas/{id}/excluir(id=${lista.id})}"
+                        method="post" th:onsubmit="return MinhasListas.exibeConfirmacaoDeExclusaoDaLista(event)">
+                        <button type="submit" class="button rz-button list-style">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </form>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="rz-box-footer flex space-between p-3">
+                <a href="/" class="button rz-button is-rounded">Voltar</a>
+                <a href="/minhas-listas/criar" class="button rz-button is-rounded">Nova Lista</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      </div>
-    </section>
+  </div>
   </section>
+  </section>
+  </div>
 </body>
+
 </html>
