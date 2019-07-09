@@ -31,6 +31,8 @@ $(function () {
     window.CriarLista = CriarLista;
     window.EditaPedido = EditarPedido;
     window.Calcular = Calcular;
+    window.history.pushState("", "", "/login");
+
 
     CriarLista.validaFormulario();
     EditarLista.validaFormulario();
