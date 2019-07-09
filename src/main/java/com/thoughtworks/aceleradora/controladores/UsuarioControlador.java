@@ -56,7 +56,7 @@ public class UsuarioControlador {
 
 
     @GetMapping(value = "/seleciona-tipo-usuario")
-    public String selecionaUsuario(Model modelo){
+    public String selecionaUsuario(Model modelo) {
         return "registro/selecionaUsuario";
     }
 
@@ -64,7 +64,7 @@ public class UsuarioControlador {
     @PostMapping(value = "/registrar/cliente")
     public String registrarCliente(@ModelAttribute("formUsuario") Cliente cliente, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(System.out::println);
             return "registro/registrar/cliente";
         }
@@ -78,7 +78,7 @@ public class UsuarioControlador {
     public String registrarProdutor(@ModelAttribute("formUsuario") Produtor produtor, BindingResult bindingResult) {
 
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "registro/registrar/produtor";
         }
 
