@@ -69,10 +69,11 @@
                       <label class="flex center">
                         <span class="pr-1">Quantidade:</span>
                         <input class="w-25 pl-1" size="5"
-                          th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
-                          onekeyup="Calcular(event)" onclick="Calcular(event)" min=0 placeholder="Ex: 4">
-                        <label class="label">Total:R$
-                          <span class="resultado" id="resultado"></span>
+                               th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
+                               th:oninput="Calcular(event)" min=0 placeholder="Ex: 4" disabled>
+                        <label class="label">Total: R$<span class="resultado" id="resultado">
+                          /<span th:text="${produto.unidadeMedida.codigo}"></span>
+                        </span>
                         </label>
                       </label>
                     </div>
