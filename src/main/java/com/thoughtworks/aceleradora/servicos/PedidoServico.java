@@ -52,7 +52,6 @@ public class PedidoServico {
                         .getProdutoProdutor().getPreco()))
                 .collect(Collectors.toList())
         );
-
         return repositorio.save(pedido);
     }
 

@@ -180,6 +180,8 @@ public class PedidoControlador {
             return "/pedidos/editar-pedido";
         }
 
+        pedido.setCriadoEm(pedidoServico.encontraUm(pedido.getId()).getCriadoEm());
+
         pedidoServico.salvarPedido(pedido);
 
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
