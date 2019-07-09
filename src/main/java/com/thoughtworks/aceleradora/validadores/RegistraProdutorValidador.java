@@ -18,7 +18,9 @@ public class RegistraProdutorValidador implements ConstraintValidator<RegistraPr
         context.disableDefaultConstraintViolation();
         return nomeNaoEstaVazio(produtor, context)
                 && ruaNãoEstaVazia(produtor, context)
-                && bairroNãoEstaVazio(produtor, context);
+                && bairroNãoEstaVazio(produtor, context)
+                && emailNãoEstaVazio(produtor, context)
+                && telefoneNãoEstaVazio(produtor, context);
     }
 
     private boolean nomeNaoEstaVazio(Produtor produtor, ConstraintValidatorContext context) {
@@ -40,6 +42,22 @@ public class RegistraProdutorValidador implements ConstraintValidator<RegistraPr
     private boolean bairroNãoEstaVazio(Produtor produtor, ConstraintValidatorContext context) {
         if (produtor.getEndereco().getBairro().trim().isEmpty()) {
             context.buildConstraintViolationWithTemplate("insira o nome do seu bairro.")
+                    .addConstraintViolation();
+            return false;
+        }
+        return true;
+    }
+    private boolean emailNãoEstaVazio(Produtor produtor, ConstraintValidatorContext context) {
+        if (produtor.getEmail().trim().isEmpty()) {
+            context.buildConstraintViolationWithTemplate("insira o seu e-mail.")
+                    .addConstraintViolation();
+            return false;
+        }
+        return true;
+    }
+    private boolean telefoneNãoEstaVazio(Produtor produtor, ConstraintValidatorContext context) {
+        if (produtor.getContato().trim().isEmpty()) {
+            context.buildConstraintViolationWithTemplate("insira o seu telefone.")
                     .addConstraintViolation();
             return false;
         }
