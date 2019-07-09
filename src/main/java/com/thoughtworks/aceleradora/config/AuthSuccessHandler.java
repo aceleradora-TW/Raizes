@@ -31,10 +31,10 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
         SimpleGrantedAuthority tipoDeUsuario = (SimpleGrantedAuthority) authentication.getAuthorities().stream().findFirst().get();
 
         if (tipoDeUsuario.getAuthority().equals(TipoDeUsuario.PRODUTOR.getValor())) {
-            this.redirectStrategy.sendRedirect(request, response, "/");
+            this.redirectStrategy.sendRedirect(request, response, "/minhas-listas");
 
         } else if (tipoDeUsuario.getAuthority().equals(TipoDeUsuario.CLIENTE.getValor())) {
-            this.redirectStrategy.sendRedirect(request, response, "/registrar");
+            this.redirectStrategy.sendRedirect(request, response, "/minhas-listas/criar");
 
         } else {
             this.redirectStrategy.sendRedirect(request, response, "/registrar");

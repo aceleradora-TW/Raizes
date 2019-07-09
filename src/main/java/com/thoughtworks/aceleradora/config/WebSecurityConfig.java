@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .usernameParameter("email")
                 .passwordParameter("senha")
-                .defaultSuccessUrl("/")
+                .successHandler(authenticationSuccessHandler())
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
