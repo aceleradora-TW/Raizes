@@ -20,7 +20,8 @@ public class RegistraClienteValidador implements ConstraintValidator<RegistraCli
     @Override
     public boolean isValid(Cliente cliente, ConstraintValidatorContext context) {
         context.disableDefaultConstraintViolation();
-        return nomeNaoEstaVazio(cliente, context);
+        return nomeNaoEstaVazio(cliente, context)
+                && ruaNãoEstaVazia(cliente,context);
     }
 
     private boolean nomeNaoEstaVazio(Cliente cliente, ConstraintValidatorContext context) {
@@ -31,6 +32,14 @@ public class RegistraClienteValidador implements ConstraintValidator<RegistraCli
             return false;
         }
 
+        return true;
+    }
+    private boolean ruaNãoEstaVazia(Cliente cliente, ConstraintValidatorContext context) {
+        if (cliente.getEndereco().getRua().trim().isEmpty()) {
+            context.buildConstraintViolationWithTemplate("insira o nome da sua rua.")
+                    .addConstraintViolation();
+            return false;
+        }
         return true;
     }
 }
