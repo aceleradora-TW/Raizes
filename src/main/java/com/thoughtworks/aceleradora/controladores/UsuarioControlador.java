@@ -76,11 +76,10 @@ public class UsuarioControlador {
     }
 
     @PostMapping(value = "/registrar/produtor")
-    public String registrarProdutor(@ModelAttribute("formProdutor") Produtor produtor, BindingResult bindingResult) {
-
-
+    public String registrarProdutor(@ModelAttribute("formProd") @Valid Produtor produtor, BindingResult bindingResult, Model modelo) {
         if(bindingResult.hasErrors()) {
-            return "registro/registrar/produtor";
+            modelo.addAttribute("erros", bindingResult.getAllErrors());
+            return "registro/registrarProdutor";
         }
 
         registrarServico.salvarProdutor(produtor);

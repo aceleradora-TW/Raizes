@@ -13,6 +13,9 @@
           <div class="columns is-text-left">
             <div class="columns is-12">
               <div>
+                <div th:if="${erros}">
+                  <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
+                </div>
                 <div class="box">
                   <label for="possui_transporte">*Possui Transporte: </label>
                   <div class="select" id="possui_transporte">
