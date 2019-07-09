@@ -18,6 +18,7 @@ import EditaProdutoEstoque from './pages/editaProdutoEstoque'
 import Calcular from './components/calcularTotal'
 import validaCadastraProduto from './pages/validaCadastraProduto'
 import ValidaRegistraCliente from './pages/validaRegistraCliente'
+import ValidaRegistraProdutor from './pages/validaRegistraProdutor'
 
 $(function () {
 
@@ -34,6 +35,8 @@ $(function () {
     window.Calcular = Calcular;
     window.history.pushState("", "", "/login");
     window.ValidaRegistraCliente = ValidaRegistraCliente;
+    window.ValidaRegistraProdutor = ValidaRegistraProdutor;
+
 
     CriarLista.validaFormulario();
     EditarLista.validaFormulario();
@@ -44,5 +47,5 @@ $(function () {
     EditaProdutoEstoque.atualizaUnidadeMedida();
     validaCadastraProduto.validaPreco();
     ValidaRegistraCliente.validacaoFormRegistroCliente();
-
+    ValidaRegistraProdutor.validacaoFormRegistroProdutor();
 });

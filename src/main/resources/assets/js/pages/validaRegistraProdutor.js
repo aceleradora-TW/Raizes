@@ -1,10 +1,8 @@
 import Validator from '../utils/validator'
 
 export default {
-  validacaoFormRegistroCliente: () => {
-    const validador = new Validator('#registraCliente');
-    console.log("Validator",validador);
-
+  validacaoFormRegistroProdutor: () => {
+    const validador = new Validator('#registraProd');
 
     validador.setRulesForEachInputs({
       rules: {
