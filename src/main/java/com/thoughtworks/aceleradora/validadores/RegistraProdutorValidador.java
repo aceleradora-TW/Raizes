@@ -1,7 +1,5 @@
 package com.thoughtworks.aceleradora.validadores;
 
-import com.thoughtworks.aceleradora.dominio.Cliente;
-import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.dominio.Produtor;
 import com.thoughtworks.aceleradora.validadores.anotacoes.RegistraProdutorValida;
 
@@ -19,7 +17,8 @@ public class RegistraProdutorValidador implements ConstraintValidator<RegistraPr
     public boolean isValid(Produtor produtor, ConstraintValidatorContext context) {
         context.disableDefaultConstraintViolation();
         return nomeNaoEstaVazio(produtor, context)
-                && ruaNãoEstaVazia(produtor, context);
+                && ruaNãoEstaVazia(produtor, context)
+                && bairroNãoEstaVazio(produtor, context);
     }
 
     private boolean nomeNaoEstaVazio(Produtor produtor, ConstraintValidatorContext context) {
@@ -33,6 +32,14 @@ public class RegistraProdutorValidador implements ConstraintValidator<RegistraPr
     private boolean ruaNãoEstaVazia(Produtor produtor, ConstraintValidatorContext context) {
         if (produtor.getEndereco().getRua().trim().isEmpty()) {
             context.buildConstraintViolationWithTemplate("insira o nome da sua rua.")
+                    .addConstraintViolation();
+            return false;
+        }
+        return true;
+    }
+    private boolean bairroNãoEstaVazio(Produtor produtor, ConstraintValidatorContext context) {
+        if (produtor.getEndereco().getBairro().trim().isEmpty()) {
+            context.buildConstraintViolationWithTemplate("insira o nome do seu bairro.")
                     .addConstraintViolation();
             return false;
         }
