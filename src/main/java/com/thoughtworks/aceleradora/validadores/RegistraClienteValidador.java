@@ -22,7 +22,10 @@ public class RegistraClienteValidador implements ConstraintValidator<RegistraCli
         context.disableDefaultConstraintViolation();
         return nomeNaoEstaVazio(cliente, context)
                 && ruaNãoEstaVazia(cliente,context)
-                && bairroNãoEstaVazio(cliente, context);
+                && bairroNãoEstaVazio(cliente, context)
+                && emailNãoEstaVazio(cliente, context)
+                && telefoneNãoEstaVazio(cliente, context)
+                && senhaNãoEstaVazia(cliente, context);
     }
 
     private boolean nomeNaoEstaVazio(Cliente cliente, ConstraintValidatorContext context) {
@@ -46,6 +49,30 @@ public class RegistraClienteValidador implements ConstraintValidator<RegistraCli
     private boolean bairroNãoEstaVazio(Cliente cliente, ConstraintValidatorContext context) {
         if (cliente.getEndereco().getBairro().trim().isEmpty()) {
             context.buildConstraintViolationWithTemplate("insira o nome do seu bairro.")
+                    .addConstraintViolation();
+            return false;
+        }
+        return true;
+    }
+    private boolean emailNãoEstaVazio(Cliente cliente, ConstraintValidatorContext context) {
+        if (cliente.getEmail().trim().isEmpty()) {
+            context.buildConstraintViolationWithTemplate("insira o seu e-mail.")
+                    .addConstraintViolation();
+            return false;
+        }
+        return true;
+    }
+    private boolean telefoneNãoEstaVazio(Cliente cliente, ConstraintValidatorContext context) {
+        if (cliente.getContato().trim().isEmpty()) {
+            context.buildConstraintViolationWithTemplate("insira o seu telefone.")
+                    .addConstraintViolation();
+            return false;
+        }
+        return true;
+    }
+    private boolean senhaNãoEstaVazia(Cliente cliente, ConstraintValidatorContext context) {
+        if (cliente.getSenha().trim().isEmpty()) {
+            context.buildConstraintViolationWithTemplate("crie uma senha.")
                     .addConstraintViolation();
             return false;
         }
