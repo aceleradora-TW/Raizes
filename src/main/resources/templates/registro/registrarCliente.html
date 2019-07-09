@@ -12,13 +12,12 @@
     <div>
       <div class="container card-content valign center">
         <h1 class="title titulo-h1">Formulário de Registro do Raízes</h1>
-        <form th:action="@{/registrar/cliente}" th:object="${formUsuario}" method="post" id="registraCliente">
+        <form th:action="@{/registrar/cliente}" th:object="${formCliente}" method="post" id="registraCliente">
           <div class="columns is-text-left">
             <div class="columns is-12">
               <div>
                 <div class="box">
                   <div class="field">
-                    <label><input th:value="${tipoUsuario.CLIENTE}" th:field="*{tipoDeUsuario}" hidden></label>
                     <label for="nome">*Nome Completo:</label>
                     <input class="input input-fancy borda-arredondada" type="text" id="nome" th:field="*{nome}"
                     placeholder="Ex:Maria Silva">
@@ -27,7 +26,7 @@
                 </div>
                 <div class="box">
                   <div class="columns">
-                    <div class="column is-half field"> <label for="rua">*Rua:</label>
+                    <div class="column is-half field"> <label for="endereco">*Rua:</label>
                       <input class="input input-fancy borda-arredondada" type="text" id="endereco"
                         th:field="*{endereco.rua}" placeholder="Ex: Rua João da Silva" th:name="rua">
                       <div class="help-block"></div>
@@ -59,7 +58,7 @@
                         <div class="select">
                           <select th:field="*{endereco.cidade.nome}">
                             <option th:each="cidades : ${cidade}" th:text="${cidades.nome}" th:value="${cidades.nome}"
-                              th:name="nome">
+                              th:name="nome" id="cidade">
                             </option>
                           </select>
                         </div>
@@ -71,7 +70,7 @@
                         <div class="select">
                           <select th:field="*{endereco.cidade.estado.uf}">
                             <option th:each="estados : ${estado}" th:text="${estados.uf}" th:value="${estados.uf}"
-                              th:name="uf" th:id="uf">
+                              th:name="uf" id="uf">
                             </option>
                           </select>
                         </div>

@@ -36,8 +36,7 @@ public class UsuarioControlador {
 
     @GetMapping(value = "/registrar/cliente")
     public String registrarCliente(Model model) {
-        model.addAttribute("formUsuario", new Cliente());
-        model.addAttribute("tipoUsuario", TipoDeUsuario.CLIENTE);
+        model.addAttribute("formCliente", new Cliente());
         model.addAttribute("cidade", cidadeRepositorio.findAll());
         model.addAttribute("estado", estadoRepositorio.findAll());
 
@@ -46,8 +45,7 @@ public class UsuarioControlador {
 
     @GetMapping(value = "/registrar/produtor")
     public String registrarProdutor(Model model) {
-        model.addAttribute("formUsuario", new Produtor());
-        model.addAttribute("tipoUsuario", TipoDeUsuario.PRODUTOR);
+        model.addAttribute("formProd", new Produtor());
         model.addAttribute("cidade", cidadeRepositorio.findAll());
         model.addAttribute("estado", estadoRepositorio.findAll());
 

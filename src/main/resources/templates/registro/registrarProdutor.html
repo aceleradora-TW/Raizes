@@ -10,14 +10,14 @@
     <div>
       <div class="container card-content valign center">
         <h1 class="title titulo-h1">Formulário de Registro do Raízes</h1>
-        <form th:action="@{/registrar/produtor}" th:object="${formUsuario}" method="post" id="registraProd">
+        <form th:action="@{/registrar/produtor}" th:object="${formProd}" method="post" id="registraProd">
           <div class="columns is-text-left">
             <div class="columns is-12">
               <div>
                 <div class="box">
                   <label for="possui_transporte">*Possui Transporte: </label>
                   <div class="select">
-                    <select th:field="${formUsuario.possuiTransporte}">
+                    <select th:field="${formProd.possuiTransporte}">
                       <option th:name="possui_transporte" th:value="true">Sim</option>
                       <option th:name="possui_transporte" th:value="false">Não</option>
                     </select>
