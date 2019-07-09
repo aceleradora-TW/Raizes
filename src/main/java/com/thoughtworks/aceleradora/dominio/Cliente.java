@@ -1,5 +1,7 @@
 package com.thoughtworks.aceleradora.dominio;
 
+import com.thoughtworks.aceleradora.validadores.anotacoes.RegistraClienteValida;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -10,6 +12,7 @@ import java.util.Objects;
 @Entity
 @DiscriminatorValue(TipoDeUsuario.Valores.CLIENTE)
 @Table(name = "clientes")
+@RegistraClienteValida
 public class Cliente extends Usuario {
 
     @OneToMany(mappedBy = "cliente")

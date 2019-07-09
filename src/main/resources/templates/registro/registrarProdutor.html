@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.w3.org/1999/xhtml">
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
@@ -16,7 +15,7 @@
               <div>
                 <div class="box">
                   <label for="possui_transporte">*Possui Transporte: </label>
-                  <div class="select">
+                  <div class="select" id="possui_transporte">
                     <select th:field="${formProd.possuiTransporte}">
                       <option th:name="possui_transporte" th:value="true">Sim</option>
                       <option th:name="possui_transporte" th:value="false">Não</option>
@@ -64,7 +63,7 @@
                         <div class="select">
                           <select th:field="*{endereco.cidade.nome}">
                             <option th:each="cidades : ${cidade}" th:text="${cidades.nome}" th:value="${cidades.nome}"
-                              th:name="nome">
+                              th:name="nome" id="cidade">
                             </option>
                           </select>
                         </div>
@@ -76,7 +75,7 @@
                         <div class="select">
                           <select th:field="*{endereco.cidade.estado.uf}">
                             <option th:each="estados : ${estado}" th:text="${estados.uf}" th:value="${estados.uf}"
-                              th:name="uf" th:id="uf">
+                              th:name="uf" id="uf">
                             </option>
                           </select>
                         </div>
