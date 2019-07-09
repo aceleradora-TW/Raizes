@@ -6,7 +6,6 @@ import com.thoughtworks.aceleradora.repositorios.ProdutoRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProdutoServico {
@@ -18,11 +17,11 @@ public class ProdutoServico {
     }
 
     public List<Produto> pegarTodosPorOrdemAlfabetica() {
-            return repositorio.findAllByOrderByNome();
+        return repositorio.findAllByOrderByNome();
     }
 
-    public Produto salvar (Produto produto) {
+    public Produto salvar(Produto produto) {
         return repositorio.save(produto);
     }
-    
+
 }
