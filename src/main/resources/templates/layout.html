@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-br" th:fragment="layout(title, content)" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" th:fragment="layout(title, content)" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="UTF-8">
@@ -30,6 +31,13 @@
           <img src="/images/logo.png">
         </a>
       </div>
+      <a th:href="@{/logout}">
+        <button id="botaoLogout">
+          <div class="navbar-end" sec:authorize="isAuthenticated()">
+            Logout
+          </div>
+        </button>
+      </a>
     </nav>
     <nav class="m-2 ml-5 breadcrumb has-arrow-separator" aria-label="breadcrumbs">
       <ul>
