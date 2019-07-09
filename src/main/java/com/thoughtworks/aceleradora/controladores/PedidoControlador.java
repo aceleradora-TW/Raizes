@@ -184,7 +184,7 @@ public class PedidoControlador {
 
         pedidoServico.salvarPedido(pedido);
 
-        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido alterado com sucesso");
 
         return "redirect:/pedidos";
     }
