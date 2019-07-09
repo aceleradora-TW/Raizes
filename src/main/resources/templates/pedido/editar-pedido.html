@@ -19,11 +19,6 @@
               <h3 class="flex start fs-22 pt-3 pl-2" th:text="${produto.nome}"></h3>
               <div class="bigbox">
                 <div th:each="produtoProdutor: ${produtoProdutoresPorProduto.get(produto)}">
-                  <label>
-                  <span class="flex end mb-2">
-                    <i class="fas fa-times"></i>
-                  </span>
-                  </label>
                   <input th:value="${pedido.criadoEm}" th:name="criado_em" hidden>
                   <div class="box" id="inputRadio">
                     <div class="w-75 flex equal-sizing flex-row">
