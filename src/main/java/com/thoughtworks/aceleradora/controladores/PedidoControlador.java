@@ -1,8 +1,18 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.Breadcrumb;
+import com.thoughtworks.aceleradora.dominio.MinhaLista;
+import com.thoughtworks.aceleradora.dominio.Pedido;
+import com.thoughtworks.aceleradora.dominio.PedidoProdutoProdutor;
+import com.thoughtworks.aceleradora.dominio.Produto;
+import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
-import com.thoughtworks.aceleradora.servicos.*;
+import com.thoughtworks.aceleradora.servicos.EnderecoServico;
+import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
+import com.thoughtworks.aceleradora.servicos.PedidoServico;
+import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
+import com.thoughtworks.aceleradora.servicos.ProdutoServico;
+import com.thoughtworks.aceleradora.servicos.ProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +27,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/pedidos")
@@ -64,7 +75,7 @@ public class PedidoControlador {
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Visualizar Pedido", "/pedidos");
 
-        String nomePedido = pedidoServico.encontraUm(id).get().getNome();
+        String nomePedido = pedidoServico.encontraUm(id).getNome();
         modelo.addAttribute("pedido", nomePedido);
         modelo.addAttribute("produtores", pedidoServico.agrupaProdutosPorProdutor(id));
 
@@ -80,7 +91,7 @@ public class PedidoControlador {
             MinhaLista lista = minhaListaServico.encontraUm(listaId);
 
             Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
-                    produtoProdutorServico.organizarProdutosProdutoresDaListadoCliente(lista);
+                    produtoProdutorServico.pegaProdutoProdutorPorProdutos(lista.getProdutos());
 
             modelo.addAttribute("produtos", lista.getProdutos());
             modelo.addAttribute("pedido", new Pedido());
@@ -127,14 +138,54 @@ public class PedidoControlador {
         return "redirect:/pedidos";
     }
 
-    @GetMapping("/editar-pedido")
-    public String editarProdutoPedido(Breadcrumb breadcrumb) {
+    @GetMapping("/{id}/editar-pedido")
+    public String editarProdutoPedido(@PathVariable("id") Long id, Breadcrumb breadcrumb, Model modelo) {
 
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Editar Pedido", "/editar-pedido");
 
+        Pedido pedido = pedidoServico.encontraUm(id);
+
+        modelo.addAttribute("produtoProdutoresPorProduto", produtoProdutorServico
+                .pegaProdutoProdutorPorProdutos(pedido
+                        .getPedidosProdutosProdutores()
+                        .stream()
+                        .map(pedidoProdutoProdutor -> pedidoProdutoProdutor.getProdutoProdutor().getProduto())
+                        .collect(Collectors.toList())));
+        modelo.addAttribute("produtoProdutoresDoPedido", pedido
+                .getPedidosProdutosProdutores()
+                .stream()
+                .map(PedidoProdutoProdutor::getProdutoProdutor)
+                .collect(Collectors.toList()));
+        modelo.addAttribute("pedido", pedido);
+
         return "pedido/editar-pedido";
 
     }
+
+    @PostMapping("/{id}/editar-pedido")
+    public String editarProdutoPedido(Pedido pedido,
+                                      Breadcrumb breadcrumb,
+                                      Model modelo,
+                                      BindingResult resultadoValidacao,
+                                      RedirectAttributes redirecionamentoDeAtributos) {
+        breadcrumb
+                .aproveitar(partesComunsDoBreadCrumb)
+                .pagina("Pedidos", "/pedidos")
+                .pagina("Realizar pedido", "/pedidos");
+
+        if(resultadoValidacao.hasErrors()) { // Sem @Valid isso não vai fazer nada.
+            modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
+            return "/pedidos/editar-pedido";
+        }
+
+        pedidoServico.salvarPedido(pedido);
+
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
+
+        return "redirect:/pedidos";
+    }
+
+
 }
