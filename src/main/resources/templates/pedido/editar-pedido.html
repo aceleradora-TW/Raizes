@@ -11,27 +11,28 @@
     <section class="container">
       <div class="columns">
         <div class="column is-12">
-          <form class="rz-form" id="formEditarPedido" th:object="${pedidos}" th:action="@{/pedidos/{id}/editar-pedido(id=${pedidos.get().id})}"
+          <form class="rz-form" id="formEditarPedido" th:object="${pedido}" th:action="@{/pedidos/{id}/editar-pedido(id=${pedido.id})}"
             method="post">
-            <h1 class="title centraliza-texto" th:text="${pedidos.get().nome}"></h1>
-            <input type="hidden" th:value="${pedidos.get().nome}" th:name="nome">
-            <div th:each="produto, index : ${produtoresDeProdutos.keySet()}">
+            <h1 class="title centraliza-texto" th:text="${pedido.nome}"></h1>
+            <input type="hidden" th:value="${pedido.nome}" th:name="nome">
+            <div th:each="produto, index : ${produtoProdutoresPorProduto.keySet()}">
               <h3 class="flex start fs-22 pt-3 pl-2" th:text="${produto.nome}"></h3>
               <div class="bigbox">
-                <div th:each="produtoProdutor: ${produtoresDeProdutos.get(produto)}">
+                <div th:each="produtoProdutor: ${produtoProdutoresPorProduto.get(produto)}">
                   <label>
                   <span class="flex end mb-2">
                     <i class="fas fa-times"></i>
                   </span>
                   </label>
-                  <input th:value="${pedidos.get().getCriadoEm()}" th:name="criado_em" hidden>
+                  <input th:value="${pedido.getCriadoEm()}" th:name="criado_em" hidden>
                   <div class="box" id="inputRadio">
                     <div class="w-75 flex equal-sizing flex-row">
                       <span class="bigcheck">
-                       <input type="radio" th:id="ProdutoProdutor + ${produtoProdutor.id}"
-                              th:field="*{pedidosProdutosProdutores[__${index.index}__].produtoProdutor}"
-                              th:value="${produtoProdutor.id}"
-                              th:checked="${pedidos.get().pedidosProdutosProdutores.contains(produtoProdutor)}">
+                        <input type="radio"
+                               th:checked="${produtoProdutoresDoPedido.contains(produtoProdutor)}"
+                               th:id="ProdutoProdutor + ${produtoProdutor.id}"
+                               th:name="pedidosProdutosProdutores[+${index.index}+].produtoProdutor"
+                               th:value="${produtoProdutor.id}">
 
                         <label class="radio" th:for="ProdutoProdutor + ${produtoProdutor.id}">
                           <span class="check"><i class="far fa-check-circle"></i></span>

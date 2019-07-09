@@ -25,9 +25,12 @@ public class PedidoServico {
         this.clienteServico = clienteServico;
     }
 
-    public Optional<Pedido> encontraUm(Long id) {
-        Optional<Pedido> pedidos = repositorio.findById(id);
-        return pedidos;
+    public Pedido encontraUm(Long id) {
+        try {
+            return repositorio.findById(id).get();
+        } catch(NullPointerException e) { // Mudar pra uma exeção personalizada
+            throw e;
+        }
     }
 
     public List<Pedido> pegarPedidos() {
@@ -39,8 +42,8 @@ public class PedidoServico {
     }
 
     public Pedido salvarPedido(Pedido pedido) {
-
         pedido.setCliente(clienteServico.encontraCliente());
+
         pedido.setPedidosProdutosProdutores(pedido
                 .getPedidosProdutosProdutores()
                 .stream()
@@ -49,28 +52,14 @@ public class PedidoServico {
                         .getProdutoProdutor().getPreco()))
                 .collect(Collectors.toList())
         );
+
         return repositorio.save(pedido);
     }
 
-    public Pedido editaPedido(Pedido pedido) {
+    public Map<Produtor, List<ProdutoProdutor>> agrupaProdutosPorProdutor(Long idPedido) { // Esse método deveria viver dentro de ProdutoProdutorServico e receber uma Lista de Produtos
+        Pedido pedido = encontraUm(idPedido);
 
-        pedido.setCliente(clienteServico.encontraCliente());
-        pedido.setPedidosProdutosProdutores(pedido
-                .getPedidosProdutosProdutores()
-                .stream()
-                .filter(pedidoProdutoProdutor -> pedidoProdutoProdutor.getProdutoProdutor() != null)
-                .peek(pedidoProdutoProdutor -> pedidoProdutoProdutor.setValor(pedidoProdutoProdutor
-                        .getProdutoProdutor().getPreco()))
-                .collect(Collectors.toList())
-        );
-        pedido.setCriadoEm(encontraUm(pedido.getId()).get().getCriadoEm());
-        return repositorio.save(pedido);
-    }
-
-    public Map<Produtor, List<ProdutoProdutor>> agrupaProdutosPorProdutor(Long idPedido) {
-        Optional<Pedido> pedido = encontraUm(idPedido);
-
-        List<PedidoProdutoProdutor> pedidosProdutosProdutoresDoPedido = pedido.get().getPedidosProdutosProdutores();
+        List<PedidoProdutoProdutor> pedidosProdutosProdutoresDoPedido = pedido.getPedidosProdutosProdutores();
 
         List<ProdutoProdutor> produtoProdutor = new ArrayList<>();
 
@@ -82,35 +71,5 @@ public class PedidoServico {
                 = produtoProdutor.stream()
                 .collect(Collectors.groupingBy(ProdutoProdutor::getProdutor));
         return byProdutor;
-    }
-
-
-    public Map<Produto, List<ProdutoProdutor>> agrupaProdutoresPorProdutos(Long idPedido) {
-
-        Optional<Pedido> pedido = encontraUm(idPedido);
-
-        List<PedidoProdutoProdutor> pedidoProdutoProdutoresDoPedido = pedido.get().getPedidosProdutosProdutores();
-
-        List<ProdutoProdutor> produtoProdutores = new ArrayList<>();
-
-        List<Produto> produtos = new ArrayList<>();
-
-        for (int i = 0; i < pedidoProdutoProdutoresDoPedido.size(); i++) {
-            produtos.add(pedidoProdutoProdutoresDoPedido.get(i).getProdutoProdutor().getProduto());
-        }
-
-        List<ProdutoProdutor> TodosProdProd = produtoProdutorRepositorio.findAll();
-
-        for (int i =0; i< TodosProdProd.size(); i++){
-            if(produtos.contains(TodosProdProd.get(i).getProduto())){
-                produtoProdutores.add(TodosProdProd.get(i));
-            }
-        }
-
-        Map<Produto, List<ProdutoProdutor>> byProduto
-                = produtoProdutores
-                .stream()
-                .collect(Collectors.groupingBy(ProdutoProdutor::getProduto));
-        return byProduto;
     }
 }
