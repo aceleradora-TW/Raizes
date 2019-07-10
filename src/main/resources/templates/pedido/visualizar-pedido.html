@@ -10,16 +10,16 @@
       <h1 class="title centraliza-texto" th:text="${pedido}"></h1>
       <div class="columns">
        <div class="column is-12">
-        <span th:each="produtor: ${produtores.keySet()}">
+        <span th:each="produtor, index: ${produtores.keySet()}">
             <div class="flex center box rz-box mb-4" id="visualizar">
               <div class="w-50 field">
                 <div class="control">
                   <h4 class="pt-3 pb-2 fs-18"><b th:text="${produtor.nome}"></b></h4>
-                  <span th:each="pedido: ${pedidoProdutoProdutores}">
+                  <span  th:each="pedido: ${pedidoProdutoProdutores}">
                   <div id="calculo">
                       <span class="flex space-between" id="spanCalcula">
                       <span class="pl-5 w-25" th:text="${pedido.produtoProdutor.produto.nome}"></span>
-                      <span th:text="${pedido.quantidadePedido}" class="quantidadePedido"></span>
+                      <span th:text="${pedido.quantidadePedido}" id="quantidadePedido"class="quantidadePedido"></span>
                       <input type="hidden" class="flex start w-25" id="valor" th:value="${pedido.valor}"/> 
                       <span class="precoCadaProduto" id="precoCadaProduto"></span>                     
                   </span>
@@ -52,8 +52,7 @@
                         <span class="pl-1" th:text="${produtor.email}"></span>
                       </div>
                     </div>
-                  </div>
-                
+                  </div>                
                 </div>
               </div>
             </div>

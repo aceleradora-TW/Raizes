@@ -28,12 +28,12 @@ export default {
 
     const preco = $('#visualizar').find('#valor').val();
     console.log("Preco",preco);
-    const quantidadePedido = $('#visualizar').find('.quantidadePedido').text();
+    const quantidadePedido = $('#visualizar').find('#quantidadePedido').text();
     console.log("Quantidade",quantidadePedido);
 
     const precoCadaProduto = preco * quantidadePedido;
     console.log("precoCadaProduto",precoCadaProduto);
-    $('#visualizar').find('.precoCadaProduto').text(parseFloat(precoCadaProduto));
+    $('#visualizar').find('#precoCadaProduto').text("R$ "+ duasCasasAposVirgula(precoCadaProduto));
     // const totalProdutor = preco * quantidadePedido;
 
 

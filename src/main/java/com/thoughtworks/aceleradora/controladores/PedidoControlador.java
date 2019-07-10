@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -65,9 +62,10 @@ public class PedidoControlador {
                 .pagina("Visualizar Pedido", "/pedidos");
 
         String nomePedido = pedidoServico.encontraUm(id).get().getNome();
+        List<PedidoProdutoProdutor> pedidoProdutoProdutores = pedidoServico.encontraUm(id).get().getPedidosProdutosProdutores();
         modelo.addAttribute("pedido", nomePedido);
         modelo.addAttribute("produtores", pedidoServico.agrupaProdutosPorProdutor(id));
-        modelo.addAttribute("pedidoProdutoProdutores", pedidoServico.encontraUm(id).get().getPedidosProdutosProdutores());
+        modelo.addAttribute("pedidoProdutoProdutores", pedidoProdutoProdutores);
 
         return "pedido/visualizar-pedido";
     }
@@ -137,5 +135,11 @@ public class PedidoControlador {
 
         return "pedido/editar-pedido";
 
+    }
+
+    @ResponseBody
+    @GetMapping("/teste")
+    public Map<Produtor, List<ProdutoProdutor>> visualizar(){
+        return pedidoServico.agrupaProdutosPorProdutor(13L);
     }
 }
