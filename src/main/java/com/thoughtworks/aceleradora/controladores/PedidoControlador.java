@@ -7,6 +7,7 @@ import com.thoughtworks.aceleradora.dominio.PedidoProdutoProdutor;
 import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
+import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.EnderecoServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
@@ -100,20 +101,17 @@ public class PedidoControlador {
 
         try{
             MinhaLista lista = minhaListaServico.encontraUm(listaId);
-
             Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
                     produtoProdutorServico.pegaProdutoProdutorPorProdutos(lista.getProdutos());
 
             modelo.addAttribute("produtos", lista.getProdutos());
             modelo.addAttribute("pedido", new Pedido());
-
             modelo.addAttribute("nomeLista", lista.getNome());
-
             modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
 
             return "pedido/realizar-pedido";
-        }catch (ListaNaoEncontradaExcecao e){
-            redirecionamentoDeAtributos.addFlashAttribute("mensagem",e.getMessage());
+        } catch (PedidoNaoEncontradoExcecao e){
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
             return "redirect:/minhas-listas/";
         }
