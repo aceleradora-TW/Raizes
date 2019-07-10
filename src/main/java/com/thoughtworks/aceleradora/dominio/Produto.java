@@ -17,7 +17,6 @@ public class Produto {
 
     @ManyToOne
     @JoinColumn(name = "id_categorias")
-    @JsonIgnore
     private Categoria categoria;
 
     @Enumerated(EnumType.STRING)
