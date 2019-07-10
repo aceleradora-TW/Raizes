@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.servicos;
 
 import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.repositorios.PedidoRepositorio;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class PedidoServico {
     public Pedido encontraUm(Long id) {
         try {
             return repositorio.findById(id).get();
-        } catch(NullPointerException e) { // Mudar pra uma exeção personalizada
+        } catch(PedidoNaoEncontradoExcecao e) {
             throw e;
         }
     }
