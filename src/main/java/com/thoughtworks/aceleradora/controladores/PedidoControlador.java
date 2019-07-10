@@ -7,6 +7,7 @@ import com.thoughtworks.aceleradora.dominio.PedidoProdutoProdutor;
 import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
+import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.servicos.EnderecoServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.PedidoServico;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -82,6 +84,15 @@ public class PedidoControlador {
         return "pedido/visualizar-pedido";
     }
 
+    @PostMapping("/{id}/excluir")
+    public String removerPedido(@PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
+
+        pedidoServico.removerPedido(id);
+        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido excluído com sucesso!");
+
+        return "redirect:/pedidos";
+    }
+
     @GetMapping("/{listaId}/realizar-pedido")
     public String listaProdutoresDeProdutos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo,RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
@@ -109,15 +120,6 @@ public class PedidoControlador {
 
     }
 
-    @PostMapping("/{id}/excluir")
-    public String removerPedido(@PathVariable("id") Long id, RedirectAttributes redirecionamentoDeAtributos) {
-
-        pedidoServico.removerPedido(id);
-        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido excluído com sucesso!");
-
-        return "redirect:/pedidos";
-    }
-
     @PostMapping("/realizar-pedido")
     public String salvarPedido(@Valid Pedido pedido, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos,
                                Breadcrumb breadcrumb) {
@@ -126,16 +128,22 @@ public class PedidoControlador {
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Realizar Pedido", "/pedidos");
 
-        if(resultadoValidacao.hasErrors()) {
-            modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
-            return "pedido/realizar-pedido";
+        try {
+            if (resultadoValidacao.hasErrors()) {
+                modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
+                return "pedido/realizar-pedido";
+            }
+
+            pedidoServico.salvarPedido(pedido);
+
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
+
+            return "redirect:/pedidos";
+        } catch (PedidoNaoSalvoExcecao | NullPointerException e) {
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
+            return "redirect:/minhas-listas";
         }
 
-        pedidoServico.salvarPedido(pedido);
-
-        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
-
-        return "redirect:/pedidos";
     }
 
     @GetMapping("/{id}/editar-pedido")
