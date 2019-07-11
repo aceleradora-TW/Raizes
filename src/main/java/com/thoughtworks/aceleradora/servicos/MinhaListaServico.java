@@ -34,6 +34,10 @@ public class MinhaListaServico {
         return repositorio.findAll();
     }
 
+    public List<MinhaLista> pegarListasCriadasPorId(Long id) {
+        return repositorio.findAllById(id);
+    }
+
     public void removerListaCriada(Long idLista) {
          repositorio.deleteById(idLista);
     }

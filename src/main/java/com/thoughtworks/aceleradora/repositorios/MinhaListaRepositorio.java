@@ -12,6 +12,7 @@ public interface MinhaListaRepositorio extends CrudRepository<MinhaLista, Long> 
     Optional<MinhaLista> findByNome(String nome);
 
     List<MinhaLista> findAll();
+    List<MinhaLista> findAllById(Long id);
 
     Optional<MinhaLista> findById(Long id);
 
