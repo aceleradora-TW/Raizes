@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-br" th:fragment="layout(title, content)" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" th:fragment="layout(title, content)" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="UTF-8">
@@ -30,6 +31,12 @@
           <img src="/images/logo.png">
         </a>
       </div>
+            <div class="navbar-end" sec:authorize="isAuthenticated()">
+              <a th:href="@{/logout}"><button>
+              Logout
+              </button>
+              </a>
+            </div>
     </nav>
     <nav class="m-2 ml-5 breadcrumb has-arrow-separator" aria-label="breadcrumbs">
       <ul>
