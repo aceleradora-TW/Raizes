@@ -13,6 +13,8 @@ export default {
 
     totalProduto.parents('#inputRadio').find('#resultado').text(duasCasasAposVirgula(resultado));
     const resultados = $('.resultado')
+    console.log("Resultados",resultados);
+    
 
     let totalPedido = 0;
     resultados.each((indice, campoResultado) => {
@@ -24,25 +26,34 @@ export default {
   },
 
   totalVisualizar: () => {
-    
 
-    const preco = $('#visualizar').find('#valor').val();
+    const totalProduto = $('#visualizar').find('#calculo');
+
+    const preco = totalProduto.find('#valor').val();
     console.log("Preco",preco);
-    const quantidadePedido = $('#visualizar').find('#quantidadePedido').text();
+    const quantidadePedido =totalProduto.find('#quantidadePedido').text();
     console.log("Quantidade",quantidadePedido);
-
     const precoCadaProduto = preco * quantidadePedido;
     console.log("precoCadaProduto",precoCadaProduto);
-    $('#visualizar').find('#precoCadaProduto').text("R$ "+ duasCasasAposVirgula(precoCadaProduto));
-    // const totalProdutor = preco * quantidadePedido;
 
 
-    // console.log(totalProdutor);
 
-    // calculo.parents('#visualizar').find('#totalProdutor').text(duasCasasAposVirgula(totalProdutor));
+    totalProduto.parents('#visualizar').find('#precoCadaProduto').text(duasCasasAposVirgula(precoCadaProduto));
+    const precos = $('.precoCadaProduto');
+    console.log("Precos",precos);
+    
 
-    const total = $('#valorTotalPedido').text("100");
-    console.log("Total",total);
+    let total = 0;
+    precos.each((indice, campoResultado) => {
+      let valor = $(campoResultado).text() || 0;
+      console.log("Valor",valor);
+      total = total + parseFloat(valor);
+      console.log("Total",total);
+    });
+    
 
+    $('#valorTotalPedido').text(duasCasasAposVirgula(total))
+
+    
   }
 }

@@ -19,8 +19,8 @@
                   <div id="calculo" th:if="${pedido.produtoProdutor.produtor.nome == produtor.nome}">
                       <span class="flex space-between" id="spanCalcula">
                       <span class="pl-5 w-25" th:text="${pedido.produtoProdutor.produto.nome}"></span>
-                      <span th:text="${pedido.quantidadePedido}" id="quantidadePedido"class="quantidadePedido"></span>
-                      <input type="hidden" class="flex start w-25" id="valor" th:value="${pedido.valor}"/>
+                      <span th:text="${pedido.quantidadePedido}" th:value="${pedido.quantidadePedido}" id="quantidadePedido" class="quantidadePedido"></span>
+                      <input type="hidden" class="flex start w-25 valor" id="valor" th:value="${pedido.valor}"/>
                       <span class="precoCadaProduto" id="precoCadaProduto"></span>                     
                   </span>
                   </div> 
