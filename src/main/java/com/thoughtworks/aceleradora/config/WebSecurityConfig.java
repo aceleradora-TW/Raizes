@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -37,24 +38,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/js/**", "/css/**", "/images/**", "/assets/**", "/registrar/**", "/seleciona-tipo-usuario/**")
-                .permitAll()
-                .antMatchers("/produtor").hasAuthority(TipoDeUsuario.PRODUTOR.getValor())
-                .antMatchers("/cliente").hasAuthority(TipoDeUsuario.CLIENTE.getValor())
-                .anyRequest()
-                .authenticated()
+                    .antMatchers("/", "/js/**", "/css/**", "/images/**", "/assets/**", "/registrar/**", "/seleciona-tipo-usuario/**")
+                    .permitAll()
+                    .antMatchers("/produtor").hasAuthority(TipoDeUsuario.PRODUTOR.getValor())
+                    .antMatchers("/cliente").hasAuthority(TipoDeUsuario.CLIENTE.getValor())
+                    .anyRequest()
+                    .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .usernameParameter("email")
-                .passwordParameter("senha")
-                .defaultSuccessUrl("/")
+                    .loginPage("/login")
+                    .permitAll()
+                    .usernameParameter("email")
+                    .passwordParameter("senha")
+                    .defaultSuccessUrl("/")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/")
-                .clearAuthentication(true)
-                .permitAll();
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/")
+                    .clearAuthentication(true)
+                    .permitAll();
         }
 
         @Autowired
