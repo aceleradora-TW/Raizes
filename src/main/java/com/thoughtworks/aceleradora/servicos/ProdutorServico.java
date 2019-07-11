@@ -6,6 +6,7 @@ import com.thoughtworks.aceleradora.repositorios.ProdutorRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutorServico {
@@ -20,10 +21,12 @@ public class ProdutorServico {
         return repositorio.findAll();
     }
 
-    public Produtor encontraUm(Long id){
-        return repositorio
-                .findById(id)
-                .orElseThrow(ProdutorNaoEncontradoExcecao::new);
+    //    public Produtor encontraUm(Long id){
+//        return repositorio
+//                .findById(id)
+//                .orElseThrow(ProdutorNaoEncontradoExcecao::new);
+//    }
+    public Optional<Produtor> encontraUm(Long id){
+        return repositorio.findById(id);
     }
-
 }

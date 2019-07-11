@@ -1,15 +1,13 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
-import com.thoughtworks.aceleradora.dominio.TipoDeCultivo;
-import com.thoughtworks.aceleradora.dominio.UnidadeMedida;
+import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoServico;
 import com.thoughtworks.aceleradora.servicos.ProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.UsesSunMisc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,15 +44,16 @@ public class ProdutoProdutorControlador {
 
 
     @GetMapping("/cadastro")
-    public String cadastrarProduto(Model modelo, Breadcrumb breadcrumb, ProdutoProdutor produtoProdutor) {
+    public String cadastrarProduto(Model modelo, Breadcrumb breadcrumb, ProdutoProdutor produtoProdutor, Long id) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Estoque", "/produtos/visualizar-estoque")
                 .pagina("Cadastro", "/produtos/cadastro");
 
 
+
         ProdutoProdutor produtoProdutorComProdutorHardocoded = new ProdutoProdutor();
-        produtoProdutorComProdutorHardocoded.setProdutor(produtorServico.encontraUm(1L));
+        produtoProdutorComProdutorHardocoded.setProdutor(produtorServico.encontraUm(id).get());
 
         modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
         modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
