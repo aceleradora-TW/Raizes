@@ -16,4 +16,7 @@ public interface MinhaListaRepositorio extends CrudRepository<MinhaLista, Long> 
     Optional<MinhaLista> findById(Long id);
 
     void deleteById(Long id);
+
+    List<MinhaLista> findAllByNome(String title);
+
 }

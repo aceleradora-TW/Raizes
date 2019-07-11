@@ -6,6 +6,8 @@ import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,7 +42,9 @@ public class MinhaListaControlador {
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Minhas Listas", "/minha-lista/listas-criadas");
 
-        modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        modelo.addAttribute("listasCriadas", minhaListaServico.buscarPorNome(auth.getName()));
 
         return "minha-lista/listas-criadas";
     }
