@@ -1,20 +1,11 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.MinhaLista;
-import com.thoughtworks.aceleradora.dominio.Pedido;
-import com.thoughtworks.aceleradora.dominio.PedidoProdutoProdutor;
-import com.thoughtworks.aceleradora.dominio.Produto;
-import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
-import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
+import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoSalvoExcecao;
-import com.thoughtworks.aceleradora.servicos.EnderecoServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.PedidoServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
-import com.thoughtworks.aceleradora.servicos.ProdutoServico;
-import com.thoughtworks.aceleradora.servicos.ProdutorServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -38,26 +28,15 @@ public class PedidoControlador {
 
     private MinhaListaServico minhaListaServico;
     private PedidoServico pedidoServico;
-    private EnderecoServico enderecoServico;
-    private ProdutorServico produtorServico;
-    private ProdutoServico produtoServico;
     private ProdutoProdutorServico produtoProdutorServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
             "/");
 
     @Autowired
-    public PedidoControlador(MinhaListaServico minhaListaServico,
-                             PedidoServico pedidoServico,
-                             EnderecoServico enderecoServico,
-                             ProdutoServico produtoServico,
-                             ProdutorServico produtorServico,
-                             ProdutoProdutorServico produtoProdutorServico) {
+    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico, ProdutoProdutorServico produtoProdutorServico) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
-        this.enderecoServico = enderecoServico;
-        this.produtoServico = produtoServico;
-        this.produtorServico = produtorServico;
         this.produtoProdutorServico = produtoProdutorServico;
     }
 
