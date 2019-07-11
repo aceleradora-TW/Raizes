@@ -173,26 +173,24 @@ public class PedidoControlador {
     @PostMapping("/{id}/editar-pedido")
     public String editarProdutoPedido(Pedido pedido,
                                       Breadcrumb breadcrumb,
-                                      Model modelo,
-                                      BindingResult resultadoValidacao,
                                       RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Realizar pedido", "/pedidos");
 
-        if(resultadoValidacao.hasErrors()) { // Sem @Valid isso não vai fazer nada.
-            modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
-            return "/pedidos/editar-pedido";
+        try {
+            pedido.setCriadoEm(pedidoServico.encontraUm(pedido.getId()).getCriadoEm());
+
+            pedidoServico.salvarPedido(pedido);
+
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido alterado com sucesso");
+
+            return "redirect:/pedidos";
+        } catch (PedidoNaoSalvoExcecao e) {
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
+            return "/pedidos";
         }
-
-        pedido.setCriadoEm(pedidoServico.encontraUm(pedido.getId()).getCriadoEm());
-
-        pedidoServico.salvarPedido(pedido);
-
-        redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido alterado com sucesso");
-
-        return "redirect:/pedidos";
     }
 
 
