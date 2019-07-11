@@ -54,7 +54,7 @@ public class PedidoServico {
         return repositorio.save(pedido);
     }
 
-    public Map<Produtor, List<PedidoProdutoProdutor>> agrupaProdutosPorProdutor(Long idPedido){
+    public Map<Produtor, List<ProdutoProdutor>> agrupaProdutosPorProdutor(Long idPedido){
         Optional<Pedido> pedido = encontraUm(idPedido);
 
         List<PedidoProdutoProdutor> pedidosProdutosProdutoresDoPedido = pedido.get().getPedidosProdutosProdutores();
@@ -65,11 +65,15 @@ public class PedidoServico {
             produtoProdutor.add(pedidosProdutosProdutoresDoPedido.get(i).getProdutoProdutor());
         }
 
-        Map<Produtor, List<PedidoProdutoProdutor>> byProdutor
-                = pedidosProdutosProdutoresDoPedido.stream()
-                .map(PedidoProdutoProdutor::getProdutoProdutor)
-                .collect(Collectors.groupingBy(PedidoProdutoProdutor::getProdutor));
+        Map<Produtor, List<ProdutoProdutor>> byProdutor
+                = produtoProdutor.stream()
+                .collect(Collectors.groupingBy(ProdutoProdutor::getProdutor));
         return byProdutor;
     }
+
+//    public Map<Produtor, List<PedidoProdutoProdutor>> agrupaPedidoProdutosPorProdutor(Long idPedido){
+//
+//        return byProdutor;
+//    }
 
 }

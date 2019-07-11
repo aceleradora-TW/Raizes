@@ -16,19 +16,19 @@
                 <div class="control">
                   <h4 class="pt-3 pb-2 fs-18"><b th:text="${produtor.nome}"></b></h4>
                   <span  th:each="pedido: ${pedidoProdutoProdutores}">
-                  <div id="calculo">
+                  <div id="calculo" th:if="${pedido.produtoProdutor.produtor.nome == produtor.nome}">
                       <span class="flex space-between" id="spanCalcula">
                       <span class="pl-5 w-25" th:text="${pedido.produtoProdutor.produto.nome}"></span>
                       <span th:text="${pedido.quantidadePedido}" id="quantidadePedido"class="quantidadePedido"></span>
-                      <input type="hidden" class="flex start w-25" id="valor" th:value="${pedido.valor}"/> 
+                      <input type="hidden" class="flex start w-25" id="valor" th:value="${pedido.valor}"/>
                       <span class="precoCadaProduto" id="precoCadaProduto"></span>                     
                   </span>
                   </div> 
-                </span>  
+                </span>
                 <label class="pl-5 pt-3 pb-2 label">Total: R$
                     <span class="totalProdutor" id="totalProdutor"></span>
-                  </label>               
-                  <div class="rz-box-footer">                    
+                  </label>
+                  <div class="rz-box-footer">
                     <span class="flex center">
                       <i class="fas fa-truck" th:classappend="${produtor.isPossuiTransporte()} ?
                       icon-transport-true : icon-transport-false"></i>
