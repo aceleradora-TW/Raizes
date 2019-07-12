@@ -38,12 +38,10 @@ public class ProdutoProdutorServico {
         return byProdProd;
     }
 
-
     public ProdutoProdutor encontraUm(Long id) {
         return produtoProdutorRepositorio
                 .findById(id)
                 .orElseThrow(ProdutoNaoEncontradoExcecao::new);
-
     }
 
     public ProdutoProdutor salvar(ProdutoProdutor produtoProdutor) {

@@ -30,7 +30,6 @@ public class UserDetailsImpl implements UserDetailsService {
     }
 
     public Usuario buscaUmUsuario(String email){
-
         return usuarioRepositorio.findByEmail(email);
     }
 }

@@ -1,15 +1,11 @@
 package com.thoughtworks.aceleradora.controladores;
 
-import com.thoughtworks.aceleradora.dominio.Breadcrumb;
-import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
-import com.thoughtworks.aceleradora.dominio.TipoDeCultivo;
-import com.thoughtworks.aceleradora.dominio.UnidadeMedida;
+import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
-import com.thoughtworks.aceleradora.servicos.CategoriaServico;
-import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
-import com.thoughtworks.aceleradora.servicos.ProdutoServico;
-import com.thoughtworks.aceleradora.servicos.ProdutorServico;
+import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,17 +27,22 @@ public class ProdutoProdutorControlador {
     private CategoriaServico categoriaServico;
     private ProdutoProdutorServico produtoProdutorServico;
     private ProdutorServico produtorServico;
-
+    private UserDetailsImpl usuarioServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Página Inicial", "/");
 
     @Autowired
-    public ProdutoProdutorControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico, ProdutoProdutorServico produtoProdutorServico, ProdutorServico produtorServico) {
+    public ProdutoProdutorControlador(ProdutoServico produtoServico,
+                                      CategoriaServico categoriaServico,
+                                      ProdutoProdutorServico produtoProdutorServico,
+                                      ProdutorServico produtorServico,
+                                      UserDetailsImpl usuarioServico) {
         this.produtoServico = produtoServico;
         this.categoriaServico = categoriaServico;
         this.produtoProdutorServico = produtoProdutorServico;
         this.produtorServico = produtorServico;
+        this.usuarioServico = usuarioServico;
     }
 
 
@@ -52,6 +53,11 @@ public class ProdutoProdutorControlador {
                 .pagina("Estoque", "/produtos/visualizar-estoque")
                 .pagina("Cadastro", "/produtos/cadastro");
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+//        modelo.addAttribute("listasCriadas", produtoProdutor.buscarPorNome(auth.getName()));
+        Usuario usuario = usuarioServico.buscaUmUsuario(auth.getName());
+//        modelo.addAttribute("listasCriadas", produtoProdutor.pegarListasCriadasPorId(usuario.getId()));
 
         ProdutoProdutor produtoProdutorComProdutorHardocoded = new ProdutoProdutor();
         produtoProdutorComProdutorHardocoded.setProdutor(produtorServico.encontraUm(1L));
