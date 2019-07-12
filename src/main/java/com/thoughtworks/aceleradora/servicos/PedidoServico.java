@@ -72,11 +72,29 @@ public class PedidoServico {
         return byProdutor;
     }
 
-    public BigDecimal calculaTotalDoProduto (PedidoProdutoProdutor pedidoProdutoProdutor){
-
-        BigDecimal quantidade = new BigDecimal(pedidoProdutoProdutor.getQuantidadePedido());
-
-        return pedidoProdutoProdutor.getValor().multiply(quantidade);
-    }
+//    public BigDecimal calculaTotalDoProduto (PedidoProdutoProdutor pedidoProdutoProdutor){
+//
+//        BigDecimal quantidade = new BigDecimal(pedidoProdutoProdutor.getQuantidadePedido());
+//
+//        return pedidoProdutoProdutor.getValor().multiply(quantidade);
+//    }
+//
+//    public BigDecimal calculaTotalDoProdutor (List<BigDecimal> precosProduto){
+//
+//
+//        return null;
+//    }
+//
+//    public BigDecimal calculaTotalDoPedido (List<BigDecimal> precosProduto, Long idPedido){
+//        Optional<Pedido> pedido = encontraUm(idPedido);
+//
+//        List<PedidoProdutoProdutor> pedidoProdutoProdutor = pedido.get().getPedidosProdutosProdutores();
+//
+//        Map<Produtor, List<PedidoProdutoProdutor>> byPreco
+//                = pedidoProdutoProdutor.stream()
+//                .collect(Collectors.groupingBy(PedidoProdutoProdutor::getValor));
+//
+//        return null;
+//    }
 
 }

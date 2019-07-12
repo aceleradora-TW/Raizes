@@ -27,7 +27,7 @@ export default {
 
   totalVisualizar: () => {
 
-    const preco =  $('#visualizar').find('#valor').val();
+    const preco =  $('#visualizar').find('#valor').text();
     console.log("Preco",preco);
     const quantidadePedido = $('#visualizar').find('#quantidadePedido').text();
     console.log("Quantidade",quantidadePedido);
