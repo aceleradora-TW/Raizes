@@ -14,7 +14,7 @@ public interface MinhaListaRepositorio extends CrudRepository<MinhaLista, Long> 
     List<MinhaLista> findAll();
 
     List<MinhaLista> findAllById(Long id);
-    List<MinhaLista> findAllByCliente_Id(Long id);
+    List<MinhaLista> findAllByClienteId(Long id);
 
     Optional<MinhaLista> findById(Long id);
 
