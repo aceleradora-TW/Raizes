@@ -72,15 +72,9 @@
                       </div>
                     </div>
                     <div class="column">
-                      <label for="uf">*Estado:</label>
+                      <label>Estado:</label>
                       <div class="control">
-                        <div class="select">
-                          <select th:field="*{endereco.cidade.estado.uf}">
-                            <option th:each="estados : ${estado}" th:text="${estados.uf}" th:value="${estados.uf}"
-                              th:name="uf" id="uf">
-                            </option>
-                          </select>
-                        </div>
+                        <span>RS</span>
                       </div>
                     </div>
                   </div>
