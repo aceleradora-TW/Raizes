@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class EmailComponente {
 
     private JavaMailSender mailSender;
-    private String email = "aceleradora15@gmail.com";
+//    private String email = "aceleradora15@gmail.com";
 
     public EmailComponente(JavaMailSender mailSender) {
         this.mailSender = mailSender;
@@ -37,8 +37,8 @@ public class EmailComponente {
 //                    "- Telefone: " + solicitacao.getTelefoneSolicitante()
         );
 
-        mensagem.setFrom(this.email);
-        mensagem.setTo(this.email);
+        mensagem.setFrom("aceleradora15@gmail.com");
+        mensagem.setTo("aceleradora15@gmail.com");
 
         try {
             mailSender.send(mensagem);
