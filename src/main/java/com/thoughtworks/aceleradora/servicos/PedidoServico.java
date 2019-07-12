@@ -72,11 +72,11 @@ public class PedidoServico {
         return byProdutor;
     }
 
-//    public BigDecimal calculaTotalDoProduto (PedidoProdutoProdutor pedidoProdutoProdutor){
-//
-//        BigDecimal total = (pedidoProdutoProdutor.getValor() * pedidoProdutoProdutor.getQuantidadePedido());
-//
-//        return;
-//    }
+    public BigDecimal calculaTotalDoProduto (PedidoProdutoProdutor pedidoProdutoProdutor){
+
+        BigDecimal quantidade = new BigDecimal(pedidoProdutoProdutor.getQuantidadePedido());
+
+        return pedidoProdutoProdutor.getValor().multiply(quantidade);
+    }
 
 }
