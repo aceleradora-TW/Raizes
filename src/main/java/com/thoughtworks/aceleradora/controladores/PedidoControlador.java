@@ -3,6 +3,7 @@ package com.thoughtworks.aceleradora.controladores;
 import com.thoughtworks.aceleradora.dominio.*;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoSalvoExcecao;
+import com.thoughtworks.aceleradora.dominio.excecoes.PedidoSemProdutorExcecao;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
 import com.thoughtworks.aceleradora.servicos.PedidoServico;
 import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
@@ -116,7 +117,7 @@ public class PedidoControlador {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
 
             return "redirect:/pedidos";
-        } catch (PedidoNaoSalvoExcecao | NullPointerException e) {
+        } catch (PedidoNaoSalvoExcecao | PedidoSemProdutorExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
             return "redirect:/minhas-listas";
         }
@@ -124,29 +125,33 @@ public class PedidoControlador {
     }
 
     @GetMapping("/{id}/editar-pedido")
-    public String editarProdutoPedido(@PathVariable("id") Long id, Breadcrumb breadcrumb, Model modelo) {
+    public String editarProdutoPedido(@PathVariable("id") Long id, Breadcrumb breadcrumb, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
 
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Editar Pedido", "/editar-pedido");
+        try {
+            Pedido pedido = pedidoServico.encontraUm(id);
 
-        Pedido pedido = pedidoServico.encontraUm(id);
+            modelo.addAttribute("produtoProdutoresPorProduto", produtoProdutorServico
+                    .pegaProdutoProdutorPorProdutos(pedido
+                            .getPedidosProdutosProdutores()
+                            .stream()
+                            .map(pedidoProdutoProdutor -> pedidoProdutoProdutor.getProdutoProdutor().getProduto())
+                            .collect(Collectors.toList())));
+            modelo.addAttribute("produtoProdutoresDoPedido", pedido
+                    .getPedidosProdutosProdutores()
+                    .stream()
+                    .map(PedidoProdutoProdutor::getProdutoProdutor)
+                    .collect(Collectors.toList()));
+            modelo.addAttribute("pedido", pedido);
 
-        modelo.addAttribute("produtoProdutoresPorProduto", produtoProdutorServico
-                .pegaProdutoProdutorPorProdutos(pedido
-                        .getPedidosProdutosProdutores()
-                        .stream()
-                        .map(pedidoProdutoProdutor -> pedidoProdutoProdutor.getProdutoProdutor().getProduto())
-                        .collect(Collectors.toList())));
-        modelo.addAttribute("produtoProdutoresDoPedido", pedido
-                .getPedidosProdutosProdutores()
-                .stream()
-                .map(PedidoProdutoProdutor::getProdutoProdutor)
-                .collect(Collectors.toList()));
-        modelo.addAttribute("pedido", pedido);
+            return "pedido/editar-pedido";
+        } catch (PedidoNaoEncontradoExcecao e) {
+            redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
+            return "redirect:/pedidos";
 
-        return "pedido/editar-pedido";
-
+        }
     }
 
     @PostMapping("/{id}/editar-pedido")
@@ -166,7 +171,7 @@ public class PedidoControlador {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido alterado com sucesso");
 
             return "redirect:/pedidos";
-        } catch (PedidoNaoSalvoExcecao e) {
+        } catch (PedidoNaoSalvoExcecao | PedidoSemProdutorExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
             return "/pedidos";
         }

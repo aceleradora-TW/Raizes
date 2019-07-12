@@ -25,12 +25,11 @@ public class PedidoServico {
         this.clienteServico = clienteServico;
     }
 
-    public Pedido encontraUm(Long id) {
-        try {
-            return repositorio.findById(id).get();
-        } catch(PedidoNaoEncontradoExcecao e) {
-            throw e;
-        }
+    public Pedido encontraUm(Long id) throws PedidoNaoEncontradoExcecao {
+        if(repositorio.findById(id).isPresent())
+        return repositorio.findById(id).get();
+
+        return repositorio.findById(id).get();
     }
 
     public List<Pedido> pegarPedidos() {
