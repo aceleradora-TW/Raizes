@@ -6,6 +6,7 @@ import com.thoughtworks.aceleradora.repositorios.PedidoRepositorio;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -71,9 +72,11 @@ public class PedidoServico {
         return byProdutor;
     }
 
-//    public Map<Produtor, List<PedidoProdutoProdutor>> agrupaPedidoProdutosPorProdutor(Long idPedido){
+//    public BigDecimal calculaTotalDoProduto (PedidoProdutoProdutor pedidoProdutoProdutor){
 //
-//        return byProdutor;
+//        BigDecimal total = (pedidoProdutoProdutor.getValor() * pedidoProdutoProdutor.getQuantidadePedido());
+//
+//        return;
 //    }
 
 }

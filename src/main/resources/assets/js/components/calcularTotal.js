@@ -27,18 +27,16 @@ export default {
 
   totalVisualizar: () => {
 
-    const totalProduto = $('#visualizar').find('#calculo');
-
-    const preco = totalProduto.find('#valor').val();
+    const preco =  $('#visualizar').find('#valor').val();
     console.log("Preco",preco);
-    const quantidadePedido =totalProduto.find('#quantidadePedido').text();
+    const quantidadePedido = $('#visualizar').find('#quantidadePedido').text();
     console.log("Quantidade",quantidadePedido);
     const precoCadaProduto = preco * quantidadePedido;
     console.log("precoCadaProduto",precoCadaProduto);
 
 
 
-    totalProduto.parents('#visualizar').find('#precoCadaProduto').text(duasCasasAposVirgula(precoCadaProduto));
+    $('#visualizar').parents('#visualizar').find('#precoCadaProduto').text(duasCasasAposVirgula(precoCadaProduto));
     const precos = $('.precoCadaProduto');
     console.log("Precos",precos);
     

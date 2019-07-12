@@ -1,31 +1,41 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
+
 <body>
   <section class="section">
     <section class="container">
       <h1 class="title centraliza-texto" th:text="${pedido}"></h1>
       <div class="columns">
-       <div class="column is-12">
-        <span th:each="produtor, index: ${produtores.keySet()}">
+        <div class="column is-12">
+          <span th:each="produtor, index: ${produtores.keySet()}">
             <div class="flex center box rz-box mb-4" id="visualizar">
               <div class="w-50 field">
                 <div class="control">
                   <h4 class="pt-3 pb-2 fs-18"><b th:text="${produtor.nome}"></b></h4>
-                  <span  th:each="pedido: ${pedidoProdutoProdutores}">
-                  <div id="calculo" th:if="${pedido.produtoProdutor.produtor.nome == produtor.nome}">
+                  <span th:each="pedido: ${pedidoProdutoProdutores}">
+                    <div id="calculo" th:if="${pedido.produtoProdutor.produtor.nome == produtor.nome}">
                       <span class="flex space-between" id="spanCalcula">
-                      <span class="pl-5 w-25" th:text="${pedido.produtoProdutor.produto.nome}"></span>
-                      <span th:text="${pedido.quantidadePedido}" th:value="${pedido.quantidadePedido}" id="quantidadePedido" class="quantidadePedido"></span>
-                      <input type="hidden" class="flex start w-25 valor" id="valor" th:value="${pedido.valor}"/>
-                      <span class="precoCadaProduto" id="precoCadaProduto"></span>                     
+
+                        <span class="pl-5 w-25" th:text="${pedido.produtoProdutor.produto.nome}"></span>
+                        <label>
+                          R$
+                          <span th:text="${pedido.valor}" id="valor" class="valor" th:value="${pedido.valor}"></span>/
+                          <span th:text="${pedido.produtoProdutor.produto.unidadeMedida.codigo}"></span>
+                        </label>
+                        <span th:text="${pedido.quantidadePedido}" th:value="${pedido.quantidadePedido}"
+                          id="quantidadePedido" class="quantidadePedido"></span>
+                        <label>R$
+                          <span class="precoCadaProduto" id="precoCadaProduto"></span>
+                        </label>
+                      </span>
+                    </div>
                   </span>
-                  </div> 
-                </span>
-                <label class="pl-5 pt-3 pb-2 label">Total: R$
+                  <label class="pl-5 pt-3 pb-2 label">Total: R$
                     <span class="totalProdutor" id="totalProdutor"></span>
                   </label>
                   <div class="rz-box-footer">
@@ -52,13 +62,13 @@
                         <span class="pl-1" th:text="${produtor.email}"></span>
                       </div>
                     </div>
-                  </div>                
+                  </div>
                 </div>
               </div>
             </div>
           </span>
-        </span>
-          <label >
+          </span>
+          <label>
             <span>Total do Pedido: R$</span>
             <span id="valorTotalPedido"></span>
           </label>
@@ -70,4 +80,5 @@
     </section>
   </section>
 </body>
+
 </html>
