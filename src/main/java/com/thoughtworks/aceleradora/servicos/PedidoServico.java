@@ -1,11 +1,16 @@
 package com.thoughtworks.aceleradora.servicos;
 
-import com.thoughtworks.aceleradora.dominio.*;
-import com.thoughtworks.aceleradora.repositorios.MinhaListaRepositorio;
+import com.thoughtworks.aceleradora.dominio.Pedido;
+import com.thoughtworks.aceleradora.dominio.PedidoProdutoProdutor;
+import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
+import com.thoughtworks.aceleradora.dominio.Produtor;
+import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.repositorios.PedidoRepositorio;
-import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -20,16 +25,14 @@ public class PedidoServico {
 
     private ClienteServico clienteServico;
 
-    public PedidoServico(PedidoRepositorio repositorio,
-                         ClienteServico clienteServico) {
+    public PedidoServico(PedidoRepositorio repositorio, ClienteServico clienteServico) {
         this.repositorio = repositorio;
         this.clienteServico = clienteServico;
-
     }
 
-    public Optional<Pedido> encontraUm(Long id) {
-        Optional<Pedido> pedidos = repositorio.findById(id);
-        return pedidos;
+    public Pedido encontraUm(Long id) {
+        return repositorio.findById(id)
+                .orElseThrow(PedidoNaoEncontradoExcecao::new);
     }
 
     public List<Pedido> pegarPedidos() {
@@ -41,8 +44,8 @@ public class PedidoServico {
     }
 
     public Pedido salvarPedido(Pedido pedido) {
-
         pedido.setCliente(clienteServico.encontraCliente());
+
         pedido.setPedidosProdutosProdutores(pedido
                 .getPedidosProdutosProdutores()
                 .stream()
@@ -51,18 +54,17 @@ public class PedidoServico {
                         .getProdutoProdutor().getPreco()))
                 .collect(Collectors.toList())
         );
-
         return repositorio.save(pedido);
     }
 
-    public Map<Produtor, List<ProdutoProdutor>> agrupaProdutosPorProdutor(Long idPedido){
-        Optional<Pedido> pedido = encontraUm(idPedido);
+    public Map<Produtor, List<ProdutoProdutor>> agrupaProdutosPorProdutor(Long idPedido) {
+        Pedido pedido = encontraUm(idPedido);
 
-        List<PedidoProdutoProdutor> pedidosProdutosProdutoresDoPedido = pedido.get().getPedidosProdutosProdutores();
+        List<PedidoProdutoProdutor> pedidosProdutosProdutoresDoPedido = pedido.getPedidosProdutosProdutores();
 
         List<ProdutoProdutor> produtoProdutor = new ArrayList<>();
 
-        for (int i = 0; i< pedidosProdutosProdutoresDoPedido.size(); i++) {
+        for (int i = 0; i < pedidosProdutosProdutoresDoPedido.size(); i++) {
             produtoProdutor.add(pedidosProdutosProdutoresDoPedido.get(i).getProdutoProdutor());
         }
 
