@@ -25,11 +25,9 @@ public class PedidoServico {
         this.clienteServico = clienteServico;
     }
 
-    public Pedido encontraUm(Long id) throws PedidoNaoEncontradoExcecao {
-        if(repositorio.findById(id).isPresent())
-        return repositorio.findById(id).get();
-
-        return repositorio.findById(id).get();
+    public Pedido encontraUm(Long id) {
+        return repositorio.findById(id)
+                .orElseThrow(PedidoNaoEncontradoExcecao::new);
     }
 
     public List<Pedido> pegarPedidos() {
