@@ -2,11 +2,11 @@ package com.thoughtworks.aceleradora.servicos;
 
 
 import com.thoughtworks.aceleradora.dominio.Produto;
-import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.repositorios.ProdutoRepositorio;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdutoServico {
@@ -24,8 +24,9 @@ public class ProdutoServico {
     public Produto salvar(Produto produto) {
         return repositorio.save(produto);
     }
-    public  List<ProdutoProdutor> pegarEstoqueDoProdutorPorId(Long id){
-        return repositorio.findAllByProdutor_Id(id);
+
+    public Optional<Produto> pegarEstoqueDoProdutorPorId(Long id){
+        return repositorio.findById(id);
     }
 
 }

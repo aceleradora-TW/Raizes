@@ -58,10 +58,11 @@ public class ProdutoProdutorControlador {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         Usuario usuario = usuarioServico.buscaUmUsuario(auth.getName());
+
         modelo.addAttribute("Estoque", produtoProdutorServico.buscaEstoqueDoProdutorPorId(usuario.getId()));
 
         ProdutoProdutor produtoProdutorComProdutorHardocoded = new ProdutoProdutor();
-        produtoProdutorComProdutorHardocoded.setProdutor(produtorServico.encontraUm(1L));
+        produtoProdutorComProdutorHardocoded.setProdutor(produtorServico.encontraUm(usuario.getId()));
 
         modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
         modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
@@ -99,7 +100,10 @@ public class ProdutoProdutorControlador {
 
 
     @GetMapping("/{id}/editar")
-    public String editarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos) {
+    public String editarProduto(Breadcrumb breadcrumb,
+                                Model modelo,
+                                @PathVariable Long id,
+                                RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
@@ -149,8 +153,9 @@ public class ProdutoProdutorControlador {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Estoque", "produto/visualizar-estoque");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        modelo.addAttribute("produtosProdutor", produtoProdutorServico.pegarProdutos());
+        modelo.addAttribute("produtosProdutor", produtoProdutorServico.buscarPorNome(auth.getName()));
 
         return "produto/visualizar-estoque";
     }

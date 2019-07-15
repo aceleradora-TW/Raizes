@@ -4,20 +4,20 @@ import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ProdutoProdutorServico {
     private ProdutoProdutorRepositorio produtoProdutorRepositorio;
 
-
+    @Autowired
     public ProdutoProdutorServico(ProdutoProdutorRepositorio produtoProdutorRepositorio) {
         this.produtoProdutorRepositorio = produtoProdutorRepositorio;
     }
@@ -62,8 +62,12 @@ public class ProdutoProdutorServico {
         return produtoProdutorRepositorio.save(produtoProdutor);
     }
 
-    public Optional<ProdutoProdutor> buscaEstoqueDoProdutorPorId(Long id){
-        return produtoProdutorRepositorio.findById(id);
+    public List<ProdutoProdutor> buscaEstoqueDoProdutorPorId(Long id){
+        return produtoProdutorRepositorio.findAllById(id);
+    }
+
+    public List<ProdutoProdutor> buscarPorNome(String nome){
+        return produtoProdutorRepositorio.findAllByProdutorNome(nome);
     }
 
 }
