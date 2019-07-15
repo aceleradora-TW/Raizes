@@ -50,6 +50,7 @@
                       <label for="complemento">Complemento:</label>
                       <input class="input input-fancy borda-arredondada" type="text" id="complemento"
                         th:field="*{endereco.complemento}" placeholder="Ex: Apartamento 101" th:name="complemento">
+                      <div class="help-block"></div>
                     </div>
                   </div>
                   <div class="columns field">
@@ -71,15 +72,19 @@
                         </div>
                       </div>
                     </div>
-                    <div class="column">
-                      <label>Estado:</label>
-                      <div class="control">
-                        <span>RS</span>
+                      <div class="column">
+                          <label id="uf" for="uf">*Estado:</label>
+                          <div class="control">
+                              <div class="select">
+                                  <select th:field="*{endereco.cidade.estado.uf}">
+                                      <option th:each="estados : ${estado}" th:text="${estados.uf}" th:value="${estados.uf}" th:name="uf" th:id="uf">
+                                      </option>
+                                  </select>
+                              </div>
+                          </div>
                       </div>
-                    </div>
                   </div>
                 </div>
-                <div>
                   <div class="box">
                     <div class="columns">
                       <div class="column is-half field">
@@ -104,7 +109,7 @@
                     </div>
                     <div class="field">
                       <div class="rz-box-footer flex space-between p-3">
-                        <a href="/" class="button rz-button is-rounded">Cancelar</a>
+                        <a href="/login" class="button rz-button is-rounded">Cancelar</a>
                         <button class="button rz-button is-rounded" type="submit">Salvar</button>
                       </div>
                     </div>
