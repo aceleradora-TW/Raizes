@@ -1,12 +1,13 @@
 package com.thoughtworks.aceleradora.servicos;
 
-import com.thoughtworks.aceleradora.dominio.MinhaLista;
 import com.thoughtworks.aceleradora.dominio.Produto;
 import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.repositorios.ProdutoProdutorRepositorio;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -26,17 +27,29 @@ public class ProdutoProdutorServico {
     }
 
 
-    public Map<Produto, List<ProdutoProdutor>> organizarProdutosProdutoresDaListadoCliente(MinhaLista lista) {
-
-        List<Produto> produtos = lista.getProdutos();
-
+    public Map<Produto, List<ProdutoProdutor>> pegaProdutoProdutorPorProdutos(List<Produto> produtos) {
         List<ProdutoProdutor> produtosProdutoresDaLista = produtoProdutorRepositorio.findByProdutoIn(produtos);
 
-        Map<Produto, List<ProdutoProdutor>> byProdProd
-                = produtosProdutoresDaLista.stream()
-                .collect(Collectors.groupingBy(ProdutoProdutor::getProduto));
+        LinkedHashMap<Produto, List<ProdutoProdutor>> produtorPorProduto = produtosProdutoresDaLista
+                .stream()
+                .collect(Collectors.groupingBy(ProdutoProdutor::getProduto))
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey(Comparator.comparing(Produto::getNome)))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        arr -> arr
+                                .getValue()
+                                .stream()
+                                .sorted(Comparator.comparing(produtoProdutor -> produtoProdutor
+                                        .getProdutor()
+                                        .getNome()))
+                                .collect(Collectors.toList()),
+                        (a, b) -> a,
+                        LinkedHashMap::new
+                ));
 
-        return byProdProd;
+        return produtorPorProduto;
     }
 
     public ProdutoProdutor encontraUm(Long id) {
