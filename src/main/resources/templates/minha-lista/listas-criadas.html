@@ -9,7 +9,7 @@
 
 <body>
   <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor())">
-    Você não tem autorização para acessar essa página
+    <h1 class="fs-22 pt-4">Você não tem autorização para acessar essa página</h1>
   </div>
   <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).CLIENTE.getValor())">
     <section class="section">
