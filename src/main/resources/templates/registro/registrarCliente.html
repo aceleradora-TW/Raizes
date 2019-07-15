@@ -64,7 +64,7 @@
                     <div class="control">
                       <div class="select">
                         <select th:field="*{endereco.cidade.estado.uf}">
-                          <option th:each="estados : ${estado}" th:text="${estados.uf}" th:value="${estados.uf}" th:name="uf" th:id="uf">
+                          <option th:each="estado : ${estados}" th:text="${estados.uf}" th:value="${estados.uf}" th:name="uf" th:id="uf">
                           </option>
                         </select>
                       </div>
