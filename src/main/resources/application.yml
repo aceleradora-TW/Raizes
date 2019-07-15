@@ -31,8 +31,8 @@ spring:
   mail:
     default-encoding: UTF-8
     host: smtp.gmail.com
-    username: ''
-    password: ''
+    username: 'raizes.agil@gmail.com'
+    password: 'raizes2019agil'
     port: 587
     properties:
       mail:
