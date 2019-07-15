@@ -125,7 +125,7 @@ public class PedidoControlador {
         }
 
         pedidoServico.salvarPedido(pedido);
-        emailComponente.notificaProdutor();
+        emailComponente.notificaProdutor(pedido);
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
 
         return "redirect:/pedidos";
