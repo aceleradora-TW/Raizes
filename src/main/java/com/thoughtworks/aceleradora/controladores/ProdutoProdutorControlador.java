@@ -47,7 +47,9 @@ public class ProdutoProdutorControlador {
 
 
     @GetMapping("/cadastro")
-    public String cadastrarProduto(Model modelo, Breadcrumb breadcrumb, ProdutoProdutor produtoProdutor) {
+    public String cadastrarProduto(Model modelo,
+                                   Breadcrumb breadcrumb,
+                                   ProdutoProdutorServico produtoProdutorServico) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Estoque", "/produtos/visualizar-estoque")
@@ -55,9 +57,8 @@ public class ProdutoProdutorControlador {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-//        modelo.addAttribute("listasCriadas", produtoProdutor.buscarPorNome(auth.getName()));
         Usuario usuario = usuarioServico.buscaUmUsuario(auth.getName());
-//        modelo.addAttribute("listasCriadas", produtoProdutor.pegarListasCriadasPorId(usuario.getId()));
+        modelo.addAttribute("Estoque", produtoProdutorServico.buscaEstoqueDoProdutorPorId(usuario.getId()));
 
         ProdutoProdutor produtoProdutorComProdutorHardocoded = new ProdutoProdutor();
         produtoProdutorComProdutorHardocoded.setProdutor(produtorServico.encontraUm(1L));

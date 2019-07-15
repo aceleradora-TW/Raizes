@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,6 +47,10 @@ public class ProdutoProdutorServico {
 
     public ProdutoProdutor salvar(ProdutoProdutor produtoProdutor) {
         return produtoProdutorRepositorio.save(produtoProdutor);
+    }
+
+    public Optional<ProdutoProdutor> buscaEstoqueDoProdutorPorId(Long id){
+        return produtoProdutorRepositorio.findById(id);
     }
 
 }

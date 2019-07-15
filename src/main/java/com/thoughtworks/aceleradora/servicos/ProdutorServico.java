@@ -33,4 +33,11 @@ public class ProdutorServico {
                 .findById(usuario.getId())
                 .orElseThrow(ProdutorNaoEncontradoExcecao::new);
     }
+    public Produtor encontraProdutor(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario = usuarioServico.buscaUmUsuario(auth.getName());
+        return repositorio
+                .findById(usuario.getId())
+                .orElseThrow(ProdutorNaoEncontradoExcecao::new);
+    }
 }
