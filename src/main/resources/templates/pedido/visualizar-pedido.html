@@ -35,9 +35,11 @@
                       </span>
                     </div>
                   </span>
+
                   <label class="pl-5 pt-3 pb-2 label">Total: R$
-                    <span class="totalProdutor" id="totalProdutor"></span>
+                    <span class="totalProdutor" id="totalProdutor" th:text="${totalProdutor.get(produtor.id)}"></span>
                   </label>
+
                   <div class="rz-box-footer">
                     <span class="flex center">
                       <i class="fas fa-truck" th:classappend="${produtor.isPossuiTransporte()} ?
@@ -70,7 +72,7 @@
           </span>
           <label>
             <span>Total do Pedido: R$</span>
-            <span id="valorTotalPedido"></span>
+            <span id="valorTotalPedido" th:text="${totalPedido}"></span>
           </label>
         </div>
       </div>

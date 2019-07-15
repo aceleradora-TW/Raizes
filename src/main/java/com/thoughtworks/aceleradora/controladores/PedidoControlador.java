@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,15 +67,38 @@ public class PedidoControlador {
         List<PedidoProdutoProdutor> pedidoProdutoProdutores = pedidoServico.encontraUm(id).get().getPedidosProdutosProdutores();
 
         HashMap listaTotalPorProduto = new HashMap();
+
+        HashMap listaTotalPorProdutor = new HashMap();
+
+
+        BigDecimal totalPedido = new BigDecimal(0);
+        BigDecimal precoCadaProduto;
+        BigDecimal totalProdutor = new BigDecimal(0);
         for (PedidoProdutoProdutor pedido:pedidoProdutoProdutores) {
-            listaTotalPorProduto.put(pedido.getId(),pedidoServico.calculaTotalDoProduto(pedido));
+            precoCadaProduto = pedidoServico.calculaTotalDoProduto(pedido);
+            listaTotalPorProduto.put(pedido.getId(),precoCadaProduto);
+            totalPedido = totalPedido.add(precoCadaProduto);
+
+            if(listaTotalPorProdutor.containsKey(pedido.getProdutoProdutor().getProdutor().getId())){
+
+                totalProdutor = new BigDecimal(listaTotalPorProdutor.get(pedido.getProdutoProdutor().getProdutor().getId()).toString());
+
+                totalProdutor = totalProdutor.add(precoCadaProduto);
+
+                listaTotalPorProdutor.put(pedido.getProdutoProdutor().getProdutor().getId(),totalProdutor);
+
+            }else{
+                listaTotalPorProdutor.put(pedido.getProdutoProdutor().getProdutor().getId(),precoCadaProduto);
+            }
         }
 
         modelo.addAttribute("pedido", nomePedido);
         modelo.addAttribute("produtores", pedidoServico.agrupaProdutosPorProdutor(id));
         modelo.addAttribute("pedidoProdutoProdutores", pedidoProdutoProdutores);
-//        modelo.addAttribute("precoProduto", pedidoServico.calculaTotalDoProduto(pedidoProdutoProdutores.get(0)));
         modelo.addAttribute("precoProduto", listaTotalPorProduto);
+        modelo.addAttribute("totalPedido", totalPedido);
+        modelo.addAttribute("totalProdutor", listaTotalPorProdutor);
+
 
         return "pedido/visualizar-pedido";
     }
