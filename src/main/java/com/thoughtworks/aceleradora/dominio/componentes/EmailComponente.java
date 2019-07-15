@@ -16,12 +16,12 @@ public class EmailComponente {
         this.mailSender = mailSender;
     }
 
-    public void notificaProdutor(Pedido pedido) {
+    public void notificaProdutor() {
         SimpleMailMessage mensagem = new SimpleMailMessage();
 
-        pedido.getPedidosProdutosProdutores().forEach(pp -> {
-            pp.getProdutoProdutor().getProdutor().getEmail();
-        });
+//        pedido.getPedidosProdutosProdutores().forEach(pp -> {
+//            pp.getProdutoProdutor().getProdutor().getEmail();
+//        });
 
         mensagem.setSubject("Novo Pedido recebido!");
 
@@ -37,8 +37,8 @@ public class EmailComponente {
 //                    "- Telefone: " + solicitacao.getTelefoneSolicitante()
         );
 
-        mensagem.setFrom("aceleradora15@gmail.com");
-        mensagem.setTo("aceleradora15@gmail.com");
+        mensagem.setFrom("raizes.agil@gmail.com");
+        mensagem.setTo("raizes.agil@gmail.com");
 
         try {
             mailSender.send(mensagem);
@@ -47,8 +47,8 @@ public class EmailComponente {
         }
     }
 
-    public void notificaCliente(PedidoProdutoProdutor pedido) {
-        SimpleMailMessage mensagem = new SimpleMailMessage();
+//    public void notificaCliente(PedidoProdutoProdutor pedido) {
+//        SimpleMailMessage mensagem = new SimpleMailMessage();
 
 //            mensagem.setSubject("Status de uma solicitação foi alterado!");
 //
@@ -64,6 +64,6 @@ public class EmailComponente {
 //                e.printStackTrace();
 //            }
 //        }
-    }
+//    }
 }
 

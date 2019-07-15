@@ -31,8 +31,8 @@ spring:
   mail:
     default-encoding: UTF-8
     host: smtp.gmail.com
-    username: 'aceleradora15@gmail.com'
-    password: '@celer@dor@15'
+    username: ''
+    password: ''
     port: 587
     properties:
       mail:

@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.componentes.EmailComponente;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
 import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class PedidoControlador {
     private ProdutorServico produtorServico;
     private ProdutoServico produtoServico;
     private ProdutoProdutorServico produtoProdutorServico;
+    private EmailComponente emailComponente;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
             "/");
@@ -36,15 +38,17 @@ public class PedidoControlador {
     public PedidoControlador(MinhaListaServico minhaListaServico,
                              PedidoServico pedidoServico,
                              EnderecoServico enderecoServico,
-                             ProdutoServico produtoServico,
                              ProdutorServico produtorServico,
-                             ProdutoProdutorServico produtoProdutorServico) {
+                             ProdutoServico produtoServico,
+                             ProdutoProdutorServico produtoProdutorServico,
+                             EmailComponente emailComponente) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
         this.enderecoServico = enderecoServico;
-        this.produtoServico = produtoServico;
         this.produtorServico = produtorServico;
+        this.produtoServico = produtoServico;
         this.produtoProdutorServico = produtoProdutorServico;
+        this.emailComponente = emailComponente;
     }
 
     @GetMapping
@@ -121,7 +125,7 @@ public class PedidoControlador {
         }
 
         pedidoServico.salvarPedido(pedido);
-
+        emailComponente.notificaProdutor();
         redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
 
         return "redirect:/pedidos";
