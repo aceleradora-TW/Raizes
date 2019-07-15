@@ -2,10 +2,14 @@ package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.Breadcrumb;
 import com.thoughtworks.aceleradora.dominio.MinhaLista;
+import com.thoughtworks.aceleradora.dominio.Usuario;
 import com.thoughtworks.aceleradora.dominio.excecoes.ListaNaoEncontradaExcecao;
 import com.thoughtworks.aceleradora.servicos.CategoriaServico;
 import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
+import com.thoughtworks.aceleradora.servicos.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,15 +28,18 @@ public class MinhaListaControlador {
 
     private MinhaListaServico minhaListaServico;
     private CategoriaServico categoriaServico;
-
+    private UserDetailsImpl usuarioServico;
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Página Inicial", "/");
 
     @Autowired
-    public MinhaListaControlador(MinhaListaServico minhaListaServico, CategoriaServico categoriaServico) {
+
+    public MinhaListaControlador(MinhaListaServico minhaListaServico, CategoriaServico categoriaServico, UserDetailsImpl usuarioServico) {
         this.minhaListaServico = minhaListaServico;
         this.categoriaServico = categoriaServico;
+        this.usuarioServico = usuarioServico;
     }
+
 
     @GetMapping
     public String listasCriadas(Breadcrumb breadcrumb, Model modelo) {
@@ -40,7 +47,11 @@ public class MinhaListaControlador {
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Minhas Listas", "/minha-lista/listas-criadas");
 
-        modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadas());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        Usuario usuario = usuarioServico.buscaUmUsuario(auth.getName());
+
+        modelo.addAttribute("listasCriadas", minhaListaServico.pegarListasCriadasPorId(usuario.getId()));
 
         return "minha-lista/listas-criadas";
     }

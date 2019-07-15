@@ -38,4 +38,9 @@ public class UserDetailsImpl implements UserDetailsService {
 
         return new User(usuario.getEmail(), usuario.getSenha(), permissoes);
     }
+
+    public Usuario buscaUmUsuario(String email){
+
+        return usuarioRepositorio.findByEmail(email);
+    }
 }

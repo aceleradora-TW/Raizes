@@ -11,14 +11,13 @@
   <div>
     <div class="container card-content valign center">
       <h1 class="title titulo-h1">Formulário de Registro do Raízes</h1>
-      <form th:action="@{/registrar/cliente}" th:object="${formUsuario}" method="post"
+      <form th:action="@{/registrar/cliente}" th:object="${formCliente}" method="post"
             id="registraAss">
         <div class="columns is-text-left">
           <div class="columns is-12">
             <div>
               <div class="box">
                 <div>
-                  <label><input th:value="${tipoUsuario.CLIENTE}" th:field="*{tipoDeUsuario}" hidden></label>
                   <label for="nome">*Nome Completo:</label>
                   <input class="input input-fancy borda-arredondada" type="text" id="nome"
                          th:field="*{nome}">
@@ -26,7 +25,7 @@
               </div>
               <div class="box">
                 <div class="columns">
-                  <div class="column is-half"> <label for="rua">*Rua:</label>
+                  <div class="column is-half"> <label id="rua" for="rua">*Rua:</label>
                     <input class="input input-fancy borda-arredondada" type="text" id="endereco"
                            th:field="*{endereco.rua}" placeholder="Ex: Rua João da Silva, 10" th:name="rua">
                   </div>
@@ -50,7 +49,7 @@
                            th:field="*{endereco.bairro}" placeholder="Ex: Centro" th:name="bairro">
                   </div>
                   <div class="column">
-                    <label for="cidade">*Cidade:</label>
+                    <label id="cidade" for="cidade">*Cidade:</label>
                     <div class="control">
                       <div class="select">
                         <select th:field="*{endereco.cidade.nome}">
@@ -61,7 +60,7 @@
                     </div>
                   </div>
                   <div class="column">
-                    <label for="uf">*Estado:</label>
+                    <label id="uf" for="uf">*Estado:</label>
                     <div class="control">
                       <div class="select">
                         <select th:field="*{endereco.cidade.estado.uf}">

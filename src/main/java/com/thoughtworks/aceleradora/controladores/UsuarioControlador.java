@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
+
 @Controller
 public class UsuarioControlador {
     private RegistrarServico registrarServico;
@@ -36,8 +38,7 @@ public class UsuarioControlador {
 
     @GetMapping(value = "/registrar/cliente")
     public String registrarCliente(Model model) {
-        model.addAttribute("formUsuario", new Cliente());
-        model.addAttribute("tipoUsuario", TipoDeUsuario.CLIENTE);
+        model.addAttribute("formCliente", new Cliente());
         model.addAttribute("cidade", cidadeRepositorio.findAll());
         model.addAttribute("estado", estadoRepositorio.findAll());
 
@@ -46,8 +47,7 @@ public class UsuarioControlador {
 
     @GetMapping(value = "/registrar/produtor")
     public String registrarProdutor(Model model) {
-        model.addAttribute("formUsuario", new Produtor());
-        model.addAttribute("tipoUsuario", TipoDeUsuario.PRODUTOR);
+        model.addAttribute("formProd", new Produtor());
         model.addAttribute("cidade", cidadeRepositorio.findAll());
         model.addAttribute("estado", estadoRepositorio.findAll());
 
@@ -56,17 +56,18 @@ public class UsuarioControlador {
 
 
     @GetMapping(value = "/seleciona-tipo-usuario")
-    public String selecionaUsuario(Model modelo) {
+    public String selecionaUsuario(){
         return "registro/selecionaUsuario";
     }
 
 
     @PostMapping(value = "/registrar/cliente")
-    public String registrarCliente(@ModelAttribute("formUsuario") Cliente cliente, BindingResult bindingResult) {
+    public String registrarCliente(@ModelAttribute("formCliente") @Valid Cliente cliente, BindingResult bindingResult, Model modelo) {
 
-        if (bindingResult.hasErrors()) {
+        if(bindingResult.hasErrors()) {
+            modelo.addAttribute("erros", bindingResult.getAllErrors());
             bindingResult.getAllErrors().forEach(System.out::println);
-            return "registro/registrar/cliente";
+            return "registro/registrarCliente";
         }
 
         registrarServico.salvarCliente(cliente);
@@ -75,11 +76,10 @@ public class UsuarioControlador {
     }
 
     @PostMapping(value = "/registrar/produtor")
-    public String registrarProdutor(@ModelAttribute("formUsuario") Produtor produtor, BindingResult bindingResult) {
-
-
-        if (bindingResult.hasErrors()) {
-            return "registro/registrar/produtor";
+    public String registrarProdutor(@ModelAttribute("formProd") @Valid Produtor produtor, BindingResult bindingResult, Model modelo) {
+        if(bindingResult.hasErrors()) {
+            modelo.addAttribute("erros", bindingResult.getAllErrors());
+            return "registro/registrarProdutor";
         }
 
         registrarServico.salvarProdutor(produtor);

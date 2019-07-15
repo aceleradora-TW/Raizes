@@ -1,14 +1,16 @@
 package com.thoughtworks.aceleradora.dominio;
 
+import com.thoughtworks.aceleradora.validadores.anotacoes.RegistraProdutorValida;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-
 @DiscriminatorValue(TipoDeUsuario.Valores.PRODUTOR)
 @Table(name = "produtores")
+@RegistraProdutorValida
 public class Produtor extends Usuario{
 
     private boolean possuiTransporte;

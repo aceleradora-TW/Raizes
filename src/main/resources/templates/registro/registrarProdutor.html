@@ -1,118 +1,118 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.w3.org/1999/xhtml">
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
 <body>
-  <main>
-    <div>
-      <div class="container card-content valign center">
-        <h1 class="title titulo-h1">Formulário de Registro do Raízes</h1>
-        <form th:action="@{/registrar/produtor}" th:object="${formUsuario}" method="post"
-           id="registraAss">
-          <div class="columns is-text-left">
-            <div class="columns is-12">
-              <div>
-                <div class="box">
-                  <label for="possui_transporte">*Possui Transporte: </label>
-                  <div class="select">
-                  <select th:field="${formUsuario.possuiTransporte}">
+<main>
+  <div>
+    <div class="container card-content valign center">
+      <h1 class="title titulo-h1">Formulário de Registro do Raízes</h1>
+      <form th:action="@{/registrar/produtor}" th:object="${formProd}" method="post"
+            id="registraAss">
+        <div class="columns is-text-left">
+          <div class="columns is-12">
+            <div>
+              <div class="box">
+                <label id="possui_transporte" for="possui_transporte">*Possui Transporte: </label>
+                <div class="select">
+                  <select th:field="${formProd.possuiTransporte}">
                     <option th:name="possui_transporte" th:value="true">Sim</option>
                     <option th:name="possui_transporte" th:value="false">Não</option>
                   </select>
-                  </div>
-                  <div>
-                    <label for="nome">*Nome Completo:</label>
-                    <input class="input input-fancy borda-arredondada" type="text" id="nome"
-                      th:field="*{nome}">
-                  </div>
-                </div>
-                <div class="box">
-                  <div class="columns">
-                    <div class="column is-half"> <label for="endereco">*Rua:</label>
-                      <input class="input input-fancy borda-arredondada" type="text" id="endereco"
-                        th:field="*{endereco.rua}" placeholder="Ex: Rua João da Silva, 10" th:name="rua">
-                    </div>
-
-                    <div class="column"> <label for="numero">*Numero:</label>
-                      <input class="input input-fancy borda-arredondada" type="text" id="numero"
-                             th:field="*{endereco.numero}" th:name="numero">
-                    </div>
-
-                    <div class="column">
-                      <label for="complemento">Complemento:</label>
-                      <input class="input input-fancy borda-arredondada" type="text" id="complemento"
-                        th:field="*{endereco.complemento}" placeholder="Ex: Apartamento 101" th:name="complemento">
-                    </div>
-                  </div>
-                  <div class="columns">
-                    <div class="column is-half">
-                      <label for="Bairro">*Bairro:</label>
-                      <input class="input input-fancy borda-arredondada" type="text" id="bairro"
-                        th:field="*{endereco.bairro}" placeholder="Ex: Centro" th:name="bairro">
-                    </div>
-                    <div class="column">
-                      <label for="cidade">*Cidade:</label>
-                      <div class="control">
-                        <div class="select">
-                          <select th:field="*{endereco.cidade.nome}">
-                            <option th:each="cidades : ${cidade}" th:text="${cidades.nome}" th:value="${cidades.nome}" th:name="nome">
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="column">
-                      <label for="uf">*Estado:</label>
-                      <div class="control">
-                        <div class="select">
-                          <select th:field="*{endereco.cidade.estado.uf}">
-                            <option th:each="estados : ${estado}" th:text="${estados.uf}" th:value="${estados.uf}" th:name="uf" th:id="uf">
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <div>
-                  <div class="box">
-                    <div class="columns">
-                      <div class="column is-half">
-                        <label for="email" id="emailProdutor">*E-mail:</label>
-                        <input class="input input-fancy borda-arredondada" th:field="*{email}" type="text"
-                          id="email">
-                      </div>
-                      <div class="column is-half">
-                        <label for="telefone">*Telefone:</label>
-                        <input class="input input-fancy borda-arredondada" type="text" id="telefone"
-                          th:field="*{contato}" th:name="contato">
+                  <label for="nome">*Nome Completo:</label>
+                  <input class="input input-fancy borda-arredondada" type="text" id="nome"
+                         th:field="*{nome}">
+                </div>
+              </div>
+              <div class="box">
+                <div class="columns">
+                  <div class="column is-half"> <label for="endereco">*Rua:</label>
+                    <input class="input input-fancy borda-arredondada" type="text" id="endereco"
+                           th:field="*{endereco.rua}" placeholder="Ex: Rua João da Silva, 10" th:name="rua">
+                  </div>
+
+                  <div class="column"> <label for="numero">*Numero:</label>
+                    <input class="input input-fancy borda-arredondada" type="text" id="numero"
+                           th:field="*{endereco.numero}" th:name="numero">
+                  </div>
+
+                  <div class="column">
+                    <label for="complemento">Complemento:</label>
+                    <input class="input input-fancy borda-arredondada" type="text" id="complemento"
+                           th:field="*{endereco.complemento}" placeholder="Ex: Apartamento 101" th:name="complemento">
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column is-half">
+                    <label for="Bairro">*Bairro:</label>
+                    <input class="input input-fancy borda-arredondada" type="text" id="bairro"
+                           th:field="*{endereco.bairro}" placeholder="Ex: Centro" th:name="bairro">
+                  </div>
+                  <div class="column">
+                    <label id="cidade" for="cidade">*Cidade:</label>
+                    <div class="control">
+                      <div class="select">
+                        <select th:field="*{endereco.cidade.nome}">
+                          <option th:each="cidades : ${cidade}" th:text="${cidades.nome}" th:value="${cidades.nome}" th:name="nome">
+                          </option>
+                        </select>
                       </div>
                     </div>
-                    <div class="columns">
+                  </div>
+                  <div class="column">
+                    <label id="uf" for="uf">*Estado:</label>
+                    <div class="control">
+                      <div class="select">
+                        <select th:field="*{endereco.cidade.estado.uf}">
+                          <option th:each="estados : ${estado}" th:text="${estados.uf}" th:value="${estados.uf}" th:name="uf" th:id="uf">
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="box">
+                  <div class="columns">
+                    <div class="column is-half">
+                      <label for="email" id="emailProdutor">*E-mail:</label>
+                      <input class="input input-fancy borda-arredondada" th:field="*{email}" type="text"
+                             id="email">
+                    </div>
+                    <div class="column is-half">
+                      <label for="telefone">*Telefone:</label>
+                      <input class="input input-fancy borda-arredondada" type="text" id="telefone"
+                             th:field="*{contato}" th:name="contato">
+                    </div>
+                  </div>
+                  <div class="columns">
                     <div class="column is-half">
                       <label for="password">*Senha:</label>
                       <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password"
                              type="password" name="senha">
                     </div>
-                    </div>
-                    <div class="field">
-                      <div class="rz-box-footer flex space-between p-3">
-                        <a href="/" class="button rz-button is-rounded">Cancelar</a>
-                        <button class="button rz-button is-rounded" type="submit">Salvar</button>
-                      </div>
+                  </div>
+                  <div class="field">
+                    <div class="rz-box-footer flex space-between p-3">
+                      <a href="/" class="button rz-button is-rounded">Cancelar</a>
+                      <button class="button rz-button is-rounded" type="submit">Salvar</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
-  </main>
+  </div>
+</main>
 </body>
 </html>
