@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -63,9 +64,17 @@ public class PedidoControlador {
 
         String nomePedido = pedidoServico.encontraUm(id).get().getNome();
         List<PedidoProdutoProdutor> pedidoProdutoProdutores = pedidoServico.encontraUm(id).get().getPedidosProdutosProdutores();
+
+        HashMap listaTotalPorProduto = new HashMap();
+        for (PedidoProdutoProdutor pedido:pedidoProdutoProdutores) {
+            listaTotalPorProduto.put(pedido.getId(),pedidoServico.calculaTotalDoProduto(pedido));
+        }
+
         modelo.addAttribute("pedido", nomePedido);
         modelo.addAttribute("produtores", pedidoServico.agrupaProdutosPorProdutor(id));
         modelo.addAttribute("pedidoProdutoProdutores", pedidoProdutoProdutores);
+//        modelo.addAttribute("precoProduto", pedidoServico.calculaTotalDoProduto(pedidoProdutoProdutores.get(0)));
+        modelo.addAttribute("precoProduto", listaTotalPorProduto);
 
         return "pedido/visualizar-pedido";
     }

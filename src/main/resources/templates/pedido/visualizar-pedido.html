@@ -30,7 +30,7 @@
                         <span th:text="${pedido.quantidadePedido}" th:value="${pedido.quantidadePedido}"
                           id="quantidadePedido" class="quantidadePedido"></span>
                         <label>R$
-                          <span class="precoCadaProduto" id="precoCadaProduto"></span>
+                          <span class="precoCadaProduto" id="precoCadaProduto" th:text="${precoProduto.get(pedido.id)}"></span>
                         </label>
                       </span>
                     </div>

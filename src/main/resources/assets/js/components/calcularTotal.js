@@ -25,33 +25,33 @@ export default {
     $('#valorTotal').text(duasCasasAposVirgula(totalPedido))
   },
 
-  totalVisualizar: () => {
+  // totalVisualizar: () => {
 
-    const preco =  $('#visualizar').find('#valor').text();
-    console.log("Preco",preco);
-    const quantidadePedido = $('#visualizar').find('#quantidadePedido').text();
-    console.log("Quantidade",quantidadePedido);
-    const precoCadaProduto = preco * quantidadePedido;
-    console.log("precoCadaProduto",precoCadaProduto);
+  //   const preco =  $('#visualizar').find('#valor').text();
+  //   console.log("Preco",preco);
+  //   const quantidadePedido = $('#visualizar').find('#quantidadePedido').text();
+  //   console.log("Quantidade",quantidadePedido);
+  //   const precoCadaProduto = preco * quantidadePedido;
+  //   console.log("precoCadaProduto",precoCadaProduto);
 
 
 
-    $('#visualizar').parents('#visualizar').find('#precoCadaProduto').text(duasCasasAposVirgula(precoCadaProduto));
-    const precos = $('.precoCadaProduto');
-    console.log("Precos",precos);
+  //   $('#visualizar').parents('#visualizar').find('#precoCadaProduto').text(duasCasasAposVirgula(precoCadaProduto));
+  //   const precos = $('.precoCadaProduto');
+  //   console.log("Precos",precos);
     
 
-    let total = 0;
-    precos.each((indice, campoResultado) => {
-      let valor = $(campoResultado).text() || 0;
-      console.log("Valor",valor);
-      total = total + parseFloat(valor);
-      console.log("Total",total);
-    });
+  //   let total = 0;
+  //   precos.each((indice, campoResultado) => {
+  //     let valor = $(campoResultado).text() || 0;
+  //     console.log("Valor",valor);
+  //     total = total + parseFloat(valor);
+  //     console.log("Total",total);
+  //   });
     
 
-    $('#valorTotalPedido').text(duasCasasAposVirgula(total))
+  //   $('#valorTotalPedido').text(duasCasasAposVirgula(total))
 
     
-  }
+  // }
 }
