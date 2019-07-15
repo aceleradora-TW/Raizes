@@ -13,6 +13,12 @@
       <h1 class="title titulo-h1">Formulário de Registro do Raízes</h1>
       <form th:action="@{/registrar/produtor}" th:object="${formProd}" method="post"
             id="registraAss">
+        <div th:if="${mensagem}">
+          <span th:text="${mensagem}"></span>
+        </div>
+        <div th:if="${erros}">
+          <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
+        </div>
         <div class="columns is-text-left">
           <div class="columns is-12">
             <div>
@@ -101,7 +107,7 @@
                   </div>
                   <div class="field">
                     <div class="rz-box-footer flex space-between p-3">
-                      <a href="/" class="button rz-button is-rounded">Cancelar</a>
+                      <a href="/login" class="button rz-button is-rounded">Cancelar</a>
                       <button class="button rz-button is-rounded" type="submit">Salvar</button>
                     </div>
                   </div>

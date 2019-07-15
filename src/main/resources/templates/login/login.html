@@ -6,7 +6,19 @@
 </head>
 <body>
 <main>
-    <div class="columns">
+    <div th:if="${mensagem} != null">
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            window.onload = function () {
+                window.Modal
+                    .success()
+                    .okAction("Ok")
+                    .show(/*[[${mensagem}]]*/)
+            };
+            /*]]>*/
+        </script>
+    </div>
+        <div class="columns">
         <div class="column is-12">
             <div class="box">
                 <div class="container has-text-centered">
