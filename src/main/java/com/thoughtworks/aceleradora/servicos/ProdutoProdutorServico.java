@@ -29,7 +29,7 @@ public class ProdutoProdutorServico {
     public Map<Produto, List<ProdutoProdutor>> pegaProdutoProdutorPorProdutos(List<Produto> produtos) {
         List<ProdutoProdutor> produtosProdutoresDaLista = produtoProdutorRepositorio.findByProdutoIn(produtos);
 
-        LinkedHashMap<Produto, List<ProdutoProdutor>> byProdProd = produtosProdutoresDaLista
+        LinkedHashMap<Produto, List<ProdutoProdutor>> produtorPorProduto = produtosProdutoresDaLista
                 .stream()
                 .collect(Collectors.groupingBy(ProdutoProdutor::getProduto))
                 .entrySet()
@@ -48,7 +48,7 @@ public class ProdutoProdutorServico {
                         LinkedHashMap::new
                 ));
 
-        return byProdProd;
+        return produtorPorProduto;
     }
 
     public ProdutoProdutor encontraUm(Long id) {
