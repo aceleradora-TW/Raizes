@@ -13,6 +13,7 @@
   </div>
   <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor())">
     <section class="section">
+      <div th:replace="fragmentos/breadcrumb"></div>
       <section class="container">
         <h1 class="title">Cadastrar Produto</h1>
         <h3 class="subtitle-color flex start">*Campos obrigatórios.</h3>

@@ -14,6 +14,7 @@
   <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor())">
 
     <section class="section">
+      <div th:replace="fragmentos/breadcrumb"></div>
       <section class="container">
         <h1 class="title centraliza-texto">Meu Estoque</h1>
         <div th:if="${mensagem} != null">
