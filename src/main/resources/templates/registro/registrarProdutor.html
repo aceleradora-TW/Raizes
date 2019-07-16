@@ -1,124 +1,128 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
-
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Raízes</title>
+    <meta charset="UTF-8">
+    <title>Raízes</title>
 </head>
 <body>
 <main>
-  <div>
-    <div class="container card-content valign center">
-      <h1 class="title titulo-h1">Formulário de Registro do Raízes</h1>
-      <form th:action="@{/registrar/produtor}" th:object="${formProd}" method="post"
-            id="registraAss">
-        <div th:if="${mensagem}">
-          <span th:text="${mensagem}"></span>
-        </div>
-        <div th:if="${erros}">
-          <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
-        </div>
-        <div class="columns is-text-left">
-          <div class="columns is-12">
-            <div>
-              <div class="box">
-                <label id="possui_transporte" for="possui_transporte">*Possui Transporte: </label>
-                <div class="select">
-                  <select th:field="${formProd.possuiTransporte}">
-                    <option th:name="possui_transporte" th:value="true">Sim</option>
-                    <option th:name="possui_transporte" th:value="false">Não</option>
-                  </select>
+    <div>
+        <div class="container card-content valign center">
+            <h1 class="title titulo-h1">Formulário de Registro do Raízes</h1>
+            <form th:action="@{/registrar/produtor}" th:object="${formProd}" method="post" id="registraAss">
+                <div th:if="${mensagem}">
+                    <span th:text="${mensagem}"></span>
                 </div>
-                <div>
-                  <label for="nome">*Nome Completo:</label>
-                  <input class="input input-fancy borda-arredondada" type="text" id="nome"
-                         th:field="*{nome}">
+                <div th:if="${erros}">
+                    <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
                 </div>
-              </div>
-              <div class="box">
-                <div class="columns">
-                  <div class="column is-half"> <label for="endereco">*Rua:</label>
-                    <input class="input input-fancy borda-arredondada" type="text" id="endereco"
-                           th:field="*{endereco.rua}" placeholder="Ex: Rua João da Silva, 10" th:name="rua">
-                  </div>
+                <div class="columns is-text-left">
+                    <div class="columns is-12">
+                        <div>
+                            <div class="box">
+                                <label for="possui_transporte">*Possui Transporte: </label>
+                                <div class="select" id="possui_transporte">
+                                    <select th:field="${formProd.possuiTransporte}">
+                                        <option th:name="possui_transporte" th:value="true">Sim</option>
+                                        <option th:name="possui_transporte" th:value="false">Não</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label for="nome">*Nome Completo:</label>
+                                    <input class="input input-fancy borda-arredondada" type="text" id="nome" th:field="*{nome}">
+                                    <div class="help-block"></div>
+                                </div>
+                            </div>
+                            <div class="box">
+                                <div class="columns">
+                                    <div class="column is-half field">
+                                        <label for="endereco">*Rua:</label>
+                                        <input class="input input-fancy borda-arredondada" type="text" id="endereco"
+                                               th:field="*{endereco.rua}" placeholder="Ex: Rua João da Silva, 10" th:name="rua">
+                                        <div class="help-block"></div>
+                                    </div>
 
-                  <div class="column"> <label for="numero">*Numero:</label>
-                    <input class="input input-fancy borda-arredondada" type="text" id="numero"
-                           th:field="*{endereco.numero}" th:name="numero">
-                  </div>
+                                    <div class="column field">
+                                        <label for="numero">*Numero:</label>
+                                        <input class="input input-fancy borda-arredondada" type="text" id="numero"
+                                               th:field="*{endereco.numero}" th:name="numero">
+                                        <div class="help-block"></div>
+                                    </div>
 
-                  <div class="column">
-                    <label for="complemento">Complemento:</label>
-                    <input class="input input-fancy borda-arredondada" type="text" id="complemento"
-                           th:field="*{endereco.complemento}" placeholder="Ex: Apartamento 101" th:name="complemento">
-                  </div>
+                                    <div class="column field">
+                                        <label for="complemento">Complemento:</label>
+                                        <input class="input input-fancy borda-arredondada" type="text" id="complemento"
+                                               th:field="*{endereco.complemento}" placeholder="Ex: Apartamento 101" th:name="complemento">
+                                        <div class="help-block"></div>
+                                    </div>
+                                </div>
+                                <div class="columns field">
+                                    <div class="column is-half">
+                                        <label for="Bairro">*Bairro:</label>
+                                        <input class="input input-fancy borda-arredondada" type="text" id="bairro"
+                                               th:field="*{endereco.bairro}" placeholder="Ex: Centro" th:name="bairro">
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="column">
+                                        <label id="cidade" for="cidade">*Cidade:</label>
+                                        <div class="control">
+                                            <div class="select">
+                                                <select th:field="*{endereco.cidade.nome}">
+                                                    <option th:each="cidades : ${cidades}" th:text="${cidades.nome}" th:value="${cidades.nome}" th:name="nome">
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column">
+                                        <label id="uf" for="uf">*Estado:</label>
+                                        <div class="control">
+                                            <div class="select">
+                                                <select th:field="*{endereco.cidade.estado.uf}">
+                                                    <option th:each="estado : ${estados}" th:text="${estados.uf}" th:value="${estados.uf}" th:name="uf" th:id="uf">
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box">
+                                <div class="columns">
+                                    <div class="column is-half field">
+                                        <label for="email" id="emailProdutor">*E-mail:</label>
+                                        <input class="input input-fancy borda-arredondada" th:field="*{email}" type="email" id="email">
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="column is-half field">
+                                        <label for="telefone">*Telefone:</label>
+                                        <input class="input input-fancy borda-arredondada" type="text" id="telefone"
+                                               th:field="*{contato}" th:name="contato">
+                                        <div class="help-block"></div>
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column is-half field">
+                                        <label for="password">*Senha:</label>
+                                        <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password"
+                                               type="password" name="senha">
+                                        <div class="help-block"></div>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="rz-box-footer flex space-between p-3">
+                                        <a th:href="@{/login}"class="button rz-button is-rounded">Cancelar</a>
+                                        <button class="button rz-button is-rounded" type="submit">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="columns">
-                  <div class="column is-half">
-                    <label for="Bairro">*Bairro:</label>
-                    <input class="input input-fancy borda-arredondada" type="text" id="bairro"
-                           th:field="*{endereco.bairro}" placeholder="Ex: Centro" th:name="bairro">
-                  </div>
-                  <div class="column">
-                    <label id="cidade" for="cidade">*Cidade:</label>
-                    <div class="control">
-                      <div class="select">
-                        <select th:field="*{endereco.cidade.nome}">
-                          <option th:each="cidades : ${cidades}" th:text="${cidades.nome}" th:value="${cidades.nome}" th:name="nome">
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="column">
-                    <label id="uf" for="uf">*Estado:</label>
-                    <div class="control">
-                      <div class="select">
-                        <select th:field="*{endereco.cidade.estado.uf}">
-                          <option th:each="estado : ${estados}" th:text="${estados.uf}" th:value="${estados.uf}" th:name="uf" th:id="uf">
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div class="box">
-                  <div class="columns">
-                    <div class="column is-half">
-                      <label for="email" id="emailProdutor">*E-mail:</label>
-                      <input class="input input-fancy borda-arredondada" th:field="*{email}" type="text"
-                             id="email">
-                    </div>
-                    <div class="column is-half">
-                      <label for="telefone">*Telefone:</label>
-                      <input class="input input-fancy borda-arredondada" type="text" id="telefone"
-                             th:field="*{contato}" th:name="contato">
-                    </div>
-                  </div>
-                  <div class="columns">
-                    <div class="column is-half">
-                      <label for="password">*Senha:</label>
-                      <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password"
-                             type="password" name="senha">
-                    </div>
-                  </div>
-                  <div class="field">
-                    <div class="rz-box-footer flex space-between p-3">
-                      <a th:href="@{/logout}" class="button rz-button is-rounded">Cancelar</a>
-                      <button class="button rz-button is-rounded" type="submit">Salvar</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </form>
+        </form>
     </div>
-  </div>
+    </div>
 </main>
 </body>
 </html>
