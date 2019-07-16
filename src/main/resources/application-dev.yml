@@ -5,3 +5,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/raizes
     username: postgres
     password: raizes
+
+  mail:
+    properties:
+      mail:
+        debug: true

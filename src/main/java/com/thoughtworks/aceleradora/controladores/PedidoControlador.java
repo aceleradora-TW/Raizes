@@ -1,12 +1,11 @@
 package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.componentes.EmailComponente;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoSemProdutorExcecao;
-import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
-import com.thoughtworks.aceleradora.servicos.PedidoServico;
-import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
+import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +28,7 @@ public class PedidoControlador {
     private MinhaListaServico minhaListaServico;
     private PedidoServico pedidoServico;
     private ProdutoProdutorServico produtoProdutorServico;
+    private EmailComponente emailComponente;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
             "/");
@@ -36,11 +36,14 @@ public class PedidoControlador {
     @Autowired
     public PedidoControlador(MinhaListaServico minhaListaServico,
                              PedidoServico pedidoServico,
-                             ProdutoProdutorServico produtoProdutorServico) {
+                             ProdutoProdutorServico produtoProdutorServico,
+                             EmailComponente emailComponente) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
         this.produtoProdutorServico = produtoProdutorServico;
-    }
+        this.emailComponente = emailComponente;
+
+        }
 
     @GetMapping
     public String pedidoCriados(Breadcrumb breadcrumb,
@@ -157,6 +160,8 @@ public class PedidoControlador {
             }
 
             pedidoServico.salvarPedido(pedido);
+            emailComponente.notificaProdutor(pedido);
+
 
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
 
