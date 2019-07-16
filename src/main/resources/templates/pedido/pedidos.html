@@ -14,7 +14,7 @@
     <h1 class="fs-22 pt-4">Você não tem autorização para acessar essa página</h1>
 </div>
 <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).CLIENTE.getValor())">
-    <section class="section">
+    <div class="section">
         <div th:replace="fragmentos/breadcrumb"></div>
    <section class="section">
       <section class="container">
@@ -52,8 +52,8 @@
                               </td>
                               <td>
                                  <span type="date" class="form-control" th:value="${{pedido.criadoEm}}" th:text="${#dates.format(pedido.criadoEm, 'dd-MMM-yyyy')}">
-                      </span>
-                      </td>
+                                 </span>
+                              </td>
                     <td class="flex end">
                       <a class="button rz-button list-style"
                         th:href="@{/pedidos/{id}/visualizar-pedido(id=${pedido.id})}">
@@ -69,18 +69,21 @@
                       </form>
                     </td>
                   </tr>
-                </tbody>
+                        </tbody>
               </table>
             </div>
             <div class="rz-box-footer flex space-between p-3">
               <a class="button rz-button is-rounded" th:href="@{/}">Voltar</a>
               <a class="button rz-button is-rounded" th:href="@{/minhas-listas}">Novo Pedido</a>
             </div>
+
           </div>
         </div>
       </div>
     </section>
   </section>
+    </div>
+</div>
 </body>
 
 </html>
