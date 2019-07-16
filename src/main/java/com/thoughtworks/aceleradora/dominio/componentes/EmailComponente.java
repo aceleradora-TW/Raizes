@@ -24,21 +24,32 @@ public class EmailComponente {
     public void notificaProdutor(Pedido pedido) {
 
         for (PedidoProdutoProdutor pedidoProdutoProdutor : pedido.getPedidosProdutosProdutores()) {
+
             SimpleMailMessage mensagem = new SimpleMailMessage();
 
             String emailProdutor = pedidoProdutoProdutor.getProdutoProdutor().getProdutor().getEmail();
 
-            mensagem.setSubject("Raízes - Novo Pedido recebido!");
+            mensagem.setSubject("Novo Pedido recebido!");
 
             mensagem.setText("Raizes - Novo pedido recebido!\n" +
                     "\n" +
                     "- Nome do Produtor: " + pedidoProdutoProdutor.getProdutoProdutor().getProdutor().getNome() + "\n" +
-                    "\n ========================== \n" + "\n" +
-                    " Dados do Pedido: " + "\n" +
+                    "\n =========== Dados do Pedido =============== \n" + "\n" +
+                    "- Data do Pedido: " + pedido.getCriadoEm().toString() + "\n" +
+                    "- Produto solicitado: " + pedidoProdutoProdutor.getProdutoProdutor().getProduto().getNome() + "\n" +
+                    "- Quantidade solicitada do produto: " + pedidoProdutoProdutor.getQuantidadePedido() +
+                    "/ " + pedidoProdutoProdutor.getProdutoProdutor().getProduto().getUnidadeMedida().getCodigo() + "\n" +
+                    "- Total do pedido: " + "PEGAR DA MAYARA E DA FRAN" + "\n" +
+                    "\n =========== Dados do Solicitante =============== \n" + "\n" +
                     "- Nome: " + pedido.getCliente().getNome() + "\n" +
                     "- E-mail: " + pedido.getCliente().getEmail() + "\n" +
                     "- Telefone: " + pedido.getCliente().getContato() + "\n" +
-                    "- Data do Pedido: " + pedido.getCriadoEm().toString() + "\n"
+                    "- Endereço: " + "\n" +
+                    "\t- Cidade: " + pedido.getCliente().getEndereco().getCidade().getNome() + "\n" +
+                    "\t- Bairro: " + pedido.getCliente().getEndereco().getBairro() + "\n" +
+                    "\t- Endereço: " + pedido.getCliente().getEndereco().getRua() + ", " +
+                    pedido.getCliente().getEndereco().getComplemento()  +
+                    " Nº: " + pedido.getCliente().getEndereco().getNumero()
             );
 
             mensagem.setFrom("raizes.agil@gmail.com");
@@ -51,6 +62,6 @@ public class EmailComponente {
             }
         }
     }
-
 }
+
 
