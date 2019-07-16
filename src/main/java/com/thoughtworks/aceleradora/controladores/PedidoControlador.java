@@ -1,12 +1,11 @@
 package com.thoughtworks.aceleradora.controladores;
 
 import com.thoughtworks.aceleradora.dominio.*;
+import com.thoughtworks.aceleradora.dominio.componentes.EmailComponente;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoSemProdutorExcecao;
-import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
-import com.thoughtworks.aceleradora.servicos.PedidoServico;
-import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
+import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,19 +28,26 @@ public class PedidoControlador {
     private MinhaListaServico minhaListaServico;
     private PedidoServico pedidoServico;
     private ProdutoProdutorServico produtoProdutorServico;
+    private EmailComponente emailComponente;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
             "/");
 
     @Autowired
-    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico, ProdutoProdutorServico produtoProdutorServico) {
+    public PedidoControlador(MinhaListaServico minhaListaServico,
+                             PedidoServico pedidoServico,
+                             ProdutoProdutorServico produtoProdutorServico,
+                             EmailComponente emailComponente) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
         this.produtoProdutorServico = produtoProdutorServico;
-    }
+        this.emailComponente = emailComponente;
+
+        }
 
     @GetMapping
-    public String pedidoCriados(Breadcrumb breadcrumb, Model modelo) {
+    public String pedidoCriados(Breadcrumb breadcrumb,
+                                Model modelo) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedido/pedidos");
@@ -51,7 +57,9 @@ public class PedidoControlador {
     }
 
     @GetMapping("/{id}/visualizar-pedido")
-    public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
+    public String visualizarPedido(@PathVariable("id") Long id,
+                                   Model modelo,
+                                   Breadcrumb breadcrumb) {
 
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
@@ -107,7 +115,10 @@ public class PedidoControlador {
     }
 
     @GetMapping("/{listaId}/realizar-pedido")
-    public String listaProdutoresDeProdutos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo,RedirectAttributes redirecionamentoDeAtributos) {
+    public String listaProdutoresDeProdutos(Breadcrumb breadcrumb,
+                                            @PathVariable("listaId") Long listaId,
+                                            Model modelo,
+                                            RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Realizar Pedido", "/pedido/pedidos");
 
@@ -130,8 +141,12 @@ public class PedidoControlador {
 
     }
 
+
     @PostMapping("/realizar-pedido")
-    public String salvarPedido(@Valid Pedido pedido, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos,
+    public String salvarPedido(@Valid Pedido pedido,
+                               BindingResult resultadoValidacao,
+                               Model modelo,
+                               RedirectAttributes redirecionamentoDeAtributos,
                                Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
@@ -145,6 +160,8 @@ public class PedidoControlador {
             }
 
             pedidoServico.salvarPedido(pedido);
+            emailComponente.notificaProdutor(pedido);
+
 
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
 

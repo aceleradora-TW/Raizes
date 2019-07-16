@@ -28,3 +28,18 @@ spring:
         fixed: 
           enabled: true
           version: test_version
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
+    port: 587
+    properties:
+      mail:
+        debug: false
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        transport:
+          protocol: smtp

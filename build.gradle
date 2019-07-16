@@ -43,6 +43,8 @@ dependencies {
     compile "org.flywaydb:flyway-core"
     compile "org.postgresql:postgresql:42.2.5"
     compile "org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE"
+    compile "org.springframework.boot:spring-boot-starter-mail"
+
 
     testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:2.21.0"

@@ -2,12 +2,10 @@
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
-
 <body>
   <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor())">
     <h1 class="fs-22 pt-4">Você não tem autorização para acessar essa página</h1>
@@ -84,7 +82,7 @@
                                 th:onchange="Calcular.totalEditar(event)" min=0 placeholder="Ex: 4" disabled>
                                 /<span th:text="${produto.unidadeMedida.codigo}"></span>
                             </span>
-                            
+
                           </label>
                           <label class="label">Total: R$ <span class="resultado" id="resultado">0.00</span>
                           </label>
@@ -112,5 +110,4 @@
         </section>
       </section>
 </body>
-
 </html>

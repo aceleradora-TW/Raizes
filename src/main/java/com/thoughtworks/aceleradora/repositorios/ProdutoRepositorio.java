@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.repositorios;
 
 import com.thoughtworks.aceleradora.dominio.Produto;
+import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,8 +13,5 @@ public interface ProdutoRepositorio extends CrudRepository<Produto, Long> {
 
     List<Produto> findAllByOrderByNome();
     Optional<Produto> findById(Long id);
-
-    Optional<Produto> findByNome(String nome);
-
 
 }
