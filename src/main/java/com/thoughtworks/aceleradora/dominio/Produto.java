@@ -1,11 +1,13 @@
 package com.thoughtworks.aceleradora.dominio;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
-
 @Entity(name = "produtos")
 @Access(AccessType.FIELD)
 public class Produto {
