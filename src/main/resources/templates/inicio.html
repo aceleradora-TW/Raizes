@@ -8,14 +8,15 @@
   </div>
 </head>
 <body>
-<section class="is-fullheight-with-navbar">
-  <div class="container">
-    <h1 class="title">Raízes</h1>
-    <div sec:authorize="isAuthenticated()">
-      Logado como: <span sec:authentication="name">
+  <div th:replace="fragmentos/breadcrumb"></div>
+  <section class="is-fullheight-with-navbar">
+    <div class="container">
+      <h1 class="title">Raízes</h1>
+        <div sec:authorize="isAuthenticated()">
+            Logado como: <span sec:authentication="name">
       </span>
+        </div>
     </div>
-  </div>
-</section>
+  </section>
 </body>
 </html>
