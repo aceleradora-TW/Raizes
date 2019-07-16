@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,6 +28,8 @@ public class EmailComponente {
 
             SimpleMailMessage mensagem = new SimpleMailMessage();
 
+            BigDecimal totalPedido = (BigDecimal.valueOf(pedidoProdutoProdutor.getQuantidadePedido())).multiply(pedidoProdutoProdutor.getValor());
+
             String emailProdutor = pedidoProdutoProdutor.getProdutoProdutor().getProdutor().getEmail();
 
             mensagem.setSubject("Novo Pedido recebido!");
@@ -34,13 +37,13 @@ public class EmailComponente {
             mensagem.setText("Raizes - Novo pedido recebido!\n" +
                     "\n" +
                     "- Nome do Produtor: " + pedidoProdutoProdutor.getProdutoProdutor().getProdutor().getNome() + "\n" +
-                    "\n =========== Dados do Pedido =============== \n" + "\n" +
+                    "\n ===== Dados do Pedido ===== \n" + "\n" +
                     "- Data do Pedido: " + pedido.getCriadoEm().toString() + "\n" +
                     "- Produto solicitado: " + pedidoProdutoProdutor.getProdutoProdutor().getProduto().getNome() + "\n" +
                     "- Quantidade solicitada do produto: " + pedidoProdutoProdutor.getQuantidadePedido() +
                     "/ " + pedidoProdutoProdutor.getProdutoProdutor().getProduto().getUnidadeMedida().getCodigo() + "\n" +
-                    "- Total do pedido: " + "PEGAR DA MAYARA E DA FRAN" + "\n" +
-                    "\n =========== Dados do Solicitante =============== \n" + "\n" +
+                    "- Total: R$" + totalPedido + "\n" +
+                    "\n ===== Dados do Solicitante ===== \n" + "\n" +
                     "- Nome: " + pedido.getCliente().getNome() + "\n" +
                     "- E-mail: " + pedido.getCliente().getEmail() + "\n" +
                     "- Telefone: " + pedido.getCliente().getContato() + "\n" +
