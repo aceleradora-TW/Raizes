@@ -5,11 +5,10 @@ import com.thoughtworks.aceleradora.dominio.ProdutoProdutor;
 import com.thoughtworks.aceleradora.dominio.TipoDeCultivo;
 import com.thoughtworks.aceleradora.dominio.UnidadeMedida;
 import com.thoughtworks.aceleradora.dominio.excecoes.ProdutoNaoEncontradoExcecao;
-import com.thoughtworks.aceleradora.servicos.CategoriaServico;
-import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
-import com.thoughtworks.aceleradora.servicos.ProdutoServico;
-import com.thoughtworks.aceleradora.servicos.ProdutorServico;
+import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
@@ -31,36 +31,40 @@ public class ProdutoProdutorControlador {
     private CategoriaServico categoriaServico;
     private ProdutoProdutorServico produtoProdutorServico;
     private ProdutorServico produtorServico;
-
+    private UserDetailsImpl usuarioServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb
             .pagina("Página Inicial", "/");
 
     @Autowired
-    public ProdutoProdutorControlador(ProdutoServico produtoServico, CategoriaServico categoriaServico, ProdutoProdutorServico produtoProdutorServico, ProdutorServico produtorServico) {
+    public ProdutoProdutorControlador(ProdutoServico produtoServico,
+                                      CategoriaServico categoriaServico,
+                                      ProdutoProdutorServico produtoProdutorServico,
+                                      ProdutorServico produtorServico,
+                                      UserDetailsImpl usuarioServico) {
         this.produtoServico = produtoServico;
         this.categoriaServico = categoriaServico;
         this.produtoProdutorServico = produtoProdutorServico;
         this.produtorServico = produtorServico;
+        this.usuarioServico = usuarioServico;
     }
 
-
     @GetMapping("/cadastro")
-    public String cadastrarProduto(Model modelo, Breadcrumb breadcrumb, ProdutoProdutor produtoProdutor) {
+    public String cadastrarProduto(Model modelo,
+                                   Breadcrumb breadcrumb,
+                                   Principal principal) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Estoque", "/produtos/visualizar-estoque")
                 .pagina("Cadastro", "/produtos/cadastro");
 
-
-        ProdutoProdutor produtoProdutorComProdutorHardocoded = new ProdutoProdutor();
-        produtoProdutorComProdutorHardocoded.setProdutor(produtorServico.encontraUm(1L));
-
+        modelo.addAttribute("produtoProdutor", new ProdutoProdutor());
+        modelo.addAttribute("produtorId", produtorServico.encontraProdutorPorEmail(principal.getName()).getId());
         modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
         modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
         modelo.addAttribute("produtos", produtoServico.pegarTodosPorOrdemAlfabetica());
         modelo.addAttribute("medidas", Arrays.asList(UnidadeMedida.values()));
-        modelo.addAttribute("produtoProdutor", produtoProdutorComProdutorHardocoded);
+
 
         return "produto/cadastro";
     }
@@ -92,7 +96,10 @@ public class ProdutoProdutorControlador {
 
 
     @GetMapping("/{id}/editar")
-    public String editarProduto(Breadcrumb breadcrumb, Model modelo, @PathVariable Long id, RedirectAttributes redirecionamentoDeAtributos) {
+    public String editarProduto(Breadcrumb breadcrumb,
+                                Model modelo,
+                                @PathVariable Long id,
+                                RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Atualizar Dados do Produto", "/produtos/editar-produto");
@@ -126,7 +133,6 @@ public class ProdutoProdutorControlador {
 
         if (resultadoValidacao.hasErrors()) {
             modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
-
             redirecionamentoDeAtributos.addFlashAttribute("erros", resultadoValidacao.getAllErrors());
             return "redirect:/produtos/{id}/editar";
         }
@@ -142,8 +148,9 @@ public class ProdutoProdutorControlador {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Estoque", "produto/visualizar-estoque");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        modelo.addAttribute("produtosProdutor", produtoProdutorServico.pegarProdutos());
+        modelo.addAttribute("produtosProdutor", produtoProdutorServico.buscarPorEmail(auth.getName()));
 
         return "produto/visualizar-estoque";
     }
