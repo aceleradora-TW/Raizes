@@ -11,8 +11,6 @@ import java.util.Optional;
 public interface PedidoRepositorio extends CrudRepository<Pedido, Long> {
     Optional<Pedido> findById(Long id);
 
-    Optional<Pedido> findByNome(String nome);
-
     List<Pedido> findAll();
 
     void deleteById(Long id);

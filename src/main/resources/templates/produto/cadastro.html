@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/xhtml">
-
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
-
 <body>
   <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).CLIENTE.getValor())">
     <h1 class="fs-22 pt-4">Você não tem autorização para acessar essa página</h1>
@@ -28,10 +25,9 @@
             <div class="rz-box box">
               <form id="formCadastraProduto" th:object="${produtoProdutor}" th:action="@{/produtos/cadastro}"
                 method="post">
+                <input type="hidden" name="produtor" th:value="${produtorId}">
                 <div class="flex center mb-4">
                   <div class="rz-box-body">
-                    <input type="hidden" th:field="*{produtor}" th:value="${produtoProdutor.produtor.id}">
-
                     <div class="pt-5 flex flex-row equal-sizing">
                       <div class="flex flex-row vertical-center">
                         <label class="pr-2"><strong>Produto</strong></label>
@@ -61,7 +57,7 @@
                       <div class="field vertical-center">
                         <div class="flex flex-row vertical-center">
                           <label class="pr-2"><strong>Quantidade</strong></label>
-                          <input class="input w-50" id="quantidadeEstoque" name="quantidadeEstoque" type="number"
+                          <input class="input w-50" id="quantidadeEstoque" th:field="*{quantidadeEstoque}" type="number"
                             placeholder="Ex.: 15">
                           <span class="my-2">/</span>
                           <span class="my-2 unidadeMedida" id="unidadeMedida2"></span>
@@ -95,5 +91,4 @@
     </section>
   </div>
 </body>
-
 </html>
