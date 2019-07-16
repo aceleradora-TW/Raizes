@@ -11,6 +11,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,4 +73,12 @@ public class PedidoServico {
                 .collect(Collectors.groupingBy(ProdutoProdutor::getProdutor));
         return byProdutor;
     }
+
+    public BigDecimal calculaTotalDoProduto (PedidoProdutoProdutor pedidoProdutoProdutor){
+
+        BigDecimal quantidade = new BigDecimal(pedidoProdutoProdutor.getQuantidadePedido());
+
+        return pedidoProdutoProdutor.getValor().multiply(quantidade);
+    }
+
 }
