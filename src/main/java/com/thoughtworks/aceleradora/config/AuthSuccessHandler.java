@@ -34,7 +34,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
             this.redirectStrategy.sendRedirect(request, response, "/");
 
         } else if (tipoDeUsuario.getAuthority().equals(TipoDeUsuario.CLIENTE.getValor())) {
-            this.redirectStrategy.sendRedirect(request, response, "/registrar");
+            this.redirectStrategy.sendRedirect(request, response, "/");
 
         } else {
             this.redirectStrategy.sendRedirect(request, response, "/registrar");

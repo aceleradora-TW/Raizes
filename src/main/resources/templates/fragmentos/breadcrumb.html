@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+<nav class="m-2 ml-5 breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+    <ul>
+        <li th:each="pagina : ${@breadcrumb.paginas}"
+            th:classappend="${@breadcrumb.ehPaginaAtiva(pagina)} ? 'is-active' : ''">
+            <a th:href="${pagina.url}" th:text="${pagina.titulo}"></a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>
