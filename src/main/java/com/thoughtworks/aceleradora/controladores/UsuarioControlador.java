@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -62,7 +63,7 @@ public class UsuarioControlador {
 
 
     @PostMapping(value = "/registrar/cliente")
-    public String registrarCliente(@ModelAttribute("formCliente") @Valid Cliente cliente, BindingResult bindingResult, Model modelo) {
+    public String registrarCliente(@ModelAttribute("formCliente") @Valid Cliente cliente, BindingResult bindingResult, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
 
         if(bindingResult.hasErrors()) {
             modelo.addAttribute("erros", bindingResult.getAllErrors());
@@ -70,18 +71,20 @@ public class UsuarioControlador {
             return "registro/registrarCliente";
         }
 
+        redirecionamentoDeAtributos.addFlashAttribute( "mensagem", "Registro efetuado com sucesso!");
         registrarServico.salvarCliente(cliente);
 
         return "redirect:/login";
     }
 
     @PostMapping(value = "/registrar/produtor")
-    public String registrarProdutor(@ModelAttribute("formProd") @Valid Produtor produtor, BindingResult bindingResult, Model modelo) {
+    public String registrarProdutor(@ModelAttribute("formProd") @Valid Produtor produtor, BindingResult bindingResult, Model modelo,  RedirectAttributes redirecionamentoDeAtributos) {
         if(bindingResult.hasErrors()) {
             modelo.addAttribute("erros", bindingResult.getAllErrors());
             return "registro/registrarProdutor";
         }
 
+        redirecionamentoDeAtributos.addFlashAttribute( "mensagem", "Registro efetuado com sucesso!");
         registrarServico.salvarProdutor(produtor);
 
         return "redirect:/login";
