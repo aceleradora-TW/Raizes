@@ -24,7 +24,7 @@
               <input th:type="hidden" name="nome" th:value="${nomeLista}">
               <div th:each="produto, index : ${produtos}">
                 <h3 class="flex start fs-22 pt-3 pl-2" th:text="${produto.nome}"></h3>
-                <span th:if="${produtoresDeProdutos.containsKey(produto) == false}">
+                <span th:if="${!produtoresDeProdutos.containsKey(produto)}">
                   <p class="centraliza-texto">*Esse produto não possui produtores!</p>
                 </span>
                 <div class="bigbox">
