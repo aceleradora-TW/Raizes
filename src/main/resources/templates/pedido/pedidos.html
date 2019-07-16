@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/xhtml">
 <html lang="pt-br">
 
 <head>
@@ -8,6 +9,13 @@
 </head>
 
 <body>
+
+<div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor())">
+    <h1 class="fs-22 pt-4">Você não tem autorização para acessar essa página</h1>
+</div>
+<div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).CLIENTE.getValor())">
+    <section class="section">
+        <div th:replace="fragmentos/breadcrumb"></div>
    <section class="section">
       <section class="container">
          <h1 class="title centraliza-texto">Meus Pedidos</h1>
