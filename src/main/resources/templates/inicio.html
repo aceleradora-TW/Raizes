@@ -3,9 +3,7 @@
       xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <title>Raízes</title>
-  <div sec:authorize="isAuthenticated()">
     <div>
-      Logado como: <span sec:authentication="name"></span>
     </div>
   </div>
 </head>
@@ -13,7 +11,10 @@
   <section class="is-fullheight-with-navbar">
     <div class="container">
       <h1 class="title">Raízes</h1>
-      <h2 class="subtitle">Ainda não há nada por aqui.</h2>
+      <div sec:authorize="isAuthenticated()">
+      Logado como: <span sec:authentication="name">
+      </span>
+      </div>
     </div>
   </section>
 </body>
