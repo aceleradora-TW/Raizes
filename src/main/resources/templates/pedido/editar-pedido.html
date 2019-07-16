@@ -26,7 +26,8 @@
                 <div th:each="produto, index : ${produtoProdutoresPorProduto.keySet()}">
                   <h3 class="flex start fs-22 pt-3 pl-2" th:text="${produto.nome}"></h3>
                   <div class="bigbox">
-                    <div th:each="produtoProdutor: ${produtoProdutoresPorProduto.get(produto)}" class="js-produto-produtores">
+                    <div th:each="produtoProdutor: ${produtoProdutoresPorProduto.get(produto)}"
+                      class="js-produto-produtores">
                       <input th:value="${pedido.criadoEm}" th:name="criado_em" hidden>
                       <div class="box" id="inputRadio">
                         <div class="w-75 flex equal-sizing flex-row">
@@ -71,13 +72,22 @@
                           </div>
                           <label class="flex center">
                             <span class="pr-1 quantidade-pedido">Quantidade:</span>
-                            <input class="w-25 pl-1 js-quantidade-pedido" size="5"
-                              th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
-                              th:onchange="Calcular.totalEditar(event)" min=0 placeholder="Ex: 4" disabled>
+                            <span th:if="${produtoProdutoresDoPedido.contains(produtoProdutor)}">
+                              <input class="w-50 pl-1 js-quantidade-pedido" size="5"
+                                th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}"
+                                type="number" th:onchange="Calcular.totalEditar(event)" min=0 placeholder="Ex: 4"
+                                disabled>
+                                /<span th:text="${produto.unidadeMedida.codigo}"></span>
+                            </span>
+                            <span th:unless="${produtoProdutoresDoPedido.contains(produtoProdutor)}">
+                              <input class="w-50 pl-1 js-quantidade-pedido" size="5" type="number"
+                                th:onchange="Calcular.totalEditar(event)" min=0 placeholder="Ex: 4" disabled>
+                                /<span th:text="${produto.unidadeMedida.codigo}"></span>
+                            </span>
+                            
                           </label>
-                          <label class="label">Total: R$ <span class="resultado" id="resultado">0.00</span>/<span th:text="${produto.unidadeMedida.codigo}"></span>
+                          <label class="label">Total: R$ <span class="resultado" id="resultado">0.00</span>
                           </label>
-
                         </div>
                       </div>
                     </div>
