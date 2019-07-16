@@ -18,18 +18,14 @@
       <div class="columns">
         <div class="column is-12">
           <div class="rz-box box">
-            <form id="formCadastraProduto" th:object="${produtoProdutor}" th:action="@{/produtos/cadastro}"
-              method="post">
+            <form id="formCadastraProduto" th:object="${produtosProdutor}" th:action="@{/produtos/cadastro}" method="post">
               <div class="flex center mb-4">
                 <div class="rz-box-body">
-                  <input type="hidden" th:field="*{produtor}" th:value="${produtoProdutor.produtor.id}">
-
                   <div class="pt-5 flex flex-row equal-sizing">
                     <div class="flex flex-row vertical-center">
                       <label class="pr-2"><strong>Produto</strong></label>
                       <div class="select">
-                        <select id="seletorDeProdutos" th:onchange="Produtos.atualizaUnidadeMedida(event)"
-                          name="produto">
+                        <select id="seletorDeProdutos" th:onchange="Produtos.atualizaUnidadeMedida(event)" name="produto">
                           <option th:each="produto : ${produtos}" th:text="${produto.nome}" th:value="${produto.id}"
                             th:attr="data-unidade-medida=${produto.unidadeMedida.codigo}">
                           </option>
@@ -40,15 +36,13 @@
                     <div class="flex flex-row vertical-center">
                       <label class="pr-2"> <strong>Tipo de Cultivo</strong></label>
                       <div class="select">
-                        <select th:field="*{tipoDeCultivo}">
-                          <option th:each="cultivo : ${cultivos}" th:text="${cultivo.codigo}"
-                            th:value="${cultivo.name()}">
+                        <select th:field="*{cultivos}">
+                          <option th:each="cultivo : ${cultivos}" th:text="${cultivo.codigo}" th:value="${cultivo.name()}">
                           </option>
                         </select>
                       </div>
                     </div>
                   </div>
-
                   <div class="pt-5 flex flex-row equal-sizing">
                     <div class="field vertical-center">
                       <div class="flex flex-row vertical-center">
@@ -70,7 +64,6 @@
                       <div class="help-block"></div>
                     </div>
                   </div>
-
                   <div class="help-block"></div>
                 </div>
               </div>

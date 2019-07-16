@@ -9,14 +9,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 
 @Controller
@@ -45,7 +43,6 @@ public class ProdutoProdutorControlador {
         this.usuarioServico = usuarioServico;
     }
 
-
     @GetMapping("/cadastro")
     public String cadastrarProduto(Model modelo,
                                    Breadcrumb breadcrumb,
@@ -55,20 +52,10 @@ public class ProdutoProdutorControlador {
                 .pagina("Estoque", "/produtos/visualizar-estoque")
                 .pagina("Cadastro", "/produtos/cadastro");
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        Usuario usuario = usuarioServico.buscaUmUsuario(auth.getName());
-
-        modelo.addAttribute("Estoque", produtoProdutorServico.buscaEstoqueDoProdutorPorId(usuario.getId()));
-
-        ProdutoProdutor produtoProdutorComProdutorHardocoded = new ProdutoProdutor();
-        produtoProdutorComProdutorHardocoded.setProdutor(produtorServico.encontraUm(usuario.getId()));
-
         modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
         modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
         modelo.addAttribute("produtos", produtoServico.pegarTodosPorOrdemAlfabetica());
         modelo.addAttribute("medidas", Arrays.asList(UnidadeMedida.values()));
-        modelo.addAttribute("produtoProdutor", produtoProdutorComProdutorHardocoded);
 
         return "produto/cadastro";
     }
