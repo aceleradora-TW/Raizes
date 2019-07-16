@@ -8,42 +8,47 @@
 </head>
 
 <body>
-<section class="section">
-  <section class="container">
-    <div class="columns">
-      <div class="column is-12">
-        <form class="rz-form" id="formRealizarPedido" th:object="${pedido}" th:action="@{/pedidos/realizar-pedido}"
+  <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor())">
+    <h1 class="fs-22 pt-4">Você não tem autorização para acessar essa página</h1>
+  </div>
+  <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).CLIENTE.getValor())">
+    <section class="section">
+      <div th:replace="fragmentos/breadcrumb"></div>
+      <section class="container">
+        <div class="columns">
+          <div class="column is-12">
+            <form class="rz-form" id="formRealizarPedido" th:object="${pedido}" th:action="@{/pedidos/realizar-pedido}"
               method="post">
-          <h1 class="title centraliza-texto" th:text="${nomeLista}"></h1>
-          <input th:type="hidden" name="nome" th:value="${nomeLista}">
-          <div th:each="produto, index : ${produtos}">
-            <h3 class="flex start fs-22 pt-3 pl-2" th:text="${produto.nome}"></h3>
-            <span th:if="${produtoresDeProdutos.containsKey(produto) == false}">
-                    <p class="centraliza-texto">*Esse produto não possui produtores!</p>
-                  </span>
-            <div class="bigbox">
-              <div th:each="produtoProdutor: ${produtoresDeProdutos.get(produto)}">
-                <div class="box" id="inputRadio">
-                  <div class="w-75 flex equal-sizing flex-row">
-                      <span class="bigcheck">
-                        <input type="radio" th:id="ProdutoProdutor + ${produtoProdutor.id}"
-                               th:value="${produtoProdutor.id}"
-                               th:field="*{pedidosProdutosProdutores[__${index.index}__].produtoProdutor}">
-                        <label class="radio" th:for="ProdutoProdutor + ${produtoProdutor.id}">
-                          <span class="check"><i class="far fa-check-circle"></i></span>
-                          <span class="radio-check"><i class="fas fa-plus"></i></span>
-                          <span th:text="${produtoProdutor.produtor.nome}"></span>
-                        </label>
-                      </span>
-                    <span class="flex column center"><i class="fas fa-map-marker-alt"></i>
-                        <span class="pl-1" th:text="${produtoProdutor.produtor.endereco.cidade.nome} + ' - '"></span>
-                        <span class="pl-1" th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
-                      </span>
-                    <span class="flex column center span-transport"
+              <h1 class="title centraliza-texto" th:text="${nomeLista}"></h1>
+              <input th:type="hidden" name="nome" th:value="${nomeLista}">
+              <div th:each="produto, index : ${produtos}">
+                <h3 class="flex start fs-22 pt-3 pl-2" th:text="${produto.nome}"></h3>
+                <span th:if="${!produtoresDeProdutos.containsKey(produto)}">
+                  <p class="centraliza-texto">*Esse produto não possui produtores!</p>
+                </span>
+                <div class="bigbox">
+                  <div th:each="produtoProdutor: ${produtoresDeProdutos.get(produto)}">
+                    <div class="box" id="inputRadio">
+                      <div class="w-75 flex equal-sizing flex-row">
+                        <span class="bigcheck">
+                          <input type="radio" th:id="ProdutoProdutor + ${produtoProdutor.id}"
+                            th:value="${produtoProdutor.id}"
+                            th:field="*{pedidosProdutosProdutores[__${index.index}__].produtoProdutor}">
+                          <label class="radio" th:for="ProdutoProdutor + ${produtoProdutor.id}">
+                            <span class="check"><i class="far fa-check-circle"></i></span>
+                            <span class="radio-check"><i class="fas fa-plus"></i></span>
+                            <span th:text="${produtoProdutor.produtor.nome}"></span>
+                          </label>
+                        </span>
+                        <span class="flex column center"><i class="fas fa-map-marker-alt"></i>
+                          <span class="pl-1" th:text="${produtoProdutor.produtor.endereco.cidade.nome} + ' - '"></span>
+                          <span class="pl-1" th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
+                        </span>
+                        <span class="flex column center span-transport"
                           th:if="${produtoProdutor.produtor.possuiTransporte}">
-                        <i class="fas fa-truck icon-transport-true"> </i>
-                      </span>
-                    <span class="flex column center span-transport"
+                          <i class="fas fa-truck icon-transport-true"> </i>
+                        </span>
+                        <span class="flex column center span-transport"
                           th:unless="${produtoProdutor.produtor.possuiTransporte}">
                         <i class="fas fa-truck icon-transport-false"></i>
                       </span>
