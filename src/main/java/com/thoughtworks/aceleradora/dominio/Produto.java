@@ -1,5 +1,7 @@
 package com.thoughtworks.aceleradora.dominio;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
