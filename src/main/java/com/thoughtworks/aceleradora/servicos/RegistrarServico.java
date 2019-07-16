@@ -3,6 +3,7 @@ package com.thoughtworks.aceleradora.servicos;
 import com.thoughtworks.aceleradora.dominio.Cliente;
 import com.thoughtworks.aceleradora.dominio.Estado;
 import com.thoughtworks.aceleradora.dominio.Produtor;
+import com.thoughtworks.aceleradora.dominio.excecoes.EstadoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.repositorios.ClienteRepositorio;
 import com.thoughtworks.aceleradora.repositorios.EstadoRepositorio;
 import com.thoughtworks.aceleradora.repositorios.ProdutorRepositorio;
@@ -37,11 +38,8 @@ public class RegistrarServico {
     }
 
     public Estado pegarRS() {
-        try {
-            return estadoRepositorio.findById(1L).get();
-        } catch(NullPointerException e) {
-            throw new RuntimeException("Nao achei o Estado!");
+            return estadoRepositorio.findById(1L).orElseThrow(EstadoNaoEncontradoExcecao::new);
         }
     }
 
-}
+
