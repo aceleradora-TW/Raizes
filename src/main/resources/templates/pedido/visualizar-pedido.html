@@ -5,13 +5,12 @@
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
-
 <body>
-  <section class="section">
-    <section class="container">
-      <h1 class="title centraliza-texto" th:text="${pedido}"></h1>
-      <div class="columns">
-        <div class="column is-12">
+<section class="section">
+  <section class="container">
+    <h1 class="title centraliza-texto" th:text="${pedido}"></h1>
+    <div class="columns">
+      <div class="column is-12">
           <span th:each="produtor, index: ${produtores.keySet()}">
             <div class="flex center box rz-box mb-4" id="visualizar">
               <div class="w-50 field">
@@ -20,7 +19,6 @@
                   <span th:each="pedido: ${pedidoProdutoProdutores}">
                     <div id="calculo" th:if="${pedido.produtoProdutor.produtor.nome == produtor.nome}">
                       <span class="flex space-between" id="spanCalcula">
-
                         <span class="pl-5 w-25" th:text="${pedido.produtoProdutor.produto.nome}"></span>
                         <label>
                           R$
@@ -28,18 +26,16 @@
                           <span th:text="${pedido.produtoProdutor.produto.unidadeMedida.codigo}"></span>
                         </label>
                         <span th:text="${pedido.quantidadePedido}" th:value="${pedido.quantidadePedido}"
-                          id="quantidadePedido" class="quantidadePedido"></span>
+                              id="quantidadePedido" class="quantidadePedido"></span>
                         <label>R$
                           <span class="precoCadaProduto" id="precoCadaProduto" th:text="${precoProduto.get(pedido.id)}"></span>
                         </label>
                       </span>
                     </div>
                   </span>
-
                   <label class="pl-5 pt-3 pb-2 label">Total: R$
                     <span class="totalProdutor" id="totalProdutor" th:text="${totalProdutor.get(produtor.id)}"></span>
                   </label>
-
                   <div class="rz-box-footer">
                     <span class="flex center">
                       <i class="fas fa-truck" th:classappend="${produtor.isPossuiTransporte()} ?
@@ -69,18 +65,17 @@
               </div>
             </div>
           </span>
-          </span>
-          <label>
-            <span>Total do Pedido: R$</span>
-            <span id="valorTotalPedido" th:text="${totalPedido}"></span>
-          </label>
-        </div>
+        </span>
+        <label>
+          <span>Total do Pedido: R$</span>
+          <span id="valorTotalPedido" th:text="${totalPedido}"></span>
+        </label>
       </div>
-      <div class="flex space-between">
-        <a class="button rz-button is-rounded" th:href="@{/pedidos}">Voltar</a>
-      </div>
-    </section>
+    </div>
+    <div class="flex space-between">
+      <a class="button rz-button is-rounded" th:href="@{/pedidos}">Voltar</a>
+    </div>
   </section>
+</section>
 </body>
-
 </html>

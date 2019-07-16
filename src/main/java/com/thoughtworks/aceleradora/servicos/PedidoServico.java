@@ -81,30 +81,4 @@ public class PedidoServico {
         return pedidoProdutoProdutor.getValor().multiply(quantidade);
     }
 
-//    public HashMap calculaTotalPorProduto(List<PedidoProdutoProdutor> pedidoProdutoProdutores) {
-//        HashMap listaTotalPorProduto = new HashMap();
-//
-//        BigDecimal precoCadaProduto;
-//
-//        for (PedidoProdutoProdutor pedido : pedidoProdutoProdutores) {
-//            precoCadaProduto = calculaTotalDoProduto(pedido);
-//            listaTotalPorProduto.put(pedido.getId(), precoCadaProduto);
-//        }
-//
-//        return listaTotalPorProduto;
-//    }
-//
-//    public HashMap calculaTotalPedido(HashMap listaTotalPorProduto, List<PedidoProdutoProdutor> pedidoProdutoProdutores) {
-//        BigDecimal totalPedido = new BigDecimal(0);
-//        BigDecimal aux = new BigDecimal(0);
-//
-//        for (PedidoProdutoProdutor pedido : pedidoProdutoProdutores.pr) {
-//            totalProduto = new BigDecimal(listaTotalPorProduto.get(pedido.getId()).toString());
-//            totalPedido = totalPedido.add(precoCadaProduto);
-//
-//        }
-//
-//
-//
-//    }
 }
