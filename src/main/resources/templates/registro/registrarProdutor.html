@@ -13,12 +13,12 @@
       <h1 class="title titulo-h1">Formulário de Registro do Raízes</h1>
       <form th:action="@{/registrar/produtor}" th:object="${formProd}" method="post"
             id="registraAss">
-        <div th:if="${mensagem}">
-          <span th:text="${mensagem}"></span>
-        </div>
-        <div th:if="${erros}">
-          <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
-        </div>
+          <div th:if="${mensagem}">
+              <span th:text="${mensagem}"></span>
+          </div>
+          <div th:if="${erros}">
+              <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
+          </div>
         <div class="columns is-text-left">
           <div class="columns is-12">
             <div>
@@ -34,6 +34,7 @@
                   <label for="nome">*Nome Completo:</label>
                   <input class="input input-fancy borda-arredondada" type="text" id="nome"
                          th:field="*{nome}">
+                    <div class="help-block"></div>
                 </div>
               </div>
               <div class="box">
@@ -41,12 +42,14 @@
                   <div class="column is-half"> <label for="endereco">*Rua:</label>
                     <input class="input input-fancy borda-arredondada" type="text" id="endereco"
                            th:field="*{endereco.rua}" placeholder="Ex: Rua João da Silva, 10" th:name="rua">
+                      <div class="help-block"></div>
                   </div>
-
-                  <div class="column"> <label for="numero">*Numero:</label>
-                    <input class="input input-fancy borda-arredondada" type="text" id="numero"
-                           th:field="*{endereco.numero}" th:name="numero">
-                  </div>
+                    <div class="column field">
+                      <label for="numero">*Numero:</label>
+                      <input class="input input-fancy borda-arredondada" type="text" id="numero"
+                        th:field="*{endereco.numero}" th:name="numero">
+                      <div class="help-block"></div>
+                    </div>
 
                   <div class="column">
                     <label for="complemento">Complemento:</label>
@@ -59,6 +62,7 @@
                     <label for="Bairro">*Bairro:</label>
                     <input class="input input-fancy borda-arredondada" type="text" id="bairro"
                            th:field="*{endereco.bairro}" placeholder="Ex: Centro" th:name="bairro">
+                      <div class="help-block"></div>
                   </div>
                   <div class="column">
                     <label id="cidade" for="cidade">*Cidade:</label>
@@ -89,13 +93,14 @@
                   <div class="columns">
                     <div class="column is-half">
                       <label for="email" id="emailProdutor">*E-mail:</label>
-                      <input class="input input-fancy borda-arredondada" th:field="*{email}" type="text"
-                             id="email">
+                      <input class="input input-fancy borda-arredondada" th:field="*{email}" type="email" id="email">
+                        <div class="help-block"></div>
                     </div>
                     <div class="column is-half">
                       <label for="telefone">*Telefone:</label>
                       <input class="input input-fancy borda-arredondada" type="text" id="telefone"
                              th:field="*{contato}" th:name="contato">
+                        <div class="help-block"></div>
                     </div>
                   </div>
                   <div class="columns">
@@ -103,11 +108,12 @@
                       <label for="password">*Senha:</label>
                       <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password"
                              type="password" name="senha">
+                        <div class="help-block"></div>
                     </div>
                   </div>
                   <div class="field">
                     <div class="rz-box-footer flex space-between p-3">
-                      <a th:href="@{/login}" class="button rz-button is-rounded">Cancelar</a>
+                      <a href="/login" class="button rz-button is-rounded">Cancelar</a>
                       <button class="button rz-button is-rounded" type="submit">Salvar</button>
                     </div>
                   </div>
