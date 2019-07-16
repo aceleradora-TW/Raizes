@@ -13,6 +13,7 @@
 <body class="has-background-light">
 <header>
   <nav class="navbar flex flex-row" role="navigation" aria-label="main navigation">
+    <div sec:authorize="isAuthenticated()">
     <div id="sanduiche" class="sanduiche">
       <a class="closebtn" onclick="Burger.toggleSanduiche()">
         <i class="fas fa-times"></i>
@@ -29,6 +30,7 @@
     <a class="w-25 sanduiche-button" onclick="Burger.toggleSanduiche()">
       <i class="fas fa-bars fas fa-2x"></i>
     </a>
+    </div>
     <div class="logo w-100 flex center">
       <a href="/">
         <img src="/images/logo.png">
