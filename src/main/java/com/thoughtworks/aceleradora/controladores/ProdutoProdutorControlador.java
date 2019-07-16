@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -46,12 +47,15 @@ public class ProdutoProdutorControlador {
     @GetMapping("/cadastro")
     public String cadastrarProduto(Model modelo,
                                    Breadcrumb breadcrumb,
-                                   ProdutoProdutorServico produtoProdutorServico) {
+                                   ProdutoProdutorServico produtoProdutorServico,
+                                   Principal principal) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Estoque", "/produtos/visualizar-estoque")
                 .pagina("Cadastro", "/produtos/cadastro");
 
+        modelo.addAttribute("produtoProdutor", new ProdutoProdutor());
+        modelo.addAttribute("produtorId", produtorServico.encontraProdutorPorEmail(principal.getName()).getId());
         modelo.addAttribute("categorias", categoriaServico.pegarCategorias());
         modelo.addAttribute("cultivos", Arrays.asList(TipoDeCultivo.values()));
         modelo.addAttribute("produtos", produtoServico.pegarTodosPorOrdemAlfabetica());
@@ -125,7 +129,6 @@ public class ProdutoProdutorControlador {
 
         if (resultadoValidacao.hasErrors()) {
             modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
-
             redirecionamentoDeAtributos.addFlashAttribute("erros", resultadoValidacao.getAllErrors());
             return "redirect:/produtos/{id}/editar";
         }
@@ -143,7 +146,7 @@ public class ProdutoProdutorControlador {
                 .pagina("Estoque", "produto/visualizar-estoque");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        modelo.addAttribute("produtosProdutor", produtoProdutorServico.buscarPorNome(auth.getName()));
+        modelo.addAttribute("produtosProdutor", produtoProdutorServico.buscarPorEmail(auth.getName()));
 
         return "produto/visualizar-estoque";
     }

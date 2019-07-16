@@ -17,7 +17,7 @@ public interface ProdutoProdutorRepositorio extends CrudRepository<ProdutoProdut
     List<ProdutoProdutor> findAll();
     List<ProdutoProdutor> findAllById(Long id);
     List<ProdutoProdutor> findByProdutorIn(List<Produtor> produtores);
-    List<ProdutoProdutor> findAllByProdutorNome(String nome);
+    List<ProdutoProdutor> findAllByProdutorEmail(String email);
 
 
 }

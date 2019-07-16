@@ -12,8 +12,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
-import java.util.Optional;
 import java.util.Set;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import static java.util.Collections.emptySet;
+import static java.util.stream.Collectors.toSet;
 
 @Service
 public class UserDetailsImpl implements UserDetailsService {
@@ -36,6 +40,7 @@ public class UserDetailsImpl implements UserDetailsService {
     }
 
     public Usuario buscaUmUsuario(String email){
+
         return usuarioRepositorio.findByEmail(email);
     }
     public Usuario buscaUmUsuarioPorNome(String nome){

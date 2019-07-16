@@ -75,8 +75,8 @@ public class ProdutoProdutorServico {
         return produtoProdutorRepositorio.findAllById(id);
     }
 
-    public List<ProdutoProdutor> buscarPorNome(String nome){
-        return produtoProdutorRepositorio.findAllByProdutorNome(nome);
+    public List<ProdutoProdutor> buscarPorEmail(String email){
+        return produtoProdutorRepositorio.findAllByProdutorEmail(email);
     }
 
 }

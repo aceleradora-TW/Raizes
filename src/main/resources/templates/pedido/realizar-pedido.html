@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/xhtml">
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 
 <head>
@@ -51,6 +50,62 @@
                         </span>
                         <span class="flex column center span-transport"
                           th:unless="${produtoProdutor.produtor.possuiTransporte}">
+                        <i class="fas fa-truck icon-transport-false"></i>
+                      </span>
+                  </div>
+                  <div class="pl-2 flex equal-sizing flex-row">
+                      <span><i class="fas fa-spa"></i>
+                        <span class="pl-1" th:text="${produtoProdutor.tipoDeCultivo}"></span>
+                      </span>
+                    <div class="flex center" id="totalProduto">
+                      <label class="label">
+                        Valor:R$
+                        <span
+                                th:field="*{pedidosProdutosProdutores[__${index.index}__].valor}"
+                                th:text="${produtoProdutor.preco}"
+                                id="preco"
+                                onfocus="Calcular()">
+                          </span>
+                          <span 
+                            th:text="${produto.unidadeMedida.codigo}">
+                          </span>
+                        </label>
+                      </div>
+                      <label class="flex center">
+                        <span class="pr-1">Quantidade:</span>
+                        <input class="w-25 pl-1" size="5"
+                          th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
+                          th:oninput="Calcular.totalRealizar(event)" min=0 placeholder="Ex: 4" disabled>
+                          /<span
+                          th:text="${produto.unidadeMedida.codigo}">
+                        </span>
+                    </label>
+                    <label class="label">Total:R$
+                      <span class="resultado" id="resultado"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bb-1 pt-3 flex flex-row end fs-18">
+            <span>Total do Pedido: R$</span>
+            <span id="valorTotal"></span>
+          </div>
+          <div class="field border-top pt-4">
+            <div class="control">
+              <div class="rz-box-footer flex space-between">
+                <button class="button rz-button is-rounded"
+                        th:onclick="return RealizarPedido.exibeConfirmacaoDeCancelamento('/minhas-listas')">Cancelar</button>
+                <button class="button rz-button is-rounded" type="submit">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</section>
                           <i class="fas fa-truck icon-transport-false"></i>
                         </span>
                       </div>
