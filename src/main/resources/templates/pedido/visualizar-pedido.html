@@ -1,26 +1,49 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
+
 <body>
-  <section class="section">
-    <section class="container">
-      <h1 class="title centraliza-texto" th:text="${pedido}"></h1>
-      <div class="columns">
-        <div class="column is-12">
-          <span th:each="produtor: ${produtores.keySet()}">
-            <div class="flex center box rz-box mb-4">
+<div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor())">
+    <h1 class="fs-22 pt-4">Você não tem autorização para acessar essa página</h1>
+</div>
+<div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).CLIENTE.getValor())">
+    <section class="section">
+        <div th:replace="fragmentos/breadcrumb"></div>
+        <section class="container">
+  <section class="container">
+    <h1 class="title centraliza-texto" th:text="${pedido}"></h1>
+    <div class="columns">
+      <div class="column is-12">
+          <span th:each="produtor, index: ${produtores.keySet()}">
+            <div class="flex center box rz-box mb-4" id="visualizar">
               <div class="w-50 field">
                 <div class="control">
                   <h4 class="pt-3 pb-2 fs-18"><b th:text="${produtor.nome}"></b></h4>
-                  <div class="flex flex-column">
-                    <span class="flex space-between" th:each="produtor: ${produtores.get(produtor)}">
-                      <span class="pl-5 w-25" th:text="${produtor.produto.nome}"></span>
-                      <span class="flex start w-25" th:text="'R$ ' + ${produtor.preco}"></span>
-                    </span>
-                  </div>
+                  <span th:each="pedido: ${pedidoProdutoProdutores}">
+                    <div id="calculo" th:if="${pedido.produtoProdutor.produtor.nome == produtor.nome}">
+                      <span class="flex space-between" id="spanCalcula">
+                        <span class="pl-5 w-25" th:text="${pedido.produtoProdutor.produto.nome}"></span>
+                        <label>
+                          R$
+                          <span th:text="${pedido.valor}" id="valor" class="valor" th:value="${pedido.valor}"></span>/
+                          <span th:text="${pedido.produtoProdutor.produto.unidadeMedida.codigo}"></span>
+                        </label>
+                        <span th:text="${pedido.quantidadePedido}" th:value="${pedido.quantidadePedido}"
+                              id="quantidadePedido" class="quantidadePedido"></span>
+                        <label>R$
+                          <span class="precoCadaProduto" id="precoCadaProduto" th:text="${precoProduto.get(pedido.id)}"></span>
+                        </label>
+                      </span>
+                    </div>
+                  </span>
+                  <label class="pl-5 pt-3 pb-2 label">Total: R$
+                    <span class="totalProdutor" id="totalProdutor" th:text="${totalProdutor.get(produtor.id)}"></span>
+                  </label>
                   <div class="rz-box-footer">
                     <span class="flex center">
                       <i class="fas fa-truck" th:classappend="${produtor.isPossuiTransporte()} ?
@@ -50,12 +73,20 @@
               </div>
             </div>
           </span>
-        </div>
+        </span>
+        <label>
+          <span>Total do Pedido: R$</span>
+          <span id="valorTotalPedido" th:text="${totalPedido}"></span>
+        </label>
       </div>
-      <div class="flex space-between">
-        <a class="button rz-button is-rounded" th:href="@{/pedidos}">Voltar</a>
-      </div>
-    </section>
+    </div>
+    <div class="flex space-between">
+      <a class="button rz-button is-rounded" th:href="@{/pedidos}">Voltar</a>
+    </div>
   </section>
+</section>
+    </section>
+</div>
 </body>
+
 </html>
