@@ -53,7 +53,7 @@
                     <div class="control">
                       <div class="select">
                         <select th:field="*{endereco.cidade.nome}">
-                          <option th:each="cidades : ${cidade}" th:text="${cidades.nome}" th:value="${cidades.nome}" th:name="nome">
+                          <option th:each="cidades : ${cidades}" th:text="${cidades.nome}" th:value="${cidades.nome}" th:name="nome">
                           </option>
                         </select>
                       </div>

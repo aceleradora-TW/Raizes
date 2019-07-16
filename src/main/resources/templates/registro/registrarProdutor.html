@@ -65,7 +65,7 @@
                     <div class="control">
                       <div class="select">
                         <select th:field="*{endereco.cidade.nome}">
-                          <option th:each="cidades : ${cidade}" th:text="${cidades.nome}" th:value="${cidades.nome}" th:name="nome">
+                          <option th:each="cidades : ${cidades}" th:text="${cidades.nome}" th:value="${cidades.nome}" th:name="nome">
                           </option>
                         </select>
                       </div>
@@ -107,7 +107,7 @@
                   </div>
                   <div class="field">
                     <div class="rz-box-footer flex space-between p-3">
-                      <a href="/login" class="button rz-button is-rounded">Cancelar</a>
+                      <a th:href="@{/logout}" class="button rz-button is-rounded">Cancelar</a>
                       <button class="button rz-button is-rounded" type="submit">Salvar</button>
                     </div>
                   </div>
