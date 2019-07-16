@@ -21,7 +21,6 @@ import ValidaRegistraCliente from './pages/validaRegistraCliente'
 import ValidaRegistraProdutor from './pages/validaRegistraProdutor'
 
 $(function () {
-
     window.Modal = new Modal();
     window.Burger = Burger;
     window.Produtos = Produtos;
@@ -45,7 +44,9 @@ $(function () {
     validaCadastraProduto.validaFormulario();
     EditaProdutoEstoque.atualizaUnidadeMedida();
     validaCadastraProduto.validaPreco();
-    // Calcular.totalVisualizar();
+    EditarPedido.onInitEditarPedido();
+    Calcular.calculaInicio();
+ 
 
     ValidaRegistraCliente.validacaoFormRegistroCliente();
     ValidaRegistraProdutor.validacaoFormRegistroProdutor();

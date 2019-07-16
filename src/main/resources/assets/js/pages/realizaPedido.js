@@ -15,8 +15,7 @@ export default {
       const box = $(this).parents('.box');
       
       const input = box.find('input[type=number]');
-      const resultado = 
-      
+
       inputs.val(0);
       resultados.text("");
       
