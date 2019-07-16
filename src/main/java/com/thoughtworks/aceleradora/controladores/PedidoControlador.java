@@ -34,14 +34,17 @@ public class PedidoControlador {
             "/");
 
     @Autowired
-    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico, ProdutoProdutorServico produtoProdutorServico) {
+    public PedidoControlador(MinhaListaServico minhaListaServico,
+                             PedidoServico pedidoServico,
+                             ProdutoProdutorServico produtoProdutorServico) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
         this.produtoProdutorServico = produtoProdutorServico;
     }
 
     @GetMapping
-    public String pedidoCriados(Breadcrumb breadcrumb, Model modelo) {
+    public String pedidoCriados(Breadcrumb breadcrumb,
+                                Model modelo) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedido/pedidos");
@@ -51,7 +54,9 @@ public class PedidoControlador {
     }
 
     @GetMapping("/{id}/visualizar-pedido")
-    public String visualizarPedido(@PathVariable("id") Long id, Model modelo, Breadcrumb breadcrumb) {
+    public String visualizarPedido(@PathVariable("id") Long id,
+                                   Model modelo,
+                                   Breadcrumb breadcrumb) {
 
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
@@ -107,7 +112,10 @@ public class PedidoControlador {
     }
 
     @GetMapping("/{listaId}/realizar-pedido")
-    public String listaProdutoresDeProdutos(Breadcrumb breadcrumb, @PathVariable("listaId") Long listaId, Model modelo,RedirectAttributes redirecionamentoDeAtributos) {
+    public String listaProdutoresDeProdutos(Breadcrumb breadcrumb,
+                                            @PathVariable("listaId") Long listaId,
+                                            Model modelo,
+                                            RedirectAttributes redirecionamentoDeAtributos) {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Realizar Pedido", "/pedido/pedidos");
 
@@ -130,8 +138,12 @@ public class PedidoControlador {
 
     }
 
+
     @PostMapping("/realizar-pedido")
-    public String salvarPedido(@Valid Pedido pedido, BindingResult resultadoValidacao, Model modelo, RedirectAttributes redirecionamentoDeAtributos,
+    public String salvarPedido(@Valid Pedido pedido,
+                               BindingResult resultadoValidacao,
+                               Model modelo,
+                               RedirectAttributes redirecionamentoDeAtributos,
                                Breadcrumb breadcrumb) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
