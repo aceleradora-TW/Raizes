@@ -35,14 +35,7 @@
       <a class="cor-texto-logout" th:href="@{/logout}">Logout</a>
     </div>
   </nav>
-  <nav class="m-2 ml-5 breadcrumb has-arrow-separator" aria-label="breadcrumbs">
-    <ul>
-      <li th:each="pagina : ${@breadcrumb.paginas}"
-          th:classappend="${@breadcrumb.ehPaginaAtiva(pagina)} ? 'is-active' : ''">
-        <a th:href="${pagina.url}" th:text="${pagina.titulo}"></a>
-      </li>
-    </ul>
-  </nav>
+
 </header>
 <div class="main animated fadeIn">
   <main th:replace="${content}"></main>

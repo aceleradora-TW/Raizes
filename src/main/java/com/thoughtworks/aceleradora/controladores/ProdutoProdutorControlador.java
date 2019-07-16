@@ -57,6 +57,7 @@ public class ProdutoProdutorControlador {
         modelo.addAttribute("produtos", produtoServico.pegarTodosPorOrdemAlfabetica());
         modelo.addAttribute("medidas", Arrays.asList(UnidadeMedida.values()));
 
+
         return "produto/cadastro";
     }
 
