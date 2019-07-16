@@ -30,20 +30,15 @@ public class EmailComponente {
 
             mensagem.setSubject("Raízes - Novo Pedido recebido!");
 
-            mensagem.setText("Novo pedido recebido!\n" +
+            mensagem.setText("Raizes - Novo pedido recebido!\n" +
                     "\n" +
-                    "- Nome: " + pedidoProdutoProdutor.getProdutoProdutor().getProdutor().getNome() + "\n" +
+                    "- Nome do Produtor: " + pedidoProdutoProdutor.getProdutoProdutor().getProdutor().getNome() + "\n" +
                     "\n ========================== \n" + "\n" +
-                    " Dados da solicitante: " + "\n" +
+                    " Dados do Pedido: " + "\n" +
                     "- Nome: " + pedido.getCliente().getNome() + "\n" +
                     "- E-mail: " + pedido.getCliente().getEmail() + "\n" +
                     "- Telefone: " + pedido.getCliente().getContato() + "\n" +
-                    "\n ========================== \n" + "\n" +
-                    " Dados do pedido: " + "\n" +
-                    "- Nome: " +  "\n" +
-                    "- E-mail: " + "\n" +
-                    "- Telefone: " + "\n"
-
+                    "- Data do Pedido: " + pedido.getCriadoEm().toString() + "\n"
             );
 
             mensagem.setFrom("raizes.agil@gmail.com");
