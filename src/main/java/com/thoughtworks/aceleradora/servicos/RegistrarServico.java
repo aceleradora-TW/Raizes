@@ -38,7 +38,8 @@ public class RegistrarServico {
     }
 
     public Estado pegarRS() {
-            return estadoRepositorio.findById(1L).orElseThrow(EstadoNaoEncontradoExcecao::new);
+            return estadoRepositorio.findById(1L)
+                    .orElseThrow(EstadoNaoEncontradoExcecao::new);
         }
     }
 
