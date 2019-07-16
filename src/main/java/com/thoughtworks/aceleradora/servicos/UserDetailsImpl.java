@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static java.util.Collections.emptySet;
@@ -42,4 +43,5 @@ public class UserDetailsImpl implements UserDetailsService {
 
         return usuarioRepositorio.findByEmail(email);
     }
+
 }
