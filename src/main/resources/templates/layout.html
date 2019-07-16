@@ -17,11 +17,14 @@
       <a class="closebtn" onclick="Burger.toggleSanduiche()">
         <i class="fas fa-times"></i>
       </a>
-      <a class="navbar-item is-primary is-inverted is-outlined " th:href="@{/minhas-listas/criar}">Criar Lista de
-        Produtos</a>
-      <a class="navbar-item is-primary is-inverted is-outlined" th:href="@{/minhas-listas}">Minhas Listas</a>
-      <a class="navbar-item is-primary is-inverted is-outlined" th:href="@{/pedidos}">Pedidos</a>
+      <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).CLIENTE.getValor())">
+        <a class="navbar-item is-primary is-inverted is-outlined " th:href="@{/minhas-listas/criar}">Criar Lista de Produtos</a>
+        <a class="navbar-item is-primary is-inverted is-outlined" th:href="@{/minhas-listas}">Minhas Listas</a>
+        <a class="navbar-item is-primary is-inverted is-outlined" th:href="@{/pedidos}">Pedidos</a>
+      </div>
+      <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor())">
       <a class="navbar-item is-primary is-inverted is-outlined" th:href="@{/produtos/visualizar-estoque}">Estoque</a>
+      </div>
     </div>
     <a class="sanduiche-button" onclick="Burger.toggleSanduiche()">
       <i class="fas fa-bars fas fa-2x"></i>
