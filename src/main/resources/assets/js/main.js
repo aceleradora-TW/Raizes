@@ -45,7 +45,7 @@ $(function () {
     validaCadastraProduto.validaFormulario();
     EditaProdutoEstoque.atualizaUnidadeMedida();
     validaCadastraProduto.validaPreco();
-    Calcular.totalVisualizar();
+    // Calcular.totalVisualizar();
 
     ValidaRegistraCliente.validacaoFormRegistroCliente();
     ValidaRegistraProdutor.validacaoFormRegistroProdutor();

@@ -26,7 +26,7 @@
                 <span th:if="${!produtoresDeProdutos.containsKey(produto)}">
                   <p class="centraliza-texto">*Esse produto não possui produtores!</p>
                 </span>
-                <div class="bigbox">
+                <div class="bigbox" id="bigbox">
                   <div th:each="produtoProdutor: ${produtoresDeProdutos.get(produto)}">
                     <div class="box" id="inputRadio">
                       <div class="w-75 flex equal-sizing flex-row">
@@ -37,7 +37,7 @@
                           <label class="radio" th:for="ProdutoProdutor + ${produtoProdutor.id}">
                             <span class="check"><i class="far fa-check-circle"></i></span>
                             <span class="radio-check"><i class="fas fa-plus"></i></span>
-                            <span th:text="${produtoProdutor.produtor.nome}"></span>
+                            <span th:text="${produtoProdutor.produtor.nome}"></span> 
                           </label>
                         </span>
                         <span class="flex column center"><i class="fas fa-map-marker-alt"></i>
