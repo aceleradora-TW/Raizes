@@ -11,13 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -59,8 +58,41 @@ public class PedidoControlador {
                 .pagina("Visualizar Pedido", "/pedidos");
 
         String nomePedido = pedidoServico.encontraUm(id).getNome();
+        List<PedidoProdutoProdutor> pedidoProdutoProdutores = pedidoServico.encontraUm(id).getPedidosProdutosProdutores();
+
+        HashMap listaTotalPorProduto = new HashMap();
+
+        HashMap listaTotalPorProdutor = new HashMap();
+
+
+        BigDecimal totalPedido = new BigDecimal(0);
+        BigDecimal precoCadaProduto;
+        BigDecimal totalProdutor = new BigDecimal(0);
+        for (PedidoProdutoProdutor pedido:pedidoProdutoProdutores) {
+            precoCadaProduto = pedidoServico.calculaTotalDoProduto(pedido);
+            listaTotalPorProduto.put(pedido.getId(),precoCadaProduto);
+            totalPedido = totalPedido.add(precoCadaProduto);
+
+            if(listaTotalPorProdutor.containsKey(pedido.getProdutoProdutor().getProdutor().getId())){
+
+                totalProdutor = new BigDecimal(listaTotalPorProdutor.get(pedido.getProdutoProdutor().getProdutor().getId()).toString());
+
+                totalProdutor = totalProdutor.add(precoCadaProduto);
+
+                listaTotalPorProdutor.put(pedido.getProdutoProdutor().getProdutor().getId(),totalProdutor);
+
+            }else{
+                listaTotalPorProdutor.put(pedido.getProdutoProdutor().getProdutor().getId(),precoCadaProduto);
+            }
+        }
+
         modelo.addAttribute("pedido", nomePedido);
         modelo.addAttribute("produtores", pedidoServico.agrupaProdutosPorProdutor(id));
+        modelo.addAttribute("pedidoProdutoProdutores", pedidoProdutoProdutores);
+        modelo.addAttribute("precoProduto", listaTotalPorProduto);
+        modelo.addAttribute("totalPedido", totalPedido);
+        modelo.addAttribute("totalProdutor", listaTotalPorProdutor);
+
 
         return "pedido/visualizar-pedido";
     }
@@ -124,6 +156,7 @@ public class PedidoControlador {
 
     }
 
+
     @GetMapping("/{id}/editar-pedido")
     public String editarProdutoPedido(@PathVariable("id") Long id, Breadcrumb breadcrumb, Model modelo, RedirectAttributes redirecionamentoDeAtributos) {
 
@@ -176,6 +209,5 @@ public class PedidoControlador {
             return "/pedidos";
         }
     }
-
 
 }
