@@ -29,11 +29,6 @@ public class ProdutoProdutorServico {
         this.produtorServico = produtorServico;
     }
 
-    public List<ProdutoProdutor> pegarProdutos() {
-        return produtoProdutorRepositorio.findAll();
-    }
-
-
     public Map<Produto, List<ProdutoProdutor>> pegaProdutoProdutorPorProdutos(List<Produto> produtos) {
         List<ProdutoProdutor> produtosProdutoresDaLista = produtoProdutorRepositorio.findByProdutoIn(produtos);
 
@@ -69,10 +64,6 @@ public class ProdutoProdutorServico {
         produtoProdutor.setProdutor(produtorServico.encontraProdutor());
 
         return produtoProdutorRepositorio.save(produtoProdutor);
-    }
-
-    public List<ProdutoProdutor> buscaEstoqueDoProdutorPorId(Long id){
-        return produtoProdutorRepositorio.findAllById(id);
     }
 
     public List<ProdutoProdutor> buscarPorEmail(String email){
