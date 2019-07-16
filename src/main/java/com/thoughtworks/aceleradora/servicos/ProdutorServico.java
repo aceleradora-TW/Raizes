@@ -20,19 +20,6 @@ public class ProdutorServico {
         this.usuarioServico = usuarioServico;
     }
 
-    public List<Produtor> pegarTodosProdutores() {
-        return repositorio.findAll();
-    }
-
-    public Produtor encontraUm(Long id){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        Usuario usuario = usuarioServico. buscaUmUsuario(auth.getName());
-
-        return repositorio
-                .findById(usuario.getId())
-                .orElseThrow(ProdutorNaoEncontradoExcecao::new);
-    }
 
     public Produtor encontraProdutorPorEmail(String email) {
         return repositorio.findByEmail(email);

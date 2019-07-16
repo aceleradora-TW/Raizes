@@ -25,8 +25,4 @@ public class ProdutoServico {
         return repositorio.save(produto);
     }
 
-    public Optional<Produto> pegarEstoqueDoProdutorPorId(Long id){
-        return repositorio.findById(id);
-    }
-
 }

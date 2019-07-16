@@ -11,5 +11,4 @@ import java.util.Optional;
 public interface PedidoProdutoProdutorRepositorio {
     Optional<PedidoProdutoProdutor> findById(Long id);
 
-    Optional<PedidoProdutoProdutor> findByProdutosProdutoresIn (List<ProdutoProdutor> produtoProdutor);
 }

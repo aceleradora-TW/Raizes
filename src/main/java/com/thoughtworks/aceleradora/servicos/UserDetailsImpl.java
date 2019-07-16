@@ -43,11 +43,5 @@ public class UserDetailsImpl implements UserDetailsService {
 
         return usuarioRepositorio.findByEmail(email);
     }
-    public Usuario buscaUmUsuarioPorNome(String nome){
-        return usuarioRepositorio.findByNome(nome);
-    }
-    public Optional<Usuario> buscaUmUsuarioPorId(Long id){
-        return usuarioRepositorio.findById(id);
-    }
 
 }
