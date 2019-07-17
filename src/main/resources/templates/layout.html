@@ -27,17 +27,20 @@
       <a class="navbar-item is-primary is-inverted is-outlined" th:href="@{/produtos/visualizar-estoque}">Estoque</a>
       </div>
     </div>
-    <a class="w-25 sanduiche-button" onclick="Burger.toggleSanduiche()">
+    <a class="sanduiche-button" onclick="Burger.toggleSanduiche()">
       <i class="fas fa-bars fas fa-2x"></i>
     </a>
     </div>
-    <div class="logo w-100 flex center">
+    <div class="logo flex center">
       <a href="/">
         <img src="/images/logo.png">
       </a>
     </div>
-    <div class="w-25 navbar-end" sec:authorize="isAuthenticated()">
-      <a class="cor-texto-logout" th:href="@{/logout}">Logout</a>
+    <div class="" sec:authorize="isAuthenticated()">
+      <a class="icon-logout" th:href="@{/logout}"><i class="fa fa-sign-out-alt"></i> Sair</a>
+    </div>
+    <div class="navbar-end" sec:authorize="!isAuthenticated()">
+        <a class="icon-login" th:href="@{/login}"><i class="fa fa-sign-in-alt"></i> Login</a>
     </div>
   </nav>
 
