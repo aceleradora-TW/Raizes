@@ -5,7 +5,7 @@
     <title>Raízes</title>
 </head>
 <body>
-<main>
+<main class="main center-absolute column login-page">
     <div th:if="${mensagem}">
         <script th:inline="javascript">
             /*<![CDATA[*/
@@ -18,10 +18,10 @@
             /*]]>*/
         </script>
     </div>
-        <div class="columns">
-        <div class="column is-12">
+        <div class="column is-10">
+        <div class="column is-9 m-auto">
             <div class="box">
-                <div class="container has-text-centered">
+                <div class="has-text-centered">
                     <form th:action="@{/login}" method="post">
                         <h1 class="title is-1">Raízes</h1>
                         <div th:if="${param.error}">

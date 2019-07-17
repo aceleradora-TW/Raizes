@@ -46,7 +46,7 @@ h3 {
   width: 104px;
 }
 .logo {
-  margin: auto;
+  flex-grow: 1;
 }
 .d-block {
   display: block !important;
@@ -73,4 +73,12 @@ h3 {
 
 .bb-1 {
   border-bottom: 1px solid #b5b5b5;
+}
+.center-absolute {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-page {
+  background: url(/images/bg.jpg) repeat;
 }
