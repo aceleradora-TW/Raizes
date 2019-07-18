@@ -7,6 +7,8 @@ import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoSemProdutorExcecao;
 import com.thoughtworks.aceleradora.servicos.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,21 +31,20 @@ public class PedidoControlador {
     private PedidoServico pedidoServico;
     private ProdutoProdutorServico produtoProdutorServico;
     private EmailComponente emailComponente;
+    private UserDetailsImpl usuarioServico;
 
     private final Consumer<Breadcrumb> partesComunsDoBreadCrumb = breadcrumb -> breadcrumb.pagina("Página Inicial",
             "/");
 
     @Autowired
-    public PedidoControlador(MinhaListaServico minhaListaServico,
-                             PedidoServico pedidoServico,
-                             ProdutoProdutorServico produtoProdutorServico,
-                             EmailComponente emailComponente) {
+    public PedidoControlador(MinhaListaServico minhaListaServico, PedidoServico pedidoServico, ProdutoProdutorServico produtoProdutorServico,
+                             EmailComponente emailComponente, UserDetailsImpl usuarioServico) {
         this.minhaListaServico = minhaListaServico;
         this.pedidoServico = pedidoServico;
         this.produtoProdutorServico = produtoProdutorServico;
         this.emailComponente = emailComponente;
-
-        }
+        this.usuarioServico = usuarioServico;
+    }
 
     @GetMapping
     public String pedidoCriados(Breadcrumb breadcrumb,
@@ -52,7 +53,11 @@ public class PedidoControlador {
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedido/pedidos");
 
-        modelo.addAttribute("pedidosCriados", pedidoServico.pegarPedidos());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        Usuario usuario = usuarioServico.buscaUmUsuario(auth.getName());
+
+        modelo.addAttribute("pedidosCriados", pedidoServico.pegarPedidosPorId(usuario.getId()));
         return "pedido/pedidos";
     }
 
