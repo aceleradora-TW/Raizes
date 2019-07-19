@@ -11,7 +11,7 @@
     <div>
       <div class="container card-content valign center">
         <h1 class="title titulo-h1">Formulário de Registro do Raízes</h1>
-        <form th:action="@{/registrar/produtor}" th:object="${formProd}" method="post" id="registraAss">
+        <form th:action="@{/registrar/produtor}" th:object="${formProd}" method="post" id="registraProd">
           <div th:if="${mensagem}">
             <span th:text="${mensagem}"></span>
           </div>
@@ -52,11 +52,10 @@
                   <div class="help-block"></div>
                 </div>
 
-                <div class="column field">
+                <div class="column">
                   <label for="complemento">Complemento:</label>
                   <input class="input input-fancy borda-arredondada" type="text" id="complemento"
                     th:field="*{endereco.complemento}" placeholder="Ex: Apartamento 101" th:name="complemento">
-                  <div class="help-block"></div>
                 </div>
               </div>
               <div class="columns field">
