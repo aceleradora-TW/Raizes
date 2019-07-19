@@ -16,11 +16,13 @@
           <div th:if="${mensagem}">
             <span th:text="${mensagem}"></span>
           </div>
-          <div th:if="${erros}">
-            <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
-          </div>
           <div class="columns is-text-left">
             <div class="w-100">
+              <div>
+                <div th:if="${erros}">
+                  <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
+                </div>
+              </div>
               <div class="box">
                 <div>
                   <label for="nome">*Nome Completo:</label>
