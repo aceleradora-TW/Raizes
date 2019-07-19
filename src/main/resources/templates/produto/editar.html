@@ -53,7 +53,7 @@
                         <div class="flex flex-row vertical-center">
                           <label class="pr-2"><strong>Quantidade</strong></label>
                           <input class="input w-50" type="number" th:field="*{quantidadeEstoque}"
-                            name="quantidadeEstoque" />
+                           id="quantidadeEstoque" maxlength="6" name="quantidadeEstoque" />
                           <span class="my-2">/</span>
                           <span class="my-2" th:text="*{produto.unidadeMedida.codigo}"></span>
                         </div>
