@@ -30,7 +30,7 @@ $(function () {
     window.Pedidos = Pedidos;
     window.Pedido = Pedido;
     window.CriarLista = CriarLista;
-    window.EditaPedido = EditarPedido;
+    window.EditarPedido = EditarPedido;
     window.Calcular = Calcular;
     window.ValidaRegistraCliente = ValidaRegistraCliente;
     window.ValidaRegistraProdutor = ValidaRegistraProdutor;
@@ -46,8 +46,6 @@ $(function () {
     validaCadastraProduto.validaPreco();
     EditarPedido.onInitEditarPedido();
     Calcular.calculaInicio();
- 
-
     ValidaRegistraCliente.validacaoFormRegistroCliente();
     ValidaRegistraProdutor.validacaoFormRegistroProdutor();
 });
