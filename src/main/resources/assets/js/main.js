@@ -46,8 +46,6 @@ $(function () {
     validaCadastraProduto.validaPreco();
     EditarPedido.onInitEditarPedido();
     Calcular.calculaInicio();
- 
-
     ValidaRegistraCliente.validacaoFormRegistroCliente();
     ValidaRegistraProdutor.validacaoFormRegistroProdutor();
 });
