@@ -1,8 +1,6 @@
 package com.thoughtworks.aceleradora.validadores;
 
 import com.thoughtworks.aceleradora.dominio.Cliente;
-import com.thoughtworks.aceleradora.dominio.MinhaLista;
-import com.thoughtworks.aceleradora.dominio.Usuario;
 import com.thoughtworks.aceleradora.repositorios.ClienteRepositorio;
 import com.thoughtworks.aceleradora.validadores.anotacoes.RegistraClienteValida;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +14,6 @@ public class RegistraClienteValidador implements ConstraintValidator<RegistraCli
     @Autowired
     ClienteRepositorio repositorio;
 
-
-
     @Override
     public void initialize(RegistraClienteValida constraintAnnotation) {
     }
@@ -26,7 +22,7 @@ public class RegistraClienteValidador implements ConstraintValidator<RegistraCli
     public boolean isValid(Cliente cliente, ConstraintValidatorContext context) {
         context.disableDefaultConstraintViolation();
         return nomeNaoEstaVazio(cliente, context)
-                && ruaNaoEstaVazia(cliente,context)
+                && ruaNaoEstaVazia(cliente, context)
                 && bairroNaoEstaVazio(cliente, context)
                 && emailNaoEstaVazio(cliente, context)
                 && telefoneNaoEstaVazio(cliente, context)
@@ -44,6 +40,7 @@ public class RegistraClienteValidador implements ConstraintValidator<RegistraCli
 
         return true;
     }
+
     private boolean ruaNaoEstaVazia(Cliente cliente, ConstraintValidatorContext context) {
         if (cliente.getEndereco().getRua().trim().isEmpty()) {
             context.buildConstraintViolationWithTemplate("insira o nome da sua rua.")
@@ -52,6 +49,7 @@ public class RegistraClienteValidador implements ConstraintValidator<RegistraCli
         }
         return true;
     }
+
     private boolean bairroNaoEstaVazio(Cliente cliente, ConstraintValidatorContext context) {
         if (cliente.getEndereco().getBairro().trim().isEmpty()) {
             context.buildConstraintViolationWithTemplate("insira o nome do seu bairro.")
@@ -60,6 +58,7 @@ public class RegistraClienteValidador implements ConstraintValidator<RegistraCli
         }
         return true;
     }
+
     private boolean emailNaoEstaVazio(Cliente cliente, ConstraintValidatorContext context) {
         if (cliente.getEmail().trim().isEmpty()) {
             context.buildConstraintViolationWithTemplate("insira o seu e-mail.")
@@ -68,6 +67,7 @@ public class RegistraClienteValidador implements ConstraintValidator<RegistraCli
         }
         return true;
     }
+
     private boolean telefoneNaoEstaVazio(Cliente cliente, ConstraintValidatorContext context) {
         if (cliente.getContato().trim().isEmpty()) {
             context.buildConstraintViolationWithTemplate("insira o seu telefone.")
@@ -76,6 +76,7 @@ public class RegistraClienteValidador implements ConstraintValidator<RegistraCli
         }
         return true;
     }
+
     private boolean senhaNaoEstaVazia(Cliente cliente, ConstraintValidatorContext context) {
         if (cliente.getSenha().trim().isEmpty()) {
             context.buildConstraintViolationWithTemplate("crie uma senha.")
@@ -88,7 +89,7 @@ public class RegistraClienteValidador implements ConstraintValidator<RegistraCli
     private boolean emailAindaNaoExisteNoBanco(Cliente cliente, ConstraintValidatorContext context) {
         Optional<Cliente> emailExistente = repositorio.findByEmail(cliente.getEmail());
 
-        if(emailExistente.isPresent()) {
+        if (emailExistente.isPresent()) {
             context.buildConstraintViolationWithTemplate("Email já existente")
                     .addConstraintViolation();
 

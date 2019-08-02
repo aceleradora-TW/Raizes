@@ -22,7 +22,7 @@ public class ProdutorServico {
 
 
     public Produtor encontraProdutorPorEmail(String email) {
-        return repositorio.findByEmail(email);
+        return repositorio.findByEmail(email).get();
     }
 
     public Produtor encontraProdutor(){
