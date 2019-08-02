@@ -24,15 +24,16 @@
                 <div class="columns">
                   <div class="column field">
                     <label for="nome">*Nome Completo:</label>
-                    <input class="input input-fancy borda-arredondada" type="text" id="nome" th:field="*{nome}">
+                    <input class="input input-fancy borda-arredondada validados" type="text" id="nome"
+                      th:field="*{nome}">
                     <div class="help-block"></div>
                   </div>
                   <div class="column field">
-                      <label for="telefone">*Telefone:</label>
-                      <input class="input input-fancy borda-arredondada" type="text" id="telefone" th:field="*{contato}"
-                        th:name="contato">
-                      <div class="help-block"></div>
-                    </div>
+                    <label for="telefone">*Telefone:</label>
+                    <input class="input input-fancy borda-arredondada validados" type="text" id="telefone"
+                      th:field="*{contato}" th:name="contato">
+                    <div class="help-block"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -40,14 +41,14 @@
               <div class="columns">
                 <div class="column is-half field">
                   <label for="endereco">*Rua:</label>
-                  <input class="input input-fancy borda-arredondada" type="text" id="endereco"
+                  <input class="input input-fancy borda-arredondada validados" type="text" id="endereco"
                     th:field="*{endereco.rua}" placeholder="Ex: Rua João da Silva, 10" th:name="rua">
                   <div class="help-block"></div>
                 </div>
 
                 <div class="column field">
                   <label for="numero">*Numero:</label>
-                  <input class="input input-fancy borda-arredondada" type="text" id="numero"
+                  <input class="input input-fancy borda-arredondada validados" type="text" id="numero"
                     th:field="*{endereco.numero}" th:name="numero">
                   <div class="help-block"></div>
                 </div>
@@ -61,7 +62,7 @@
               <div class="columns field">
                 <div class="column is-half">
                   <label for="Bairro">*Bairro:</label>
-                  <input class="input input-fancy borda-arredondada" type="text" id="bairro"
+                  <input class="input input-fancy borda-arredondada validados" type="text" id="bairro"
                     th:field="*{endereco.bairro}" placeholder="Ex: Centro" th:name="bairro">
                   <div class="help-block"></div>
                 </div>
@@ -100,25 +101,25 @@
                 </div>
                 <div class="column is-4 field">
                   <label for="password">*Senha:</label>
-                  <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password" type="password"
-                    name="senha">
+                  <input class="input input-fancy borda-arredondada validados" th:field="*{senha}" id="password"
+                    type="password" name="senha">
                   <div class="help-block"></div>
                 </div>
 
                 <div class="column is-4 field">
-                    <label for="possui_transporte">*Possui Transporte: </label><br>
-                    <div class="select" id="possui_transporte">
-                      <select th:field="${formProd.possuiTransporte}">
-                        <option th:name="possui_transporte" th:value="true">Sim</option>
-                        <option th:name="possui_transporte" th:value="false">Não</option>
-                      </select>
-                    </div>
+                  <label for="possui_transporte">*Possui Transporte: </label><br>
+                  <div class="select" id="possui_transporte">
+                    <select th:field="${formProd.possuiTransporte}">
+                      <option th:name="possui_transporte" th:value="true">Sim</option>
+                      <option th:name="possui_transporte" th:value="false">Não</option>
+                    </select>
                   </div>
+                </div>
               </div>
               <div class="field">
                 <div class="pl-0 pr-0 rz-box-footer flex space-between pt-3 pb-3">
                   <button class="button rz-button is-rounded"
-                  th:onclick="return ValidaRegistraProdutor.exibeConfirmacaoDeCancelamento('/login')">Cancelar</button>
+                    th:onclick="return ValidaRegistraProdutor.exibeConfirmacaoDeCancelamento('/login')">Cancelar</button>
                   <button class="button rz-button is-rounded" type="submit">Salvar</button>
                 </div>
               </div>
