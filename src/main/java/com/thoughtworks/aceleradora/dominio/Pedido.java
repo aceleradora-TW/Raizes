@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.dominio;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.thoughtworks.aceleradora.validadores.anotacoes.RealizarPedidoValida;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "pedidos")
 @Access(AccessType.FIELD)
+@RealizarPedidoValida
 public class Pedido {
 
     @Id

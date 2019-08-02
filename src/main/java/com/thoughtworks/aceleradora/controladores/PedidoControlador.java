@@ -129,12 +129,12 @@ public class PedidoControlador {
 
         try{
             MinhaLista lista = minhaListaServico.encontraUm(listaId);
-            Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos =
-                    produtoProdutorServico.pegaProdutoProdutorPorProdutos(lista.getProdutos());
+            Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos = produtoProdutorServico.pegaProdutoProdutorPorProdutos(lista.getProdutos());
 
             modelo.addAttribute("produtos", lista.getProdutos());
             modelo.addAttribute("pedido", new Pedido());
             modelo.addAttribute("nomeLista", lista.getNome());
+            modelo.addAttribute("listaId", lista.getId());
             modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
 
             return "pedido/realizar-pedido";
@@ -143,14 +143,12 @@ public class PedidoControlador {
 
             return "redirect:/minhas-listas/";
         }
-
     }
-
 
     @PostMapping("/realizar-pedido")
     public String salvarPedido(@Valid Pedido pedido,
+//                               @RequestParam("listaId") Long listaId,
                                BindingResult resultadoValidacao,
-                               Model modelo,
                                RedirectAttributes redirecionamentoDeAtributos,
                                Breadcrumb breadcrumb) {
         breadcrumb
@@ -160,8 +158,10 @@ public class PedidoControlador {
 
         try {
             if (resultadoValidacao.hasErrors()) {
-                modelo.addAttribute("erros", resultadoValidacao.getAllErrors());
-                return "pedido/realizar-pedido";
+                redirecionamentoDeAtributos.addFlashAttribute("erros", resultadoValidacao.getAllErrors());
+//                System.out.println("SAIDA" + listaId);
+//                String url = listaId.toString().concat("/realizar-pedido");
+                return "redirect:18/realizar-pedido";
             }
 
             pedidoServico.salvarPedido(pedido);

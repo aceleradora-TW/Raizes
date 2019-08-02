@@ -20,8 +20,17 @@
           <div class="column is-12">
             <form class="rz-form" id="formRealizarPedido" th:object="${pedido}" th:action="@{/pedidos/realizar-pedido}"
               method="post">
+              <div th:if="${mensagem}">
+                <span th:text="${mensagem}"></span>
+              </div>
+              <div th:if="${erros}">
+                <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
+              </div>
               <h1 class="title centraliza-texto" th:text="${nomeLista}"></h1>
-              <input th:type="hidden" name="nome" th:value="${nomeLista}">
+
+              <input th:type="hidden" name="nome" th:value="${nomeLista}" />
+              <input th:type="hidden" name="listaId" th:value="${listaId}" />
+
               <div th:each="produto, index : ${produtos}">
                 <h3 class="flex start fs-22 pt-3 pl-2" th:text="${produto.nome}"></h3>
                 <span th:if="${!produtoresDeProdutos.containsKey(produto)}">
