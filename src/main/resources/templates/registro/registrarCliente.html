@@ -23,26 +23,26 @@
                   <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
                 </div>
               </div>
-              <div class="box field">
-                <div>
+              <div class="box">
+                <div class="field">
                   <label for="nome">*Nome Completo:</label>
-                  <input class="input input-fancy borda-arredondada" type="text" id="nome" th:field="*{nome}">
+                  <input class="input input-fancy borda-arredondada validados" type="text" id="nome" th:field="*{nome}">
                   <div class="help-block"></div>
                 </div>
               </div>
               <div class="box">
                 <div class="columns">
                   <div class="column is-half field"> <label id="rua" for="rua">*Rua:</label>
-                    <input class="input input-fancy borda-arredondada" type="text" id="endereco"
+                    <input class="input input-fancy borda-arredondada validados" type="text" id="endereco"
                       th:field="*{endereco.rua}" placeholder="Ex: Rua João da Silva, 10" th:name="rua">
-                      <div class="help-block"></div>
+                    <div class="help-block"></div>
                   </div>
 
                   <div class="column field">
                     <label for="numero">*Numero:</label>
-                    <input class="input input-fancy borda-arredondada" type="text" id="numero"
+                    <input class="input input-fancy borda-arredondada validados" type="text" id="numero"
                       th:field="*{endereco.numero}" th:name="numero">
-                      <div class="help-block"></div>
+                    <div class="help-block"></div>
                   </div>
 
                   <div class="column">
@@ -55,9 +55,9 @@
                 <div class="columns">
                   <div class="column is-half field">
                     <label for="bairro">*Bairro:</label>
-                    <input class="input input-fancy borda-arredondada" type="text" id="bairro"
+                    <input class="input input-fancy borda-arredondada validados" type="text" id="bairro"
                       th:field="*{endereco.bairro}" placeholder="Ex: Centro" th:name="bairro">
-                      <div class="help-block"></div>
+                    <div class="help-block"></div>
                   </div>
                   <div class="column">
                     <label id="cidade" for="cidade">*Cidade:</label>
@@ -95,21 +95,23 @@
                     </div>
                     <div class="column is-half field">
                       <label for="telefone">*Telefone:</label>
-                      <input class="input input-fancy borda-arredondada" type="text" id="telefone" th:field="*{contato}" th:name="contato">
+                      <input class="input input-fancy borda-arredondada validados" type="text" id="telefone"
+                        th:field="*{contato}" th:name="contato">
                       <div class="help-block"></div>
                     </div>
                   </div>
                   <div class="columns">
                     <div class="column is-half field">
                       <label for="password">*Senha:</label>
-                      <input class="input input-fancy borda-arredondada" th:field="*{senha}" id="password"  type="password" name="senha">
+                      <input class="input input-fancy borda-arredondada validados" th:field="*{senha}" id="password"
+                        type="password" name="senha">
                       <div class="help-block"></div>
                     </div>
                   </div>
                   <div class="field">
                     <div class="rz-box-footer flex space-between p-3">
                       <button class="button rz-button is-rounded"
-                      th:onclick="return ValidaRegistraCliente.exibeConfirmacaoDeCancelamento('/login')">Cancelar</button>
+                        th:onclick="return ValidaRegistraCliente.exibeConfirmacaoDeCancelamento('/login')">Cancelar</button>
                       <button class="button rz-button is-rounded" type="submit">Salvar</button>
                     </div>
                   </div>
