@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -81,21 +82,21 @@ public class PedidoControlador {
         BigDecimal totalPedido = new BigDecimal(0);
         BigDecimal precoCadaProduto;
         BigDecimal totalProdutor = new BigDecimal(0);
-        for (PedidoProdutoProdutor pedido:pedidoProdutoProdutores) {
+        for (PedidoProdutoProdutor pedido : pedidoProdutoProdutores) {
             precoCadaProduto = pedidoServico.calculaTotalDoProduto(pedido);
-            listaTotalPorProduto.put(pedido.getId(),precoCadaProduto);
+            listaTotalPorProduto.put(pedido.getId(), precoCadaProduto);
             totalPedido = totalPedido.add(precoCadaProduto);
 
-            if(listaTotalPorProdutor.containsKey(pedido.getProdutoProdutor().getProdutor().getId())){
+            if (listaTotalPorProdutor.containsKey(pedido.getProdutoProdutor().getProdutor().getId())) {
 
                 totalProdutor = new BigDecimal(listaTotalPorProdutor.get(pedido.getProdutoProdutor().getProdutor().getId()).toString());
 
                 totalProdutor = totalProdutor.add(precoCadaProduto);
 
-                listaTotalPorProdutor.put(pedido.getProdutoProdutor().getProdutor().getId(),totalProdutor);
+                listaTotalPorProdutor.put(pedido.getProdutoProdutor().getProdutor().getId(), totalProdutor);
 
-            }else{
-                listaTotalPorProdutor.put(pedido.getProdutoProdutor().getProdutor().getId(),precoCadaProduto);
+            } else {
+                listaTotalPorProdutor.put(pedido.getProdutoProdutor().getProdutor().getId(), precoCadaProduto);
             }
         }
 
@@ -127,18 +128,17 @@ public class PedidoControlador {
         breadcrumb.aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Realizar Pedido", "/pedido/pedidos");
 
-        try{
+        try {
             MinhaLista lista = minhaListaServico.encontraUm(listaId);
             Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos = produtoProdutorServico.pegaProdutoProdutorPorProdutos(lista.getProdutos());
 
             modelo.addAttribute("produtos", lista.getProdutos());
             modelo.addAttribute("pedido", new Pedido());
             modelo.addAttribute("nomeLista", lista.getNome());
-            modelo.addAttribute("listaId", lista.getId());
             modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
 
             return "pedido/realizar-pedido";
-        } catch (PedidoNaoEncontradoExcecao e){
+        } catch (PedidoNaoEncontradoExcecao e) {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
 
             return "redirect:/minhas-listas/";
@@ -147,26 +147,27 @@ public class PedidoControlador {
 
     @PostMapping("/realizar-pedido")
     public String salvarPedido(@Valid Pedido pedido,
-//                               @RequestParam("listaId") Long listaId,
                                BindingResult resultadoValidacao,
                                RedirectAttributes redirecionamentoDeAtributos,
-                               Breadcrumb breadcrumb) {
+                               Breadcrumb breadcrumb,
+                               HttpServletRequest request) {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
                 .pagina("Realizar Pedido", "/pedidos");
 
         try {
+
             if (resultadoValidacao.hasErrors()) {
                 redirecionamentoDeAtributos.addFlashAttribute("erros", resultadoValidacao.getAllErrors());
-//                System.out.println("SAIDA" + listaId);
-//                String url = listaId.toString().concat("/realizar-pedido");
-                return "redirect:18/realizar-pedido";
+
+                String paginaAtual = request.getHeader("Referer");
+
+                return "redirect:" + paginaAtual;
             }
 
             pedidoServico.salvarPedido(pedido);
             emailComponente.notificaProdutor(pedido);
-
 
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
 

@@ -21,11 +21,11 @@ public class PedidoProdutoProdutor {
 
     @ManyToOne
     @JoinColumn(name = "id_produtos_produtores")
-    ProdutoProdutor produtoProdutor;
+    private ProdutoProdutor produtoProdutor;
 
     @ManyToOne
     @JoinColumn(name = "id_pedidos")
-    Pedido pedido;
+    private Pedido pedido;
 
     private BigDecimal valor;
 

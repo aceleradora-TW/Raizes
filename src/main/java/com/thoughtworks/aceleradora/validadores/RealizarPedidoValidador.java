@@ -12,7 +12,6 @@ public class RealizarPedidoValidador implements ConstraintValidator<RealizarPedi
 
     }
 
-
     @Override
     public boolean isValid(Pedido pedido, ConstraintValidatorContext context) {
         context.disableDefaultConstraintViolation();
@@ -30,62 +29,4 @@ public class RealizarPedidoValidador implements ConstraintValidator<RealizarPedi
 
         return true;
     }
-//
-//    private boolean ruaNaoEstaVazia(Cliente cliente, ConstraintValidatorContext context) {
-//        if (cliente.getEndereco().getRua().trim().isEmpty()) {
-//            context.buildConstraintViolationWithTemplate("insira o nome da sua rua.")
-//                    .addConstraintViolation();
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    private boolean bairroNaoEstaVazio(Cliente cliente, ConstraintValidatorContext context) {
-//        if (cliente.getEndereco().getBairro().trim().isEmpty()) {
-//            context.buildConstraintViolationWithTemplate("insira o nome do seu bairro.")
-//                    .addConstraintViolation();
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    private boolean emailNaoEstaVazio(Cliente cliente, ConstraintValidatorContext context) {
-//        if (cliente.getEmail().trim().isEmpty()) {
-//            context.buildConstraintViolationWithTemplate("insira o seu e-mail.")
-//                    .addConstraintViolation();
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    private boolean telefoneNaoEstaVazio(Cliente cliente, ConstraintValidatorContext context) {
-//        if (cliente.getContato().trim().isEmpty()) {
-//            context.buildConstraintViolationWithTemplate("insira o seu telefone.")
-//                    .addConstraintViolation();
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    private boolean senhaNaoEstaVazia(Cliente cliente, ConstraintValidatorContext context) {
-//        if (cliente.getSenha().trim().isEmpty()) {
-//            context.buildConstraintViolationWithTemplate("crie uma senha.")
-//                    .addConstraintViolation();
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    private boolean emailAindaNaoExisteNoBanco(Cliente cliente, ConstraintValidatorContext context) {
-//        Optional<Cliente> emailExistente = repositorio.findByEmail(cliente.getEmail());
-//
-//        if (emailExistente.isPresent()) {
-//            context.buildConstraintViolationWithTemplate("Email já existente")
-//                    .addConstraintViolation();
-//
-//            return false;
-//        }
-//
-//        return true;
-//    }
 }

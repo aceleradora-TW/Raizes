@@ -29,7 +29,6 @@
               <h1 class="title centraliza-texto" th:text="${nomeLista}"></h1>
 
               <input th:type="hidden" name="nome" th:value="${nomeLista}" />
-              <input th:type="hidden" name="listaId" th:value="${listaId}" />
 
               <div th:each="produto, index : ${produtos}">
                 <h3 class="flex start fs-22 pt-3 pl-2" th:text="${produto.nome}"></h3>
