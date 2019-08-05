@@ -25,7 +25,7 @@ spring:
     chain:
       cache: false
       strategy:
-        fixed: 
+        fixed:
           enabled: true
           version: test_version
   mail:
