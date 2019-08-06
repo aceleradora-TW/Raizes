@@ -36,7 +36,7 @@
         <img src="/images/logo.png">
       </a>
     </div>
-    <div class="" sec:authorize="isAuthenticated()">
+    <div class="navbar-end" sec:authorize="isAuthenticated()">
       <a class="icon-logout" th:href="@{/logout}"><i class="fa fa-sign-out-alt"></i> Sair</a>
     </div>
     <div class="navbar-end" sec:authorize="!isAuthenticated()">
