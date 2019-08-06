@@ -15,18 +15,29 @@ public class RealizarPedidoValidador implements ConstraintValidator<RealizarPedi
     @Override
     public boolean isValid(Pedido pedido, ConstraintValidatorContext context) {
         context.disableDefaultConstraintViolation();
-        return quantidadeNaoEstaVazia(pedido, context);
+        return quantidadeNaoEstaVazia(pedido, context)
+                && produtoPossuiProdutor(pedido, context);
     }
 
     private boolean quantidadeNaoEstaVazia(Pedido pedido, ConstraintValidatorContext context) {
-        for (int i = 0; i < pedido.getPedidosProdutosProdutores().size(); i++) {
-            if (pedido.getPedidosProdutosProdutores().get(i).getQuantidadePedido() <= 0) {
-                context.buildConstraintViolationWithTemplate("A quantidade deve ser maior que zero")
-                        .addConstraintViolation();
-                return false;
+        if(pedido.getPedidosProdutosProdutores() != null) {
+            for (int i = 0; i < pedido.getPedidosProdutosProdutores().size(); i++) {
+                if (pedido.getPedidosProdutosProdutores().get(i).getQuantidadePedido() <= 0) {
+                    context.buildConstraintViolationWithTemplate("A quantidade deve ser maior que zero.")
+                            .addConstraintViolation();
+                    return false;
+                }
             }
         }
+        return true;
+    }
 
+    private boolean produtoPossuiProdutor(Pedido pedido, ConstraintValidatorContext context) {
+        if(pedido.getPedidosProdutosProdutores() == null) {
+            context.buildConstraintViolationWithTemplate("Selecione ao menos um produtor.")
+                    .addConstraintViolation();
+            return false;
+        }
         return true;
     }
 }
