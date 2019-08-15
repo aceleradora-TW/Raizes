@@ -33,7 +33,7 @@ public class ListaValidador implements ConstraintValidator<ListaValida, MinhaLis
     private boolean nomeAindaNaoExisteNoBanco(MinhaLista lista, ConstraintValidatorContext context) {
         List<MinhaLista> listasDoClienteLogado = repositorio.findAllByClienteId(clienteServico.encontraCliente().getId());
         for (int i = 0; i <listasDoClienteLogado.size() ; i++) {
-            if(!listasDoClienteLogado.isEmpty() && listasDoClienteLogado.get(i).getNome().equals(lista.getNome())) {
+            if(!listasDoClienteLogado.isEmpty() && listasDoClienteLogado.get(i).getNome().equals(lista.getNome()) && lista.getId() != listasDoClienteLogado.get(i).getId()) {
                 context.buildConstraintViolationWithTemplate("Nome da lista deve ser único.")
                         .addConstraintViolation();
                 return false;
