@@ -1,5 +1,7 @@
 package com.thoughtworks.aceleradora.dominio;
 
+import com.thoughtworks.aceleradora.validadores.anotacoes.RealizarPedidoValida;
+
 import javax.persistence.*;
 
 import java.math.BigDecimal;
@@ -8,6 +10,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity(name = "pedidos_produtos_produtores")
 @Access(AccessType.FIELD)
+@RealizarPedidoValida
 public class PedidoProdutoProdutor {
 
     @Id
@@ -18,11 +21,11 @@ public class PedidoProdutoProdutor {
 
     @ManyToOne
     @JoinColumn(name = "id_produtos_produtores")
-    ProdutoProdutor produtoProdutor;
+    private ProdutoProdutor produtoProdutor;
 
     @ManyToOne
     @JoinColumn(name = "id_pedidos")
-    Pedido pedido;
+    private Pedido pedido;
 
     private BigDecimal valor;
 

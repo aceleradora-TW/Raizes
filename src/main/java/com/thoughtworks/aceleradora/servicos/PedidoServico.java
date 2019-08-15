@@ -76,7 +76,7 @@ public class PedidoServico {
         return byProdutor;
     }
 
-    public BigDecimal calculaTotalDoProduto (PedidoProdutoProdutor pedidoProdutoProdutor){
+    public BigDecimal calculaTotalDoProduto(PedidoProdutoProdutor pedidoProdutoProdutor) {
 
         BigDecimal quantidade = new BigDecimal(pedidoProdutoProdutor.getQuantidadePedido());
 
