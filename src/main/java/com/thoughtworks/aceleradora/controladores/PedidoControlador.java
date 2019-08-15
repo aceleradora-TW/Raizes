@@ -157,6 +157,7 @@ public class PedidoControlador {
                 .pagina("Realizar Pedido", "/pedidos");
 
         try {
+            Pedido pedidoAtual = pedidoServico.removeProdutosSemProdutosProdutores(pedido);
 
             if (resultadoValidacao.hasErrors()) {
                 redirecionamentoDeAtributos.addFlashAttribute("erros", resultadoValidacao.getAllErrors());
@@ -166,8 +167,8 @@ public class PedidoControlador {
                 return "redirect:" + paginaAtual;
             }
 
-            pedidoServico.salvarPedido(pedido);
-            emailComponente.notificaProdutor(pedido);
+            pedidoServico.salvarPedido(pedidoAtual);
+            emailComponente.notificaProdutor(pedidoAtual);
 
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
 
@@ -176,7 +177,6 @@ public class PedidoControlador {
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", e.getMessage());
             return "redirect:/minhas-listas";
         }
-
     }
 
 
