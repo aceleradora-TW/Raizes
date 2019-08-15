@@ -157,7 +157,7 @@ public class PedidoControlador {
                 .pagina("Realizar Pedido", "/pedidos");
 
         try {
-            Pedido pedidoAtual = pedidoServico.removeProdutosSemProdutosProdutores(pedido);
+
 
             if (resultadoValidacao.hasErrors()) {
                 redirecionamentoDeAtributos.addFlashAttribute("erros", resultadoValidacao.getAllErrors());
@@ -167,8 +167,8 @@ public class PedidoControlador {
                 return "redirect:" + paginaAtual;
             }
 
-            pedidoServico.salvarPedido(pedidoAtual);
-            emailComponente.notificaProdutor(pedidoAtual);
+            Pedido pedidoSalvo = pedidoServico.salvarPedido(pedido);
+            emailComponente.notificaProdutor(pedidoSalvo);
 
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido criado com sucesso");
 

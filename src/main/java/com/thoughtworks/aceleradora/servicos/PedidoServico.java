@@ -83,15 +83,4 @@ public class PedidoServico {
         return pedidoProdutoProdutor.getValor().multiply(quantidade);
     }
 
-    public Pedido removeProdutosSemProdutosProdutores(Pedido pedido) {
-
-        for (int i = 0; i < pedido.getPedidosProdutosProdutores().size(); i++) {
-            if (pedido.getPedidosProdutosProdutores().get(i).getProdutoProdutor() == null) {
-                pedido.getPedidosProdutosProdutores().remove(pedido.getPedidosProdutosProdutores().get(i));
-                i--;
-            }
-        }
-        return pedido;
-    }
-
 }

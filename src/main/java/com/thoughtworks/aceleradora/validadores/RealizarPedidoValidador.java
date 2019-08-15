@@ -1,6 +1,7 @@
 package com.thoughtworks.aceleradora.validadores;
 
 import com.thoughtworks.aceleradora.dominio.Pedido;
+import com.thoughtworks.aceleradora.dominio.PedidoProdutoProdutor;
 import com.thoughtworks.aceleradora.validadores.anotacoes.RealizarPedidoValida;
 
 import javax.validation.ConstraintValidator;
@@ -20,9 +21,11 @@ public class RealizarPedidoValidador implements ConstraintValidator<RealizarPedi
     }
 
     private boolean quantidadeNaoEstaVazia(Pedido pedido, ConstraintValidatorContext context) {
-        if(pedido.getPedidosProdutosProdutores() != null) {
+        if (pedido.getPedidosProdutosProdutores() != null) {
             for (int i = 0; i < pedido.getPedidosProdutosProdutores().size(); i++) {
-                if (pedido.getPedidosProdutosProdutores().get(i).getQuantidadePedido() <= 0) {
+                PedidoProdutoProdutor pedidoProdutoProdutor = pedido.getPedidosProdutosProdutores().get(i);
+
+                if (pedidoProdutoProdutor.getProdutoProdutor() != null && pedidoProdutoProdutor.getQuantidadePedido() <= 0) {
                     context.buildConstraintViolationWithTemplate("A quantidade deve ser maior que zero.")
                             .addConstraintViolation();
                     return false;
@@ -33,7 +36,7 @@ public class RealizarPedidoValidador implements ConstraintValidator<RealizarPedi
     }
 
     private boolean produtoPossuiProdutor(Pedido pedido, ConstraintValidatorContext context) {
-        if(pedido.getPedidosProdutosProdutores() == null) {
+        if (pedido.getPedidosProdutosProdutores() == null) {
             context.buildConstraintViolationWithTemplate("Selecione ao menos um produtor.")
                     .addConstraintViolation();
             return false;
