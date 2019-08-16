@@ -225,7 +225,7 @@ public class PedidoControlador {
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
-                .pagina("Realizar pedido", "/pedidos");
+                .pagina("Editar pedido", "/pedidos");
 
         try {
             pedido.setCriadoEm(pedidoServico.encontraUm(pedido.getId()).getCriadoEm());
