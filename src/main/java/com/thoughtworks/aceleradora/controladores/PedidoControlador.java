@@ -5,14 +5,20 @@ import com.thoughtworks.aceleradora.dominio.componentes.EmailComponente;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoEncontradoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoNaoSalvoExcecao;
 import com.thoughtworks.aceleradora.dominio.excecoes.PedidoSemProdutorExcecao;
-import com.thoughtworks.aceleradora.servicos.*;
+import com.thoughtworks.aceleradora.servicos.MinhaListaServico;
+import com.thoughtworks.aceleradora.servicos.PedidoServico;
+import com.thoughtworks.aceleradora.servicos.ProdutoProdutorServico;
+import com.thoughtworks.aceleradora.servicos.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -158,7 +164,6 @@ public class PedidoControlador {
 
         try {
 
-
             if (resultadoValidacao.hasErrors()) {
                 redirecionamentoDeAtributos.addFlashAttribute("erros", resultadoValidacao.getAllErrors());
 
@@ -211,17 +216,26 @@ public class PedidoControlador {
     }
 
     @PostMapping("/{id}/editar-pedido")
-    public String editarProdutoPedido(Pedido pedido,
+    public String editarProdutoPedido(@Valid Pedido pedido,
+                                      BindingResult resultadoValidacao,
+                                      RedirectAttributes redirecionamentoDeAtributos,
                                       Breadcrumb breadcrumb,
-                                      RedirectAttributes redirecionamentoDeAtributos) {
+                                      HttpServletRequest request) {
+
         breadcrumb
                 .aproveitar(partesComunsDoBreadCrumb)
                 .pagina("Pedidos", "/pedidos")
-                .pagina("Realizar pedido", "/pedidos");
+                .pagina("Editar pedido", "/pedidos");
 
         try {
             pedido.setCriadoEm(pedidoServico.encontraUm(pedido.getId()).getCriadoEm());
 
+            if (resultadoValidacao.hasErrors()) {
+                redirecionamentoDeAtributos.addFlashAttribute("erros", resultadoValidacao.getAllErrors());
+
+                String paginaAtual = request.getHeader("Referer");
+                return "redirect:" + paginaAtual;
+            }
             pedidoServico.salvarPedido(pedido);
 
             redirecionamentoDeAtributos.addFlashAttribute("mensagem", "Pedido alterado com sucesso");

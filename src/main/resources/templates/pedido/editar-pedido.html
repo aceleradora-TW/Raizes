@@ -17,8 +17,13 @@
         <section class="container">
           <div class="columns">
             <div class="column is-12">
-              <form class="rz-form" id="formEditarPedido" th:object="${pedido}"
-                th:action="@{/pedidos/{id}/editar-pedido(id=${pedido.id})}" method="post">
+              <form class="rz-form" id="formEditarPedido" th:object="${pedido}" th:action="@{/pedidos/{id}/editar-pedido(id=${pedido.id})}" method="post">
+                <div th:if="${mensagem}">
+                  <span th:text="${mensagem}"></span>
+                </div>
+                <div th:if="${erros}">
+                  <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
+                </div>
                 <h1 class="title centraliza-texto" th:text="${pedido.nome}"></h1>
                 <input type="hidden" th:value="${pedido.nome}" th:name="nome">
                 <div th:each="produto, index : ${produtoProdutoresPorProduto.keySet()}">
