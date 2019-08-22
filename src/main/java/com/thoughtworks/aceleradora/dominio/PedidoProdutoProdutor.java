@@ -17,7 +17,7 @@ public class PedidoProdutoProdutor {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    private int quantidadePedido;
+    private Integer quantidadePedido;
 
     @ManyToOne
     @JoinColumn(name = "id_produtos_produtores")
@@ -32,7 +32,7 @@ public class PedidoProdutoProdutor {
     public PedidoProdutoProdutor() {
     }
 
-    public PedidoProdutoProdutor(int quantidadePedido, ProdutoProdutor produtoProdutor, BigDecimal valor) {
+    public PedidoProdutoProdutor(Integer quantidadePedido, ProdutoProdutor produtoProdutor, BigDecimal valor) {
         this.quantidadePedido = quantidadePedido;
         this.produtoProdutor = produtoProdutor;
         this.valor = valor;
@@ -46,11 +46,11 @@ public class PedidoProdutoProdutor {
         this.id = id;
     }
 
-    public int getQuantidadePedido() {
+    public Integer getQuantidadePedido() {
         return quantidadePedido;
     }
 
-    public void setQuantidadePedido(int quantidadePedido) {
+    public void setQuantidadePedido(Integer quantidadePedido) {
         this.quantidadePedido = quantidadePedido;
     }
 

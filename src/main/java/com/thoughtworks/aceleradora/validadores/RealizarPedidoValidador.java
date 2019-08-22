@@ -20,13 +20,17 @@ public class RealizarPedidoValidador implements ConstraintValidator<RealizarPedi
                 && produtoPossuiProdutor(pedido, context);
     }
 
+    private boolean validaQueQuantidadePedidoEhNulaOuMenorIgualAZero(PedidoProdutoProdutor pedidoProdutoProdutor){
+        return (pedidoProdutoProdutor.getQuantidadePedido() == null || pedidoProdutoProdutor.getQuantidadePedido() <= 0);
+    }
+
     private boolean quantidadeNaoEstaVazia(Pedido pedido, ConstraintValidatorContext context) {
         if (pedido.getPedidosProdutosProdutores() != null) {
             for (int i = 0; i < pedido.getPedidosProdutosProdutores().size(); i++) {
                 PedidoProdutoProdutor pedidoProdutoProdutor = pedido.getPedidosProdutosProdutores().get(i);
 
-                if (pedidoProdutoProdutor.getProdutoProdutor() != null && pedidoProdutoProdutor.getQuantidadePedido() <= 0) {
-                    context.buildConstraintViolationWithTemplate("A quantidade deve ser maior que zero.")
+                if (pedidoProdutoProdutor.getProdutoProdutor() != null && validaQueQuantidadePedidoEhNulaOuMenorIgualAZero(pedidoProdutoProdutor)) {
+                    context.buildConstraintViolationWithTemplate("A quantidade não pode ser vazia ou menor que um.")
                             .addConstraintViolation();
                     return false;
                 }
