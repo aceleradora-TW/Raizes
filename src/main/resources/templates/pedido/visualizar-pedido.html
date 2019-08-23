@@ -20,21 +20,21 @@
       <div class="column is-12">
           <span th:each="produtor, index: ${produtores.keySet()}">
             <div class="flex center box rz-box mb-4" id="visualizar">
-              <div class="w-50 field">
+              <div class="w-50 field column is-1">
                 <div class="control">
                   <h4 class="pt-3 pb-2 fs-18"><b th:text="${produtor.nome}"></b></h4>
                   <span th:each="pedido: ${pedidoProdutoProdutores}">
                     <div id="calculo" th:if="${pedido.produtoProdutor.produtor.nome == produtor.nome}">
                       <span class="flex space-between" id="spanCalcula">
-                        <span class="pl-5 w-25" th:text="${pedido.produtoProdutor.produto.nome}"></span>
+                        <div><span class="pl-5 w-25" th:text="${pedido.produtoProdutor.produto.nome}"></span></div>
                         <label>
-                          R$
+                          <span>R$</span>
                           <span th:text="${pedido.valor}" id="valor" class="valor" th:value="${pedido.valor}"></span>/
                           <span th:text="${pedido.produtoProdutor.produto.unidadeMedida.codigo}"></span>
                         </label>
                         <span th:text="${pedido.quantidadePedido}" th:value="${pedido.quantidadePedido}"
                               id="quantidadePedido" class="quantidadePedido"></span>
-                        <label>R$
+                        <label><span>R$</span>
                           <span class="precoCadaProduto" id="precoCadaProduto" th:text="${precoProduto.get(pedido.id)}"></span>
                         </label>
                       </span>
