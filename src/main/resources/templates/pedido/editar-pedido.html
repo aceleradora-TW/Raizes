@@ -2,10 +2,12 @@
 <html th:replace="~{layout :: layout(~{::title}, ~{::body})}" xmlns:th="http://www.thymeleaf.org"
   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Raízes</title>
 </head>
+
 <body>
   <div sec:authorize="hasAuthority(T(com.thoughtworks.aceleradora.dominio.TipoDeUsuario).PRODUTOR.getValor())">
     <h1 class="fs-22 pt-4">Você não tem autorização para acessar essa página</h1>
@@ -17,7 +19,8 @@
         <section class="container">
           <div class="columns">
             <div class="column is-12">
-              <form class="rz-form" id="formEditarPedido" th:object="${pedido}" th:action="@{/pedidos/{id}/editar-pedido(id=${pedido.id})}" method="post">
+              <form class="rz-form" id="formEditarPedido" th:object="${pedido}"
+                th:action="@{/pedidos/{id}/editar-pedido(id=${pedido.id})}" method="post">
                 <div th:if="${mensagem}">
                   <span th:text="${mensagem}"></span>
                 </div>
@@ -33,38 +36,39 @@
                       class="js-produto-produtores">
                       <input th:value="${pedido.criadoEm}" th:name="criado_em" hidden>
                       <div class="box" id="inputRadio">
-                        <div class="w-75 flex equal-sizing flex-row">
-                          <span class="bigcheck">
-                            <input type="radio" th:checked="${produtoProdutoresDoPedido.contains(produtoProdutor)}"
-                              th:id="ProdutoProdutor + ${produtoProdutor.id}"
-                              th:name="pedidosProdutosProdutores[+${index.index}+].produtoProdutor"
-                              th:value="${produtoProdutor.id}">
-
-                            <label class="radio" th:for="ProdutoProdutor + ${produtoProdutor.id}">
-                              <span class="check"><i class="far fa-check-circle"></i></span>
-                              <span class="radio-check"><i class="fas fa-plus"></i></span>
-                              <span th:text="${produtoProdutor.produtor.nome}"></span>
-                            </label>
-                          </span>
-                          <span class="flex column center"><i class="fas fa-map-marker-alt"></i>
+                        <div class="w-75 columns is-desktop">
+                          <div class="column">
+                            <span class="bigcheck">
+                              <input type="radio" th:checked="${produtoProdutoresDoPedido.contains(produtoProdutor)}"
+                                th:id="ProdutoProdutor + ${produtoProdutor.id}"
+                                th:name="pedidosProdutosProdutores[+${index.index}+].produtoProdutor"
+                                th:value="${produtoProdutor.id}">
+                              <label class="radio" th:for="ProdutoProdutor + ${produtoProdutor.id}">
+                                <span class="check"><i class="far fa-check-circle"></i></span>
+                                <span class="radio-check"><i class="fas fa-plus"></i></span>
+                                <span th:text="${produtoProdutor.produtor.nome}"></span>
+                              </label>
+                            </span>
+                          </div>
+                          <span class="flex column center column"><i class="fas fa-map-marker-alt"></i>
                             <span class="pl-1"
                               th:text="${produtoProdutor.produtor.endereco.cidade.nome} + ' - '"></span>
                             <span class="pl-1" th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
                           </span>
-                          <span class="flex column center span-transport"
+                          <span class="flex column center span-transport column"
                             th:if="${produtoProdutor.produtor.possuiTransporte}">
                             <i class="fas fa-truck icon-transport-true"> </i>
                           </span>
-                          <span class="flex column center span-transport"
+                          <span class="flex column center span-transport column"
                             th:unless="${produtoProdutor.produtor.possuiTransporte}">
                             <i class="fas fa-truck icon-transport-false"></i>
                           </span>
                         </div>
-                        <div class="pl-2 flex equal-sizing flex-row">
-                          <span><i class="fas fa-spa"></i>
+                        <div class="pl-2 columns is-desktop">
+                          <span class="column"><i class="fas fa-spa"></i>
                             <span class="pl-1" th:text="${produtoProdutor.tipoDeCultivo}"></span>
                           </span>
-                          <div class="flex center" id="totalProduto">
+                          <div class="flex center column" id="totalProduto">
                             <label class="label">
                               Valor: R$
                               <span th:text="${produtoProdutor.preco}" id="preco" onfocus="Calcular()">
@@ -73,23 +77,23 @@
                               </span>
                             </label>
                           </div>
-                          <label class="flex center">
+                          <label class="flex center column">
                             <span class="pr-1 quantidade-pedido">Quantidade:</span>
                             <span th:if="${produtoProdutoresDoPedido.contains(produtoProdutor)}">
                               <input class="w-50 pl-1 js-quantidade-pedido" size="5"
                                 th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}"
                                 type="number" th:onchange="Calcular.totalEditar(event)" min=0 placeholder="Ex: 4"
                                 disabled>
-                                /<span th:text="${produto.unidadeMedida.codigo}"></span>
+                              /<span th:text="${produto.unidadeMedida.codigo}"></span>
                             </span>
                             <span th:unless="${produtoProdutoresDoPedido.contains(produtoProdutor)}">
                               <input class="w-50 pl-1 js-quantidade-pedido" size="5" type="number"
                                 th:onchange="Calcular.totalEditar(event)" min=0 placeholder="Ex: 4" disabled>
-                                /<span th:text="${produto.unidadeMedida.codigo}"></span>
+                              /<span th:text="${produto.unidadeMedida.codigo}"></span>
                             </span>
 
                           </label>
-                          <label class="label">Total: R$ <span class="resultado" id="resultado">0.00</span>
+                          <label class="label column">Total: R$ <span class="resultado" id="resultado">0.00</span>
                           </label>
                         </div>
                       </div>
@@ -115,4 +119,5 @@
         </section>
       </section>
 </body>
+
 </html>
