@@ -36,7 +36,7 @@
                       class="js-produto-produtores">
                       <input th:value="${pedido.criadoEm}" th:name="criado_em" hidden>
                       <div class="box" id="inputRadio">
-                        <div class="w-75 columns is-desktop">
+                        <div class="w-75 pl-2 columns is-desktop">
                           <div class="column">
                             <span class="bigcheck">
                               <input type="radio" th:checked="${produtoProdutoresDoPedido.contains(produtoProdutor)}"
@@ -50,25 +50,25 @@
                               </label>
                             </span>
                           </div>
-                          <span class="flex column center column"><i class="fas fa-map-marker-alt"></i>
+                          <span class="flex start column pt-4"><i class="fas fa-map-marker-alt"></i>
                             <span class="pl-1"
                               th:text="${produtoProdutor.produtor.endereco.cidade.nome} + ' - '"></span>
                             <span class="pl-1" th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
                           </span>
-                          <span class="flex column center span-transport column"
+                          <span class="flex start column span-transport pt-4"
                             th:if="${produtoProdutor.produtor.possuiTransporte}">
                             <i class="fas fa-truck icon-transport-true"> </i>
                           </span>
-                          <span class="flex column center span-transport column"
+                          <span class="flex start column span-transport pt-4"
                             th:unless="${produtoProdutor.produtor.possuiTransporte}">
                             <i class="fas fa-truck icon-transport-false"></i>
                           </span>
                         </div>
                         <div class="pl-2 columns is-desktop">
-                          <span class="column"><i class="fas fa-spa"></i>
+                          <span class="flex start column"><i class="fas fa-spa"></i>
                             <span class="pl-1" th:text="${produtoProdutor.tipoDeCultivo}"></span>
                           </span>
-                          <div class="flex center column" id="totalProduto">
+                          <div class="flex start column" id="totalProduto">
                             <label class="label">
                               Valor: R$
                               <span th:text="${produtoProdutor.preco}" id="preco" onfocus="Calcular()">
@@ -77,7 +77,7 @@
                               </span>
                             </label>
                           </div>
-                          <label class="flex center column">
+                          <label class="flex start column">
                             <span class="pr-1 quantidade-pedido">Quantidade:</span>
                             <span th:if="${produtoProdutoresDoPedido.contains(produtoProdutor)}">
                               <input class="w-50 pl-1 js-quantidade-pedido" size="5"
@@ -91,14 +91,13 @@
                                 th:onchange="Calcular.totalEditar(event)" min=0 placeholder="Ex: 4" disabled>
                               /<span th:text="${produto.unidadeMedida.codigo}"></span>
                             </span>
-
                           </label>
-                          <label class="label column">Total: R$ <span class="resultado" id="resultado">0.00</span>
+                          <label class="flex start label column">Total: R$ <span class="resultado" id="resultado">0.00</span>
                           </label>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> 
                 </div>
                 <div class="bb-1 pt-3 flex space-between fs-18">
                   <span>Total do Pedido: R$</span>
@@ -118,6 +117,8 @@
           </div>
         </section>
       </section>
+    </section>
+  </div>
 </body>
 
 </html>
