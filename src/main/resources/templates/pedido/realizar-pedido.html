@@ -27,9 +27,7 @@
                 <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
               </div>
               <h1 class="title centraliza-texto" th:text="${nomeLista}"></h1>
-
               <input th:type="hidden" name="nome" th:value="${nomeLista}" />
-
               <div th:each="produto, index : ${produtos}">
                 <h3 class="flex start fs-22 pt-3 pl-2" th:text="${produto.nome}"></h3>
                 <span th:if="${!produtoresDeProdutos.containsKey(produto)}">
@@ -38,35 +36,36 @@
                 <div class="bigbox" id="bigbox">
                   <div th:each="produtoProdutor: ${produtoresDeProdutos.get(produto)}">
                     <div class="box" id="inputRadio">
-                      <div class="w-75 flex equal-sizing flex-row">
-                        <span class="bigcheck">
-                          <input type="radio" th:id="ProdutoProdutor + ${produtoProdutor.id}"
-                            th:value="${produtoProdutor.id}"
-                            th:field="*{pedidosProdutosProdutores[__${index.index}__].produtoProdutor}">
-                          <label class="radio" th:for="ProdutoProdutor + ${produtoProdutor.id}">
-                            <span class="check"><i class="far fa-check-circle"></i></span>
-                            <span class="radio-check"><i class="fas fa-plus"></i></span>
-                            <span th:text="${produtoProdutor.produtor.nome}"></span>
-                          </label>
-                        </span>
-                        <span class="flex column center"><i class="fas fa-map-marker-alt"></i>
+                      <div class="w-75 pl-2 columns is-desktop">
+                        <div class="column">
+                          <span class="bigcheck">
+                            <input type="radio" th:id="ProdutoProdutor + ${produtoProdutor.id}"
+                              th:value="${produtoProdutor.id}"
+                              th:field="*{pedidosProdutosProdutores[__${index.index}__].produtoProdutor}">
+                            <label class="radio" th:for="ProdutoProdutor + ${produtoProdutor.id}">
+                              <span class="check"><i class="far fa-check-circle"></i></span>
+                              <span class="radio-check"><i class="fas fa-plus"></i></span>
+                              <span th:text="${produtoProdutor.produtor.nome}"></span>
+                            </label>
+                          </span>
+                        </div>
+                        <span class="flex start column pt-4"><i class="fas fa-map-marker-alt"></i>
                           <span class="pl-1" th:text="${produtoProdutor.produtor.endereco.cidade.nome} + ' - '"></span>
                           <span class="pl-1" th:text="${produtoProdutor.produtor.endereco.cidade.estado.uf}"></span>
                         </span>
-                        <span class="flex column center span-transport"
+                        <span class="flex start column pt-4 span-transport"
                           th:if="${produtoProdutor.produtor.possuiTransporte}">
                           <i class="fas fa-truck icon-transport-true"> </i>
                         </span>
-                        <span class="flex column center span-transport"
-                          th:unless="${produtoProdutor.produtor.possuiTransporte}">
+                        <span class="flex start column pt-4" th:unless="${produtoProdutor.produtor.possuiTransporte}">
                           <i class="fas fa-truck icon-transport-false"></i>
                         </span>
                       </div>
-                      <div class="pl-2 flex equal-sizing flex-row">
-                        <span><i class="fas fa-spa"></i>
+                      <div class="pl-2 columns is-desktop">
+                        <span class="flex start column pt-4"><i class="fas fa-spa"></i>
                           <span class="pl-1" th:text="${produtoProdutor.tipoDeCultivo}"></span>
                         </span>
-                        <div class="flex center" id="totalProduto">
+                        <div class="flex start column pt-4" id="totalProduto">
                           <label class="label">
                             Valor:R$
                             <span th:field="*{pedidosProdutosProdutores[__${index.index}__].valor}"
@@ -76,7 +75,7 @@
                             </span>
                           </label>
                         </div>
-                        <label class="flex center">
+                        <label class="flex start column pt-4">
                           <span class="pr-1">Quantidade:</span>
                           <input class="w-25 pl-1" size="5"
                             th:field="*{pedidosProdutosProdutores[__${index.index}__].quantidadePedido}" type="number"
@@ -84,7 +83,7 @@
                           /<span th:text="${produto.unidadeMedida.codigo}">
                           </span>
                         </label>
-                        <label class="label">Total:R$
+                        <label class="label flex start column pt-4">Total:R$
                           <span class="resultado" id="resultado"></span>
                         </label>
                       </div>
@@ -112,4 +111,5 @@
     </section>
   </div>
 </body>
+
 </html>
