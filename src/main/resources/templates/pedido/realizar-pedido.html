@@ -26,6 +26,9 @@
               <div th:if="${erros}">
                 <li th:each="erro : ${erros}" th:text="${erro.getDefaultMessage()}"></li>
               </div>
+              <div th:if="${!hasProdutor}">
+                <span>Não será possivel prosseguir com seu pedido pois não possui produtores.</span>
+              </div>
               <h1 class="title centraliza-texto" th:text="${nomeLista}"></h1>
               <input th:type="hidden" name="nome" th:value="${nomeLista}" />
               <div th:each="produto, index : ${produtos}">
@@ -100,7 +103,9 @@
                   <div class="rz-box-footer flex space-between">
                     <button class="button rz-button is-rounded"
                       th:onclick="return RealizarPedido.exibeConfirmacaoDeCancelamento('/minhas-listas')">Cancelar</button>
-                    <button class="button rz-button is-rounded" type="submit">Salvar</button>
+                    <div th:if="${pedido.pedidosProdutosProdutores != null}">
+                      <button class="button rz-button is-rounded" type="submit">Salvar</button>
+                    </div>
                   </div>
                 </div>
               </div>
