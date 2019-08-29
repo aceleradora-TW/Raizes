@@ -70,7 +70,7 @@ public class ProdutoProdutorServico {
         return produtoProdutorRepositorio.findAllByProdutorEmail(email);
     }
 
-    public boolean hasProdutor(Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos) {
+    public boolean possuiProdutor(Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos) {
 
         if(produtoresDeProdutos == null || produtoresDeProdutos.isEmpty()) return false;
 
