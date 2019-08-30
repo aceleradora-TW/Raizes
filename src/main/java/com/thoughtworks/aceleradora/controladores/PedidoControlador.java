@@ -138,10 +138,13 @@ public class PedidoControlador {
             MinhaLista lista = minhaListaServico.encontraUm(listaId);
             Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos = produtoProdutorServico.pegaProdutoProdutorPorProdutos(lista.getProdutos());
 
+           boolean possuiProdutor = produtoProdutorServico.possuiProdutor(produtoresDeProdutos);
+
             modelo.addAttribute("produtos", lista.getProdutos());
-            modelo.addAttribute("pedido", new Pedido());
+            modelo.addAttribute("pedido",  new Pedido());
             modelo.addAttribute("nomeLista", lista.getNome());
             modelo.addAttribute("produtoresDeProdutos", produtoresDeProdutos);
+            modelo.addAttribute("possuiProdutor", possuiProdutor);
 
             return "pedido/realizar-pedido";
         } catch (PedidoNaoEncontradoExcecao e) {

@@ -66,8 +66,19 @@ public class ProdutoProdutorServico {
         return produtoProdutorRepositorio.save(produtoProdutor);
     }
 
-    public List<ProdutoProdutor> buscarPorEmail(String email){
+    public List<ProdutoProdutor> buscarPorEmail(String email) {
         return produtoProdutorRepositorio.findAllByProdutorEmail(email);
     }
 
+    public boolean possuiProdutor(Map<Produto, List<ProdutoProdutor>> produtoresDeProdutos) {
+
+        if(produtoresDeProdutos == null || produtoresDeProdutos.isEmpty()) return false;
+
+        return produtoresDeProdutos.values()
+                .stream()
+                .findFirst()
+                .get()
+                .stream()
+                .anyMatch(produtoProdutor -> produtoProdutor.getProdutor() != null);
+    }
 }
