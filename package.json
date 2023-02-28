@@ -32,7 +32,7 @@
     "babel-loader": "^8.0.6",
     "babel-preset-es2015": "^6.24.1",
     "bulma": "^0.7.4",
-    "cypress": "^3.3.0",
+    "cypress": "^12.7.0",
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
